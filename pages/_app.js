@@ -223,20 +223,20 @@ const App = ({ Component, pageProps }) => {
   );
 };
 
-App.getInitialProps = async ({ Component, ctx }) => {
-  let pageProps = {};
-  if (Component.getInitialProps) {
-    pageProps = await Component.getInitialProps(ctx);
-  }
+// App.getInitialProps = async ({ Component, ctx }) => {
+//   let pageProps = {};
+//   if (Component.getInitialProps) {
+//     pageProps = await Component.getInitialProps(ctx);
+//   }
 
-  if (!!ctx.req) {
-    pageProps = pageProps || {};
+//   if (!!ctx.req) {
+//     pageProps = pageProps || {};
 
-    const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
-    pageProps.store = store;
-  }
+//     const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
+//     pageProps.store = store;
+//   }
 
-  return { pageProps };
-};
+//   return { pageProps };
+// };
 
 export default wrapper.withRedux(App);
