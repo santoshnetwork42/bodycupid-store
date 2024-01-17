@@ -898,7 +898,9 @@ function Checkout(props) {
             </>
           ) : (
             <div className="empty-cart text-center">
-              <p className="mt-2">Your cart is currently empty.</p>
+              <p className="mt-2 text-black font-weight-bold">
+                Your cart is currently empty.
+              </p>
               <i className="cart-empty d-icon-bag"></i>
               <p className="return-to-shop mb-0">
                 <ALink

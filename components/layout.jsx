@@ -1,29 +1,50 @@
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useLayoutEffect } from "react";
+import "react-input-range/lib/css/index.css";
 import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { useRouter } from "next/router";
-import Head from "next/head";
 import "react-toastify/dist/ReactToastify.min.css";
-import "react-input-range/lib/css/index.css";
 
 import Header from "~/components/common/header";
-import Footer from "~/components/common/footer";
-import Passwordless from "~/components/common/partials/passwordless";
-import Quickview from "~/components/features/product/common/quickview-modal";
-import LoginModal from "~/components/features/modals/login-modal";
-import MobileMenu from "~/components/common/partials/mobile-menu";
-
 import { modalActions } from "~/store/modal";
-
 import {
-  stickyHeaderHandler,
-  stickyFooterHandler,
   resizeHandler,
+  stickyFooterHandler,
+  stickyHeaderHandler,
 } from "~/utils";
+import { useIsInteractive } from "~/utils/contexts/navbar";
 import { removeHoverEffect } from "~/utils/helper";
-import Announcement from "~/components/common/announcement";
-import StickyCheckout from "~/components/common/sticky-checkout";
-import CouponDiscountBar from "~/components/common/coupon-discount-bar";
+
+const Footer = dynamic(() => import("~/components/common/footer"));
+const Passwordless = dynamic(
+  () => import("~/components/common/partials/passwordless"),
+  { ssr: false }
+);
+const Quickview = dynamic(
+  () => import("~/components/features/product/common/quickview-modal"),
+  { ssr: false }
+);
+const LoginModal = dynamic(
+  () => import("~/components/features/modals/login-modal"),
+  { ssr: false }
+);
+const MobileMenu = dynamic(
+  () => import("~/components/common/partials/mobile-menu"),
+  { ssr: false }
+);
+const Announcement = dynamic(() => import("~/components/common/announcement"), {
+  ssr: false,
+});
+const StickyCheckout = dynamic(
+  () => import("~/components/common/sticky-checkout"),
+  { ssr: false }
+);
+const CouponDiscountBar = dynamic(
+  () => import("~/components/common/coupon-discount-bar"),
+  { ssr: false }
+);
 
 function Layout({
   children,
@@ -34,6 +55,8 @@ function Layout({
   closePasswordless,
 }) {
   const router = useRouter();
+  const isInteractive = useIsInteractive();
+
   useEffect(() => {
     removeHoverEffect();
   }, []);
@@ -77,6 +100,10 @@ function Layout({
     <>
       <Head>
         <link rel="icon" href="/images/icons/favicon.png" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+
         <link
           href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap"
           rel="stylesheet"
@@ -88,7 +115,7 @@ function Layout({
         /> */}
       </Head>
       <div className="page-wrapper">
-        <Announcement showTopRunner={navbar.showTopRunner} />
+        {isInteractive && <Announcement showTopRunner={navbar.showTopRunner} />}
 
         <Header navbar={navbar} />
 

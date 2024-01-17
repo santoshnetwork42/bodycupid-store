@@ -1,29 +1,30 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/router";
-import { API, graphqlOperation } from "aws-amplify";
-import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+import { useEffect, useMemo, useState } from "react";
+import { connect } from "react-redux";
 
-import { STORE_ID } from "~/config";
-import fetchData from "~/utils/fetchData";
-import handleRedirect from "~/utils/handleRedirect";
-import MediaOne from "~/components/partials/product/media/media-one";
-import DetailOne from "~/components/partials/product/detail/detail-one";
+import NextHead from "~/components/common/next-head";
+import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import DescOne from "~/components/partials/product/desc/desc-one";
+import DetailOne from "~/components/partials/product/detail/detail-one";
+import LinkedProducts from "~/components/partials/product/linked-product";
+import MediaOne from "~/components/partials/product/media/media-one";
+import { STORE_ID } from "~/config";
 import {
   getProductBySlug,
   getProductSlug,
-  findProducts,
   getStoreBanners,
 } from "~/graphql/api";
-import LinkedProducts from "~/components/partials/product/linked-product";
 import { eventActions } from "~/store/events";
-import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
-import ProductCollection from "~/components/partials/home/product-collection";
-import { errorHandler } from "~/utils/errorHandler";
+import fetchData from "~/utils/fetchData";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import handleRedirect from "~/utils/handleRedirect";
 import { getProductMeta } from "~/utils/products";
-import NextHead from "~/components/common/next-head";
+
+const RenderProductCollection = dynamic(() =>
+  import("~/components/partials/home/render-product-collection")
+);
 
 const logger = new Logger("Products");
 
@@ -35,50 +36,29 @@ function ProductDefault(props) {
   const { variantId } = query;
 
   const [selectedVariant, setVariant] = useState(variantId);
-  const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
     viewItem({
       ...product,
       section: { id: "product-detail", name: "Product Detail" },
     });
-    getRelatedProducts();
   }, [slug]);
 
-  const getRelatedProducts = useCallback(async () => {
-    try {
-      if (!!product) {
-        const { id, categoryId, subCategoryId } = product || {};
-        const filter = {
-          id: { ne: id },
-          storeId: { eq: STORE_ID },
-          status: { eq: "ENABLED" },
-        };
-        if (subCategoryId) {
-          filter.subCategoryId = { eq: subCategoryId };
-        } else {
-          filter.categoryId = { eq: categoryId };
-        }
-        const {
-          data: {
-            searchProducts: { items },
-          },
-        } = await API.graphql(
-          graphqlOperation(findProducts, {
-            filter,
-            sort: [{ field: "position", direction: "asc" }],
-            variantFilter: { status: { eq: "ENABLED" } },
-            imageLimit: 1,
-            limit: 4,
-          })
-        );
-        if (items.length) {
-          setRelatedProducts(items);
-        }
+  const relatedProductFilter = useMemo(() => {
+    if (!!product) {
+      const { id, categoryId, subCategoryId } = product || {};
+      const filter = {
+        id: { ne: id },
+      };
+      if (subCategoryId) {
+        filter.subCategoryId = { eq: subCategoryId };
+      } else {
+        filter.categoryId = { eq: categoryId };
       }
-    } catch (error) {
-      errorHandler(error);
+      return filter;
     }
+
+    return null;
   }, [product]);
 
   const { defaultVariantId } = useMemo(() => {
@@ -133,12 +113,12 @@ function ProductDefault(props) {
           <div className="page-content pb-10 bg-white">
             <div className="container  vertical pt-3 lh-default bg-white ">
               <LinkedProducts product={product} />
-
               <DescOne key={`desc-one=${product.id}`} product={product} />
             </div>
-            {relatedProducts.length > 0 && (
-              <ProductCollection
-                products={relatedProducts}
+
+            {!!relatedProductFilter && (
+              <RenderProductCollection
+                filter={relatedProductFilter}
                 title="Related products"
               />
             )}
@@ -156,6 +136,7 @@ export const getStaticPaths = async () => {
       fallback: "blocking",
     };
   }
+
   const {
     searchProducts: { items },
   } = await fetchData(getProductSlug, {
@@ -194,7 +175,7 @@ export const getStaticProps = async (context) => {
     });
 
     if (product) {
-      const { id, pageTitle, productDescription, title, metadata } = product;
+      const { pageTitle, productDescription, title, metadata } = product;
       const { thumbImage } = getProductMeta(product);
 
       return {

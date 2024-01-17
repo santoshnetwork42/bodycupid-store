@@ -211,56 +211,6 @@
   }
 }
 
-//  Buttons
-.alert-btn {
-  &:not(.alert-message) {
-    padding: 0.9rem 3.9rem 0.9rem 0.9rem;
-  }
-
-  .btn:not(.btn-close) {
-    margin-right: 1rem;
-    padding: 0.73em 1.61em;
-  }
-
-  &.alert-message {
-    p {
-      margin-bottom: 1rem;
-    }
-  }
-
-  &.alert-dark {
-    &.alert-warning {
-      .btn:not(.btn-close) {
-        background-color: transparent;
-        padding: 0.7em 1.43em;
-        border-width: 3px;
-        color: #fff;
-
-        &:hover {
-          border-color: #df7f50;
-          background: #df7f50;
-        }
-      }
-    }
-  }
-
-  &.alert-light {
-    &.alert-warning {
-      .btn:not(.btn-close) {
-        color: $secondary-color;
-        background-color: #fff;
-        border-color: #fff;
-
-        &:hover {
-          color: #fff;
-          background-color: $secondary-color;
-          border-color: $secondary-color;
-        }
-      }
-    }
-  }
-}
-
 .coupon-tag2 {
   background: white;
   width: fit-content;
@@ -271,7 +221,7 @@
 }
 
 .coupon-modal-tag-color {
-  background: #EAEAEA;
+  background: #eaeaea;
 }
 
 .applied-coupon-tag {
@@ -286,7 +236,7 @@
 }
 
 .coupon-status-applied {
-  color: #17B31B;
+  color: #17b31b;
   font-family: Manrope;
   font-size: 16px;
   font-style: normal;
@@ -295,10 +245,6 @@
   padding: 0.5rem 0.5rem;
   display: flex;
   align-items: center;
-}
-
-.coupon-applied-confetii{
-    margin: -15px auto
 }
 
 .coupon-message {
@@ -329,7 +275,7 @@
 }
 
 .coupon-error-lable {
-  color: #E50B20 !important;
+  color: #e50b20 !important;
 }
 
 .coupon-error-box-border {
@@ -413,5 +359,5 @@
 
 .background-coupon-white {
   background: white;
-  color: green
+  color: green;
 }
