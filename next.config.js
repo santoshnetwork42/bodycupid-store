@@ -66,6 +66,11 @@ const nextConfig = withBundleAnalyzer({
     ],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
+
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
 });
 
 module.exports = withSentryConfig(

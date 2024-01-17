@@ -5,7 +5,6 @@ import { Amplify, Hub, Auth, API, Analytics, Logger } from "aws-amplify";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import awaitGlobal from "await-global";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
@@ -23,13 +22,14 @@ import { getUser, getStore } from "~/graphql/api";
 import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import NextHead from "~/components/common/next-head";
-import Loader from "~/components/common/partials/loader";
+import Header from "~/components/common/header";
 
 import NavbarProvider from "~/utils/contexts/navbar";
 import ABProvider from "~/utils/contexts/ab";
 import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
 
 Amplify.configure({ ...awsconfig, ssr: true });
+Analytics.disable();
 
 const logger = new Logger("App");
 
@@ -75,16 +75,16 @@ const App = ({ Component, pageProps }) => {
           });
 
           store.dispatch(userActions.setUser(getUserResponse));
-          await Analytics.updateEndpoint({
-            userId: getUserResponse.id,
-            userAttributes: {
-              username: [getUserResponse.id],
-              email: [getUserResponse.email || null],
-              phone: [getUserResponse.phone || null],
-              firstName: [getUserResponse.firstName || null],
-              lastName: [getUserResponse.lastName || null],
-            },
-          }).catch(() => null);
+          // await Analytics.updateEndpoint({
+          //   userId: getUserResponse.id,
+          //   userAttributes: {
+          //     username: [getUserResponse.id],
+          //     email: [getUserResponse.email || null],
+          //     phone: [getUserResponse.phone || null],
+          //     firstName: [getUserResponse.firstName || null],
+          //     lastName: [getUserResponse.lastName || null],
+          //   },
+          // }).catch(() => null);
         }
       }
     } catch (error) {
@@ -207,14 +207,13 @@ const App = ({ Component, pageProps }) => {
       <Provider store={store}>
         <PersistGate
           persistor={store.__persistor}
-          loading={<Loader loading={true} />}
+          loading={<Header navbar={{ hideCart: true, hideMainMenu: true }} />}
         >
           <ABProvider>
             <NavbarProvider>
               <Layout navbar={navbarProps} footer={footerProps}>
                 <Scripts />
                 <Component {...pageProps} />
-                <SpeedInsights route={router.pathname} />;
               </Layout>
             </NavbarProvider>
           </ABProvider>
@@ -224,20 +223,20 @@ const App = ({ Component, pageProps }) => {
   );
 };
 
-App.getInitialProps = async ({ Component, ctx }) => {
-  let pageProps = {};
-  if (Component.getInitialProps) {
-    pageProps = await Component.getInitialProps(ctx);
-  }
+// App.getInitialProps = async ({ Component, ctx }) => {
+//   let pageProps = {};
+//   if (Component.getInitialProps) {
+//     pageProps = await Component.getInitialProps(ctx);
+//   }
 
-  if (!!ctx.req) {
-    pageProps = pageProps || {};
+//   if (!!ctx.req) {
+//     pageProps = pageProps || {};
 
-    const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
-    pageProps.store = store;
-  }
+//     const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
+//     pageProps.store = store;
+//   }
 
-  return { pageProps };
-};
+//   return { pageProps };
+// };
 
 export default wrapper.withRedux(App);

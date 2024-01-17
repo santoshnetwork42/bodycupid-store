@@ -356,7 +356,6 @@
     @include css(color, header, _link-color);
     @include print_css(header, middle, login);
 
-   
     i {
       @include print_css(header, middle, login, icon);
     }
@@ -398,7 +397,6 @@
     transition: none;
 
     &:hover {
-      .icon-box-icon,
       p,
       .icon-box-title {
         color: inherit;
@@ -406,16 +404,8 @@
     }
   }
 
-  .icon-box-icon,
-  
   .icon-box-title {
     transition: color 0.3s;
-  }
-
-  .icon-box-icon {
-    margin-bottom: 0;
-    padding: 0;
-    font-size: 3rem;
   }
 
   .icon-box-title {
@@ -426,7 +416,6 @@
     line-height: 1;
     letter-spacing: 0.027em;
   }
-
 }
 
 .logo {
