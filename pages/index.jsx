@@ -55,9 +55,14 @@ function HomePage({
           title="Top products"
           disableCarousel={isSmallSize}
           slug="top-products"
+          filter={{ collections: { eq: "top-products" } }}
         />
 
-        <RenderProductCollection title="Our featured" slug="featured" />
+        <RenderProductCollection
+          title="Our featured"
+          slug="featured"
+          filter={{ collections: { eq: "featured" } }}
+        />
 
         <CategorySection />
         <ReviewSection />

@@ -91,11 +91,11 @@ export default function MediaOne(props) {
         onChangeRef={changeRefHandler}
         events={events}
       >
-        {lgImages.map((image) => (
+        {lgImages.map((image, ind) => (
           <div key={image.imageKey}>
             <Image
               src={getPublicImageURL(image.imageKey)}
-              priority
+              priority={ind === index}
               height={480}
               width={480}
               quality={95}

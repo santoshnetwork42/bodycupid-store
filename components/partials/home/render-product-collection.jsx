@@ -15,6 +15,7 @@ import { setSoldOutLast } from "~/utils/products";
 
 function RenderProductCollection({
   title = "",
+  filter,
   slug,
   disableCarousel,
   large,
@@ -25,13 +26,13 @@ function RenderProductCollection({
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    if (isInteractive) {
+    if (isInteractive && filter) {
       API.graphql(
         graphqlOperation(findProducts, {
           filter: {
             storeId: { eq: STORE_ID },
             status: { eq: "ENABLED" },
-            collections: { eq: slug },
+            ...filter,
           },
           limit: 8,
           sort: [{ field: "position", direction: "asc" }],
@@ -45,18 +46,20 @@ function RenderProductCollection({
         .then(setSoldOutLast)
         .then(setProducts);
 
-      API.graphql(
-        graphqlOperation(getCollectionType, {
-          filter: {
-            storeId: { eq: STORE_ID },
-            slug: { eq: slug },
-          },
-        })
-      )
-        .then((res) => res.data.searchCollectionTypes.items[0])
-        .then(setCollection);
+      if (slug) {
+        API.graphql(
+          graphqlOperation(getCollectionType, {
+            filter: {
+              storeId: { eq: STORE_ID },
+              slug: { eq: slug },
+            },
+          })
+        )
+          .then((res) => res.data.searchCollectionTypes.items[0])
+          .then(setCollection);
+      }
     }
-  }, [isInteractive]);
+  }, [isInteractive, filter, slug]);
 
   useEffect(() => {
     const ele = document.getElementById(`product-carousel-${slug}`);
