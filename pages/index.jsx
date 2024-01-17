@@ -6,7 +6,6 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 import NextHead from "~/components/common/next-head";
 import IntroSection from "~/components/partials/home/intro-section";
 import ProductCollection from "~/components/partials/home/product-collection";
-import { STORE_ID } from "~/config";
 
 const CategorySection = dynamic(() =>
   import("~/components/partials/home/category-section")

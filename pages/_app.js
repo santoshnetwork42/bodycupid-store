@@ -23,6 +23,7 @@ import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import NextHead from "~/components/common/next-head";
 import Loader from "~/components/common/partials/loader";
+import Header from "~/components/common/header";
 
 import NavbarProvider from "~/utils/contexts/navbar";
 import ABProvider from "~/utils/contexts/ab";
@@ -205,7 +206,10 @@ const App = ({ Component, pageProps }) => {
     <>
       {!!pageMeta && <NextHead {...pageMeta} />}
       <Provider store={store}>
-        <PersistGate persistor={store.__persistor} loading={<Loader loading />}>
+        <PersistGate
+          persistor={store.__persistor}
+          loading={<Header navbar={{ hideCart: true, hideMainMenu: true }} />}
+        >
           <ABProvider>
             <NavbarProvider>
               <Layout navbar={navbarProps} footer={footerProps}>
