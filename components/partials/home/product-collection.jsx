@@ -15,6 +15,7 @@ function ProductCollection({
   disableCarousel,
   large,
   addClass,
+  priority,
 }) {
   useEffect(() => {
     const ele = document.getElementById(`product-carousel-${slug}`);
@@ -54,7 +55,7 @@ function ProductCollection({
           adClass="owl-theme owl-nav-full"
           options={!large ? productSlider : productSliderLarge}
         >
-          {products.map((item) => (
+          {products.map((item, index) => (
             <ProductTwo
               adClass="mb-4 text-center"
               slug={slug}
@@ -64,6 +65,7 @@ function ProductCollection({
                 id: title.toLowerCase().replace(/\ /g, "-"),
                 name: title,
               }}
+              priority={!!(priority && index < 4)}
             />
           ))}
         </OwlCarousel>

@@ -49,6 +49,7 @@ function HomePage({
           disableCarousel={isSmallSize}
           slug="best-seller"
           redirectTo={`/collections/best-seller?sortby=${bestSellerDefaultSorting}`}
+          priority
         />
 
         <RenderProductCollection
