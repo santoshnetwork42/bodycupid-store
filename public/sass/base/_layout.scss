@@ -8,7 +8,7 @@
   padding-right: 20px;
   margin-left: auto;
   margin-right: auto;
-} 
+}
 
 @include mq(xs, max) {
   .container,
@@ -23,6 +23,7 @@
 .container {
   @include css(max-width, base, _container-width);
 }
+
 .divider {
   display: inline-block;
   vertical-align: middle;
@@ -89,14 +90,14 @@
 }
 
 .modal-title {
-  color: #8D8D8D;
+  color: #8d8d8d;
   text-align: center;
   font-family: Manrope;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  @media (max-width: 450px){
+  @media (max-width: 450px) {
     font-size: 16px;
   }
 }
@@ -109,8 +110,8 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  @media (max-width: 450px){
-    font-size: 20px; 
+  @media (max-width: 450px) {
+    font-size: 20px;
   }
 }
 
