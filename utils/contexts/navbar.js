@@ -204,36 +204,35 @@ export const useMenu = () => {
       link: `/collections/combos-and-gifts`,
       slug: "combos-and-gifts",
     });
+
+    menu.push({
+      label: "Festive Offers",
+      link: "",
+      slug: "festive-offers",
+      subMenu: [
+        {
+          label: "3 Perfumes @ 1099",
+          link: "/collections/fragrance-bundle-offer",
+          slug: "fragrance-bundle-offer",
+        },
+        {
+          label: "Perfume Kits @ 499",
+          link: "/collections/perfumes",
+          slug: "perfumes",
+        },
+        {
+          label: "BUY 3 @ 599",
+          link: "/collections/special-bundle-offer",
+          slug: "special-bundle-offer",
+        },
+      ],
+    });
+    // menu.push({
+    //   label: "Buy 3 @ 599",
+    //   link: `/collections/special-bundle-offer`,
+    //   slug: "special-bundle-offer",
+    // });
   }
-
-  menu.push({
-    label: "Festive Offers",
-    link: "",
-    slug: "festive-offers",
-    subMenu: [
-      {
-        label: "3 Perfumes @ 1099",
-        link: "/collections/fragrance-bundle-offer",
-        slug: "fragrance-bundle-offer",
-      },
-      {
-        label: "Perfume Kits @ 499",
-        link: "/collections/perfumes",
-        slug: "perfumes",
-      },
-      {
-        label: "BUY 3 @ 599",
-        link: "/collections/special-bundle-offer",
-        slug: "special-bundle-offer",
-      },
-    ],
-  });
-
-  // menu.push({
-  //   label: "Buy 3 @ 599",
-  //   link: `/collections/special-bundle-offer`,
-  //   slug: "special-bundle-offer",
-  // });
 
   return menu;
 };
