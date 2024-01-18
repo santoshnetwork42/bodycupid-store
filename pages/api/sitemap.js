@@ -63,7 +63,7 @@ export default async function Revalidate(req, res) {
 
     const siteMapLinks = [
       {
-        loc: `${NEXT_PUBLIC_SITE_URL}/sitemap.xml`,
+        loc: `${NEXT_PUBLIC_SITE_URL}`,
       },
       ...productSitemapEntries,
       ...collSitemapEntries,
