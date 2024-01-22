@@ -21,6 +21,7 @@ import fetchData from "~/utils/fetchData";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import handleRedirect from "~/utils/handleRedirect";
 import { getProductMeta } from "~/utils/products";
+import { useIsInteractive } from "~/utils/contexts/navbar";
 
 const RenderProductCollection = dynamic(() =>
   import("~/components/partials/home/render-product-collection")
@@ -36,12 +37,15 @@ function ProductDefault(props) {
   const { variantId } = query;
 
   const [selectedVariant, setVariant] = useState(variantId);
+  const isInteractive = useIsInteractive();
 
   useEffect(() => {
-    viewItem({
-      ...product,
-      section: { id: "product-detail", name: "Product Detail" },
-    });
+    if (isInteractive) {
+      viewItem({
+        ...product,
+        section: { id: "product-detail", name: "Product Detail" },
+      });
+    }
   }, [slug]);
 
   const relatedProductFilter = useMemo(() => {
