@@ -164,13 +164,13 @@ function ProductTwo(props) {
             <div className="ratings-full d-flex rating-product-list mr-1">
               <Star size={20} color={"#FAB73B"} />
             </div>
-            <span className="rating">{rating}</span>
+            <span className="rating text-black font-weight-bold">{rating}</span>
             <ALink
               href={{
                 pathname: `/products/${slug}`,
                 query: { review: true },
               }}
-              className="rating-reviews"
+              className="rating-reviews text-black font-weight-bold"
             >
               ({totalRatings || 0} reviews)
             </ALink>

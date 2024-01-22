@@ -225,12 +225,6 @@ function DescOne(props) {
     return product?.totalRatings ?? 0;
   }, [total, product?.totalRatings, userReview]);
 
-  // const showVideoModalHandler = (e) => {
-  //   e.preventDefault();
-  //   let link = e.currentTarget.closest(".btn-play").getAttribute("data");
-  //   openModal(link);
-  // };
-
   const submitReview = useCallback(
     async (e) => {
       e.preventDefault();

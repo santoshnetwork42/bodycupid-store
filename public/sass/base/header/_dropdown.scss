@@ -86,21 +86,6 @@
     }
   }
 
-  // &::after {
-  //     content: '';
-  //     position: absolute;
-  //     z-index: 1000;
-  //     left: 50%;
-  //     top: -9999px;
-  //     transform: translate3d(-50%, -8px, 0);
-  //     border: 11px solid transparent;
-  //     border-bottom: 11px solid #fff;
-  //     transition: opacity .2s ease-out, transform .2s ease-out;
-  //     visibility: hidden;
-  //     opacity: 0;
-  //     cursor: pointer;
-  // }
-
   a {
     display: flex;
     align-items: center;

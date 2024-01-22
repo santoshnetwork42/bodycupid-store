@@ -17,8 +17,10 @@ const nextConfig = withBundleAnalyzer({
         source: "/robots.txt",
         destination: "/api/robots",
       },
+      { source: "/sitemap.xml", destination: "/api/sitemap" },
     ];
   },
+
   async redirects() {
     return [
       {
@@ -63,6 +65,11 @@ const nextConfig = withBundleAnalyzer({
       },
     ],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+  },
+
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
   },
 });
 

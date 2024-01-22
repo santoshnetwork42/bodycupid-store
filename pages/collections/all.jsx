@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 
-// import ShopBanner from "~/components/partials/shop/shop-banner";
-// import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import {
   findProducts,
@@ -28,7 +26,6 @@ function AllProduct(props) {
 
       <h1 className="d-none">{name} - All Products</h1>
 
-      {/* <ShopBanner category={null} /> */}
       <div className="page-content pb-3">
         <div className="container">
           <div className="row main-content-wrap gutter-lg">
@@ -98,7 +95,7 @@ export const getStaticProps = async () => {
           image: getPublicImageURL(imageUrl),
         },
       },
-      revalidate: 120,
+      revalidate: 1800,
     };
   } catch (error) {
     logger.error(error);

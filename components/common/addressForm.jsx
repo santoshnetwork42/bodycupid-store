@@ -32,6 +32,14 @@ const AddressForm = (props) => {
   const { totalPrice } = useCartTotal({
     paymentType: "PREPAID",
   });
+  useEffect(() => {
+    if (user) {
+      setAddress((prevState) => ({
+        ...prevState,
+        phone: user.phone || "",
+      }));
+    }
+  }, [user]);
 
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);

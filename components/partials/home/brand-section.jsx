@@ -20,6 +20,7 @@ function BrandSection({ brands }) {
                     height={120}
                     objectFit="contain"
                     alt="Brand"
+                    priority={false}
                   />
                 </figure>
               </div>

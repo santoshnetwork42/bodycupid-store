@@ -10,8 +10,8 @@ import { eventActions } from "~/store/events";
 
 function MainMenu({ topNavbarClicked }) {
   const { pathname } = useRouter();
-
   const menu = useMenu();
+
   return (
     <nav className="main-nav">
       <ul className="menu">

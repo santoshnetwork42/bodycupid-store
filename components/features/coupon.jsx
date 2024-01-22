@@ -201,14 +201,6 @@ function Coupon(props) {
                         </span>
                       </div>
                       <div className="coupon-status-applied">Applied</div>
-                      {/* <div className="coupon-applied-confetii">
-                      <Image 
-                        src="/images/applied.gif"
-                        alt="Applied Gif"
-                        height={50}
-                        width={60}
-                      />
-                      </div> */}
                     </div>
                     <ALink
                       href="#"

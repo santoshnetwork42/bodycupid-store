@@ -1,15 +1,24 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 
-import ALink from "~/components/features/custom-link";
-import { User, Hamburger } from "~/components/icons";
-import CartMenu from "~/components/common/partials/cart-menu";
-import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
-import { headerBorderRemoveList } from "~/utils/data/menu";
+import ALink from "~/components/features/custom-link";
+import { Hamburger, User } from "~/components/icons";
 import { modalActions } from "~/store/modal";
+import { headerBorderRemoveList } from "~/utils/data/menu";
+
+const CartMenu = dynamic(
+  () => import("~/components/common/partials/cart-menu"),
+  { ssr: false }
+);
+
+const MainMenu = dynamic(
+  () => import("~/components/common/partials/main-menu"),
+  { ssr: false }
+);
 
 function Header({ navbar, auth, openPasswordLess, setCartVisibility }) {
   const router = useRouter();
@@ -68,10 +77,6 @@ function Header({ navbar, auth, openPasswordLess, setCartVisibility }) {
             </div>
 
             <div className="header-right">
-              {/* <ALink href="/pages/wishlist" className="wishlist  mr-3 ">
-                <Heart />
-              </ALink>
-              <span className="divider"></span> */}
               {!navbar?.hideSearch && (
                 <div className="d-sm-show search-container mr-2">
                   <SearchBox type="icon" />
@@ -91,16 +96,9 @@ function Header({ navbar, auth, openPasswordLess, setCartVisibility }) {
                   <User />
                 </ALink>
               )}
-              {/* {!auth && (
-                <ALink
-                  href="/pages/login"
-                  className='label-block wishlist d-sm-show'
-                >
-                  <User />
-                </ALink>
-              )} */}
+
               <span className="divider"></span>
-              {!navbar.hideCart && <CartMenu />}
+              {!navbar?.hideCart && <CartMenu />}
             </div>
           </div>
         </div>

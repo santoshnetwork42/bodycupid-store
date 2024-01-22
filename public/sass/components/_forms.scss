@@ -292,16 +292,7 @@ input[type="radio"]:checked ~ label::after {
     font-size: 1.2rem;
   }
 }
-.input-wrapper-inline {
-  display: flex;
-  position: relative;
-  max-width: 61.3rem;
-  width: 100%;
-  height: 45px;
-  .btn {
-    line-height: 1;
-  }
-}
+
 .input-wrapper-round {
   /* Issue */
   // display: flex;
@@ -314,14 +305,6 @@ input[type="radio"]:checked ~ label::after {
   .btn {
     border-radius: 2.4rem;
     line-height: 1;
-  }
-  &.input-wrapper-inline {
-    .form-control {
-      border-radius: 2.4rem 0 0 2.4rem;
-    }
-    .btn {
-      border-radius: 0 2.4rem 2.4rem 0;
-    }
   }
 }
 

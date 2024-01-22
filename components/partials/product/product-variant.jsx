@@ -1,4 +1,6 @@
 import React, { useMemo } from "react";
+import Image from "next/image";
+
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
@@ -26,12 +28,14 @@ export default function ProductVariant({ item, onSelect, selected }) {
       </div>
 
       <div className="image-wrapper">
-        <img
+        <Image
           className="product-image"
           src={getPublicImageURL(item.imageUrl)}
           alt={item.title}
-          width="137"
-          height="137"
+          priority
+          height={137}
+          width={137}
+          quality={95}
         />
       </div>
 

@@ -1,6 +1,7 @@
 import { getCartTotals } from "utils";
 import { alertToaster } from "./popupHelper";
 import { getFirstVariant } from "./products";
+import { moeEvent } from "./events";
 
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
@@ -201,5 +202,17 @@ export async function fetchSearchItems(search) {
   } catch (error) {
     console.error("Error fetching items:", error);
     return [];
+  }
+}
+
+export function trackEvent(title, payload) {
+  if (window?.Moengage) {
+    moeEvent(title, payload);
+  } else {
+    window?.addEventListener("MOE_LIFECYCLE", function (e) {
+      if (e.detail.name === "SDK_INITIALIZED") {
+        moeEvent(title, payload);
+      }
+    });
   }
 }
