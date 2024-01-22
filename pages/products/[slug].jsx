@@ -46,7 +46,7 @@ function ProductDefault(props) {
         section: { id: "product-detail", name: "Product Detail" },
       });
     }
-  }, [slug]);
+  }, [slug, isInteractive]);
 
   const relatedProductFilter = useMemo(() => {
     if (!!product) {
