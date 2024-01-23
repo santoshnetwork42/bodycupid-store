@@ -199,7 +199,7 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(imageUrl),
           },
         },
-        revalidate: 120,
+        revalidate: 1800,
       };
     }
 
@@ -276,7 +276,7 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(imageUrl),
           },
         },
-        revalidate: 120,
+        revalidate: 1800,
       };
     }
 
