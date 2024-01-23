@@ -5,7 +5,7 @@ import { useCartTotal } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import AddressForm from "./addressForm";
-import { deleteUserAddress } from "~/graphql/mutations";
+import { deleteUserAddress } from "~/graphql/api";
 import { findUserAddresses } from "~/graphql/api";
 import Modal from "~/components/common/modal";
 import { Cricle, CricleDot, Plus } from "../icons";

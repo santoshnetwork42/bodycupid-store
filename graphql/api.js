@@ -6,7 +6,6 @@ export const getMenuCategories = /* GraphQL */ `
     $nextToken: String
     $from: Int
     $aggregates: [SearchableProductCategoryAggregationInput]
-    $subCategoryFilter: ModelProductSubCategoryFilterInput
   ) {
     searchProductCategories(
       filter: $filter
@@ -23,31 +22,23 @@ export const getMenuCategories = /* GraphQL */ `
         priority
         isFeatured
         isArchive
-        subCategory(filter: $subCategoryFilter) {
-          items {
-            id
-            name
-            slug
-            priority
-            isArchive
-            isFeatured
-          }
-        }
+        storeId
+        imageUrl
       }
     }
   }
 `;
 
 export const getSubCategoriesByCategoryID = /* GraphQL */ `
-  query SearchProductSubCategories(
-    $filter: SearchableProductSubCategoryFilterInput
-    $sort: [SearchableProductSubCategorySortInput]
+  query SearchProductCategories(
+    $filter: SearchableProductCategoryFilterInput
+    $sort: [SearchableProductCategorySortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableProductSubCategoryAggregationInput]
+    $aggregates: [SearchableProductCategoryAggregationInput]
   ) {
-    searchProductSubCategories(
+    searchProductCategories(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -59,24 +50,27 @@ export const getSubCategoriesByCategoryID = /* GraphQL */ `
         id
         name
         slug
+        priority
         isFeatured
+        isArchive
+        storeId
+        imageUrl
+        categoryID
       }
-      nextToken
-      total
     }
   }
 `;
 
 export const getAllSubcategoriesPath = /* GraphQL */ `
   query SearchProductSubCategories(
-    $filter: SearchableProductSubCategoryFilterInput
-    $sort: [SearchableProductSubCategorySortInput]
+    $filter: SearchableProductCategoryFilterInput
+    $sort: [SearchableProductCategorySortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableProductSubCategoryAggregationInput]
+    $aggregates: [SearchableProductCategoryAggregationInput]
   ) {
-    searchProductSubCategories(
+    searchProductCategories(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -232,7 +226,20 @@ export const getHomePageProducts = /* GraphQL */ `
             updatedAt
             taxable
             barcode
-            imageUrl
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+            }
             weight
             weightUnit
             inventory
@@ -262,14 +269,14 @@ export const getHomePageProducts = /* GraphQL */ `
 
 export const getHomePageCategories = /* GraphQL */ `
   query SearchProductSubCategories(
-    $filter: SearchableProductSubCategoryFilterInput
-    $sort: [SearchableProductSubCategorySortInput]
+    $filter: SearchableProductCategoryFilterInput
+    $sort: [SearchableProductCategorySortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableProductSubCategoryAggregationInput]
+    $aggregates: [SearchableProductCategoryAggregationInput]
   ) {
-    searchProductSubCategories(
+    searchProductCategories(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -284,9 +291,6 @@ export const getHomePageCategories = /* GraphQL */ `
         imageUrl
         priority
         isArchive
-        category {
-          slug
-        }
       }
     }
   }
@@ -317,11 +321,6 @@ export const getQuickViewProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         category {
-          id
-          name
-          slug
-        }
-        subCategory {
           id
           name
           slug
@@ -370,7 +369,20 @@ export const getQuickViewProduct = /* GraphQL */ `
             updatedAt
             taxable
             barcode
-            imageUrl
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+            }
             weight
             weightUnit
             inventory
@@ -394,6 +406,7 @@ export const getQuickViewProduct = /* GraphQL */ `
           nextToken
         }
       }
+
       nextToken
     }
   }
@@ -419,6 +432,10 @@ export const getProductBySlug = /* GraphQL */ `
     ) {
       items {
         id
+        variantGroups {
+          variantGroupId
+          variantGroupOptionIds
+        }
         title
         brand
         vendor
@@ -427,11 +444,6 @@ export const getProductBySlug = /* GraphQL */ `
         categoryId
         subCategoryId
         category {
-          id
-          name
-          slug
-        }
-        subCategory {
           id
           name
           slug
@@ -499,11 +511,28 @@ export const getProductBySlug = /* GraphQL */ `
             updatedAt
             taxable
             barcode
-            imageUrl
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+            }
             weight
             weightUnit
             inventory
             blockedInventory
+            productVariantOptionIds {
+              variantGroupId
+              variantGroupOptionId
+            }
           }
           nextToken
         }
@@ -526,7 +555,6 @@ export const getProductBySlug = /* GraphQL */ `
     }
   }
 `;
-
 export const getFeaturedCoupon = /* GraphQL */ `
   query SearchCoupons(
     $filter: SearchableCouponFilterInput
@@ -622,7 +650,20 @@ export const applyCoupon = /* GraphQL */ `
             price
             position
             listingPrice
-            imageUrl
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+            }
             inventory
             blockedInventory
           }
@@ -730,7 +771,11 @@ export const getOrder = /* GraphQL */ `
             status
             costPrice
             listingPrice
-            imageUrl
+            images {
+              items {
+                id
+              }
+            }
           }
           sku
           cancelledQuantity
@@ -783,12 +828,12 @@ export const getOrderStatus = /* GraphQL */ `
 `;
 export const searchProductSubCategories = /* GraphQL */ `
   query SearchProductSubCategories(
-    $filter: SearchableProductSubCategoryFilterInput
-    $sort: [SearchableProductSubCategorySortInput]
+    $filter: SearchableProductCategoryFilterInput
+    $sort: [SearchableProductCategorySortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableProductSubCategoryAggregationInput]
+    $aggregates: [SearchableProductCategoryAggregationInput]
   ) {
     searchProductSubCategories(
       filter: $filter
@@ -807,20 +852,7 @@ export const searchProductSubCategories = /* GraphQL */ `
           name
           description
           slug
-          subCategory {
-            items {
-              id
-              name
-              categoryID
-              category {
-                id
-                name
-                slug
-              }
-              slug
-            }
-            nextToken
-          }
+
           createdAt
           updatedAt
         }
@@ -838,7 +870,7 @@ export const getBasicSubCategory = /* GraphQL */ `
     $slug: String!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
-    $filter: ModelProductSubCategoryFilterInput
+    $filter: ModelProductCategoryFilterInput
     $limit: Int
     $nextToken: String
   ) {
@@ -923,15 +955,8 @@ export const findProducts = /* GraphQL */ `
         id
         title
         collections
-        collectionsList {
-          label
-        }
         vendor
         status
-        subCategory {
-          name
-          slug
-        }
         isFeatured
         category {
           name
@@ -945,6 +970,11 @@ export const findProducts = /* GraphQL */ `
         tags
         inventory
         blockedInventory
+        variantGroups {
+          variantGroupId
+          variantGroupOptionIds
+        }
+
         continueSellingOutOfStock
         metadata {
           title
@@ -966,7 +996,24 @@ export const findProducts = /* GraphQL */ `
             price
             position
             listingPrice
-            imageUrl
+            productVariantOptionIds {
+              variantGroupId
+              variantGroupOptionId
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+            }
             inventory
             blockedInventory
             status
@@ -1020,6 +1067,10 @@ export const getProductById = /* GraphQL */ `
       thumbImages
       isInventoryEnabled
       totalOrders
+      variantGroups {
+        variantGroupId
+        variantGroupOptionIds
+      }
       variants {
         items {
           id
@@ -1027,7 +1078,21 @@ export const getProductById = /* GraphQL */ `
           price
           position
           listingPrice
-          imageUrl
+          productVariantOptionIds {
+            variantGroupId
+            variantGroupOptionId
+          }
+          images {
+            items {
+              id
+              position
+              alt
+              width
+              height
+              imageKey
+              isThumb
+            }
+          }
           inventory
           blockedInventory
         }
@@ -1137,22 +1202,6 @@ export const getProductSlug = /* GraphQL */ `
   }
 `;
 
-export const searchProductsForSitemap = /* GraphQL */ `
-  query SearchProducts(
-    $filter: SearchableProductFilterInput
-    $nextToken: String
-  ) {
-    searchProducts(filter: $filter, nextToken: $nextToken) {
-      nextToken
-      items {
-        id
-        slug
-        updatedAt
-      }
-    }
-  }
-`;
-
 export const searchProductsBasic = /* GraphQL */ `
   query SearchProducts(
     $filter: SearchableProductFilterInput
@@ -1197,11 +1246,8 @@ export const searchProductsBasic = /* GraphQL */ `
 `;
 
 export const createReview = /* GraphQL */ `
-  mutation CreateReview(
-    $input: CreateReviewInput!
-    $condition: ModelReviewConditionInput
-  ) {
-    createReview(input: $input, condition: $condition) {
+  mutation CreateReview($input: CreateReviewInput!) {
+    createReview(input: $input) {
       id
       userId
       verified
@@ -1220,11 +1266,8 @@ export const createReview = /* GraphQL */ `
 `;
 
 export const updateReview = /* GraphQL */ `
-  mutation UpdateReview(
-    $input: UpdateReviewInput!
-    $condition: ModelReviewConditionInput
-  ) {
-    updateReview(input: $input, condition: $condition) {
+  mutation UpdateReview($input: UpdateReviewInput!) {
+    updateReview(input: $input) {
       id
       userId
       verified
@@ -1276,11 +1319,8 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
 `;
 
 export const createShoppingCartProduct = /* GraphQL */ `
-  mutation CreateShoppingCartProduct(
-    $input: CreateShoppingCartProductInput!
-    $condition: ModelShoppingCartProductConditionInput
-  ) {
-    createShoppingCartProduct(input: $input, condition: $condition) {
+  mutation CreateShoppingCartProduct($input: CreateShoppingCartProductInput!) {
+    createShoppingCartProduct(input: $input) {
       id
       shoppingcartId
       productId
@@ -1290,11 +1330,8 @@ export const createShoppingCartProduct = /* GraphQL */ `
   }
 `;
 export const updateShoppingCartProduct = /* GraphQL */ `
-  mutation UpdateShoppingCartProduct(
-    $input: UpdateShoppingCartProductInput!
-    $condition: ModelShoppingCartProductConditionInput
-  ) {
-    updateShoppingCartProduct(input: $input, condition: $condition) {
+  mutation UpdateShoppingCartProduct($input: UpdateShoppingCartProductInput!) {
+    updateShoppingCartProduct(input: $input) {
       id
       shoppingcartId
       productId
@@ -1304,11 +1341,8 @@ export const updateShoppingCartProduct = /* GraphQL */ `
   }
 `;
 export const deleteShoppingCartProduct = /* GraphQL */ `
-  mutation DeleteShoppingCartProduct(
-    $input: DeleteShoppingCartProductInput!
-    $condition: ModelShoppingCartProductConditionInput
-  ) {
-    deleteShoppingCartProduct(input: $input, condition: $condition) {
+  mutation DeleteShoppingCartProduct($input: DeleteShoppingCartProductInput!) {
+    deleteShoppingCartProduct(input: $input) {
       id
       shoppingcartId
       productId
@@ -1320,11 +1354,8 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
 `;
 
 export const createShoppingCart = /* GraphQL */ `
-  mutation CreateShoppingCart(
-    $input: CreateShoppingCartInput!
-    $condition: ModelShoppingCartConditionInput
-  ) {
-    createShoppingCart(input: $input, condition: $condition) {
+  mutation CreateShoppingCart($input: CreateShoppingCartInput!) {
+    createShoppingCart(input: $input) {
       id
       storeId
       userId
@@ -1335,11 +1366,8 @@ export const createShoppingCart = /* GraphQL */ `
   }
 `;
 export const updateShoppingCart = /* GraphQL */ `
-  mutation UpdateShoppingCart(
-    $input: UpdateShoppingCartInput!
-    $condition: ModelShoppingCartConditionInput
-  ) {
-    updateShoppingCart(input: $input, condition: $condition) {
+  mutation UpdateShoppingCart($input: UpdateShoppingCartInput!) {
+    updateShoppingCart(input: $input) {
       id
       storeId
       userId
@@ -1349,11 +1377,8 @@ export const updateShoppingCart = /* GraphQL */ `
 `;
 
 export const deleteShoppingCart = /* GraphQL */ `
-  mutation DeleteShoppingCart(
-    $input: DeleteShoppingCartInput!
-    $condition: ModelShoppingCartConditionInput
-  ) {
-    deleteShoppingCart(input: $input, condition: $condition) {
+  mutation DeleteShoppingCart($input: DeleteShoppingCartInput!) {
+    deleteShoppingCart(input: $input) {
       id
     }
   }
@@ -1399,11 +1424,8 @@ export const findUserAddresses = /* GraphQL */ `
 `;
 
 export const createUserAddress = /* GraphQL */ `
-  mutation CreateUserAddress(
-    $input: CreateUserAddressInput!
-    $condition: ModelUserAddressConditionInput
-  ) {
-    createUserAddress(input: $input, condition: $condition) {
+  mutation CreateUserAddress($input: CreateUserAddressInput!) {
+    createUserAddress(input: $input) {
       id
       userID
       name
@@ -1424,11 +1446,8 @@ export const createUserAddress = /* GraphQL */ `
 `;
 
 export const updateUserAddress = /* GraphQL */ `
-  mutation UpdateUserAddress(
-    $input: UpdateUserAddressInput!
-    $condition: ModelUserAddressConditionInput
-  ) {
-    updateUserAddress(input: $input, condition: $condition) {
+  mutation UpdateUserAddress($input: UpdateUserAddressInput!) {
+    updateUserAddress(input: $input) {
       id
       userID
       name
@@ -1444,6 +1463,28 @@ export const updateUserAddress = /* GraphQL */ `
       area
       createdAt
       updatedAt
+    }
+  }
+`;
+export const deleteUserAddress = /* GraphQL */ `
+  mutation DeleteUserAddress($input: DeleteUserAddressInput!) {
+    deleteUserAddress(input: $input) {
+      id
+      userID
+      name
+      phone
+      email
+      country
+      state
+      city
+      pinCode
+      landmark
+      address
+      location
+      area
+      createdAt
+      updatedAt
+      __typename
     }
   }
 `;
@@ -1504,16 +1545,14 @@ export const getUser = /* GraphQL */ `
       walletBalance
       walletSpent
       totalStoreCredit
+      totalRewards
     }
   }
 `;
 
 export const updateUser = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    updateUser(input: $input, condition: $condition) {
+  mutation UpdateUser($input: UpdateUserInput!) {
+    updateUser(input: $input) {
       id
       owner
       firstName
@@ -1757,7 +1796,20 @@ export const getLinkedProducts = /* GraphQL */ `
               currency
               costPrice
               listingPrice
-              imageUrl
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+              }
             }
           }
           images(limit: $imageLimit) {
@@ -1828,21 +1880,6 @@ export const getHomePageBlogs = /* GraphQL */ `
           pageURL
         }
         createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-
-export const searchCollectionTypesForSitemap = /* GraphQL */ `
-  query SearchCollectionTypes(
-    $filter: SearchableCollectionTypeFilterInput
-    $nextToken: String
-  ) {
-    searchCollectionTypes(filter: $filter, nextToken: $nextToken) {
-      items {
-        id
-        slug
         updatedAt
       }
     }
@@ -1935,11 +1972,8 @@ export const getRedirects = /* GraphQL */ `
 `;
 
 export const createRedirects = /* GraphQL */ `
-  mutation CreateRedirects(
-    $input: CreateRedirectsInput!
-    $condition: ModelRedirectsConditionInput
-  ) {
-    createRedirects(input: $input, condition: $condition) {
+  mutation CreateRedirects($input: CreateRedirectsInput!) {
+    createRedirects(input: $input) {
       id
     }
   }
@@ -2002,9 +2036,9 @@ export const getCoupon = /* GraphQL */ `
   }
 `;
 
-export const createNewOrder = /* GraphQL */ `
+export const createOrder = /* GraphQL */ `
   mutation CreateNewOrder($input: CreateNewOrderInput!) {
-    createNewOrder(input: $input) {
+    createOrder(input: $input) {
       id
       code
       storeId
@@ -2066,9 +2100,370 @@ export const getCollectionType = /* GraphQL */ `
   }
 `;
 
-export const handleStoreShoppingCart = /* GraphQL */ `
-  mutation HandleStoreShoppingCart($input: HandleStoreShoppingCartInput!) {
-    handleStoreShoppingCart(input: $input) {
+export const searchProductFaqs = /* GraphQL */ `
+  query SearchProductFaqs(
+    $filter: SearchableProductFaqFilterInput
+    $sort: [SearchableProductFaqSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductFaqAggregationInput]
+  ) {
+    searchProductFaqs(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        productId
+        title
+        description
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+              __typename
+            }
+          }
+        }
+        __typename
+      }
+      __typename
+    }
+  }
+`;
+
+export const getInitialData = /* GraphQL */ `
+  query getInitialData(
+    $collectionFilter: SearchableCollectionTypeFilterInput
+    $collectionSort: [SearchableCollectionTypeSortInput]
+    $collectionLimit: Int
+    $collectionNextToken: String
+    $collectionFrom: Int
+    $collectionAggregates: [SearchableCollectionTypeAggregationInput]
+    $couponFilter: SearchableCouponFilterInput
+    $couponSort: [SearchableCouponSortInput]
+    $couponLimit: Int
+    $couponNextToken: String
+    $couponFrom: Int
+    $couponAggregates: [SearchableCouponAggregationInput]
+    $ltoProductFilter: SearchableProductFilterInput
+    $ltoProductSort: [SearchableProductSortInput]
+    $ltoProductLimit: Int
+    $ltoProductNextToken: String
+    $ltoProductFrom: Int
+    $ltoProductAggregates: [SearchableProductAggregationInput]
+    $ltoProductVariantFilter: ModelVariantFilterInput
+    $ltoProductVariantLimit: Int
+    $ltoProductImageLimit: Int
+    $getStoreSettingInput: GetStoreSettingInput!
+  ) {
+    searchCollectionTypes(
+      filter: $collectionFilter
+      sort: $collectionSort
+      limit: $collectionLimit
+      nextToken: $collectionNextToken
+      from: $collectionFrom
+      aggregates: $collectionAggregates
+    ) {
+      items {
+        id
+        slug
+        name
+        title
+        description
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+      }
+    }
+
+    searchCoupons(
+      filter: $couponFilter
+      sort: $couponSort
+      limit: $couponLimit
+      nextToken: $couponNextToken
+      from: $couponFrom
+      aggregates: $couponAggregates
+    ) {
+      items {
+        id
+        description
+        code
+        couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        getYStoreProduct {
+          id
+          title
+          price
+        }
+        minOrderValue
+        maxDiscount
+        expirationDate
+        autoApply
+        applicableCollections
+        applicableProducts
+        paymentMethod
+      }
+    }
+
+    searchProducts(
+      filter: $ltoProductFilter
+      sort: $ltoProductSort
+      limit: $ltoProductLimit
+      nextToken: $ltoProductNextToken
+      from: $ltoProductFrom
+      aggregates: $ltoProductAggregates
+    ) {
+      items {
+        id
+        title
+        collections
+        vendor
+        status
+        isFeatured
+        category {
+          name
+          slug
+        }
+        slug
+        price
+        sku
+        position
+        listingPrice
+        tags
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        thumbImages
+        isInventoryEnabled
+        totalOrders
+        recommended
+        recommendPriority
+        recommendPrice
+        variants(
+          filter: $ltoProductVariantFilter
+          limit: $ltoProductVariantLimit
+        ) {
+          items {
+            id
+            title
+            price
+            position
+            listingPrice
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+            }
+            inventory
+            blockedInventory
+            status
+          }
+        }
+        images(limit: $ltoProductImageLimit) {
+          items {
+            id
+            position
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
+        }
+      }
+      nextToken
+      total
+    }
+
+    getStoreSetting(input: $getStoreSettingInput) {
+      id
+      configurations {
+        
+      }
+      menus {
+        id
+        parentId
+        storeId
+        priority
+        menus {
+          items {
+            id
+            parentId
+            storeId
+            priority
+            menus {
+              items {
+                id
+                parentId
+                storeId
+                priority
+                isArchive
+                label
+                link
+                slug
+                createdAt
+                updatedAt
+                __typename
+              }
+              nextToken
+              __typename
+            }
+            isArchive
+            label
+            link
+            slug
+            createdAt
+            updatedAt
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        isArchive
+        label
+        link
+        slug
+        createdAt
+        updatedAt
+        __typename
+      }
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        trackingUrl
+        imageUrl
+        darkImageUrl
+        banners {
+          webKey
+          mobileKey
+          link
+          name
+          isArchive
+          priority
+          deviceType
+          __typename
+        }
+        announcements {
+          label
+          link
+          color
+          textColor
+          deviceType
+          __typename
+        }
+        socialLinks {
+          instagram
+          facebook
+          twitter
+          youtube
+          pinterest
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      shippingTiers {
+        id
+        storeId
+        store {
+          id
+          name
+          title
+          description
+          isActive
+          webUrl
+          trackingUrl
+          imageUrl
+          darkImageUrl
+          banners {
+            webKey
+            mobileKey
+            link
+            name
+            isArchive
+            priority
+            deviceType
+            __typename
+          }
+          announcements {
+            label
+            link
+            color
+            textColor
+            deviceType
+            __typename
+          }
+          socialLinks {
+            instagram
+            facebook
+            twitter
+            youtube
+            pinterest
+            __typename
+          }
+          createdAt
+          updatedAt
+          __typename
+        }
+        paymentType
+        amount
+        minOrderValue
+        maxOrderValue
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+
+export const manageShoppingCart = /* GraphQL */ `
+  mutation ManageShoppingCart($input: ManageShoppingCartInput!) {
+    manageShoppingCart(input: $input) {
       success
       message
     }

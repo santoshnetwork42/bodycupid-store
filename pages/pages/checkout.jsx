@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useContext } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -36,7 +36,11 @@ import Card from "~/components/features/accordion/card";
 import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
-import { useGuestCheckout } from "~/utils/contexts/navbar";
+import {
+  NavbarContext,
+  useGuestCheckout,
+  useNavBarState,
+} from "~/utils/contexts/navbar";
 import { MAX_COD_AMOUNT } from "~/constant";
 import { productDiscountPercentage } from "~/utils/products";
 
@@ -65,6 +69,7 @@ function Checkout(props) {
 
   const guestCheckout = useGuestCheckout();
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
+  const { isRewardApplied } = useNavBarState();
 
   const { isSmallSize: isMobile } = useWindowDimensions();
   const { ready: isInventoryCheckReady, inventoryMapping } = useInventory({
@@ -112,8 +117,11 @@ function Checkout(props) {
     codCharges,
     appliedCODCharges,
     prepaidDiscountPercent,
+    usableRewards,
+    totalAmount,
   } = useCartTotal({
     paymentType: payMethod,
+    isRewardApplied,
   });
 
   const cartItems = useCartItems({
@@ -160,10 +168,15 @@ function Checkout(props) {
         paymentMethod: payMethod,
         address: shippingAddress,
         metadata,
+        appliedRewardPoints: null,
+        totalAmount: totalAmount,
       }),
       loadScript(RAZORPAY_SCRIPT),
     ]);
 
+    if (isRewardApplied && !!usableRewards) {
+      variables.appliedRewardPoints = usableRewards ? usableRewards : null;
+    }
     if (!success) {
       alertToaster("Something went wrong. Try Again!");
       if (code === "INVALID_ADDRESS") {
@@ -701,9 +714,7 @@ function Checkout(props) {
             </>
           ) : (
             <div className="empty-cart text-center">
-              <p className="mt-2 text-black font-weight-bold">
-                Your cart is currently empty.
-              </p>
+              <p className="mt-2">Your cart is currently empty.</p>
               <i className="cart-empty d-icon-bag"></i>
               <p className="return-to-shop mb-0">
                 <ALink

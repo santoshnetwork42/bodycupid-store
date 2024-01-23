@@ -9,8 +9,13 @@ import { GUEST_CHECKOUT } from "~/constant";
 
 export const NavbarContext = createContext();
 
-function NavbarProvider({ children, cartList, appliedCoupon }) {
+function NavbarProvider({ children, cartList, appliedCoupon, user }) {
   const [isInteractive, setIsInteractive] = useState(false);
+  const [isRewardApplied, setIsRewardApplied] = useState(false);
+
+  const handleRewardApply = (state) => {
+    setIsRewardApplied(state);
+  };
 
   const apiResolve = (query, variables, authMode) =>
     API.graphql({
@@ -44,13 +49,19 @@ function NavbarProvider({ children, cartList, appliedCoupon }) {
       isInteractive={isInteractive}
       cartItems={cartList}
       appliedCoupon={appliedCoupon}
+      user={user}
+      deviceType="WEB"
     >
-      <NavbarContext.Provider value={{ isInteractive }}>
+      <NavbarContext.Provider
+        value={{ isInteractive, isRewardApplied, handleRewardApply }}
+      >
         {children}
       </NavbarContext.Provider>
     </Navbar>
   );
 }
+
+export const useNavBarState = () => useContext(NavbarContext);
 
 export const useIsInteractive = () => {
   const { isInteractive } = useContext(NavbarContext);
