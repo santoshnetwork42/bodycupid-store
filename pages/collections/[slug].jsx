@@ -104,13 +104,9 @@ export const getStaticPaths = async () => {
   }
   const [
     { searchProductCategories },
-    { searchProductSubCategories },
     { searchCollectionTypes: allCollections },
   ] = await Promise.all([
     fetchData(getAllCategoriesPath, {
-      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
-    }),
-    fetchData(getAllSubcategoriesPath, {
       filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
     }),
     fetchData(getAllCollectionPath, {
@@ -118,15 +114,13 @@ export const getStaticPaths = async () => {
     }),
   ]);
 
-  const paths = [
-    ...searchProductCategories.items,
-    ...searchProductSubCategories.items,
-    ...allCollections.items,
-  ].map((c) => {
-    return {
-      params: { slug: c.slug },
-    };
-  });
+  const paths = [...searchProductCategories.items, ...allCollections.items].map(
+    (c) => {
+      return {
+        params: { slug: c.slug },
+      };
+    }
+  );
 
   return {
     paths,
@@ -177,12 +171,12 @@ export const getStaticProps = async (context) => {
         }
       );
 
-      const [{ searchProducts }, { searchProductSubCategories }] =
+      const [{ searchProducts }, { searchProductCategories }] =
         await Promise.all([getProducts, getSubCategoriesByCategory]);
 
       const filterItems = [
         { name: "All", path: `/collections/${category.slug}` },
-        ...searchProductSubCategories.items.map((sub) => ({
+        ...searchProductCategories.items.map((sub) => ({
           ...sub,
           path: `/collections/${sub.slug}`,
         })),
@@ -205,80 +199,17 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(imageUrl),
           },
         },
-        revalidate: 1800,
+        revalidate: 120,
       };
     }
 
-    // Sub Category By Slug
-    const [subCategory] = await fetchData(getBasicSubCategory, {
-      slug,
-      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
-    }).then((resp) => resp.byslugProductSubCategory.items);
-
-    if (subCategory) {
-      filter.categoryId = { eq: subCategory.categoryID };
-      filter.subCategoryId = { eq: subCategory.id };
-
-      const {
-        title,
-        description,
-        imageUrl,
-        name: subCategoryName,
-      } = subCategory;
-
-      // Get Product By Category
-      const getProducts = fetchData(findProducts, {
-        filter,
-        sort: [{ field: "position", direction: "asc" }],
-        variantFilter: { status: { eq: "ENABLED" } },
-        imageLimit: 1,
-      });
-
-      // Get Product Sub-Category By Category ID
-      const getSubCategoriesByCategory = fetchData(
-        getSubCategoriesByCategoryID,
-        {
-          filter: {
-            storeId: { eq: STORE_ID },
-            categoryID: { eq: subCategory.categoryID },
-            slug: { ne: slug },
-            isArchive: { eq: false },
-          },
-        }
-      );
-
-      const [{ searchProducts }, { searchProductSubCategories }] =
-        await Promise.all([getProducts, getSubCategoriesByCategory]);
-
-      const filterItems = [
-        { name: "All", path: `/collections/${subCategory.category.slug}` },
-        { name: subCategoryName, path: `/collections/${slug}` },
-        ...searchProductSubCategories.items.map((sub) => ({
-          ...sub,
-          path: `/collections/${sub.slug}`,
-        })),
-      ];
-
-      return {
-        props: {
-          slug,
-          data: subCategory,
-          pageType: "SUBCATEGORY",
-          sectionId: subCategory.id,
-          products: searchProducts,
-          filterItems,
-          pageFilter: filter,
-          pageMeta: {
-            siteName: name,
-            title: title || subCategoryName,
-            description,
-            canonical: `${webUrl}/collections/${slug}`,
-            image: getPublicImageURL(imageUrl),
-          },
-        },
-        revalidate: 1800,
-      };
-    }
+    // Get Product By Category
+    const getProducts = fetchData(findProducts, {
+      filter,
+      sort: [{ field: "position", direction: "asc" }],
+      variantFilter: { status: { eq: "ENABLED" } },
+      imageLimit: 1,
+    });
 
     const collection = await fetchData(searchCollectionTypes, {
       filter: {
@@ -345,7 +276,7 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(imageUrl),
           },
         },
-        revalidate: 1800,
+        revalidate: 120,
       };
     }
 

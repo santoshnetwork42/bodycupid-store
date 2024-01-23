@@ -20,12 +20,13 @@ export default function MediaOne(props) {
     const images = [...product.images.items];
     images.sort((a, b) => a.position - b.position);
     if (product.variants.items.length > 0) {
-      product.variants.items.forEach((i) => {
-        images.push({
-          ...i,
-          variantId: i.id,
-          imageKey: i.imageUrl,
-          alt: i.alt || i.title,
+      product.variants.items.forEach((variant) => {
+        variant.images.items.forEach((item) => {
+          images.push({
+            ...item,
+            variantId: variant.id,
+            imageKey: item.imageKey,
+          });
         });
       });
     }

@@ -2,10 +2,10 @@ import React, { useCallback } from "react";
 import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
 import { useRouter } from "next/router";
+import { useCartTotal } from "@wow-star/utils";
 
 import { eventActions } from "~/store/events";
 import { toDecimal } from "~/utils";
-import { useCartTotal } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
 import { modalActions } from "~/store/modal";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
@@ -38,10 +38,12 @@ function CartTotal({
     prepaidDiscount,
     prepaidDiscountPercent,
     prepaidGrandTotal,
-    cartAmountSaved: totalSaved,
-  } = useCartTotal();
-
-  const totalSavings = Math.round(totalSaved + prepaidDiscount);
+    totalAmountSaved,
+    codCharges,
+    appliedCODCharges,
+  } = useCartTotal({
+    paymentType: "PREPAID",
+  });
 
   const guestCheckout = useGuestCheckout();
 
@@ -148,6 +150,30 @@ function CartTotal({
                   </p>
                 </td>
               </tr>
+
+              {!!codCharges && (
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">COD Charges</h4>
+                  </td>
+                  <td
+                    className={`summary-subtotal-price pb-0 pt-0 ${
+                      !appliedCODCharges && "discount-price-color"
+                    }`}
+                  >
+                    {!appliedCODCharges && (
+                      <del className="summary-subtotal-listingprice mr-2">
+                        ₹{toDecimal(codCharges)}
+                      </del>
+                    )}
+                    {!!appliedCODCharges
+                      ? `₹${toDecimal(appliedCODCharges)}`
+                      : "Free"}
+                    &nbsp;
+                  </td>
+                </tr>
+              )}
+
               <tr className="summary-subtotal">
                 <td>
                   <h4 className="summary-subtitle lh-1">
@@ -195,7 +221,7 @@ function CartTotal({
                 {" "}
                 ₹{toDecimal(prepaidGrandTotal)}
               </div>
-              {!!totalSavings && (
+              {!!totalAmountSaved && (
                 <div className="summary-saving-lable-container m-0 p-0">
                   <p
                     className={`saving-lable ${
@@ -203,7 +229,7 @@ function CartTotal({
                     }`}
                   >
                     You saved
-                    <span> {`₹${toDecimal(totalSavings)} `}</span>
+                    <span> {`₹${toDecimal(totalAmountSaved)} `}</span>
                   </p>
                 </div>
               )}

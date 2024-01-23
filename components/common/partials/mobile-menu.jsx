@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
 import { connect } from "react-redux";
 import NextImage from "next/image";
+import { useMenu } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import { Cross } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
 import { modalActions } from "~/store/modal";
-import { useMenu } from "~/utils/contexts/navbar";
 import { eventActions } from "~/store/events";
 
 function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
@@ -65,92 +65,96 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
 
       <ALink className="mobile-menu-close" href="#" onClick={hideMobileMenu}>
         <i>
-          <Cross color="currentColor" />
+          <Cross color="#000" />
         </i>
       </ALink>
 
-      <div className="mobile-menu-container scrollable">
-        <div className="pt-2 pb-1 d-flex align-items-center justify-content-center">
-          <ALink href="/" className="logo-footer">
-            <NextImage
-              src="/images/logo.png"
-              loading="eager"
-              alt="logo"
-              height={70}
-              width={70}
-              objectFit="contain"
-            />
-          </ALink>
+      <div className="mobile-menu-container scrollable pr-0">
+        <div className="pt-2 pb-2 pl-3 pr-3">
+          <div className="pt-0 pb-0 d-flex align-items-center">
+            <ALink href="/" className="logo-footer">
+              <NextImage
+                src="/images/logo.png"
+                loading="eager"
+                alt="logo"
+                height={70}
+                width={70}
+                objectFit="contain"
+              />
+            </ALink>
+          </div>
         </div>
-        <ul className="mobile-menu mmenu-anim">
-          <li>
-            {menu.map((item, index) => (
-              <div key={item?.label}>
-                <Card
-                  title={item.label}
-                  type="mobile"
-                  onLinkClick={(e) => {
-                    hideMobileMenu(e);
-                    topNavbarClicked({
-                      banner_name: item.label,
-                      item_id: index + 1,
-                      Source: "Mobile",
-                      "Section Name": "Mobile Navbar",
-                    });
-                  }}
-                  url={item.link}
-                  hideDropDown={!item?.subMenu?.length}
-                >
-                  <ul>
-                    {item?.subMenu?.map((subItem) => (
-                      <li key={`${item.label}-${subItem.label}`}>
-                        <ALink
-                          href={subItem.link}
-                          onClick={(e) => {
-                            hideMobileMenu(e);
-                            topNavbarClicked({
-                              banner_name: subItem.label,
-                              item_id: null,
-                              Source: "Web",
-                              "Section Name": "Top Navbar",
-                            });
-                          }}
-                        >
-                          {subItem.label}
-                        </ALink>
-                      </li>
-                    ))}
-                  </ul>
-                </Card>
-              </div>
-            ))}
-          </li>
-
-          {!user && (
+        <div className="div-menu">
+          <ul className="mobile-menu mmenu-anim">
             <li>
-              <ALink
-                href={"#"}
-                onClick={() => {
-                  openPasswordLess();
-                  hideMobileMenu();
-                }}
-              >
-                Login
-              </ALink>
+              {menu.map((item, index) => (
+                <div key={item?.label}>
+                  <Card
+                    title={item.label}
+                    type="mobile"
+                    onLinkClick={(e) => {
+                      hideMobileMenu(e);
+                      topNavbarClicked({
+                        banner_name: item.label,
+                        item_id: index + 1,
+                        Source: "Mobile",
+                        "Section Name": "Mobile Navbar",
+                      });
+                    }}
+                    url={item.link}
+                    hideDropDown={!item?.menus.items?.length}
+                  >
+                    <ul>
+                      {item?.menus.items?.map((subItem) => (
+                        <li key={`${item.label}-${subItem.label}`}>
+                          <ALink
+                            href={subItem.link}
+                            onClick={(e) => {
+                              hideMobileMenu(e);
+                              topNavbarClicked({
+                                banner_name: subItem.label,
+                                item_id: null,
+                                Source: "Web",
+                                "Section Name": "Top Navbar",
+                              });
+                            }}
+                          >
+                            {subItem.label}
+                          </ALink>
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
+                </div>
+              ))}
             </li>
-          )}
-          {!!user && (
-            <>
-              <li>
-                <ALink href="/pages/account">My Account</ALink>
 
-                <ALink href={"/"} onClick={handleLogout}>
-                  Logout
+            {!user && (
+              <li>
+                <ALink
+                  href={"#"}
+                  onClick={() => {
+                    openPasswordLess();
+                    hideMobileMenu();
+                  }}
+                >
+                  Login
                 </ALink>
               </li>
-            </>
-          )}
-        </ul>
+            )}
+            {!!user && (
+              <>
+                <li>
+                  <ALink href="/pages/account">My Account</ALink>
+
+                  <ALink href={"/"} onClick={handleLogout}>
+                    Logout
+                  </ALink>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
       </div>
     </div>
   );

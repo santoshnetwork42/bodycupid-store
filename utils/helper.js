@@ -128,6 +128,14 @@ export const getUpdatedCart = (cartList, recordKey, payload) => {
     if (recordKey === c.recordKey) {
       return { ...c, ...payload };
     }
+
+    if (
+      c.cartItemSource === "LIMITED_TIME_DEAL" &&
+      c.parentRecordKey === recordKey &&
+      payload.recordKey
+    ) {
+      c.parentRecordKey = payload.recordKey;
+    }
     return c;
   });
 };

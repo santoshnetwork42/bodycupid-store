@@ -2,25 +2,29 @@ import React from "react";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import Head from "next/head";
+import { useCartItems, useInventory } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import Coupons from "~/components/features/coupon";
 import { eventActions } from "~/store/events";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
-import { useInventory } from "~/utils/hooks/useInventory";
 import { Logger } from "aws-amplify";
 import CartTotal from "~/components/common/partials/cart-totals";
-import { useCartItems } from "~/utils/hooks/useCart";
+import { cartActions } from "~/store/cart";
 
 const logger = new Logger("Cart");
 
 function Cart(props) {
-  const { store, appliedCoupon, viewCart } = props;
-
+  const { store, appliedCoupon, viewCart, validateCart } = props;
   const { name } = store || {};
-  const cartItems = useCartItems();
-  const inventory = useInventory();
+
+  const lineItems = useCartItems({
+    showLTOProducts: false,
+    showNonApplicableFreeProducts: true,
+  });
+
+  const inventory = useInventory({ validateCart });
 
   const { inventoryMapping } = inventory;
 
@@ -58,12 +62,12 @@ function Cart(props) {
 
         <div className="container p-0 sm-container mt-7 mb-2 ">
           <div className="row">
-            {cartItems.length > 0 ? (
+            {lineItems.length > 0 ? (
               <>
                 <div className="col-lg-8 col-md-12 ">
                   <div className="shop-table cart-table lh-default ">
                     <div key={appliedCoupon?.id}>
-                      {cartItems.map((item) => (
+                      {lineItems.map((item) => (
                         <CartProduct
                           key={`${item.itemKey}-${item.extraQty}`}
                           item={item}
@@ -119,6 +123,7 @@ function mapStateToProps(state) {
 }
 const Component = connect(mapStateToProps, {
   viewCart: eventActions.viewCart,
+  validateCart: cartActions.validateCart,
 })(Cart);
 
 Component.hideFooter = true;
