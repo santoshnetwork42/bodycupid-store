@@ -1,17 +1,17 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { API } from "aws-amplify";
 import { connect } from "react-redux";
+import { useCartTotal } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import AddressForm from "./addressForm";
-import { deleteUserAddress } from "~/graphql/mutations";
+import { deleteUserAddress } from "~/graphql/api";
 import { findUserAddresses } from "~/graphql/api";
 import Modal from "~/components/common/modal";
 import { Cricle, CricleDot, Plus } from "../icons";
 import { errorHandler } from "~/utils/errorHandler";
 import { modalActions } from "~/store/modal";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
-import { useCartTotal } from "~/utils/hooks/useCart";
 import { eventActions } from "~/store/events";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
 
@@ -32,7 +32,10 @@ function Addresses({
   const [defaultAddress, setDefaultAddress] = useState({});
   const [isAddressFormVisible, setIsAddressFormVisible] = useState(false);
 
-  const { totalPrice } = useCartTotal();
+  const { totalPrice } = useCartTotal({
+    paymentType: "PREPAID",
+  });
+
   const guestCheckout = useGuestCheckout();
 
   const getUserAddress = useCallback(async () => {

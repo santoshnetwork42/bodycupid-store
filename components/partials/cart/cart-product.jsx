@@ -26,7 +26,6 @@ function CartProduct({
   cartList,
   removeFromCart,
   updateCart,
-  ltoProducts,
   removeCoupon,
 }) {
   const {
@@ -47,7 +46,9 @@ function CartProduct({
     hideRemove = false,
     couponMessage,
     ltoProduct,
-    ltoRecordKey,
+    ltoDeal,
+    cartItemSource,
+    itemKey,
   } = item;
 
   const { isSmallSize } = useWindowDimensions();
@@ -97,14 +98,6 @@ function CartProduct({
 
   const outOfStock = qty > inventory;
 
-  const matchingLTOProduct = ltoProducts.find(
-    (product) => product.id === ltoProduct
-  );
-
-  const ltoDealProduct = cartList.find(
-    (cartItem) => cartItem.recordKey === ltoRecordKey
-  );
-
   const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(item, variantId),
     [variantId, slug]
@@ -114,7 +107,7 @@ function CartProduct({
     <div className="m-0 p-0 border-no">
       <div
         className={`cart-product-card mb-2 ${
-          matchingLTOProduct || ltoDealProduct ? "cart-product-padding" : "pb-0"
+          ltoDeal || ltoProduct ? "cart-product-padding" : "pb-0"
         }`}
       >
         <div className="mobile-specific-cart-product-container mobile-specific-cart d-flex p-relative">
@@ -324,17 +317,17 @@ function CartProduct({
           </div>
         )}
 
-        {!cartItemType && (
+        {(!cartItemType || cartItemType === "CART") && (
           <>
-            {!!matchingLTOProduct && !outOfStock && (
+            {!!ltoDeal && !outOfStock && (
               <LimitedTimeProductDeal
                 parentRecordKey={recordKey}
-                product={matchingLTOProduct}
+                product={ltoDeal}
                 addedAt={item.addedAt}
               />
             )}
-            {!!ltoDealProduct && !outOfStock && (
-              <LimitedTimeProduct product={ltoDealProduct} />
+            {!!ltoProduct && !outOfStock && (
+              <LimitedTimeProduct product={ltoProduct} />
             )}
           </>
         )}
@@ -347,7 +340,6 @@ function mapStateToProps(state) {
   return {
     cartList: state.cart.data,
     appliedCoupon: state.cart.coupon,
-    ltoProducts: state.cart.ltoProducts,
   };
 }
 

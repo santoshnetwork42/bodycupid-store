@@ -1,7 +1,7 @@
 import { call, select, takeEvery } from "redux-saga/effects";
 import { API } from "aws-amplify";
 
-import { handleStoreShoppingCart } from "~/graphql/api";
+import { manageShoppingCart } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import { actionTypes } from "~/store/cart";
 import { actionTypes as userActionTypes } from "~/store/user";
@@ -37,7 +37,7 @@ export function* cartSaga() {
           );
 
           yield call([API, API.graphql], {
-            query: handleStoreShoppingCart,
+            query: manageShoppingCart,
             variables: {
               input: {
                 couponCodeId: couponCode || null,
