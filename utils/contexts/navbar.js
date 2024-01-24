@@ -1,124 +1,28 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 import Cookie from "js-cookie";
+import { connect } from "react-redux";
+import { NavbarProvider as Navbar, useConfiguration } from "@wow-star/utils";
 
 import { STORE_ID, STORE_PREFIX } from "~/config";
-import { getCoupon, getInitialData } from "~/graphql/api";
-import { getSortedCategoryAndSubCategory } from "../helper";
-import { errorHandler } from "../errorHandler";
 import { GUEST_CHECKOUT } from "~/constant";
-import { useDispatch } from "react-redux";
-import { cartActions } from "~/store/cart";
-import { getDefaultSorting } from "..";
-import { getProductInventory } from "../products";
 
 export const NavbarContext = createContext();
 
-function NavbarProvider({ children }) {
-  const dispatch = useDispatch();
+function NavbarProvider({ children, cartList, appliedCoupon, user }) {
   const [isInteractive, setIsInteractive] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [collections, setCollections] = useState([]);
-  const [shippingTiers, setShippingTiers] = useState(null);
-  const [coupons, setCoupons] = useState(null);
-  const [configurations, setConfigurations] = useState([]);
+  const [isRewardApplied, setIsRewardApplied] = useState(false);
 
-  const getDashboardData = () => {
-    API.graphql(
-      graphqlOperation(getInitialData, {
-        //Category
-        menuCategoryFilter: {
-          storeId: { eq: STORE_ID },
-          isFeatured: { eq: true },
-          isArchive: { eq: false },
-        },
-        menuCategorySubCategoryFilter: {
-          isFeatured: { eq: true },
-          isArchive: { eq: false },
-        },
-        menuCategorySort: [{ field: "priority", direction: "asc" }],
-        collectionFilter: {
-          storeId: { eq: STORE_ID },
-          showInMenu: { eq: true },
-          isArchive: { eq: false },
-        },
-
-        //Collection
-        collectionSort: [{ field: "priority", direction: "asc" }],
-
-        //Configuration
-        configurationFilter: {
-          storeId: { eq: STORE_ID },
-        },
-
-        //Coupon
-        couponFilter: {
-          isActive: { eq: true },
-          storeId: { eq: STORE_ID },
-          or: [
-            { isFeatured: { eq: true } },
-            {
-              couponType: { eq: "FREEBIE" },
-            },
-          ],
-        },
-
-        //LtoProduct
-        ltoProductFilter: {
-          storeId: { eq: STORE_ID },
-          recommended: { eq: true },
-        },
-        ltoProductSort: [{ field: "recommendPriority", direction: "asc" }],
-
-        //Shipping
-        shippingFilter: { storeId: { eq: STORE_ID } },
-      })
-    )
-      .then((response) => {
-        //Category
-        const sortedCategoryAndSubCategory = getSortedCategoryAndSubCategory(
-          response.data.searchProductCategories.items
-        );
-        setCategories(sortedCategoryAndSubCategory);
-
-        //Collection
-        setCollections(response.data.searchCollectionTypes.items);
-
-        //Configuration
-        setConfigurations(response.data.searchConfigurations.items);
-
-        //ShippingTier
-        setShippingTiers(response.data.searchShippingTiers.items);
-
-        //Coupon
-        setCoupons(
-          response.data.searchCoupons.items.filter((coupon) => {
-            const { expirationDate } = coupon;
-            return (
-              !expirationDate ||
-              new Date(expirationDate).getTime() >= new Date().getTime()
-            );
-          })
-        );
-
-        //LtoProduct
-        const ltoProducts = response.data.searchProducts.items.filter((lto) => {
-          const status = lto.variants?.items?.length
-            ? lto.variants?.items[0].status === "ENABLED"
-            : lto.status === "ENABLED";
-          const { hasInventory } = getProductInventory(lto);
-          return hasInventory && status;
-        });
-        dispatch(cartActions.initialLTO(ltoProducts));
-      })
-      .catch(errorHandler);
+  const handleRewardApply = (state) => {
+    setIsRewardApplied(state);
   };
 
-  useEffect(() => {
-    if (isInteractive) {
-      getDashboardData();
-    }
-  }, [isInteractive]);
+  const apiResolve = (query, variables, authMode) =>
+    API.graphql({
+      query,
+      variables,
+      authMode: authMode === "AUTH" ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+    });
 
   useEffect(() => {
     const handleMouseMovement = () => {
@@ -138,93 +42,30 @@ function NavbarProvider({ children }) {
     };
   }, []);
 
-  const addUserCoupon = async (coupon) => {
-    setCoupons([
-      { ...coupon, autoApply: true, isExternal: true },
-      ...(coupons || []),
-    ]);
-  };
-
   return (
-    <NavbarContext.Provider
-      value={{
-        isInteractive,
-        categories,
-        collections,
-        shippingTiers,
-        coupons,
-        configurations,
-        addUserCoupon,
-      }}
+    <Navbar
+      storeId={STORE_ID}
+      resolve={apiResolve}
+      isInteractive={isInteractive}
+      cartItems={cartList}
+      appliedCoupon={appliedCoupon}
+      user={user}
+      deviceType="WEB"
     >
-      {children}
-    </NavbarContext.Provider>
+      <NavbarContext.Provider
+        value={{ isInteractive, isRewardApplied, handleRewardApply }}
+      >
+        {children}
+      </NavbarContext.Provider>
+    </Navbar>
   );
 }
+
+export const useNavBarState = () => useContext(NavbarContext);
 
 export const useIsInteractive = () => {
   const { isInteractive } = useContext(NavbarContext);
   return !!isInteractive;
-};
-
-export const useMenu = () => {
-  const { categories, collections } = useContext(NavbarContext);
-
-  const menu = categories.map((category) => ({
-    label: category.name,
-    link: `/collections/${category.slug}`,
-    slug: category.slug,
-    subMenu: category?.subCategory?.items.map((subCat) => ({
-      label: subCat.name,
-      link: `/collections/${subCat.slug}`,
-      slug: subCat.slug,
-    })),
-  }));
-
-  if (collections.length) {
-    const collectionsMenu = collections.map((col) => ({
-      label: col.name,
-      link: `/collections/${col.slug}?sortby=${getDefaultSorting(
-        col.defaultSorting
-      )}`,
-      slug: col.slug,
-    }));
-
-    menu.push({
-      label: "Ranges",
-      link: "/collections/ranges",
-      subMenu: collectionsMenu,
-      slug: "ranges",
-    });
-  }
-
-  if (menu.length) {
-    menu.push({
-      label: "Combos & Gifts",
-      link: `/collections/combos-and-gifts`,
-      slug: "combos-and-gifts",
-    });
-  }
-
-  return menu;
-};
-
-export const useShippingTiers = () => {
-  const { shippingTiers } = useContext(NavbarContext);
-  return shippingTiers;
-};
-
-export const useCoupons = () => {
-  const { coupons } = useContext(NavbarContext);
-  return coupons;
-};
-
-export const useConfiguration = (key, defaultValue) => {
-  const { configurations } = useContext(NavbarContext);
-  const configuration = configurations.find(
-    (configuration) => configuration.key === key
-  );
-  return configuration?.value || defaultValue;
 };
 
 export const useGuestCheckout = () => {
@@ -234,20 +75,13 @@ export const useGuestCheckout = () => {
   return false;
 };
 
-export const useUpdateUserCoupon = () => {
-  const { coupons, addUserCoupon } = useContext(NavbarContext);
-
-  const updateUserCoupon = async (couponCode) => {
-    API.graphql(
-      graphqlOperation(getCoupon, {
-        code: couponCode,
-      })
-    )
-      .then((res) => res.data.getCoupon)
-      .then(addUserCoupon);
+function mapStateToProps(state) {
+  return {
+    cartList: state.cart.data ? state.cart.data : [],
+    user: state.user.data,
+    appliedCoupon: state.cart.coupon,
   };
+}
+const Component = connect(mapStateToProps)(NavbarProvider);
 
-  return [coupons, updateUserCoupon];
-};
-
-export default NavbarProvider;
+export default Component;

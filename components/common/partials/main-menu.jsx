@@ -1,15 +1,16 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { useMenu } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import { DownAngle } from "~/components/icons";
 
-import { useMenu } from "~/utils/contexts/navbar";
 import { connect } from "react-redux";
 import { eventActions } from "~/store/events";
 
 function MainMenu({ topNavbarClicked }) {
   const { pathname } = useRouter();
+
   const menu = useMenu();
 
   return (
@@ -19,7 +20,7 @@ function MainMenu({ topNavbarClicked }) {
           <li
             key={item.link}
             className={`${pathname.includes(item.link) ? "active" : ""} ${
-              item?.subMenu?.length ? "submenu" : ""
+              item?.menus?.items.length ? "submenu" : ""
             }
             `}
           >
@@ -36,18 +37,18 @@ function MainMenu({ topNavbarClicked }) {
               href={item.link}
             >
               {item.label}
-              {!!item?.subMenu?.length && (
+              {!!item?.menus.items?.length && (
                 <i>
                   <DownAngle color="currentColor" size={12} />
                 </i>
               )}
             </ALink>
 
-            {!!item?.subMenu?.length && (
+            {!!item?.menus.items?.length && (
               <div className="megamenu">
                 <div className="d-flex">
                   <ul>
-                    {item?.subMenu.map((subItem) => (
+                    {item?.menus.items.map((subItem) => (
                       <li key={`sub-categories-${subItem.link}`}>
                         <ALink
                           className="cat-name"

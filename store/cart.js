@@ -13,12 +13,10 @@ export const actionTypes = {
   EMPTY_CART: "EMPTY_CART",
   CREATE_CART: "CREATE_CART",
   VALIDATE_CART: "VALIDATE_CART",
-  INITIALIZE_LTO: "INITIALIZE_LTO",
 };
 const initialState = {
   data: [],
   coupon: null,
-  ltoProducts: [],
 };
 
 function cartReducer(state = initialState, action) {
@@ -65,55 +63,29 @@ function cartReducer(state = initialState, action) {
 
         return { ...state, data: tmpData };
       } else {
-        const selfProductsLength =
-          state.data?.filter((p) => !p.cartItemSource)?.length || 0;
-        const ltoProductLength = state.ltoProducts?.length || 0;
-        const ltoIndex =
-          selfProductsLength > ltoProductLength ? -1 : selfProductsLength;
-
         const currentATC = {
           ...tmpProduct,
           recordKey,
-          ltoProduct: null,
           addedAt: new Date().toISOString(),
         };
 
-        if (!tmpProduct.cartItemSource && ltoIndex > -1) {
-          currentATC.ltoProduct = state.ltoProducts[ltoIndex]?.id || null;
-        }
-
         return {
           ...state,
-          data: [
-            ...state.data.map((p) => {
-              if (p.recordKey === tmpProduct.parentRecordKey) {
-                p.ltoProduct = null;
-                p.ltoRecordKey = recordKey;
-              }
-              return p;
-            }),
-            currentATC,
-          ],
+          data: [...state.data, currentATC],
         };
       }
 
     case actionTypes.REMOVE_FROM_CART:
       tmpProduct = { ...action.payload.product };
-      let { cart, ltoRecordKey } = state.data.reduce(
-        (cartAcc, product) => {
-          if (tmpProduct.recordKey !== product.recordKey) {
-            cartAcc.cart.push(product);
-          } else {
-            cartAcc.ltoRecordKey = product.ltoRecordKey;
-          }
-          return cartAcc;
-        },
-        { cart: [], ltoRecordKey: null }
-      );
-
-      if (ltoRecordKey) {
-        cart = cart.filter((c) => c.recordKey !== ltoRecordKey);
-      }
+      const cart = state.data.reduce((cartAcc, product) => {
+        if (
+          tmpProduct.recordKey !== product.recordKey &&
+          product.parentRecordKey !== tmpProduct.recordKey
+        ) {
+          cartAcc.push(product);
+        }
+        return cartAcc;
+      }, []);
 
       return { ...state, data: cart };
 
@@ -132,7 +104,7 @@ function cartReducer(state = initialState, action) {
       };
 
     case actionTypes.EMPTY_CART:
-      return { ...initialState, ltoProducts: state.ltoProducts };
+      return { ...initialState };
 
     case actionTypes.APPLY_COUPONS:
       return { ...state, coupon: action.payload.coupon };
@@ -153,9 +125,6 @@ function cartReducer(state = initialState, action) {
       });
 
       return { ...state, data };
-
-    case actionTypes.INITIALIZE_LTO:
-      return { ...state, ltoProducts: action.payload.ltoProducts };
 
     default:
       return state;
@@ -186,12 +155,6 @@ export const cartActions = {
   removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
   emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
   createCart: (user) => ({ type: actionTypes.CREATE_CART, payload: { user } }),
-  initialLTO: (data) => ({
-    type: actionTypes.INITIALIZE_LTO,
-    payload: {
-      ltoProducts: data,
-    },
-  }),
 };
 
 const persistConfig = {
