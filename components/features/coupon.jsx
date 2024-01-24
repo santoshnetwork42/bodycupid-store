@@ -331,7 +331,7 @@ function Coupon(props) {
               }`}
               disabled={loading}
               onClick={() => {
-                !!coupon && applyCouponCode();
+                !!coupon && applyCouponCode(coupon);
               }}
             >
               <span className=" mr-2">Apply</span>
