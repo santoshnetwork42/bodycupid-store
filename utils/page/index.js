@@ -35,15 +35,13 @@ const getCollectionBySlug = (slug) => {
 
 export const getStaticProps = async () => {
   try {
-    const getStoreData = fetchData(getStoreBanners, { id: STORE_ID });
-
     const [
       { searchProducts: searchBestSellerProducts },
       { getStore: store },
       { searchCollectionTypes: bestSellerCollectionItem },
     ] = await Promise.all([
       getSearchProducts({ collections: { eq: "best-seller" } }, 8),
-      getStoreData,
+      fetchData(getStoreBanners, { id: STORE_ID }),
       getCollectionBySlug("best-seller"),
     ]);
 
