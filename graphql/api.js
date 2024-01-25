@@ -2469,3 +2469,34 @@ export const manageShoppingCart = /* GraphQL */ `
     }
   }
 `;
+
+export const searchCollectionTypesForSitemap = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $nextToken: String
+  ) {
+    searchCollectionTypes(filter: $filter, nextToken: $nextToken) {
+      items {
+        id
+        slug
+        updatedAt
+      }
+    }
+  }
+`;
+
+export const searchProductsForSitemap = /* GraphQL */ `
+  query SearchProducts(
+    $filter: SearchableProductFilterInput
+    $nextToken: String
+  ) {
+    searchProducts(filter: $filter, nextToken: $nextToken) {
+      nextToken
+      items {
+        id
+        slug
+        updatedAt
+      }
+    }
+  }
+`;
