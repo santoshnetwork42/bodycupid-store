@@ -148,12 +148,28 @@ export const getStaticProps = async (context) => {
     }).then((resp) => resp.byslugProductCategory.items);
 
     if (category) {
-      filter.categoryId = { eq: category.id };
+      console.log("categoryyyyy", category);
+      // filter.categoryId = { eq: category.id };
       const { title, description, imageUrl, name: categoryName } = category;
 
       // Get Product By Category
       const getProducts = fetchData(findProducts, {
-        filter,
+        filter: {
+          status: { eq: "ENABLED" },
+          storeId: { eq: STORE_ID },
+          and: [
+            {
+              or: [
+                {
+                  categoryId: { eq: category.id },
+                },
+                {
+                  subCategoryId: { eq: category.id },
+                },
+              ],
+            },
+          ],
+        },
         sort: [{ field: "position", direction: "asc" }],
         variantFilter: { status: { eq: "ENABLED" } },
         imageLimit: 1,
