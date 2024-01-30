@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSetState } from "react-use";
 import { API } from "aws-amplify";
 import { connect } from "react-redux";
+import { useCartTotal } from "@wow-star/utils";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/api";
 import { removePhonePrefix } from "~/utils/helper";
@@ -10,11 +11,11 @@ import { validateAddress, getProperAddress } from "~/utils/address";
 import { errorHandler } from "~/utils/errorHandler";
 import { fetchCityAndState } from "~/utils/addAddress";
 import { eventActions } from "~/store/events";
-import { useCartTotal } from "~/utils/hooks/useCart";
 
 const AddressForm = (props) => {
   const { defaultAddress, user, onAddress, onSubmit, addressAdded } = props;
   const { firstName, lastName, email, phone } = user || {};
+
   const [address, setAddress] = useSetState({
     firstName: firstName || "",
     lastName: lastName || "",
@@ -28,6 +29,10 @@ const AddressForm = (props) => {
     area: "",
   });
 
+  const { totalPrice } = useCartTotal({
+    paymentType: "PREPAID",
+  });
+
   useEffect(() => {
     if (user) {
       setAddress((prevState) => ({
@@ -36,8 +41,6 @@ const AddressForm = (props) => {
       }));
     }
   }, [user]);
-
-  const { totalPrice } = useCartTotal();
 
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);

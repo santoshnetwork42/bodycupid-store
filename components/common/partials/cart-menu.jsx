@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
+import { useCartItems, useInventory } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import { Bag, Cart, Cross } from "~/components/icons";
@@ -10,8 +11,6 @@ import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
 
 import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
-import { useCartItems } from "~/utils/hooks/useCart";
-import { useInventory } from "~/utils/hooks/useInventory";
 import CartTotal from "~/components/common/partials/cart-totals";
 import { Logger } from "aws-amplify";
 import CartProduct from "~/components/partials/cart/cart-product";
@@ -20,12 +19,21 @@ import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 const logger = new Logger("Cart");
 
 function CartMenu(props) {
-  const { cartList, appliedCoupon, isCartOpen, setCartVisibility, viewCart } =
-    props;
+  const {
+    cartList,
+    appliedCoupon,
+    isCartOpen,
+    setCartVisibility,
+    viewCart,
+    validateCart,
+  } = props;
 
   const router = useRouter();
-  const cartItems = useCartItems();
-  const inventory = useInventory();
+  const cartItems = useCartItems({
+    showLTOProducts: false,
+    showNonApplicableFreeProducts: true,
+  });
+  const inventory = useInventory({ validateCart });
 
   const { inventoryMapping } = inventory;
 
@@ -168,4 +176,5 @@ export default connect(mapStateToProps, {
   openLogin: modalActions.openPasswordlessModal,
   setCartVisibility: modalActions.setCartVisibility,
   viewCart: eventActions.viewCart,
+  validateCart: cartActions.validateCart,
 })(CartMenu);

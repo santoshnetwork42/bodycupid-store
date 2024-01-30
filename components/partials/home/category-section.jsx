@@ -29,7 +29,7 @@ function CategorySection({ tileClicked }) {
           sort: [{ field: "priority", direction: "asc" }],
         })
       )
-        .then((res) => res.data.searchProductSubCategories.items)
+        .then((res) => res.data.searchProductCategories.items)
         .then(setCategories);
     }
   }, [isInteractive]);

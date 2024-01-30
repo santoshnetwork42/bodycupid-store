@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Script from "next/script";
 import { connect } from "react-redux";
+import { useUpdateUserCoupon } from "@wow-star/utils";
+
 import { alertToaster } from "~/utils/popupHelper";
 import { WISEPOPS_KEY } from "~/config";
-
-import { useUpdateUserCoupon } from "~/utils/contexts/navbar";
 
 function Wisepops({ user }) {
   const [isBeforeFormSubmitListenerAdded, setIsBeforeFormSubmitListenerAdded] =
