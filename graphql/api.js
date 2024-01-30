@@ -926,6 +926,7 @@ export const getBasicCategory = /* GraphQL */ `
         imageUrl
         isArchive
         bannerUrl
+        categoryID
       }
     }
   }
@@ -970,6 +971,7 @@ export const findProducts = /* GraphQL */ `
         tags
         inventory
         blockedInventory
+        subCategoryId
         variantGroups {
           variantGroupId
           variantGroupOptionIds
