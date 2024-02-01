@@ -1,19 +1,18 @@
-import React, { useMemo } from "react";
-import { connect } from "react-redux";
-import Image from "next/image";
+import { useProduct, useProductVariantGroups } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
-import { useProductPrice } from "@wow-star/utils";
+import Image from "next/image";
+import { useMemo } from "react";
+import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { Star, Eye } from "~/components/icons";
+import Quantity from "~/components/features/quantity";
+import { Eye, Star } from "~/components/icons";
+import { PRODUCT_TAG_LIST } from "~/constant";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta, getProductInventory } from "~/utils/products";
-import Quantity from "~/components/features/quantity";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
-import { PRODUCT_TAG_LIST } from "~/constant";
 
 const logger = new Logger("Product-details");
 
@@ -33,19 +32,35 @@ function ProductTwo(props) {
     isSearch,
   } = props;
 
-  const { title, slug, rating, totalRatings, collections } = product || {};
+  const [selectedVariant] = useProductVariantGroups(product);
+  const productsNew = useProduct(product, selectedVariant?.id);
+  // console.log("productsNew", productsNew);
 
-  const { price, listingPrice } = useProductPrice(product);
+  const {
+    title,
+    slug,
+    rating,
+    totalRatings,
+    collections,
+    price,
+    listingPrice,
+    hasInventory,
+    currentInventory,
+    thumbImage,
+    discount,
+  } = productsNew || {};
+
+  // const { price, listingPrice } = useProductPrice(product);
 
   const showQuickviewHandler = () => {
     openQuickview(slug);
     logger.verbose("Opened quick view for product:", slug);
   };
 
-  const { hasInventory, currentInventory } = useMemo(
-    () => getProductInventory(product),
-    [product]
-  );
+  // const {  } = useMemo(
+  //   () => getProductInventory(product),
+  //   [product]
+  // );
 
   const label = product.collectionsList?.length
     ? product.collectionsList?.find((col) => !!col.label)?.label
@@ -83,7 +98,7 @@ function ProductTwo(props) {
     return cartList.find((cl) => cl.recordKey === recordKey);
   }, [cartList]);
 
-  const { thumbImage, discount } = getProductMeta(product);
+  // const { thumbImage, discount } = getProductMeta(product);
 
   function changeQty(qty) {
     if (cartItem) {
@@ -122,15 +137,9 @@ function ProductTwo(props) {
       </ALink>
 
       <div className="product-label-group">
-        {
-          discount > 0 && (
-            // (product.variants?.items?.length < 2 ? (
-            <label className="product-label label-sale">-{discount}%</label>
-          )
-          // ) : (
-          //   <label className="product-label label-sale">Sale</label>
-          // ))
-        }
+        {discount > 0 && (
+          <label className="product-label label-sale">-{discount}%</label>
+        )}
       </div>
 
       {!!tag && (
