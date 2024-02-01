@@ -138,7 +138,7 @@ export default function ToolBox(props) {
                     }`}
                     href={{
                       pathname: item.path,
-                      query: "sortby=" + getDefaultSorting(item.defaultSorting),
+                      // query: "sortby=" + getDefaultSorting(item.defaultSorting),
                     }}
                   >
                     <p className="m-0">{item.name}</p>
