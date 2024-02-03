@@ -51,12 +51,12 @@ function HomePage({
           priority
         />
 
-        <RenderProductCollection
+        {/* <RenderProductCollection
           title="Top products"
           disableCarousel={isSmallSize}
           slug="top-products"
           filter={{ collections: { eq: "top-products" } }}
-        />
+        /> */}
 
         <RenderProductCollection
           title="Our featured"
