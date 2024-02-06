@@ -148,7 +148,6 @@ export const getStaticProps = async (context) => {
     }).then((resp) => resp.byslugProductCategory.items);
 
     if (category) {
-      console.log("categoryyyyy", category);
       // filter.categoryId = { eq: category.id };
       const { title, description, imageUrl, name: categoryName } = category;
 
