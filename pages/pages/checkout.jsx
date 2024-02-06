@@ -99,10 +99,10 @@ function Checkout(props) {
 
   const isFirst = payMethod === "PREPAID";
 
-  useEffect(() => {
-    startCheckout();
-    logger.verbose("Checkout component initialized");
-  }, []);
+  // useEffect(() => {
+  //   startCheckout();
+  //   logger.verbose("Checkout component initialized");
+  // }, []);
 
   const {
     totalListingPrice,

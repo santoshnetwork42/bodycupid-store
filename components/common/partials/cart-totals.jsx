@@ -24,6 +24,7 @@ function CartTotal({
   isSmall,
   setCartVisibility,
   inventory,
+  startCheckout,
 }) {
   const router = useRouter();
   const { isSmallSize } = useWindowDimensions();
@@ -64,6 +65,8 @@ function CartTotal({
       logger.error("Out of stock product found in cart");
       return false;
     }
+
+    startCheckout();
 
     if (user || guestCheckout) {
       router.push("/pages/checkout");
@@ -281,5 +284,6 @@ const Component = connect(mapStateToProps, {
   openLogin: modalActions.openPasswordlessModal,
   recordOutOfStock: eventActions.outOfStock,
   setCartVisibility: modalActions.setCartVisibility,
+  startCheckout: eventActions.startCheckout,
 })(CartTotal);
 export default Component;
