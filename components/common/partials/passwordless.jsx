@@ -31,6 +31,7 @@ function Passwordless({
   redirect,
   setUser,
   login,
+  OtpRequested,
 }) {
   const router = useRouter();
   const { query } = router;
@@ -273,6 +274,10 @@ function Passwordless({
     });
   };
 
+  const handleEvent = () => {
+    OtpRequested();
+  };
+
   return (
     <Modal
       isOpen={forceOpen || isOpen}
@@ -334,6 +339,7 @@ function Passwordless({
                               className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
                               type="submit"
                               disabled={loading}
+                              onClick={handleEvent}
                             >
                               Get OTP
                               {loading && <div className="spin-loader ml-2" />}
@@ -442,4 +448,5 @@ export default connect(mapStateToProps, {
   openLogin: modalActions.openLoginModal,
   setUser: userActions.setUser,
   login: eventActions.logIn,
+  OtpRequested: eventActions.OtpRequested,
 })(Passwordless);
