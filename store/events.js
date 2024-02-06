@@ -42,6 +42,7 @@ export const actionTypes = {
   HOME_VIEWED: "HOME_VIEWED",
   ADD_PAYMENT_INFO: "ADD_PAYMENT_INFO",
   BANNER_CLICKED: "BANNER_CLICKED",
+  OTP_REQUESTED: "OTP_REQUESTED",
   PRODUCT_SEARCHED: "PRODUCT_SEARCHED",
   TILE_CLICKED: "TILE_CLICKED",
   LOG_OUT: "LOG_OUT",
@@ -101,6 +102,10 @@ export const eventActions = {
   }),
   bannerClicked: (payload) => ({
     type: actionTypes.BANNER_CLICKED,
+    payload,
+  }),
+  OtpRequested: (payload) => ({
+    type: actionTypes.OTP_REQUESTED,
     payload,
   }),
   productSearched: (payload) => ({
@@ -745,6 +750,16 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.BANNER_CLICKED, function* saga(e) {
     try {
       trackEvent("Banner Clicked", {
+        ...e.payload,
+      });
+    } catch (e) {
+      errorHandler(e);
+    }
+  });
+
+  yield takeEvery(actionTypes.OTP_REQUESTED, function* saga(e) {
+    try {
+      trackEvent("OTP requested", {
         ...e.payload,
       });
     } catch (e) {
