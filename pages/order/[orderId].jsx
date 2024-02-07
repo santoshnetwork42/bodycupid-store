@@ -65,6 +65,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
       }
     }
   }, [orderId, paymentId, fetchOrder]);
+  const [counter, setCounter] = useState(0);
 
   const isPaymentProcessing =
     order?.status === "PENDING" &&
@@ -75,12 +76,15 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
     if (isPaymentProcessing) {
       alertToaster("Hold On! We're updating your payment status...", "info");
 
-      if (timer) clearTimeout(timer);
-      const timerId = setTimeout(() => {
-        fetchPaymentStatus();
-        setTimer(null);
-      }, [2000]);
-      setTimer(timerId);
+      if (counter < 3 && paymentId) {
+        if (timer) clearTimeout(timer);
+        const timerId = setTimeout(() => {
+          fetchPaymentStatus();
+          setTimer(null);
+        }, [2000]);
+        setTimer(timerId);
+        setCounter((count) => count + 1);
+      }
     }
   }, [order, paymentId]);
 
@@ -368,7 +372,10 @@ Order.getInitialProps = async (context) => {
       return item;
     });
 
-    if (response?.storeId === STORE_ID && response?.status !== "PENDING") {
+    if (
+      response?.storeId === STORE_ID &&
+      (response?.status !== "PENDING" || paymentId)
+    ) {
       return {
         order: {
           ...response,
