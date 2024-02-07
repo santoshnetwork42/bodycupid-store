@@ -126,7 +126,9 @@ function ProductTwo(props) {
       {/* <figure className="product-media"> */}
       <ALink href={`/products/${slug}`}>
         <Image
-          src={getPublicImageURL(thumbImage?.imageKey)}
+          src={getPublicImageURL(
+            isSearch ? product.imageUrl : thumbImage?.imageKey
+          )}
           alt={title}
           height={280}
           width={280}
