@@ -967,6 +967,9 @@ export const findProducts = /* GraphQL */ `
         price
         sku
         position
+        collectionsList {
+          label
+        }
         listingPrice
         tags
         inventory
