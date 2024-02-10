@@ -205,6 +205,7 @@ export async function fetchSearchItems(search) {
       }
     );
     const data = await response.json();
+
     return data.results.map(({ imageUrl, ...item }) => {
       const [, slug] = item.link.match(/products\/([^?]+)/);
       item.slug = slug;
