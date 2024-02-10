@@ -190,9 +190,22 @@ export function initializeMoengageAndAddInfo({
 }
 
 export async function fetchSearchItems(search) {
+  const NEXT_PUBLIC_TTM_CLIENT_URL = process.env.NEXT_PUBLIC_TTM_CLIENT_URL;
+  const NEXT_PUBLIC_TTM_CLIENT_API_KEY =
+    process.env.NEXT_PUBLIC_TTM_CLIENT_API_KEY;
+  const NEXT_PUBLIC_TTM_CLIENT_THRESHOLD =
+    process.env.NEXT_PUBLIC_TTM_CLIENT_THRESHOLD;
   try {
-    const response = await fetch(`/api/search?search=${search}`);
+    const response = await fetch(
+      `${NEXT_PUBLIC_TTM_CLIENT_URL}/search?query=${search}&threshold=${NEXT_PUBLIC_TTM_CLIENT_THRESHOLD}`,
+      {
+        headers: {
+          Authorization: `Bearer ${NEXT_PUBLIC_TTM_CLIENT_API_KEY}`,
+        },
+      }
+    );
     const data = await response.json();
+
     return data.results.map(({ imageUrl, ...item }) => {
       const [, slug] = item.link.match(/products\/([^?]+)/);
       item.slug = slug;
