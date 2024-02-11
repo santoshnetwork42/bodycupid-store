@@ -1,20 +1,18 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { connect } from "react-redux";
 import { useCartItems, useInventory } from "@wow-star/utils";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { Logger } from "aws-amplify";
 
+import CouponDiscountBar from "~/components/common/coupon-discount-bar";
+import CartTotal from "~/components/common/partials/cart-totals";
 import ALink from "~/components/features/custom-link";
 import { Bag, Cart, Cross } from "~/components/icons";
-
-import { cartActions } from "~/store/cart";
-import { modalActions } from "~/store/modal";
-import { eventActions } from "~/store/events";
-
-import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
-import CartTotal from "~/components/common/partials/cart-totals";
-import { Logger } from "aws-amplify";
 import CartProduct from "~/components/partials/cart/cart-product";
-import CouponDiscountBar from "~/components/common/coupon-discount-bar";
+import { cartActions } from "~/store/cart";
+import { eventActions } from "~/store/events";
+import { modalActions } from "~/store/modal";
+import { getCartCount, getTotalPrice, toDecimal } from "~/utils";
 
 const logger = new Logger("Cart");
 
@@ -33,6 +31,7 @@ function CartMenu(props) {
     showLTOProducts: false,
     showNonApplicableFreeProducts: true,
   });
+
   const inventory = useInventory({ validateCart });
 
   const { inventoryMapping } = inventory;
