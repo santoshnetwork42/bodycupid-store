@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import NextImage from "next/image";
 import { API, graphqlOperation } from "aws-amplify";
@@ -66,16 +66,24 @@ function Quickview(props) {
       )
     : 0;
 
-  let lgImages = product?.images.items || [];
-  if (product?.variants.items.length > 0) {
-    lgImages.push(
-      ...product.variants.items.map((i) => ({
-        variantId: i.id,
-        imageKey: i.imageUrl,
-        alt: i.alt || i.title,
-      }))
-    );
-  }
+  const lgImages = useMemo(() => {
+    if (product) {
+      const images = [...product?.images?.items];
+      images?.sort((a, b) => a.position - b.position);
+      if (product?.variants?.items?.length > 0) {
+        product.variants.items.forEach((variant) => {
+          variant.images.items.forEach((item) => {
+            images.push({
+              ...item,
+              variantId: variant.id,
+              imageKey: item.imageKey,
+            });
+          });
+        });
+      }
+      return images;
+    }
+  }, [product]);
 
   if (!slug) return <></>;
 
@@ -109,7 +117,7 @@ function Quickview(props) {
               adClass="product-single-carousel owl-theme owl-nav-inner"
               options={mainSlider3}
             >
-              {lgImages.map((item) => (
+              {lgImages?.map((item) => (
                 <NextImage
                   key={item.id}
                   src={getPublicImageURL(item.imageKey)}

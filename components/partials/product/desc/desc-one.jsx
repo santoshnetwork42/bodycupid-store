@@ -465,8 +465,8 @@ function DescOne(props) {
                           className="form-control"
                           id="reply-email"
                           name="reply-email"
-                          placeholder="Email *"
-                          required
+                          placeholder="Email"
+                          // required
                           value={reviewState.email}
                           onChange={(e) =>
                             setReview({ ...reviewState, email: e.target.value })

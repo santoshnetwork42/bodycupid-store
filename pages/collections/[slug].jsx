@@ -218,14 +218,6 @@ export const getStaticProps = async (context) => {
       };
     }
 
-    // Get Product By Category
-    const getProducts = fetchData(findProducts, {
-      filter,
-      sort: [{ field: "position", direction: "asc" }],
-      variantFilter: { status: { eq: "ENABLED" } },
-      imageLimit: 1,
-    });
-
     const collection = await fetchData(searchCollectionTypes, {
       filter: {
         slug: { eq: slug },
