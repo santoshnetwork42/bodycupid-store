@@ -148,7 +148,6 @@ export const getStaticProps = async (context) => {
     }).then((resp) => resp.byslugProductCategory.items);
 
     if (category) {
-      console.log("categoryyyyy", category);
       // filter.categoryId = { eq: category.id };
       const { title, description, imageUrl, name: categoryName } = category;
 
@@ -218,14 +217,6 @@ export const getStaticProps = async (context) => {
         revalidate: 1800,
       };
     }
-
-    // Get Product By Category
-    const getProducts = fetchData(findProducts, {
-      filter,
-      sort: [{ field: "position", direction: "asc" }],
-      variantFilter: { status: { eq: "ENABLED" } },
-      imageLimit: 1,
-    });
 
     const collection = await fetchData(searchCollectionTypes, {
       filter: {
