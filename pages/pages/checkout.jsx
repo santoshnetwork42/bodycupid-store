@@ -85,6 +85,7 @@ function Checkout(props) {
   const [shippingAddress, setAddress] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
   const [isCollapse, setIsCollapse] = useState(false);
+  const [paymentLoader, setPaymentLoader] = useState(false);
 
   const [
     { isConfirmed, order: finalOrder, loading },
@@ -146,8 +147,8 @@ function Checkout(props) {
         logger.debug("Closing razorpay modal");
         razorpayMethod.close();
       }
-
       await router.push(`/order/${finalOrder.id}`);
+      setPaymentLoader(false);
       await emptyCart();
     }
   };
@@ -159,77 +160,86 @@ function Checkout(props) {
   }, [isConfirmed]);
 
   const placeOrder = async (e) => {
-    e.preventDefault();
-    const [
-      { success, code, formError, order, payment, transaction },
-      rzpEnabled,
-    ] = await Promise.all([
-      placeOrderV1({
-        paymentMethod: payMethod,
-        address: shippingAddress,
-        metadata,
-        appliedRewardPoints: null,
-        totalAmount: totalAmount,
-      }),
-      loadScript(RAZORPAY_SCRIPT),
-    ]);
+    try {
+      e.preventDefault();
+      setPaymentLoader(true);
+      const [
+        { success, code, formError, order, payment, transaction },
+        rzpEnabled,
+      ] = await Promise.all([
+        placeOrderV1({
+          paymentMethod: payMethod,
+          address: shippingAddress,
+          metadata,
+          appliedRewardPoints: null,
+          totalAmount: totalAmount,
+        }),
+        loadScript(RAZORPAY_SCRIPT),
+      ]);
 
-    if (isRewardApplied && !!usableRewards) {
-      variables.appliedRewardPoints = usableRewards ? usableRewards : null;
-    }
-    if (!success) {
-      alertToaster("Something went wrong. Try Again!");
-      if (code === "INVALID_ADDRESS") {
-        setFormErorr(formError);
+      if (isRewardApplied && !!usableRewards) {
+        variables.appliedRewardPoints = usableRewards ? usableRewards : null;
       }
-    }
+      if (!success) {
+        alertToaster("Something went wrong. Try Again!");
+        if (code === "INVALID_ADDRESS") {
+          setFormErorr(formError);
+        }
+        setPaymentLoader(false);
+      }
 
-    if (success) {
-      if (payMethod === "PREPAID") {
-        if (rzpEnabled && store && transaction && order) {
-          const options = {
-            key: RAZORPAY_KEY,
-            amount: transaction.amount,
-            currency: "INR",
-            name: store.name,
-            image: getPublicImageURL(store.imageUrl),
-            order_id: transaction.orderId,
-            handler: async function ({ razorpay_payment_id }) {
-              orderHelper.fetchTransactionStatus(order.id, razorpay_payment_id);
-            },
-            prefill: {
-              name: shippingAddress.name,
-              email: shippingAddress.email,
-              contact: shippingAddress.phone,
-            },
-            notes: {
-              storeId: store.id,
-              orderId: order.id,
-              paymentId: payment.id,
-            },
-            theme: {
-              color: "#3399cc",
-            },
-            modal: {
-              ondismiss: function () {
-                orderHelper.reset();
-                razorpayMethod = null;
+      if (success) {
+        if (payMethod === "PREPAID") {
+          if (rzpEnabled && store && transaction && order) {
+            const options = {
+              key: RAZORPAY_KEY,
+              amount: transaction.amount,
+              currency: "INR",
+              name: store.name,
+              image: getPublicImageURL(store.imageUrl),
+              order_id: transaction.orderId,
+              handler: async function ({ razorpay_payment_id }) {
+                orderHelper.fetchTransactionStatus(
+                  order.id,
+                  razorpay_payment_id
+                );
               },
-            },
-          };
+              prefill: {
+                name: shippingAddress.name,
+                email: shippingAddress.email,
+                contact: shippingAddress.phone,
+              },
+              notes: {
+                storeId: store.id,
+                orderId: order.id,
+                paymentId: payment.id,
+              },
+              theme: {
+                color: "#3399cc",
+              },
+              modal: {
+                ondismiss: function () {
+                  orderHelper.reset();
+                  razorpayMethod = null;
+                },
+              },
+            };
 
-          razorpayMethod = new Razorpay(options);
-          razorpayMethod.open();
-          addPaymentInfo();
-          logger.verbose("Razorpay initialization");
-        } else {
-          alertToaster("Something went wrong. Try Again!", "error");
-          logger.error("Something went wrong with Razorpay initialization");
+            razorpayMethod = new Razorpay(options);
+            razorpayMethod.open();
+            addPaymentInfo();
+            logger.verbose("Razorpay initialization");
+          } else {
+            alertToaster("Something went wrong. Try Again!", "error");
+            logger.error("Something went wrong with Razorpay initialization");
+          }
         }
       }
-    }
 
-    return Promise.resolve();
+      return Promise.resolve();
+    } catch (error) {
+      setPaymentLoader(false);
+    }
   };
 
   const { codCouponDisabled, onlineDisabled } = useMemo(() => {
@@ -249,7 +259,7 @@ function Checkout(props) {
 
       <h1 className="d-none">{name} - Checkout</h1>
 
-      {!!finalOrder && loading && <PaymentLoader loading />}
+      {paymentLoader && <PaymentLoader loading={paymentLoader} />}
 
       {!user && !guestCheckout && <Passwordless forceOpen redirect={false} />}
 
@@ -702,7 +712,9 @@ function Checkout(props) {
                             }`}
                           >
                             Place Order
-                            {loading && <div className="spin-loader ml-2" />}
+                            {(loading || paymentLoader) && (
+                              <div className="spin-loader ml-2" />
+                            )}
                           </button>
                         )}
                       </div>
