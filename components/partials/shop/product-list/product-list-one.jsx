@@ -94,7 +94,7 @@ function ProductListOne(props) {
         sortBy.push({ field: "price", direction: "desc" });
         break;
       case "best-seller":
-        filter.collections = { eq: "best-seller" };
+        sortBy.push({ field: "totalOrders", direction: "desc" });
         break;
       default:
         sortBy.push({ field: "position", direction: "asc" });
