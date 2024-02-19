@@ -15,8 +15,7 @@ import { rootActions } from "~/store";
 import { userActions } from "~/store/user";
 import { systemActions } from "~/store/system";
 import { eventActions } from "~/store/events";
-import { STORE_ID, STORE_PREFIX } from "~/config";
-import fetchData from "~/utils/fetchData";
+import { AWS_CLIENT_ID, STORE_ID, STORE_PREFIX } from "~/config";
 import awsconfig from "~/aws-exports";
 import { getUser, getStore } from "~/graphql/api";
 import { errorHandler } from "~/utils/errorHandler";
@@ -28,7 +27,11 @@ import NavbarProvider from "~/utils/contexts/navbar";
 import ABProvider from "~/utils/contexts/ab";
 import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
 
-Amplify.configure({ ...awsconfig, ssr: true });
+Amplify.configure({
+  ...awsconfig,
+  ssr: true,
+  aws_user_pools_web_client_id: AWS_CLIENT_ID,
+});
 Analytics.disable();
 
 const logger = new Logger("App");

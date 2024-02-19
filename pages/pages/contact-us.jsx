@@ -6,10 +6,10 @@ function ContactUs({ store }) {
   return (
     <main className="main about-us">
       <Head>
-        <title>{store.name} | Contact Us</title>
+        <title>{store?.name} | Contact Us</title>
       </Head>
 
-      <h1 className="d-none">CONTACT - {store.name}</h1>
+      <h1 className="d-none">CONTACT - {store?.name}</h1>
 
       <div className="page-content">
         <div className="container">

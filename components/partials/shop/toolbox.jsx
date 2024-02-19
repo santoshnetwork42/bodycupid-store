@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import ALink from "~/components/features/custom-link";
 
 import SidebarFilterThree from "~/components/partials/shop/sidebar/sidebar-filter-three";
-import { cleanQuery } from "~/utils/helper";
 import { getDefaultSorting } from "~/utils";
 
 export default function ToolBox(props) {
