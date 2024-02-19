@@ -144,6 +144,7 @@ function ProductListOne(props) {
             const productsMapped = setSoldOutLast(fetchedItems);
             setProducts(productsMapped);
             setTotal(fetchedItems.length);
+
             setLoading(false);
           });
         }

@@ -364,8 +364,8 @@ Order.getInitialProps = async (context) => {
     });
 
     const products = response?.products?.items.map((item) => {
-      if (item.variant?.imageUrl) {
-        item.thumbImage = item?.variant.imageUrl;
+      if (item.variant?.images?.items[0]?.imageKey) {
+        item.thumbImage = item?.variant?.images?.items[0]?.imageKey;
       } else {
         item.thumbImage = item.product.images?.items[0]?.imageKey;
       }

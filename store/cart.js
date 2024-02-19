@@ -17,6 +17,7 @@ export const actionTypes = {
 const initialState = {
   data: [],
   coupon: null,
+  allowed: false,
 };
 
 function cartReducer(state = initialState, action) {
@@ -101,6 +102,7 @@ function cartReducer(state = initialState, action) {
         ...state,
         data: products,
         coupon: allowed ? state.coupon : null,
+        allowed,
       };
 
     case actionTypes.EMPTY_CART:
