@@ -221,6 +221,7 @@ function Checkout(props) {
                 ondismiss: function () {
                   orderHelper.reset();
                   razorpayMethod = null;
+                  setPaymentLoader(false);
                 },
               },
             };
