@@ -45,6 +45,7 @@ export const itemMapper = (product, coupon) => {
     "Variant ID": variantId,
     "Product Subcategory": subCategory?.name,
     "Product Title": product.title,
+    SKU: product.sku,
     "Image URL": getPublicImageURL(thumbImage?.imageKey),
     "Product Category": category?.name,
     "Product URL": `${currentURL}/products/${product.slug}`,
@@ -254,16 +255,16 @@ export const moEngagedOrderMapper = (
     Source: source,
     "Cart URL": `${currentURL}/pages/cart`,
     "Coupon Applied": coupon?.code,
-    "Total Discount": couponTotal || 0,
     "First Time User": isFirstTimeUser,
   };
-
+  let totalDiscount = couponTotal;
   const mappings = products.reduce(
     (
       {
         "Total Price": Total_Price,
         "Vendor Name": Vendor_Name,
         "Product Title": Product_Title,
+        SKU: SKU,
         "Image URL": Image_URL,
         "Product ID": Product_ID,
         "Total Quantity": Total_Quantity,
@@ -280,16 +281,23 @@ export const moEngagedOrderMapper = (
       const { value: valueNew, mrpValue } = itemMapper(product, coupon);
       const { thumbImage } = getProductMeta(product);
       const url = getPublicImageURL(thumbImage?.imageKey);
+      totalDiscount = totalDiscount + mrpValue - valueNew;
       return {
         "Total Price": Total_Price + valueNew,
         "Product Title": [...Product_Title, product.title],
+        SKU: [...SKU, product.sku],
+        "Total Discount": totalDiscount || 0,
         "Image URL": [...Image_URL, url],
         "Total Quantity": Total_Quantity + (product?.qty || 0),
         "Product ID": [...Product_ID, product?.id],
         "Vendor Name": [...Vendor_Name, product?.vendor],
         "Product Price": [...Product_Price, product.price],
         "Product Quantity": [...Product_Quantity, product.qty],
-        "Variant ID": [...Variant_ID, product?.variantId],
+        "Variant ID":
+          [
+            ...Variant_ID,
+            product?.variantId ? product?.variantId : product?.id,
+          ] || [],
         "Product URL": [
           ...Product_URL,
           `${currentURL}/products/${product.slug}`,
@@ -306,6 +314,8 @@ export const moEngagedOrderMapper = (
     {
       "Total Price": 0,
       "Product Title": [],
+      "Total Discount": 0,
+      SKU: [],
       "Vendor Name": [],
       "Image URL": [],
       "Total Quantity": 0,
@@ -362,26 +372,27 @@ export const moEngageItemPurchasedMapper = (
     Source: source,
     "Cart URL": `${currentURL}/pages/cart`,
     "Coupon Applied": coupon?.code,
-    "Total Discount": couponTotal || 0,
     "First Time User": isFirstTimeUser,
   };
-
+  let totalDiscount = couponTotal;
   const events = products.map((product) => {
     const { value: valueNew, mrpValue } = itemMapper(product, coupon);
     const { thumbImage } = getProductMeta(product);
     const url = getPublicImageURL(thumbImage?.imageKey);
-
+    totalDiscount = totalDiscount + mrpValue - valueNew;
     const eventAttributes = {
       ...basicAttributes,
+      "Total Discount": totalDiscount || 0,
       "Total Price": valueNew,
       "Vendor Name": product.vendor,
       "Product Title": product.title,
+      SKU: product.sku,
       "Image URL": url,
       "Total Quantity": product.qty || 0,
       "Product ID": product.id,
       "Product Price": product.price,
       "Product Quantity": product.qty,
-      "Variant ID": product.variantId,
+      "Variant ID": product.variantId ? product.variantId : product.id,
       "Product URL": `${currentURL}/products/${product.slug}`,
       "Total MRP": mrpValue,
       "Product Subcategory": product.subCategory?.name,
@@ -391,7 +402,7 @@ export const moEngageItemPurchasedMapper = (
 
     return {
       ...eventAttributes,
-      "Order ID": null,
+      "Order ID": order?.code,
       "Order Date": null,
       "Payment Mode": null,
       "Payment Status": null,
