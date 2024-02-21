@@ -261,7 +261,7 @@ export function* eventsSaga() {
             "Utm Source": source,
             "Utm Medium": medium,
             URL: window.location.href,
-            "First Time User": isFirstTime,
+            "First Time User": false,
             Source: eventSource,
           });
         }
@@ -398,7 +398,7 @@ export function* eventsSaga() {
 
       const userData = yield select((state) => state.user.data);
       const user = userMapper(userData, address);
-      const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
+            const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
       const { ga, pixel, vercel } = orderMapper(products, coupon);
       const { orderCreated } = moEngagedOrderMapper(
         products,
