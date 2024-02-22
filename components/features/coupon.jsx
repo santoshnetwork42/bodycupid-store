@@ -77,7 +77,7 @@ function Coupon(props) {
         applyCouponCode(bestCouponCode, true);
       }
     }
-  }, [bestCouponCode]);
+  }, [bestCouponCode, cartList]);
 
   const applyCouponCode = useCallback(
     async (couponCode, autoApplied = false) => {

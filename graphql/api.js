@@ -316,7 +316,12 @@ export const getQuickViewProduct = /* GraphQL */ `
     ) {
       items {
         id
+        variantGroups {
+          variantGroupId
+          variantGroupOptionIds
+        }
         title
+        collections
         isFeatured
         categoryId
         subCategoryId
@@ -343,13 +348,14 @@ export const getQuickViewProduct = /* GraphQL */ `
         weight
         weightUnit
         inventory
-        continueSellingOutOfStock
         blockedInventory
         rating
+        totalRatings
         totalOrders
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        continueSellingOutOfStock
         hasVarient
         variants(filter: $variantFilter) {
           items {
@@ -387,6 +393,10 @@ export const getQuickViewProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            productVariantOptionIds {
+              variantGroupId
+              variantGroupOptionId
+            }
           }
           nextToken
         }
@@ -403,7 +413,6 @@ export const getQuickViewProduct = /* GraphQL */ `
             imageKey
             isThumb
           }
-          nextToken
         }
       }
 
