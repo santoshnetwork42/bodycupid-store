@@ -31,7 +31,6 @@ function Coupon(props) {
     addToCart,
     removeFromCart,
     layout = "cart",
-    allowed: isAllowed,
   } = props;
 
   const [coupon, setCoupon] = useState("");
@@ -100,14 +99,15 @@ function Coupon(props) {
       setLoading(false);
 
       if (response) {
-        const { message, coupon: couponResponse } = getCouponDiscount(
-          response,
-          cartList
-        );
+        const {
+          allowed,
+          message,
+          coupon: couponResponse,
+        } = getCouponDiscount(response, cartList);
 
         const { couponType, getYStoreProduct } = couponResponse;
 
-        if (isAllowed) {
+        if (allowed) {
           cartList.forEach((item) => {
             if (item.cartItemSource === "COUPON") {
               removeFromCart(item);
@@ -440,7 +440,6 @@ function mapStateToProps(state) {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
-    allowed: state.cart.allowed || false,
   };
 }
 
