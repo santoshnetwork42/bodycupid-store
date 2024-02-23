@@ -2480,6 +2480,7 @@ export const manageShoppingCart = /* GraphQL */ `
     manageShoppingCart(input: $input) {
       success
       message
+      shoppingCartId
     }
   }
 `;

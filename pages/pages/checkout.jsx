@@ -52,6 +52,7 @@ function Checkout(props) {
   const {
     cartList,
     user,
+    shoppingCartId,
     emptyCart,
     appliedCoupon,
     setCartVisibility,
@@ -173,6 +174,7 @@ function Checkout(props) {
           metadata,
           appliedRewardPoints: null,
           totalAmount: totalAmount,
+          shoppingCartId,
         }),
         loadScript(RAZORPAY_SCRIPT),
       ]);
@@ -752,6 +754,7 @@ function mapStateToProps(state) {
     appliedCoupon: state.cart.coupon,
     store: state.system.store,
     metadata: state.system.meta,
+    shoppingCartId: state.cart.cartId ? state.cart.cartId : null,
   };
 }
 const Component = connect(mapStateToProps, {
