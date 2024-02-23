@@ -2515,3 +2515,12 @@ export const searchProductsForSitemap = /* GraphQL */ `
     }
   }
 `;
+
+export const sendAffiseAnalytics = /* GraphQL */ `
+  mutation SendAffiseAnalytics($input: SendAffiseAnalyticsInput!) {
+    sendAffiseAnalytics(input: $input) {
+      success
+      message
+    }
+  }
+`;
