@@ -24,7 +24,7 @@ const awsmobile = {
     "ap-south-1:b150ea16-a6e4-4130-a06e-62ecf93dc7bb",
   aws_cognito_region: "ap-south-1",
   aws_user_pools_id: "ap-south-1_cB2553HFZ",
-  aws_user_pools_web_client_id: "5cnbvl1m7o21ieh2cn9h4j1qsv",
+  aws_user_pools_web_client_id: "3p2n1koa9o7dnnue6iaivd9uhe",
   oauth: {},
   aws_cognito_username_attributes: ["PHONE_NUMBER"],
   aws_cognito_social_providers: [],

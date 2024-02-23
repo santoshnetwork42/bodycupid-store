@@ -78,9 +78,9 @@ function Passwordless({
         password: getRandomString(30),
         phone_number: addPhonePrefix(state.phone),
         attributes: {
-          name: "",
-          given_name: "",
-          middle_name: "",
+          // name: "",
+          // given_name: "",
+          // middle_name: "",
           phone_number: addPhonePrefix(state.phone),
         },
         autoSignIn: {
