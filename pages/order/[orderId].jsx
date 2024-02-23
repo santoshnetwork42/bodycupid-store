@@ -17,6 +17,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
 import { alertToaster } from "~/utils/popupHelper";
 import Checkmark from "~/components/icons";
+import AffisePost from "~/components/scripts/Affise/AffisePost";
 
 const logger = new Logger("Orders");
 
@@ -349,6 +350,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
           </div>
 
           <PaymentLoader loading={isPaymentProcessing} />
+          {order?.status === "CONFIRMED" && <AffisePost order={order} />}
         </div>
       </div>
     </main>
