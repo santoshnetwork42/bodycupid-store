@@ -59,7 +59,8 @@ function Coupon(props) {
     setIsCouponModalOpen(false);
   };
 
-  const { filteredFeaturedCoupons: featuredCoupons } = useFeaturedCoupons();
+  const { filteredFeaturedCoupons: featuredCoupons = [] } =
+    useFeaturedCoupons();
   const bestCouponCode = useBestCoupon();
 
   const { discount: couponTotal } = useMemo(
