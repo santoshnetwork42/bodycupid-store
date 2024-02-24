@@ -14,3 +14,4 @@ export const WISEPOPS_KEY = process.env.NEXT_PUBLIC_WISEPOPS_KEY;
 export const GOOGLE_VERIFICATION_TAG =
   process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION_TAG;
 export const AWS_CLIENT_ID = process.env.NEXT_PUBLIC_AWS_CLIENT_ID;
+export const AFFISE_ENABLED = process.env.NEXT_PUBLIC_AFFISE_ENABLED;

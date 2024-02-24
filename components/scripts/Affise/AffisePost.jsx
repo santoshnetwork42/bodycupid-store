@@ -1,10 +1,10 @@
 import { API } from "aws-amplify";
 import { useEffect } from "react";
 
-import { STORE_ID } from "~/config";
+import { STORE_ID, AFFISE_ENABLED } from "~/config";
 import { sendAffiseAnalytics } from "~/graphql/api";
 
-function AffisePost({ order }) {
+function AffisePost({ order = null }) {
   useEffect(() => {
     const sendPostbackData = async (data) => {
       const productsTitles = data.products.items.map(
@@ -42,7 +42,7 @@ function AffisePost({ order }) {
         console.log("bw_thankyou_page_error :", error);
       }
     };
-    if (!order) return;
+    if (AFFISE_ENABLED && order) return;
 
     try {
       // Set the survival mins for local storage data
