@@ -19,8 +19,9 @@ const CouponBanner = ({ message, animate }) => (
 );
 
 const couponDiscountBar = ({ cartList, appliedCoupon }) => {
-  const { filteredFeaturedCoupons: featuredCoupons } = useFeaturedCoupons();
-  const [freeProduct] = useFreeProducts({
+  const { filteredFeaturedCoupons: featuredCoupons = [] } =
+    useFeaturedCoupons();
+  const [freeProduct = {}] = useFreeProducts({
     showNonApplicableFreeProducts: false,
   });
 
