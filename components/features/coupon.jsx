@@ -18,6 +18,7 @@ import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
 import Modal from "~/components/common/modal";
 import Image from "next/image";
+import { STORE_ID } from "~/config";
 
 const logger = new Logger("Coupon");
 
@@ -58,7 +59,7 @@ function Coupon(props) {
     setIsCouponModalOpen(false);
   };
 
-  const featuredCoupons = useFeaturedCoupons();
+  const { filteredFeaturedCoupons: featuredCoupons } = useFeaturedCoupons();
   const bestCouponCode = useBestCoupon();
 
   const { discount: couponTotal } = useMemo(
@@ -87,6 +88,7 @@ function Coupon(props) {
         query: applyCouponMutation,
         authMode: "API_KEY",
         variables: {
+          storeId: STORE_ID,
           code: couponCode,
           variantFilter: { status: { ne: "DISABLED" } },
           imageLimit: 1,

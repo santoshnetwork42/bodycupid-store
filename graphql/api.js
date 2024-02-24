@@ -610,12 +610,13 @@ export const getFeaturedCoupon = /* GraphQL */ `
 
 export const applyCoupon = /* GraphQL */ `
   mutation ApplyCoupon(
+    $storeId: ID!
     $code: String!
     $variantFilter: ModelVariantFilterInput
     $variantLimit: Int
     $imageLimit: Int
   ) {
-    applyCoupon(code: $code) {
+    applyCoupon(storeId: $storeId, code: $code) {
       id
       code
       couponType

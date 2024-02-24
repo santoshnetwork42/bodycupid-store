@@ -163,6 +163,13 @@ function Checkout(props) {
   const placeOrder = async (e) => {
     try {
       e.preventDefault();
+
+      if (!user || !user.isActive) {
+        emptyCart();
+        router.replace("/pages/order-failed");
+        return;
+      }
+
       setPaymentLoader(true);
       const [
         { success, code, formError, order, payment, transaction },
