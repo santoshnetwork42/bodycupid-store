@@ -4,12 +4,7 @@ function Affise() {
   useEffect(() => {
     try {
       var ckSurvivalMinutes = 30 * 24 * 60;
-      // Define the number of mins for cookie survival
-      console.log(
-        "ck head script initiated and survival days set",
-        ckSurvivalMinutes,
-        "days"
-      );
+      
       // Function to extract query parameters from the URL
       var getCKSearchParams = function () {
         var searchParams = new URLSearchParams(window.location.search);
@@ -68,10 +63,10 @@ function Affise() {
       };
       // Get the query parameters from the URL
       var ckSearchParams = getCKSearchParams();
-      console.log("ckSearchParams :", ckSearchParams);
+      // console.log("ckSearchParams :", ckSearchParams);
       // Store the query parameters in local storage
       storeCKInLocalStorage(ckSearchParams);
-      console.log("head script ended");
+      // console.log("head script ended");
     } catch (error) {
       console.log("bw_head_error", error);
     }
