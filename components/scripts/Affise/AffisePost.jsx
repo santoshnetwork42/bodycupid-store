@@ -5,9 +5,9 @@ import { STORE_ID, AFFISE_ENABLED } from "~/config";
 import { sendAffiseAnalytics } from "~/graphql/api";
 
 function AffisePost({ order = null }) {
-  useEffect(() => {
-    const sendPostbackData = async (data) => {
-      const productsTitles = data.products.items.map(
+    useEffect(() => {
+        const sendPostbackData = async (data) => {
+            const productsTitles = data.products.items.map(
         ({ product: { title } }) => title
       );
       const productNames = productsTitles.join("|");
@@ -42,7 +42,7 @@ function AffisePost({ order = null }) {
         console.log("bw_thankyou_page_error :", error);
       }
     };
-    if (AFFISE_ENABLED && order) return;
+    if (!AFFISE_ENABLED || !order) return;
 
     try {
       // Set the survival mins for local storage data
