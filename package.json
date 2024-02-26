@@ -13,7 +13,7 @@
     "@next/bundle-analyzer": "^13.4.2",
     "@sentry/nextjs": "^7.47.0",
     "@vercel/analytics": "^1.0.1",
-    "@wow-star/utils": "1.0.130",
+    "@wow-star/utils": "^1.0.131-beta.2",
     "await-global": "^2.0.0",
     "aws-amplify": "^5.0.11",
     "delay": "^6.0.0",
