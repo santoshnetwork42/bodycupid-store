@@ -9,7 +9,6 @@ function Affise() {
       var getCKSearchParams = function () {
         var searchParams = new URLSearchParams(window.location.search);
         var params = {};
-        // Iterate through the query parameters and store them in the 'params' object
         searchParams.forEach(function (value, key) {
           params[key] = value;
         });
