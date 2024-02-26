@@ -69,14 +69,16 @@ function Coupon(props) {
   );
 
   useEffect(() => {
-    if (appliedCoupon?.autoApplied && !bestCouponCode) {
-      removeCoupon();
-    } else if (
-      bestCouponCode &&
-      (!appliedCoupon || appliedCoupon.autoApplied)
-    ) {
-      if (appliedCoupon?.code !== bestCouponCode) {
+    if (bestCouponCode) {
+      if (
+        (!appliedCoupon || appliedCoupon?.autoApplied) &&
+        appliedCoupon?.code !== bestCouponCode
+      ) {
         applyCouponCode(bestCouponCode, true);
+      }
+    } else {
+      if (appliedCoupon?.autoApplied) {
+        removeCoupon();
       }
     }
   }, [bestCouponCode, cartList]);
