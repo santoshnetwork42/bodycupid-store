@@ -93,6 +93,7 @@ function Coupon(props) {
         variables: {
           storeId: STORE_ID,
           code: couponCode,
+          deviceType: "WEB",
           variantFilter: { status: { ne: "DISABLED" } },
           imageLimit: 1,
         },

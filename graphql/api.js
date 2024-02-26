@@ -612,11 +612,12 @@ export const applyCoupon = /* GraphQL */ `
   mutation ApplyCoupon(
     $storeId: ID!
     $code: String!
+    $deviceType: ApplCouponDeviceType!
     $variantFilter: ModelVariantFilterInput
     $variantLimit: Int
     $imageLimit: Int
   ) {
-    applyCoupon(storeId: $storeId, code: $code) {
+    applyCoupon(storeId: $storeId, code: $code, deviceType: $deviceType) {
       id
       code
       couponType
