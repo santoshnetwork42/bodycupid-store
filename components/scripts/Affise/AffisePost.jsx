@@ -11,6 +11,7 @@ function AffisePost({ order = null }) {
       const productsTitles = data.products.items.map(
         ({ product: { title } }) => title
       );
+      const paymentType = data.paymentType;
       const productNames = productsTitles.join("|");
       const totalAmount = data.totalAmount / 1.18;
       const orderValueWithTax = parseFloat(totalAmount.toFixed(2));
@@ -27,7 +28,7 @@ function AffisePost({ order = null }) {
               utmCampaign: data.bw_utm_campaign,
               discountCode: data.couponCodeId || null,
               productName: productNames,
-              paymentType: data.paymentType.toLowercase(),
+              paymentType: paymentType.toLowerCase(),
               goal: "new",
             },
           },
