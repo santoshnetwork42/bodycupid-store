@@ -47,6 +47,7 @@ function Affise() {
               localStorage.removeItem(key);
             }
           });
+          
         } else {
           for (var key in params) {
             if (params.hasOwnProperty(key)) {
