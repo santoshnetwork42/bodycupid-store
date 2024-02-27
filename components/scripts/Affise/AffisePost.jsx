@@ -5,12 +5,15 @@ import { STORE_ID, AFFISE_ENABLED } from "~/config";
 import { sendAffiseAnalytics } from "~/graphql/api";
 
 function AffisePost({ order = null }) {
-    useEffect(() => {
-        const sendPostbackData = async (data) => {
-            const productsTitles = data.products.items.map(
+  console.log("order", order);
+  useEffect(() => {
+    const sendPostbackData = async (data) => {
+      const productsTitles = data.products.items.map(
         ({ product: { title } }) => title
       );
       const productNames = productsTitles.join("|");
+      const totalAmount = data.totalAmount / 1.18;
+      const orderValueWithTax = parseFloat(totalAmount.toFixed(2));
       try {
         const response = await API.graphql({
           query: sendAffiseAnalytics,
@@ -20,10 +23,12 @@ function AffisePost({ order = null }) {
               storeId: STORE_ID,
               orderId: data.code,
               orderValue: data.totalAmount,
-              orderValueWithTax: data.totalAmount,
+              orderValueWithTax,
               utmCampaign: data.bw_utm_campaign,
-              discountCode: data.couponCodeId,
+              discountCode: data.couponCodeId || null,
               productName: productNames,
+              paymentType: data.paymentType.toLowercase(),
+              goal: "new",
             },
           },
         });
