@@ -48,7 +48,6 @@ function Affise() {
             }
           });
         } else {
-          // Store each query parameter in local storage with a 'bw_' prefix
           for (var key in params) {
             if (params.hasOwnProperty(key)) {
               localStorage.setItem("bw_" + key, params[key]);
