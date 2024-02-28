@@ -1,4 +1,4 @@
-import { call, select, takeEvery } from "redux-saga/effects";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import { API } from "aws-amplify";
 
 import { manageShoppingCart } from "~/graphql/api";
@@ -36,7 +36,7 @@ export function* cartSaga() {
             })
           );
 
-          yield call([API, API.graphql], {
+          const response = yield call([API, API.graphql], {
             query: manageShoppingCart,
             variables: {
               input: {
@@ -47,6 +47,9 @@ export function* cartSaga() {
             },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
+          const cartId = response?.data?.manageShoppingCart?.shoppingCartId;
+
+          yield put({ type: actionTypes.UPDATE_CART_ID, payload: cartId });
         }
       } catch (e) {
         errorHandler(e);
