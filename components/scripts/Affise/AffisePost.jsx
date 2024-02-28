@@ -12,9 +12,9 @@ function AffisePost({ order = null }) {
         ({ product: { title } }) => title
       );
       const paymentType = data.paymentType;
-      const productNames = productsTitles.join("|");
-      const totalAmount = data.totalAmount / 1.18;
-      const orderValueWithTax = parseFloat(totalAmount.toFixed(2));
+      const productNames = productsTitles.join("|") || "";
+      const totalAmountBeforeTax = data.totalAmount / 1.18;
+      const orderValueBeforeTax = parseFloat(totalAmountBeforeTax.toFixed(2));
       try {
         const response = await API.graphql({
           query: sendAffiseAnalytics,
@@ -23,10 +23,9 @@ function AffisePost({ order = null }) {
               clickId: data.bw_clickid,
               storeId: STORE_ID,
               orderId: data.code,
-              orderValue: data.totalAmount,
-              orderValueWithTax,
+              orderValueBeforeTax,
               utmCampaign: data.bw_utm_campaign,
-              discountCode: data.couponCodeId || null,
+              discountCode: data.couponCodeId || "",
               productName: productNames,
               paymentType: paymentType.toLowerCase(),
               goal: "new",
@@ -155,7 +154,7 @@ function AffisePost({ order = null }) {
     } catch (error) {
       console.log("bw_thankyou_page_error :", error);
     }
-  }, [order]);
+  }, []);
 
   return <></>;
 }
