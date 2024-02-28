@@ -21,11 +21,11 @@ import AffisePost from "~/components/scripts/Affise/AffisePost";
 
 const logger = new Logger("Orders");
 
-function Order({ order: orderItem, paymentId, orderId, store }) {
+function Order({ order: orderItem, paymentId, orderId, store, user }) {
   const [order, setOrder] = useState(orderItem);
   const { name } = store || {};
   const [timer, setTimer] = useState(null);
-
+  
   const allStatus = ["CANCELLED", "DISPATCHED", "COURIER_RETURN", "DELIVERED"];
 
   const router = useRouter();
@@ -350,7 +350,9 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
           </div>
 
           <PaymentLoader loading={isPaymentProcessing} />
-          {order?.status === "CONFIRMED" && <AffisePost order={order} />}
+          {order?.status === "CONFIRMED" && (
+            <AffisePost order={order} user={user} />
+          )}
         </div>
       </div>
     </main>
@@ -400,6 +402,7 @@ Order.getInitialProps = async (context) => {
 function mapStateToProps(state) {
   return {
     store: state.system.store,
+    user: state.user.data,
   };
 }
 const Component = connect(mapStateToProps)(Order);
