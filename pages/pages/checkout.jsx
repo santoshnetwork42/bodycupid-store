@@ -52,6 +52,7 @@ function Checkout(props) {
   const {
     cartList,
     user,
+    shoppingCartId,
     emptyCart,
     appliedCoupon,
     setCartVisibility,
@@ -162,6 +163,13 @@ function Checkout(props) {
   const placeOrder = async (e) => {
     try {
       e.preventDefault();
+
+      if (!user || !user.isActive) {
+        emptyCart();
+        router.replace("/pages/order-failed");
+        return;
+      }
+
       setPaymentLoader(true);
       const [
         { success, code, formError, order, payment, transaction },
@@ -173,6 +181,7 @@ function Checkout(props) {
           metadata,
           appliedRewardPoints: null,
           totalAmount: totalAmount,
+          shoppingCartId,
         }),
         loadScript(RAZORPAY_SCRIPT),
       ]);
@@ -752,6 +761,7 @@ function mapStateToProps(state) {
     appliedCoupon: state.cart.coupon,
     store: state.system.store,
     metadata: state.system.meta,
+    shoppingCartId: state.cart.cartId ? state.cart.cartId : null,
   };
 }
 const Component = connect(mapStateToProps, {

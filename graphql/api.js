@@ -610,12 +610,14 @@ export const getFeaturedCoupon = /* GraphQL */ `
 
 export const applyCoupon = /* GraphQL */ `
   mutation ApplyCoupon(
+    $storeId: ID!
     $code: String!
+    $deviceType: ApplCouponDeviceType!
     $variantFilter: ModelVariantFilterInput
     $variantLimit: Int
     $imageLimit: Int
   ) {
-    applyCoupon(code: $code) {
+    applyCoupon(storeId: $storeId, code: $code, deviceType: $deviceType) {
       id
       code
       couponType
@@ -2480,6 +2482,7 @@ export const manageShoppingCart = /* GraphQL */ `
     manageShoppingCart(input: $input) {
       success
       message
+      shoppingCartId
     }
   }
 `;
@@ -2511,6 +2514,15 @@ export const searchProductsForSitemap = /* GraphQL */ `
         slug
         updatedAt
       }
+    }
+  }
+`;
+
+export const sendAffiseAnalytics = /* GraphQL */ `
+  mutation SendAffiseAnalytics($input: SendAffiseAnalyticsInput!) {
+    sendAffiseAnalytics(input: $input) {
+      success
+      message
     }
   }
 `;

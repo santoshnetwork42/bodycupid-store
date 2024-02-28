@@ -13,10 +13,12 @@ export const actionTypes = {
   EMPTY_CART: "EMPTY_CART",
   CREATE_CART: "CREATE_CART",
   VALIDATE_CART: "VALIDATE_CART",
+  UPDATE_CART_ID: "UPDATE_CART_ID",
 };
 const initialState = {
   data: [],
   coupon: null,
+  cartId: null,
 };
 
 function cartReducer(state = initialState, action) {
@@ -126,6 +128,12 @@ function cartReducer(state = initialState, action) {
 
       return { ...state, data };
 
+    case actionTypes.UPDATE_CART_ID:
+      return {
+        ...state,
+        cartId: action.payload,
+      };
+
     default:
       return state;
   }
@@ -155,6 +163,10 @@ export const cartActions = {
   removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
   emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
   createCart: (user) => ({ type: actionTypes.CREATE_CART, payload: { user } }),
+  updateCartId: (cartId) => ({
+    type: actionTypes.UPDATE_CART_ID,
+    payload: { cartId },
+  }),
 };
 
 const persistConfig = {
