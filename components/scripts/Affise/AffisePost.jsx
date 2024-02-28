@@ -155,7 +155,7 @@ function AffisePost({ order = null }) {
     } catch (error) {
       console.log("bw_thankyou_page_error :", error);
     }
-  }, []);
+  }, [order]);
 
   return <></>;
 }
