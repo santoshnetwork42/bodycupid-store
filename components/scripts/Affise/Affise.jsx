@@ -16,6 +16,7 @@ function Affise() {
       };
       
       // Function to store query parameters in local storage
+      
       var storeCKInLocalStorage = function (params) {
         // Remove specific items from local storage if they are not present in 'params'
         if (!("gclid" in params)) {
