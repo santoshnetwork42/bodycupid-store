@@ -33,7 +33,6 @@ function Order({
   const [order, setOrder] = useState(orderItem);
   const { name } = store || {};
   const [timer, setTimer] = useState(null);
-  console.log("user", user);
   const allStatus = ["CANCELLED", "DISPATCHED", "COURIER_RETURN", "DELIVERED"];
 
   const router = useRouter();
