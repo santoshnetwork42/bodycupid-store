@@ -229,3 +229,18 @@ export function trackEvent(title, payload) {
     });
   }
 }
+
+export const orderStatusBadge = {
+  CONFIRMED: {
+    color: "#008000",
+  },
+  CANCELLED: {
+    color: "#ff0000",
+  },
+  DISPATCHED: {
+    color: "#0EA5E9",
+  },
+  DELIVERED: {
+    color: "#0000ff",
+  },
+};
