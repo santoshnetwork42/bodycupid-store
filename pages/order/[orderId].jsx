@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { API } from "aws-amplify";
 import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
-
+import { userActions } from "~/store/user";
 import ALink from "~/components/features/custom-link";
 import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
@@ -21,11 +21,18 @@ import AffisePost from "~/components/scripts/Affise/AffisePost";
 
 const logger = new Logger("Orders");
 
-function Order({ order: orderItem, paymentId, orderId, store, user }) {
+function Order({
+  order: orderItem,
+  paymentId,
+  orderId,
+  store,
+  user,
+  updateUser,
+  lastOrderId,
+}) {
   const [order, setOrder] = useState(orderItem);
   const { name } = store || {};
   const [timer, setTimer] = useState(null);
-  
   const allStatus = ["CANCELLED", "DISPATCHED", "COURIER_RETURN", "DELIVERED"];
 
   const router = useRouter();
@@ -99,6 +106,17 @@ function Order({ order: orderItem, paymentId, orderId, store, user }) {
     }
     return {};
   }, [order?.shippingAddress]);
+
+  useEffect(() => {
+    if (lastOrderId == null || lastOrderId != orderId) {
+      updateUser({
+        totalOrders: user.totalOrders + 1,
+        totalSpent: user.totalSpent + order.totalAmount,
+        lastOrderDate: new Date().toISOString(),
+        lastOrderId: order.id,
+      });
+    }
+  }, [order]);
 
   const getStatusType = (status) => {
     switch (status) {
@@ -403,8 +421,12 @@ function mapStateToProps(state) {
   return {
     store: state.system.store,
     user: state.user.data,
+    lastOrderId: state.user.data.lastOrderId || null,
   };
 }
-const Component = connect(mapStateToProps)(Order);
+
+const Component = connect(mapStateToProps, {
+  updateUser: userActions.updateUserFields,
+})(Order);
 Component.hideMainMenu = true;
 export default Component;
