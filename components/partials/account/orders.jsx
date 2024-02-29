@@ -8,6 +8,7 @@ import { formateDate, toDecimal } from "~/utils";
 import { searchOrders } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import { errorHandler } from "~/utils/errorHandler";
+import { orderStatusBadge } from "~/utils/helper";
 
 function AccountOrders({ user }) {
   const [orders, setOrders] = useState([]);
@@ -36,10 +37,13 @@ function AccountOrders({ user }) {
           },
           authMode: "AMAZON_COGNITO_USER_POOLS",
         });
+        const filteredItems = items.filter(
+          ({ status }) => status !== "TIMEDOUT"
+        );
         if (reset) {
-          setOrders(items);
+          setOrders(filteredItems);
         } else {
-          setOrders([...orders, ...items]);
+          setOrders([...orders, ...filteredItems]);
         }
         setTotalOrder(total);
         setToken(nextToken);
@@ -69,30 +73,35 @@ function AccountOrders({ user }) {
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => (
-            <tr key={order.id}>
-              <td className="order-number">
-                <ALink href={`/order/${order.id}`}>#{order.code}</ALink>
-              </td>
-              <td className="order-date">
-                <time>{formateDate(order.orderDate)}</time>
-              </td>
-              <td className="order-status">
-                <span>{order.status}</span>
-              </td>
-              <td className="order-total">
-                <span>₹{toDecimal(order.totalAmount)}</span>
-              </td>
-              <td className="order-action">
-                <ALink
-                  href={`/order/${order.id}`}
-                  className="btn btn-link btn-underline"
-                >
-                  View
-                </ALink>
-              </td>
-            </tr>
-          ))}
+          {orders.map((order) => {
+            const badgeStyle = {
+              color: orderStatusBadge[order.status].color,
+            };
+            return (
+              <tr key={order.id}>
+                <td className="order-number">
+                  <ALink href={`/order/${order.id}`}>#{order.code}</ALink>
+                </td>
+                <td className="order-date">
+                  <time>{formateDate(order.orderDate)}</time>
+                </td>
+                <td className="order-status" style={badgeStyle}>
+                  <span>{order.status}</span>
+                </td>
+                <td className="order-total">
+                  <span>₹{toDecimal(order.totalAmount)}</span>
+                </td>
+                <td className="order-action">
+                  <ALink
+                    href={`/order/${order.id}`}
+                    className="btn btn-link btn-underline"
+                  >
+                    View
+                  </ALink>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <TokenPagination
