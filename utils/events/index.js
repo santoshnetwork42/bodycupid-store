@@ -1,14 +1,12 @@
+import { addPhonePrefix, getSource, removePhonePrefix } from "~/utils/helper";
 import {
   getFirstVariant,
   getProductInventory,
   getProductMeta,
   getProductPrice,
 } from "~/utils/products";
-import { addPhonePrefix } from "~/utils/helper";
-import { getPublicImageURL } from "../getPublicImageUrl";
-import { removePhonePrefix } from "~/utils/helper";
 import { getCouponDiscount } from "../coupons";
-import { getSource } from "~/utils/helper";
+import { getPublicImageURL } from "../getPublicImageUrl";
 
 export const itemMapper = (product, coupon) => {
   let {
@@ -43,7 +41,7 @@ export const itemMapper = (product, coupon) => {
   const basicAttributes = {
     "Product ID": id,
     "Variant ID": variantId,
-    "Product Subcategory": subCategory?.name,
+    "Product Subcategory": subCategory?.name || null,
     "Product Title": product.title,
     SKU: product.sku,
     "Image URL": getPublicImageURL(thumbImage?.imageKey),
@@ -359,7 +357,6 @@ export const moEngagedOrderMapper = (
 export const moEngageItemPurchasedMapper = (
   products,
   coupon,
-  paymentMethod,
   order,
   isFirstTimeUser
 ) => {
@@ -374,12 +371,11 @@ export const moEngageItemPurchasedMapper = (
     "Coupon Applied": coupon?.code,
     "First Time User": isFirstTimeUser,
   };
-  let totalDiscount = couponTotal;
   const events = products.map((product) => {
     const { value: valueNew, mrpValue } = itemMapper(product, coupon);
     const { thumbImage } = getProductMeta(product);
     const url = getPublicImageURL(thumbImage?.imageKey);
-    totalDiscount = totalDiscount + mrpValue - valueNew;
+    const totalDiscount = mrpValue - valueNew;
     const eventAttributes = {
       ...basicAttributes,
       "Total Discount": totalDiscount || 0,
