@@ -223,6 +223,7 @@ export function* eventsSaga() {
           email: null,
           phone,
         });
+        
         trackEvent("Customer Registered", {
           "Customer ID": userId,
           "Mobile Number": mobile,
