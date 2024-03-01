@@ -1,11 +1,12 @@
 import { API } from "aws-amplify";
 import { useEffect } from "react";
 
-import { STORE_ID, AFFISE_ENABLED } from "~/config";
+import { AFFISE_ENABLED, STORE_ID } from "~/config";
 import { sendAffiseAnalytics } from "~/graphql/api";
 
 function AffisePost({ order = null, user }) {
   const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
+
   useEffect(() => {
     const sendPostbackData = async (data) => {
       const productsTitles = data.products.items.map(
@@ -47,6 +48,7 @@ function AffisePost({ order = null, user }) {
         console.log("bw_thankyou_page_error :", error);
       }
     };
+
     if (!AFFISE_ENABLED || !order) return;
 
     try {

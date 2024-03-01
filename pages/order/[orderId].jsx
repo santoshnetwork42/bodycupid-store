@@ -28,7 +28,6 @@ function Order({
   store,
   user,
   updateUser,
-  lastOrderId,
 }) {
   const [order, setOrder] = useState(orderItem);
   const { name } = store || {};
@@ -108,7 +107,7 @@ function Order({
   }, [order?.shippingAddress]);
 
   useEffect(() => {
-    if (lastOrderId == null || lastOrderId != orderId) {
+    if (user && user.lastOrderId !== orderId) {
       updateUser({
         totalOrders: user.totalOrders + 1,
         totalSpent: user.totalSpent + order.totalAmount,
@@ -116,7 +115,7 @@ function Order({
         lastOrderId: order.id,
       });
     }
-  }, [order]);
+  }, [order, user]);
 
   const getStatusType = (status) => {
     switch (status) {
@@ -368,7 +367,7 @@ function Order({
           </div>
 
           <PaymentLoader loading={isPaymentProcessing} />
-          {order?.status === "CONFIRMED" && (
+          {order?.status === "CONFIRMED" && user?.id === order.userId && (
             <AffisePost order={order} user={user} />
           )}
         </div>
@@ -421,12 +420,12 @@ function mapStateToProps(state) {
   return {
     store: state.system.store,
     user: state.user.data,
-    lastOrderId: state.user.data.lastOrderId || null,
   };
 }
 
 const Component = connect(mapStateToProps, {
   updateUser: userActions.updateUserFields,
 })(Order);
+
 Component.hideMainMenu = true;
 export default Component;
