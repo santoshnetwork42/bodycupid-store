@@ -223,6 +223,7 @@ export function* eventsSaga() {
           email: null,
           phone,
         });
+        
         trackEvent("Customer Registered", {
           "Customer ID": userId,
           "Mobile Number": mobile,
@@ -398,7 +399,7 @@ export function* eventsSaga() {
 
       const userData = yield select((state) => state.user.data);
       const user = userMapper(userData, address);
-            const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
+      const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
       const { ga, pixel, vercel } = orderMapper(products, coupon);
       const { orderCreated } = moEngagedOrderMapper(
         products,
@@ -780,7 +781,7 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.TOP_NAVBAR_CLICKED, function* saga(e) {
-    trackEvent("Top Navbar clicked", {
+    trackEvent("Top Navbar Clicked", {
       ...e.payload,
     });
   });
