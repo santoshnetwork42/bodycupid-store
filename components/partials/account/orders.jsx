@@ -75,7 +75,7 @@ function AccountOrders({ user }) {
         <tbody>
           {orders.map((order) => {
             const badgeStyle = {
-              color: orderStatusBadge[order.status].color,
+              color: orderStatusBadge[order.status]?.color || "#0000ff",
             };
             return (
               <tr key={order.id}>
