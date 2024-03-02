@@ -75,7 +75,7 @@ function Order({
   const [counter, setCounter] = useState(0);
 
   const isPaymentProcessing =
-    order?.status === "PENDING" &&
+    (order?.status === "PENDING" || order?.status === "TIMEDOUT") &&
     order?.paymentType === "PREPAID" &&
     paymentId;
 
