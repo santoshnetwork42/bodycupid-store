@@ -2,8 +2,8 @@ import React from "react";
 import Head from "next/head";
 import { connect } from "react-redux";
 
-function Shiiping({ store }) {
-  const { name } = store;
+function Shipping({ store }) {
+  const { name } = store || {};
   return (
     <main className="main about-us">
       <Head>
@@ -39,4 +39,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(React.memo(Shiiping));
+export default connect(mapStateToProps)(React.memo(Shipping));
