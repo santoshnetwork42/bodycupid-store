@@ -61,12 +61,29 @@ function Coupon(props) {
 
   const { filteredFeaturedCoupons: featuredCoupons = [] } =
     useFeaturedCoupons();
-  const bestCouponCode = useBestCoupon();
 
   const { discount: couponTotal } = useMemo(
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
+
+  const useBestCoupon = () => {
+    const { featuredCouponsSorted } = useFeaturedCoupons();
+
+    const eligibleCoupons = featuredCouponsSorted.filter(
+      (f) => f.coupon?.autoApply && f.allowed
+    );
+    const sortedCoupons = eligibleCoupons.sort((a, b) => {
+      const discountA = getCouponDiscount(a.coupon, cartList);
+      const discountB = getCouponDiscount(b.coupon, cartList);
+      return discountB?.discount - discountA?.discount;
+    });
+
+    const bestCoupon = sortedCoupons[0];
+    return bestCoupon?.coupon?.code;
+  };
+
+  const bestCouponCode = useBestCoupon();
 
   useEffect(() => {
     if (bestCouponCode) {
@@ -82,6 +99,8 @@ function Coupon(props) {
       }
     }
   }, [bestCouponCode, cartList]);
+
+  console.log("best", bestCouponCode, couponTotal);
 
   const applyCouponCode = useCallback(
     async (couponCode, autoApplied = false) => {
