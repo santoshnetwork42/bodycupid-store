@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import TagManager from "react-gtm-module";
 import { Analytics } from "@vercel/analytics/react";
+import { useEffect } from "react";
+import GTM from "react-gtm-module";
 
+import Wisepops from "~/components/scripts/wisepops.jsx";
 import { GTM_ID } from "~/config";
 import { useIsInteractive } from "~/utils/contexts/navbar";
-import Wisepops from "~/components/scripts/wisepops.jsx";
 import Affise from "./scripts/Affise/Affise";
 
 export default function Scripts() {
@@ -12,7 +12,7 @@ export default function Scripts() {
 
   useEffect(() => {
     if (isInteractive) {
-      TagManager.initialize({ gtmId: GTM_ID });
+      GTM.initialize({ gtmId: GTM_ID });
     }
   }, [isInteractive]);
 
