@@ -17,11 +17,11 @@ import {
   getStoreBanners,
 } from "~/graphql/api";
 import { eventActions } from "~/store/events";
+import { useIsInteractive } from "~/utils/contexts/navbar";
 import fetchData from "~/utils/fetchData";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import handleRedirect from "~/utils/handleRedirect";
 import { getProductMeta } from "~/utils/products";
-import { useIsInteractive } from "~/utils/contexts/navbar";
 
 const RenderProductCollection = dynamic(() =>
   import("~/components/partials/home/render-product-collection")
@@ -30,7 +30,7 @@ const RenderProductCollection = dynamic(() =>
 const logger = new Logger("Products");
 
 function ProductDefault(props) {
-  const { product, pageMeta, viewItem, slug } = props;
+  const { product, pageMeta, viewItem } = props;
 
   const router = useRouter();
   const { query } = router;
@@ -46,7 +46,7 @@ function ProductDefault(props) {
         section: { id: "product-detail", name: "Product Detail" },
       });
     }
-  }, [slug]);
+  }, [product, isInteractive]);
 
   const relatedProductFilter = useMemo(() => {
     if (!!product) {
