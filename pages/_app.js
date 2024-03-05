@@ -1,31 +1,29 @@
-import { useCallback, useEffect } from "react";
-import { useStore, Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { Amplify, Hub, Auth, API, Analytics, Logger } from "aws-amplify";
-import { useRouter } from "next/router";
-import Cookie from "js-cookie";
 import awaitGlobal from "await-global";
-
-import "~/public/sass/style.scss";
+import { API, Amplify, Analytics, Auth, Hub, Logger } from "aws-amplify";
+import Cookie from "js-cookie";
+import { useRouter } from "next/router";
+import { useCallback, useEffect } from "react";
 import "react-owl-carousel2/lib/styles.css";
+import { Provider, useStore } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
-import { wrapper } from "../store/index.js";
-import Layout from "~/components/layout";
-import { rootActions } from "~/store";
-import { userActions } from "~/store/user";
-import { systemActions } from "~/store/system";
-import { eventActions } from "~/store/events";
-import { AWS_CLIENT_ID, STORE_ID, STORE_PREFIX } from "~/config";
 import awsconfig from "~/aws-exports";
-import { getUser, getStore } from "~/graphql/api";
-import { errorHandler } from "~/utils/errorHandler";
-import Scripts from "~/components/scripts";
-import NextHead from "~/components/common/next-head";
 import Header from "~/components/common/header";
-
-import NavbarProvider from "~/utils/contexts/navbar";
-import ABProvider from "~/utils/contexts/ab";
+import NextHead from "~/components/common/next-head";
+import Layout from "~/components/layout";
+import Scripts from "~/components/scripts";
+import { AWS_CLIENT_ID, STORE_ID, STORE_PREFIX } from "~/config";
 import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
+import { getStore, getUser } from "~/graphql/api";
+import "~/public/sass/style.scss";
+import { rootActions } from "~/store";
+import { eventActions } from "~/store/events";
+import { systemActions } from "~/store/system";
+import { userActions } from "~/store/user";
+import ABProvider from "~/utils/contexts/ab";
+import NavbarProvider from "~/utils/contexts/navbar";
+import { errorHandler } from "~/utils/errorHandler";
+import { wrapper } from "../store/index.js";
 
 Amplify.configure({
   ...awsconfig,
