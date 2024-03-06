@@ -1,17 +1,20 @@
 import { useMemo } from "react";
 import { connect } from "react-redux";
+import { useCartTotal } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import { modalActions } from "~/store/modal";
-import { getCartTotals, toDecimal } from "~/utils";
+import { toDecimal } from "~/utils";
+import { useNavBarState } from "~/utils/contexts/navbar";
 
 function StickyFooter(props) {
-  const { cartList, appliedCoupon, showStickyCheckout, setCartVisibility } =
-    props;
-  const { totalPrice, totalItems } = useMemo(
-    () => getCartTotals(cartList, [], appliedCoupon),
-    [appliedCoupon, cartList]
-  );
+  const { cartList, showStickyCheckout, setCartVisibility } = props;
+  const { isRewardApplied } = useNavBarState();
+
+  const { totalPrice, totalItems } = useCartTotal({
+    paymentType: "PREPAID",
+    isRewardApplied: isRewardApplied,
+  });
 
   if (!cartList.length || !showStickyCheckout) return <></>;
   return (
