@@ -1536,8 +1536,8 @@ export const searchOrders = /* GraphQL */ `
 `;
 
 export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
+  query GetUser {
+    getUser {
       id
       owner
       firstName

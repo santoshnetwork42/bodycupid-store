@@ -117,7 +117,6 @@ function Passwordless({
               data: { getUser: getUserResponse },
             } = await API.graphql({
               query: getUser,
-              variables: { id: user?.attributes?.sub },
               authMode: "AMAZON_COGNITO_USER_POOLS",
             });
             const { sub, phone_number } = user?.attributes;
