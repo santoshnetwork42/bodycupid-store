@@ -44,6 +44,11 @@ const nextConfig = withBundleAnalyzer({
         permanent: true,
       },
       {
+        source: "/categories/:slug*",
+        destination: "/collections/:slug*",
+        permanent: true,
+      },
+      {
         source: "/elements",
         destination: "/",
         permanent: true,
