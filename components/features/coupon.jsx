@@ -61,12 +61,13 @@ function Coupon(props) {
 
   const { filteredFeaturedCoupons: featuredCoupons = [] } =
     useFeaturedCoupons();
-  const bestCouponCode = useBestCoupon();
 
   const { discount: couponTotal } = useMemo(
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
+
+  const bestCouponCode = useBestCoupon();
 
   useEffect(() => {
     if (bestCouponCode) {
@@ -111,30 +112,10 @@ function Coupon(props) {
           coupon: couponResponse,
         } = getCouponDiscount(response, cartList);
 
-        const { couponType, getYStoreProduct } = couponResponse;
-
         if (allowed) {
-          cartList.forEach((item) => {
-            if (item.cartItemSource === "COUPON") {
-              removeFromCart(item);
-            }
-          });
-
           applyCoupon({ ...couponResponse, autoApplied: !!autoApplied });
           openModal();
 
-          if (couponType === "PRODUCT") {
-            addToCart({
-              ...getYStoreProduct,
-              qty: 1,
-              disableChange: true,
-              cartItemSource: "COUPON",
-              section: {
-                id: "COUPON".toLowerCase().replace(/\ /g, "-"),
-                name: "COUPON",
-              },
-            });
-          }
           isSliderOpen && closeSlider();
           logger.info("Applied coupon:", response);
         } else {

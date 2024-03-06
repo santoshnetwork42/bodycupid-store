@@ -1,4 +1,4 @@
-import { useCartItems, useInventory } from "@wow-star/utils";
+import { useCartItems, useCartTotal, useInventory } from "@wow-star/utils";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { connect } from "react-redux";
@@ -12,7 +12,8 @@ import CartProduct from "~/components/partials/cart/cart-product";
 import { cartActions } from "~/store/cart";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
-import { getCartCount, getTotalPrice, toDecimal } from "~/utils";
+import { getTotalPrice, toDecimal } from "~/utils";
+import { useNavBarState } from "~/utils/contexts/navbar";
 
 const logger = new Logger("Cart");
 
@@ -33,6 +34,12 @@ function CartMenu(props) {
   });
 
   const inventory = useInventory({ validateCart });
+  const { isRewardApplied } = useNavBarState();
+
+  const { totalItems } = useCartTotal({
+    paymentType: "PREPAID",
+    isRewardApplied: isRewardApplied,
+  });
 
   const { inventoryMapping } = inventory;
 
@@ -76,7 +83,7 @@ function CartMenu(props) {
           </span>
         </div>
         <Bag />
-        <span className="cart-count">{getCartCount(cartList)}</span>
+        <span className="cart-count">{totalItems}</span>
       </ALink>
       <div
         className="sidebar-overlay"
@@ -88,9 +95,7 @@ function CartMenu(props) {
         <div className="sidebar-header wrapper">
           <div className="d-flex align-items-center">
             <Cart />
-            <h4 className="cart-title ml-2">
-              Shopping Cart ({getCartCount(cartList)})
-            </h4>
+            <h4 className="cart-title ml-2">Shopping Cart ({totalItems})</h4>
           </div>
           <ALink
             href="#"
