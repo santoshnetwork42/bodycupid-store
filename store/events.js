@@ -223,7 +223,7 @@ export function* eventsSaga() {
           email: null,
           phone,
         });
-        
+
         trackEvent("Customer Registered", {
           "Customer ID": userId,
           "Mobile Number": mobile,
@@ -240,7 +240,6 @@ export function* eventsSaga() {
             data: { getUser: getUserResponse },
           } = yield call([API, API.graphql], {
             query: getUser,
-            variables: { id: userId },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
 
