@@ -223,7 +223,7 @@ export function* eventsSaga() {
           email: null,
           phone,
         });
-        
+
         trackEvent("Customer Registered", {
           "Customer ID": userId,
           "Mobile Number": mobile,
@@ -240,31 +240,38 @@ export function* eventsSaga() {
             data: { getUser: getUserResponse },
           } = yield call([API, API.graphql], {
             query: getUser,
-            variables: { id: userId },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
 
-          const isFirstTime =
-            Math.abs(new Date(getUserResponse?.createdAt) - new Date() / 1000) <
-            300;
-          const { firstName, lastName, email, phone } = getUserResponse;
-          initializeMoengageAndAddInfo({
-            firstName,
-            lastName,
-            email,
-            phone,
-          });
-          const mobile = phone?.split("+91")[1];
+          if (getUserResponse) {
+            const isFirstTime =
+              Math.abs(
+                new Date(getUserResponse?.createdAt) - new Date() / 1000
+              ) < 300;
+            const {
+              firstName = null,
+              lastName = null,
+              email = null,
+              phone = null,
+            } = getUserResponse;
+            initializeMoengageAndAddInfo({
+              firstName,
+              lastName,
+              email,
+              phone,
+            });
+            const mobile = phone?.split("+91")[1];
 
-          trackEvent("Customer Logged In", {
-            "Customer ID": userId,
-            "Mobile Number": mobile,
-            "Utm Source": source,
-            "Utm Medium": medium,
-            URL: window.location.href,
-            "First Time User": false,
-            Source: eventSource,
-          });
+            trackEvent("Customer Logged In", {
+              "Customer ID": userId,
+              "Mobile Number": mobile,
+              "Utm Source": source,
+              "Utm Medium": medium,
+              URL: window.location.href,
+              "First Time User": false,
+              Source: eventSource,
+            });
+          }
         }
       } else if (action == "logout") {
         const Moengage = window?.Moengage;
