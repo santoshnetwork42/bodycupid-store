@@ -1623,6 +1623,7 @@ export const getStore = /* GraphQL */ `
         link
         color
         textColor
+        isArchive
       }
       socialLinks {
         instagram

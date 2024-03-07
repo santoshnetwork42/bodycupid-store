@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
 import { useRouter } from "next/router";
-import { useCartTotal } from "@wow-star/utils";
+import { useCartTotal, useConfiguration } from "@wow-star/utils";
 
 import { eventActions } from "~/store/events";
 import { toDecimal } from "~/utils";
@@ -11,6 +11,7 @@ import { modalActions } from "~/store/modal";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
 import Coupon from "~/components/features/coupon";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
+import { PREPAID_ENABLED } from "~/constant";
 
 const logger = new Logger("Cart");
 
@@ -28,6 +29,7 @@ function CartTotal({
 }) {
   const router = useRouter();
   const { isSmallSize } = useWindowDimensions();
+  const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
 
   const {
     totalItems,
@@ -43,7 +45,7 @@ function CartTotal({
     codCharges,
     appliedCODCharges,
   } = useCartTotal({
-    paymentType: "PREPAID",
+    paymentType: prepaidEnabled ? "PREPAID" : "COD",
   });
 
   const guestCheckout = useGuestCheckout();
@@ -177,18 +179,20 @@ function CartTotal({
                 </tr>
               )}
 
-              <tr className="summary-subtotal">
-                <td>
-                  <h4 className="summary-subtitle lh-1">
-                    {prepaidDiscountPercent}% Online Payment Discount
-                  </h4>
-                </td>
-                <td>
-                  <p className="summary-subtotal-price discount-price-color">
-                    -{`₹${toDecimal(prepaidDiscount)}`}
-                  </p>
-                </td>
-              </tr>
+              {prepaidDiscount > 0 && (
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle lh-1">
+                      {prepaidDiscountPercent}% Online Payment Discount
+                    </h4>
+                  </td>
+                  <td>
+                    <p className="summary-subtotal-price discount-price-color">
+                      -{`₹${toDecimal(prepaidDiscount)}`}
+                    </p>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
           <table className="total">
