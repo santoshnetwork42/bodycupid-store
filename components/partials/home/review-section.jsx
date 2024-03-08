@@ -27,6 +27,7 @@ const TESTIMONIAL = [
     userImage: "/images/agents/Anusha.jpg",
   },
 ];
+
 export default function ReviewSection() {
   return (
     <section className="parallax pb-3">
