@@ -4,7 +4,7 @@ function Affise() {
   useEffect(() => {
     try {
       var ckSurvivalMinutes = 30 * 24 * 60;
-      
+
       // Function to extract query parameters from the URL
       var getCKSearchParams = function () {
         var searchParams = new URLSearchParams(window.location.search);
@@ -14,9 +14,9 @@ function Affise() {
         });
         return params;
       };
-      
+
       // Function to store query parameters in local storage
-      
+
       var storeCKInLocalStorage = function (params) {
         // Remove specific items from local storage if they are not present in 'params'
         if (!("gclid" in params)) {
@@ -48,7 +48,6 @@ function Affise() {
               localStorage.removeItem(key);
             }
           });
-          
         } else {
           for (var key in params) {
             if (params.hasOwnProperty(key)) {

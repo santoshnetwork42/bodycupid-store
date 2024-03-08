@@ -12,7 +12,7 @@ export default function Scripts() {
 
   useEffect(() => {
     if (isInteractive) {
-      GTM.initialize({ gtmId: GTM_ID });
+      // GTM.initialize({ gtmId: GTM_ID });
     }
   }, [isInteractive]);
 
