@@ -41,7 +41,7 @@ import {
   useGuestCheckout,
   useNavBarState,
 } from "~/utils/contexts/navbar";
-import { MAX_COD_AMOUNT } from "~/constant";
+import { COD_ENABLED, MAX_COD_AMOUNT, PREPAID_ENABLED } from "~/constant";
 import { productDiscountPercentage } from "~/utils/products";
 
 const logger = new Logger("Checkout");
@@ -70,6 +70,9 @@ function Checkout(props) {
 
   const guestCheckout = useGuestCheckout();
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
+  const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
+  const codEnabled = useConfiguration(COD_ENABLED, true);
+
   const { isRewardApplied } = useNavBarState();
 
   const { isSmallSize: isMobile } = useWindowDimensions();
@@ -82,7 +85,7 @@ function Checkout(props) {
   });
 
   const router = useRouter();
-  const [payMethod, setFirst] = useState("PREPAID");
+  const [payMethod, setFirst] = useState(prepaidEnabled ? "PREPAID" : "COD");
   const [shippingAddress, setAddress] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
   const [isCollapse, setIsCollapse] = useState(false);
@@ -164,7 +167,7 @@ function Checkout(props) {
     try {
       e.preventDefault();
 
-      if (!user || !user.isActive) {
+      if (!guestCheckout && (!user || !user.isActive)) {
         emptyCart();
         router.replace("/pages/order-failed");
         return;
@@ -504,19 +507,21 @@ function Checkout(props) {
                                     </td>
                                   </tr>
                                 )}
-                                {isFirst && !!prepaidDiscount && (
-                                  <tr className="summary-subtotal">
-                                    <td>
-                                      <h4 className="summary-subtitle">
-                                        {prepaidDiscountPercent}% Online Payment
-                                        Discount
-                                      </h4>
-                                    </td>
-                                    <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
-                                      - {`₹${toDecimal(prepaidDiscount)}`}
-                                    </td>
-                                  </tr>
-                                )}
+                                {isFirst &&
+                                  !!prepaidDiscount &&
+                                  prepaidDiscount > 0 && (
+                                    <tr className="summary-subtotal">
+                                      <td>
+                                        <h4 className="summary-subtitle">
+                                          {prepaidDiscountPercent}% Online
+                                          Payment Discount
+                                        </h4>
+                                      </td>
+                                      <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
+                                        - {`₹${toDecimal(prepaidDiscount)}`}
+                                      </td>
+                                    </tr>
+                                  )}
                                 <tr className="summary-subtotal">
                                   <td>
                                     <h4 className="summary-subtitle">
@@ -545,7 +550,7 @@ function Checkout(props) {
                                   </td>
                                 </tr>
 
-                                {!!codCharges && (
+                                {!!codCharges && codCharges > 0 && (
                                   <tr className="summary-subtotal">
                                     <td>
                                       <h4 className="summary-subtitle">
@@ -632,48 +637,52 @@ function Checkout(props) {
                         <h4 className="payment-heading">Payment Methods</h4>
 
                         <div className="checkbox-group ">
-                          <PaymentMethods
-                            title="Pay Online"
-                            tag={
-                              !!prepaidDiscount &&
-                              `EXTRA ${prepaidDiscountPercent}% OFF`
-                            }
-                            isSelected={payMethod === "PREPAID"}
-                            description={
-                              onlineDisabled
-                                ? `Online payment disabled for you coupon "${appliedCoupon?.code}"`
-                                : "Pay using credit/debit cards, net-banking, UPI, or digital wallets."
-                            }
-                            disabled={onlineDisabled}
-                            onClick={() => {
-                              !onlineDisabled && setFirst("PREPAID");
-                            }}
-                            amount={prepaidGrandTotal}
-                          />
-
-                          <PaymentMethods
-                            title="Cash On Delivery"
-                            tagVariant="danger"
-                            showUpdateCoupon={codCouponDisabled}
-                            tag={
-                              !!codCharges && `₹${toDecimal(codCharges)} EXTRA`
-                            }
-                            isSelected={payMethod === "COD"}
-                            description={
-                              codCouponDisabled
-                                ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
-                                : isMaxCODDisabled
-                                ? `COD payment is not allowed for orders above ₹${maxCOD}.`
-                                : `Pay using Cash on Delivery.`
-                            }
-                            disabled={codCouponDisabled || isMaxCODDisabled}
-                            onClick={() => {
-                              !codCouponDisabled &&
-                                !isMaxCODDisabled &&
-                                setFirst("COD");
-                            }}
-                            amount={codGrandTotal}
-                          />
+                          {prepaidEnabled && (
+                            <PaymentMethods
+                              title="Pay Online"
+                              tag={
+                                !!prepaidDiscount &&
+                                `EXTRA ${prepaidDiscountPercent}% OFF`
+                              }
+                              isSelected={payMethod === "PREPAID"}
+                              description={
+                                onlineDisabled
+                                  ? `Online payment disabled for you coupon "${appliedCoupon?.code}"`
+                                  : "Pay using credit/debit cards, net-banking, UPI, or digital wallets."
+                              }
+                              disabled={onlineDisabled}
+                              onClick={() => {
+                                !onlineDisabled && setFirst("PREPAID");
+                              }}
+                              amount={prepaidGrandTotal}
+                            />
+                          )}
+                          {codEnabled && (
+                            <PaymentMethods
+                              title="Cash On Delivery"
+                              tagVariant="danger"
+                              showUpdateCoupon={codCouponDisabled}
+                              tag={
+                                !!codCharges &&
+                                `₹${toDecimal(codCharges)} EXTRA`
+                              }
+                              isSelected={payMethod === "COD"}
+                              description={
+                                codCouponDisabled
+                                  ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
+                                  : isMaxCODDisabled
+                                  ? `COD payment is not allowed for orders above ₹${maxCOD}.`
+                                  : `Pay using Cash on Delivery.`
+                              }
+                              disabled={codCouponDisabled || isMaxCODDisabled}
+                              onClick={() => {
+                                !codCouponDisabled &&
+                                  !isMaxCODDisabled &&
+                                  setFirst("COD");
+                              }}
+                              amount={codGrandTotal}
+                            />
+                          )}
                         </div>
                       </div>
 

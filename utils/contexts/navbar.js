@@ -69,9 +69,9 @@ export const useIsInteractive = () => {
 };
 
 export const useGuestCheckout = () => {
-  const guestCheck = useConfiguration(GUEST_CHECKOUT, 0);
+  const guestCheck = useConfiguration(GUEST_CHECKOUT, false);
   const guestCookie = Cookie.get(`${STORE_PREFIX}_guest`);
-  if (guestCheck === 1 || guestCookie) return true;
+  if (!!guestCheck || guestCookie) return true;
   return false;
 };
 
