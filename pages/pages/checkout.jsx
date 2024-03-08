@@ -167,7 +167,7 @@ function Checkout(props) {
     try {
       e.preventDefault();
 
-      if (!user || !user.isActive) {
+      if (!guestCheckout && (!user || !user.isActive)) {
         emptyCart();
         router.replace("/pages/order-failed");
         return;
