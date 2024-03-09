@@ -4,6 +4,7 @@ import {
   useConfiguration,
   useFreeProducts,
   useInventory,
+  useNavbar,
   useOrders,
 } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
@@ -68,7 +69,7 @@ function Checkout(props) {
   } = props;
 
   const { name } = store || {};
-
+  const { isReady } = useNavbar();
   const guestCheckout = useGuestCheckout();
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
   const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
@@ -91,6 +92,12 @@ function Checkout(props) {
   const [formErorr, setFormErorr] = useState(null);
   const [isCollapse, setIsCollapse] = useState(false);
   const [paymentLoader, setPaymentLoader] = useState(false);
+
+  useEffect(() => {
+    if (isReady) {
+      setPaymentLoader(false);
+    }
+  }, [isReady]);
 
   const [
     { isConfirmed, order: finalOrder, loading },
@@ -166,6 +173,7 @@ function Checkout(props) {
 
   const placeOrder = async (e) => {
     try {
+      console.log("call place order");
       e.preventDefault();
       const isAffiseTrackingValid = checkAffiseValidity();
       if (!guestCheckout && (!user || !user.isActive)) {
@@ -253,6 +261,7 @@ function Checkout(props) {
 
       return Promise.resolve();
     } catch (error) {
+      console.log("error", error);
       setPaymentLoader(false);
     }
   };
@@ -720,7 +729,13 @@ function Checkout(props) {
 
                         {(!!isValidAddress(shippingAddress) || !isMobile) && (
                           <button
-                            onClick={placeOrder}
+                            onClick={(e) => {
+                              if (isReady) {
+                                placeOrder(e);
+                              } else {
+                                setPaymentLoader(true);
+                              }
+                            }}
                             disabled={
                               !isValidAddress(shippingAddress) ||
                               !isInventoryCheckReady ||
