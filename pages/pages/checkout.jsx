@@ -719,7 +719,7 @@ function Checkout(props) {
                             {loading && <div className="spin-loader ml-2" />}
                           </button>
                         )}
-
+                        <div>{isReady}</div>
                         {(!!isValidAddress(shippingAddress) || !isMobile) && (
                           <button
                             onClick={(e) => {
