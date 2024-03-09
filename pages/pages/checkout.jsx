@@ -93,12 +93,6 @@ function Checkout(props) {
   const [isCollapse, setIsCollapse] = useState(false);
   const [paymentLoader, setPaymentLoader] = useState(false);
 
-  useEffect(() => {
-    if (isReady) {
-      setPaymentLoader(false);
-    }
-  }, [isReady]);
-
   const [
     { isConfirmed, order: finalOrder, loading },
     placeOrderV1,
@@ -729,13 +723,10 @@ function Checkout(props) {
                         {(!!isValidAddress(shippingAddress) || !isMobile) && (
                           <button
                             onClick={(e) => {
-                              if (isReady) {
-                                placeOrder(e);
-                              } else {
-                                setPaymentLoader(true);
-                              }
+                              placeOrder(e);
                             }}
                             disabled={
+                              !!isReady ||
                               !isValidAddress(shippingAddress) ||
                               !isInventoryCheckReady ||
                               loading
