@@ -168,8 +168,6 @@ function Checkout(props) {
     try {
       e.preventDefault();
       const isAffiseTrackingValid = checkAffiseValidity();
-      console.log("isAffiseTrackingValid", isAffiseTrackingValid);
-      console.log("metadata place order", metadata);
       if (!guestCheckout && (!user || !user.isActive)) {
         emptyCart();
         router.replace("/pages/order-failed");
