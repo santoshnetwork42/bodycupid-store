@@ -173,7 +173,6 @@ function Checkout(props) {
 
   const placeOrder = async (e) => {
     try {
-      console.log("call place order");
       e.preventDefault();
       const isAffiseTrackingValid = checkAffiseValidity();
       if (!guestCheckout && (!user || !user.isActive)) {
