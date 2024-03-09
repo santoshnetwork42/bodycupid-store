@@ -70,6 +70,7 @@ function Checkout(props) {
 
   const { name } = store || {};
   const { isReady } = useNavbar();
+
   const guestCheckout = useGuestCheckout();
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
   const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
@@ -638,7 +639,9 @@ function Checkout(props) {
                         className="payment accordion radio-type "
                         id="payment-method"
                       >
-                        <h4 className="payment-heading">Payment Methods</h4>
+                        <h4 className="payment-heading">
+                          Payment Methods {isReady ? "1" : "0"}
+                        </h4>
 
                         <div className="checkbox-group ">
                           {prepaidEnabled && (
@@ -719,14 +722,13 @@ function Checkout(props) {
                             {loading && <div className="spin-loader ml-2" />}
                           </button>
                         )}
-                        <div>{isReady}</div>
                         {(!!isValidAddress(shippingAddress) || !isMobile) && (
                           <button
                             onClick={(e) => {
                               placeOrder(e);
                             }}
                             disabled={
-                              !!isReady ||
+                              !isReady ||
                               !isValidAddress(shippingAddress) ||
                               !isInventoryCheckReady ||
                               loading
