@@ -4,6 +4,7 @@ import {
   useConfiguration,
   useFreeProducts,
   useInventory,
+  useNavbar,
   useOrders,
 } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
@@ -68,6 +69,7 @@ function Checkout(props) {
   } = props;
 
   const { name } = store || {};
+  const { isReady } = useNavbar();
 
   const guestCheckout = useGuestCheckout();
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
@@ -253,6 +255,7 @@ function Checkout(props) {
 
       return Promise.resolve();
     } catch (error) {
+      console.log("error", error);
       setPaymentLoader(false);
     }
   };
@@ -717,11 +720,13 @@ function Checkout(props) {
                             {loading && <div className="spin-loader ml-2" />}
                           </button>
                         )}
-
                         {(!!isValidAddress(shippingAddress) || !isMobile) && (
                           <button
-                            onClick={placeOrder}
+                            onClick={(e) => {
+                              placeOrder(e);
+                            }}
                             disabled={
+                              !isReady ||
                               !isValidAddress(shippingAddress) ||
                               !isInventoryCheckReady ||
                               loading
