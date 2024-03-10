@@ -122,6 +122,7 @@ const App = ({ Component, pageProps }) => {
       utm_medium: medium,
       utm_source: source,
       utm_term: term,
+      clickid,
     } = query;
     const landingPage = window?.location?.href;
     const referrer = document?.referrer;
@@ -134,6 +135,7 @@ const App = ({ Component, pageProps }) => {
       utmMedium: medium || meta?.utmMedium || null,
       utmSource: source || meta?.utmSource || null,
       utmTerm: term || meta?.utmTerm || null,
+      clickId: clickid || meta?.clickId || "",
     };
 
     if (JSON.stringify(metadata) !== cookieMeta) {
