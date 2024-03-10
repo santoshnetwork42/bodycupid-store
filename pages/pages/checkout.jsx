@@ -1,17 +1,18 @@
-import { useEffect, useMemo, useState, useContext } from "react";
-import { connect } from "react-redux";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { Logger } from "aws-amplify";
-import { Collapse } from "react-bootstrap";
 import {
   useCartItems,
   useCartTotal,
   useConfiguration,
   useFreeProducts,
   useInventory,
+  useNavbar,
   useOrders,
 } from "@wow-star/utils";
+import { Logger } from "aws-amplify";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useMemo, useState } from "react";
+import { Collapse } from "react-bootstrap";
+import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 
@@ -43,6 +44,7 @@ import {
 } from "~/utils/contexts/navbar";
 import { COD_ENABLED, MAX_COD_AMOUNT, PREPAID_ENABLED } from "~/constant";
 import { productDiscountPercentage } from "~/utils/products";
+import { checkAffiseValidity } from "~/utils/helper";
 
 const logger = new Logger("Checkout");
 
@@ -67,6 +69,7 @@ function Checkout(props) {
   } = props;
 
   const { name } = store || {};
+  const { isReady } = useNavbar();
 
   const guestCheckout = useGuestCheckout();
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
@@ -166,7 +169,7 @@ function Checkout(props) {
   const placeOrder = async (e) => {
     try {
       e.preventDefault();
-
+      const isAffiseTrackingValid = checkAffiseValidity();
       if (!guestCheckout && (!user || !user.isActive)) {
         emptyCart();
         router.replace("/pages/order-failed");
@@ -185,6 +188,7 @@ function Checkout(props) {
           appliedRewardPoints: null,
           totalAmount: totalAmount,
           shoppingCartId,
+          isAffiseTrackingValid,
         }),
         loadScript(RAZORPAY_SCRIPT),
       ]);
@@ -251,6 +255,7 @@ function Checkout(props) {
 
       return Promise.resolve();
     } catch (error) {
+      console.log("error", error);
       setPaymentLoader(false);
     }
   };
@@ -715,11 +720,13 @@ function Checkout(props) {
                             {loading && <div className="spin-loader ml-2" />}
                           </button>
                         )}
-
                         {(!!isValidAddress(shippingAddress) || !isMobile) && (
                           <button
-                            onClick={placeOrder}
+                            onClick={(e) => {
+                              placeOrder(e);
+                            }}
                             disabled={
+                              !isReady ||
                               !isValidAddress(shippingAddress) ||
                               !isInventoryCheckReady ||
                               loading
