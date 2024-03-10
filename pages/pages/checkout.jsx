@@ -639,9 +639,7 @@ function Checkout(props) {
                         className="payment accordion radio-type "
                         id="payment-method"
                       >
-                        <h4 className="payment-heading">
-                          Payment Methods {isReady ? "1" : "0"}
-                        </h4>
+                        <h4 className="payment-heading">Payment Methods</h4>
 
                         <div className="checkbox-group ">
                           {prepaidEnabled && (
