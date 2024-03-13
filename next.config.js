@@ -25,11 +25,11 @@ const nextConfig = withBundleAnalyzer({
       paylolad.push(
         {
           source: "/blog",
-          destination: `${process.env.BLOG_URL}`,
+          destination: process.env.BLOG_URL,
         },
         {
-          source: "/blog/:slug*",
-          destination: `${process.env.BLOG_URL}/blog/:slug*`,
+          source: "/blog/:path*",
+          destination: `${process.env.BLOG_URL}/:path*`,
         }
       );
     }
