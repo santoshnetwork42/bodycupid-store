@@ -13,17 +13,37 @@ const nextConfig = withBundleAnalyzer({
   // distDir: 'build',
   reactStrictMode: true,
   async rewrites() {
-    return [
+    const paylolad = [
       {
         source: "/robots.txt",
         destination: "/api/robots",
       },
       { source: "/sitemap.xml", destination: "/api/sitemap" },
     ];
+
+    if (process.env.BLOG_URL) {
+      paylolad.push(
+        {
+          source: "/blog",
+          destination: `${process.env.BLOG_URL}`,
+        },
+        {
+          source: "/blog/:slug*",
+          destination: `${process.env.BLOG_URL}/blog/:slug*`,
+        }
+      );
+    }
+
+    return paylolad;
   },
 
   async redirects() {
     return [
+      {
+        source: "/product/:slug",
+        destination: "/products/:slug",
+        permanent: true,
+      },
       {
         source: "/pages/login",
         destination: "/",
