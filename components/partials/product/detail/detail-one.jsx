@@ -340,7 +340,7 @@ function DetailOne(props) {
           </p>
         )}
 
-        {hasInventory && currentInventory < 100 && (
+        {hasInventory && currentInventory < 99 && (
           <>
             <BigDot color="red" size={20} />
             <span className="text-secondary font-weight-semi-bold">
