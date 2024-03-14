@@ -55,7 +55,6 @@ export const itemMapper = (product, coupon) => {
     MRP: listingPrice,
     Source: source,
     "Product Range": null,
-    "ATC Source": section?.name || null,
   };
 
   return {
@@ -75,6 +74,7 @@ export const itemMapper = (product, coupon) => {
     moengage: {
       addToCart: {
         ...basicAttributes,
+        "ATC Source": section?.name || null,
       },
       productViewed: {
         ...basicAttributes,
