@@ -72,10 +72,10 @@ function Addresses({
   }, [user]);
 
   const removeAddress = useCallback(
-    async (id) => {
+    async (id, userID) => {
       await API.graphql({
         query: deleteUserAddress,
-        variables: { input: { id } },
+        variables: { input: { id, userID } },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
       const remainingAddress = addresses.filter((a) => a.id !== id);
@@ -216,7 +216,7 @@ function Addresses({
                               <ALink
                                 href="#"
                                 className="btn btn-link btn-secondary btn-underline ml-3"
-                                onClick={() => removeAddress(adr.id)}
+                                onClick={() => removeAddress(adr.id, user.id)}
                               >
                                 Delete <i className="far fa-trash-alt"></i>
                               </ALink>

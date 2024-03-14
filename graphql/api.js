@@ -1561,7 +1561,6 @@ export const getUser = /* GraphQL */ `
       walletBalance
       walletSpent
       totalStoreCredit
-      totalRewards
     }
   }
 `;
