@@ -107,7 +107,6 @@ function Order({
   }, [order?.shippingAddress]);
 
   useEffect(() => {
-    console.log("here", order);
     if (user && user.id && order) {
       if (user?.id === order?.userId) {
         fetchOrder();
