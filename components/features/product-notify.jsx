@@ -68,7 +68,7 @@ function ProductNotify(props) {
           We are working hard to be back in stock as soon as possible
         </p>
       </div>
-      {!!allreadyNotify ? (
+      {/* {!!allreadyNotify ? (
         <div className="d-flex align-items-center">
           <p className="m-0">
             We'll notify you when this product is back in stock
@@ -101,7 +101,7 @@ function ProductNotify(props) {
       </button>
     </div>
         </form>
-      )}
+      )} */}
     </div>
   );
 }
