@@ -60,7 +60,6 @@ export const getStaticProps = async () => {
     } = await fetchData(searchCollectionTypes, {
       filter: {
         storeId: { eq: STORE_ID },
-        showInMenu: { eq: true },
         isArchive: { eq: false },
       },
       sort: [{ field: "priority", direction: "asc" }],

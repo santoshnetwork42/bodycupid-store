@@ -234,7 +234,6 @@ export const getStaticProps = async (context) => {
       const otherCollections = await fetchData(searchCollectionTypes, {
         filter: {
           storeId: { eq: STORE_ID },
-          showInMenu: { eq: true },
           slug: { ne: slug },
           isArchive: { eq: false },
         },
