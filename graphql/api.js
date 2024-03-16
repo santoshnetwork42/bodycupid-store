@@ -1926,7 +1926,6 @@ export const searchCollectionTypes = /* GraphQL */ `
         name
         title
         description
-        showInMenu
         priority
         imageUrl
         defaultSorting
@@ -2206,7 +2205,6 @@ export const getInitialData = /* GraphQL */ `
         name
         title
         description
-        showInMenu
         priority
         imageUrl
         defaultSorting
