@@ -27,6 +27,7 @@ function AccountOrders({ user }) {
           query: searchOrders,
           variables: {
             filter: {
+              userId: { eq: user?.id },
               storeId: { eq: STORE_ID },
               status: { ne: "PENDING" },
             },
