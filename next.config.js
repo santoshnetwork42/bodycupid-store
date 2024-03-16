@@ -9,8 +9,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const nextConfig = withBundleAnalyzer({
-  // basePath: '/react/riode/demo-1',
-  // distDir: 'build',
   reactStrictMode: true,
   async rewrites() {
     const paylolad = [
@@ -81,6 +79,7 @@ const nextConfig = withBundleAnalyzer({
       },
     ];
   },
+
   images: {
     remotePatterns: [
       {
