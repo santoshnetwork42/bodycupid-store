@@ -240,7 +240,12 @@ function Order({
                             href={"/products/" + item.product.slug}
                           >
                             <img
-                              src={getPublicImageURL(item.thumbImage)}
+                              src={getPublicImageURL(
+                                item.thumbImage ||
+                                  (item.variant?.images?.items[0]?.imageKey
+                                    ? item.variant?.images?.items[0]?.imageKey
+                                    : item.product?.images.items[0]?.imageKey)
+                              )}
                               alt={item.product?.images.items[0]?.alt}
                               width="80"
                               height="88"
