@@ -71,3 +71,6 @@ next.config.original.js
 # Analyzer
 analyze
 .readme
+
+.graphqlconfig.yml
+schema.json

@@ -46,6 +46,7 @@ function Order({
       const response = await API.graphql({
         query: getOrder,
         variables: { id: orderId },
+        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
       });
       if (!!response.data.getOrder) {
         setOrder(response.data.getOrder);
@@ -106,15 +107,12 @@ function Order({
   }, [order?.shippingAddress]);
 
   useEffect(() => {
-    if (user && user.lastOrderId !== orderId) {
-      updateUser({
-        totalOrders: user.totalOrders + 1,
-        totalSpent: user.totalSpent + order.totalAmount,
-        lastOrderDate: new Date().toISOString(),
-        lastOrderId: order.id,
-      });
+    if (user && user.id && order) {
+      if (user?.id === order?.userId) {
+        fetchOrder();
+      }
     }
-  }, [order, user]);
+  }, [user]);
 
   const getStatusType = (status) => {
     switch (status) {
@@ -204,23 +202,25 @@ function Order({
                     {formateDate(order?.createdAt)}
                   </td>
                 </tr>
-                <tr className="summary-subtotal">
-                  <td>
-                    <h4 className="summary-subtitle">Shipping Address:</h4>
-                  </td>
-                  <td className="summary-subtotal-price">
-                    {[
-                      order?.shippingAddress?.address,
-                      order?.shippingAddress?.location,
-                      order?.shippingAddress?.city,
-                      state,
-                      country,
-                      order?.shippingAddress?.pinCode,
-                    ]
-                      .filter(Boolean)
-                      .join(", ")}
-                  </td>
-                </tr>
+                {order?.shippingAddress && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">Shipping Address:</h4>
+                    </td>
+                    <td className="summary-subtotal-price">
+                      {[
+                        order?.shippingAddress?.address,
+                        order?.shippingAddress?.location,
+                        order?.shippingAddress?.city,
+                        state,
+                        country,
+                        order?.shippingAddress?.pinCode,
+                      ]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

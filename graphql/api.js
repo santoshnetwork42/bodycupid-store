@@ -61,65 +61,6 @@ export const getSubCategoriesByCategoryID = /* GraphQL */ `
   }
 `;
 
-export const getAllSubcategoriesPath = /* GraphQL */ `
-  query SearchProductSubCategories(
-    $filter: SearchableProductCategoryFilterInput
-    $sort: [SearchableProductCategorySortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableProductCategoryAggregationInput]
-  ) {
-    searchProductCategories(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        slug
-      }
-    }
-  }
-`;
-
-export const getSideBarFilterCategories = /* GraphQL */ `
-  query SearchProductCategories(
-    $filter: SearchableProductCategoryFilterInput
-    $sort: [SearchableProductCategorySortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableProductCategoryAggregationInput]
-  ) {
-    searchProductCategories(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        name
-        slug
-        isArchive
-        subCategory {
-          items {
-            id
-            name
-            slug
-            isArchive
-          }
-        }
-      }
-    }
-  }
-`;
-
 export const getAllCategoriesPath = /* GraphQL */ `
   query SearchProductCategories(
     $filter: SearchableProductCategoryFilterInput
@@ -163,105 +104,6 @@ export const getAllCollectionPath = /* GraphQL */ `
     ) {
       items {
         slug
-      }
-    }
-  }
-`;
-
-export const getHomePageProducts = /* GraphQL */ `
-  query SearchProducts(
-    $filter: SearchableProductFilterInput
-    $sort: [SearchableProductSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableProductAggregationInput]
-    $variantFilter: ModelVariantFilterInput
-    $variantLimit: Int
-    $imageLimit: Int
-  ) {
-    searchProducts(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        title
-        isFeatured
-        productType
-        slug
-        price
-        sku
-        status
-        position
-        currency
-        listingPrice
-        taxable
-        tags
-        inventory
-        continueSellingOutOfStock
-        blockedInventory
-        rating
-        thumbImages
-        isTaxEnabled
-        isInventoryEnabled
-        variants(filter: $variantFilter, limit: $variantLimit) {
-          items {
-            id
-            productId
-            title
-            price
-            sku
-            size
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            createdAt
-            updatedAt
-            taxable
-            barcode
-            images {
-              items {
-                id
-                productId
-                position
-                createdAt
-                updatedAt
-                alt
-                width
-                height
-                imageKey
-                isThumb
-              }
-            }
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-          }
-        }
-        reviews {
-          items {
-            id
-          }
-        }
-        images(limit: $imageLimit) {
-          items {
-            id
-            position
-            alt
-            width
-            height
-            imageKey
-            isThumb
-          }
-        }
       }
     }
   }
@@ -1557,11 +1399,6 @@ export const getUser = /* GraphQL */ `
       createdAt
       updatedAt
       totalOrders
-      totalSpent
-      walletBalance
-      walletSpent
-      totalStoreCredit
-      totalRewards
     }
   }
 `;
@@ -1926,7 +1763,6 @@ export const searchCollectionTypes = /* GraphQL */ `
         name
         title
         description
-        showInMenu
         priority
         imageUrl
         defaultSorting
@@ -2206,7 +2042,6 @@ export const getInitialData = /* GraphQL */ `
         name
         title
         description
-        showInMenu
         priority
         imageUrl
         defaultSorting
