@@ -27,9 +27,6 @@ export const createUser = /* GraphQL */ `
       totalOrders
       totalSpent
       lastOrderDate
-      walletBalance
-      walletSpent
-      totalStoreCredit
       __typename
     }
   }
@@ -60,9 +57,6 @@ export const deleteUser = /* GraphQL */ `
       totalOrders
       totalSpent
       lastOrderDate
-      walletBalance
-      walletSpent
-      totalStoreCredit
       __typename
     }
   }
@@ -475,9 +469,6 @@ export const deleteProductLog = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       comment
@@ -532,9 +523,6 @@ export const createOrder = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       channelName
@@ -566,7 +554,6 @@ export const createOrder = /* GraphQL */ `
         area
         __typename
       }
-      totalStoreCredit
       couponCodeId
       coupon {
         id
@@ -684,9 +671,6 @@ export const deleteOrder = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       channelName
@@ -718,7 +702,6 @@ export const deleteOrder = /* GraphQL */ `
         area
         __typename
       }
-      totalStoreCredit
       couponCodeId
       coupon {
         id
@@ -821,9 +804,6 @@ export const updateOrderComment = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       comment
@@ -863,9 +843,6 @@ export const deleteOrderComment = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       comment
@@ -1187,9 +1164,6 @@ export const createPayment = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       orderId
@@ -1247,9 +1221,6 @@ export const updatePayment = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       orderId
@@ -1307,9 +1278,6 @@ export const deletePayment = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       orderId
@@ -1406,9 +1374,6 @@ export const deleteCoupon = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       couponType
@@ -1561,9 +1526,6 @@ export const updateUser = /* GraphQL */ `
       totalOrders
       totalSpent
       lastOrderDate
-      walletBalance
-      walletSpent
-      totalStoreCredit
       __typename
     }
   }
@@ -3032,9 +2994,6 @@ export const createProductLog = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       comment
@@ -3074,9 +3033,6 @@ export const updateProductLog = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       comment
@@ -3131,9 +3087,6 @@ export const updateOrder = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       channelName
@@ -3165,7 +3118,6 @@ export const updateOrder = /* GraphQL */ `
         area
         __typename
       }
-      totalStoreCredit
       couponCodeId
       coupon {
         id
@@ -3268,9 +3220,6 @@ export const createOrderComment = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       comment
@@ -3516,9 +3465,6 @@ export const createReview = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       reviewer {
@@ -3626,9 +3572,6 @@ export const updateReview = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       reviewer {
@@ -3736,9 +3679,6 @@ export const deleteReview = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       reviewer {
@@ -3860,9 +3800,6 @@ export const createShoppingCart = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       couponCodeId
@@ -3956,9 +3893,6 @@ export const updateShoppingCart = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       couponCodeId
@@ -4052,9 +3986,6 @@ export const deleteShoppingCart = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       couponCodeId
@@ -4454,9 +4385,6 @@ export const createCoupon = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       couponType
@@ -4588,9 +4516,6 @@ export const updateCoupon = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       couponType
@@ -5065,9 +4990,6 @@ export const createNewOrder = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       channelName
@@ -5099,7 +5021,6 @@ export const createNewOrder = /* GraphQL */ `
         area
         __typename
       }
-      totalStoreCredit
       couponCodeId
       coupon {
         id
@@ -5216,9 +5137,6 @@ export const applyCoupon = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       couponType

@@ -24,9 +24,6 @@ export const getUser = /* GraphQL */ `
       totalOrders
       totalSpent
       lastOrderDate
-      walletBalance
-      walletSpent
-      totalStoreCredit
       __typename
     }
   }
@@ -59,9 +56,6 @@ export const listUsers = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       nextToken
@@ -107,9 +101,6 @@ export const searchUsers = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       nextToken
@@ -2364,9 +2355,6 @@ export const getProductLog = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       comment
@@ -2470,9 +2458,6 @@ export const getOrder = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       channelName
@@ -2504,7 +2489,6 @@ export const getOrder = /* GraphQL */ `
         area
         __typename
       }
-      totalStoreCredit
       couponCodeId
       coupon {
         id
@@ -2590,7 +2574,6 @@ export const listOrders = /* GraphQL */ `
         storeId
         userId
         channelName
-        totalStoreCredit
         couponCodeId
         couponDiscount
         prepaidDiscount
@@ -2650,7 +2633,6 @@ export const bystoreIdOrder = /* GraphQL */ `
         storeId
         userId
         channelName
-        totalStoreCredit
         couponCodeId
         couponDiscount
         prepaidDiscount
@@ -2710,7 +2692,6 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
         storeId
         userId
         channelName
-        totalStoreCredit
         couponCodeId
         couponDiscount
         prepaidDiscount
@@ -2770,7 +2751,6 @@ export const searchOrders = /* GraphQL */ `
         storeId
         userId
         channelName
-        totalStoreCredit
         couponCodeId
         couponDiscount
         prepaidDiscount
@@ -2851,9 +2831,6 @@ export const getOrderComment = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       comment
@@ -3362,9 +3339,6 @@ export const getPayment = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       orderId
@@ -3644,9 +3618,6 @@ export const getReview = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       reviewer {
@@ -3980,9 +3951,6 @@ export const getShoppingCart = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       couponCodeId
@@ -4403,9 +4371,6 @@ export const getCoupon = /* GraphQL */ `
         totalOrders
         totalSpent
         lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
         __typename
       }
       couponType

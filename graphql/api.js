@@ -1557,10 +1557,6 @@ export const getUser = /* GraphQL */ `
       createdAt
       updatedAt
       totalOrders
-      totalSpent
-      walletBalance
-      walletSpent
-      totalStoreCredit
     }
   }
 `;
