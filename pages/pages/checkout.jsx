@@ -188,6 +188,7 @@ function Checkout(props) {
           appliedRewardPoints: null,
           totalAmount: totalAmount,
           shoppingCartId,
+          source: "WEB",
           isAffiseTrackingValid,
         }),
         loadScript(RAZORPAY_SCRIPT),
