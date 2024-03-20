@@ -87,46 +87,48 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
         <div className="div-menu">
           <ul className="mobile-menu mmenu-anim">
             <li>
-              {menu.map((item, index) => (
-                <div key={item?.label}>
-                  <Card
-                    title={item.label}
-                    type="mobile"
-                    onLinkClick={(e) => {
-                      hideMobileMenu(e);
-                      topNavbarClicked({
-                        banner_name: item.label,
-                        item_id: index + 1,
-                        Source: "Mobile",
-                        "Section Name": "Mobile Navbar",
-                      });
-                    }}
-                    url={item.link}
-                    hideDropDown={!item?.menus.items?.length}
-                  >
-                    <ul>
-                      {item?.menus.items?.map((subItem) => (
-                        <li key={`${item.label}-${subItem.label}`}>
-                          <ALink
-                            href={subItem.link}
-                            onClick={(e) => {
-                              hideMobileMenu(e);
-                              topNavbarClicked({
-                                banner_name: subItem.label,
-                                item_id: null,
-                                Source: "Web",
-                                "Section Name": "Top Navbar",
-                              });
-                            }}
-                          >
-                            {subItem.label}
-                          </ALink>
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </div>
-              ))}
+              {menu
+                ?.filter((item) => item.parentId === null)
+                .map((item, index) => (
+                  <div key={item?.label}>
+                    <Card
+                      title={item.label}
+                      type="mobile"
+                      onLinkClick={(e) => {
+                        hideMobileMenu(e);
+                        topNavbarClicked({
+                          banner_name: item.label,
+                          item_id: index + 1,
+                          Source: "Mobile",
+                          "Section Name": "Mobile Navbar",
+                        });
+                      }}
+                      url={item.link}
+                      hideDropDown={!item?.menus.items?.length}
+                    >
+                      <ul>
+                        {item?.menus.items?.map((subItem) => (
+                          <li key={`${item.label}-${subItem.label}`}>
+                            <ALink
+                              href={subItem.link}
+                              onClick={(e) => {
+                                hideMobileMenu(e);
+                                topNavbarClicked({
+                                  banner_name: subItem.label,
+                                  item_id: null,
+                                  Source: "Web",
+                                  "Section Name": "Top Navbar",
+                                });
+                              }}
+                            >
+                              {subItem.label}
+                            </ALink>
+                          </li>
+                        ))}
+                      </ul>
+                    </Card>
+                  </div>
+                ))}
             </li>
 
             {!user && (
