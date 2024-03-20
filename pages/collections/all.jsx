@@ -55,7 +55,6 @@ export const getStaticProps = async () => {
     const { searchProductCategories } = await fetchData(getMenuCategories, {
       filter: {
         storeId: { eq: STORE_ID },
-        showInMenu: { eq: true },
         isArchive: { eq: false },
       },
       sort: [{ field: "priority", direction: "asc" }],

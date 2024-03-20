@@ -8,7 +8,7 @@ function Terms({ store }) {
   return (
     <main className="main about-us">
       <Head>
-        <title>{name} | Titles</title>
+        <title>{name} | Terms of service</title>
       </Head>
 
       <h1 className="d-none">Terms of service - {name}</h1>
