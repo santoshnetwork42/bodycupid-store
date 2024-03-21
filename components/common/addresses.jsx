@@ -216,7 +216,7 @@ function Addresses({
                               <ALink
                                 href="#"
                                 className="btn btn-link btn-secondary btn-underline ml-3"
-                                onClick={() => removeAddress(adr.id, user.id)}
+                                onClick={() => removeAddress(adr.id, user?.id)}
                               >
                                 Delete <i className="far fa-trash-alt"></i>
                               </ALink>
@@ -367,7 +367,7 @@ function Addresses({
                       <ALink
                         href="#"
                         className="btn btn-link btn-secondary btn-underline ml-3"
-                        onClick={() => removeAddress(adr.id)}
+                        onClick={() => removeAddress(adr.id, user?.id)}
                       >
                         Delete <i className="far fa-trash-alt"></i>
                       </ALink>
