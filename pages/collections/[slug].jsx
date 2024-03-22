@@ -138,7 +138,10 @@ export const getStaticProps = async (context) => {
       storeId: { eq: STORE_ID },
     };
 
-    const { getStore } = await fetchData(getStoreBanners, { id: STORE_ID });
+    const { getStore } = await fetchData(getStoreBanners, {
+      id: STORE_ID,
+      deviceType: "WEB",
+    });
     const { webUrl, name } = getStore;
 
     // Category By Slug
