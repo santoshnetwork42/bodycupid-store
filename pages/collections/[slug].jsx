@@ -289,7 +289,7 @@ export const getStaticProps = async (context) => {
           pageMeta: {
             siteName: name,
             title: metadata?.title || title || collectionName,
-            description: metadata?.description,
+            description: metadata?.description || description,
             canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
             image: getPublicImageURL(metadata?.image || imageUrl),
           },
