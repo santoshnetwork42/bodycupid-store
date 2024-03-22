@@ -104,7 +104,7 @@ const App = ({ Component, pageProps }) => {
           data: { getStore: getStoreResponse },
         } = await API.graphql({
           query: getStore,
-          variables: { id: STORE_ID },
+          variables: { id: STORE_ID, deviceType: "WEB" },
         });
         store.dispatch(systemActions.setStore(getStoreResponse));
       }

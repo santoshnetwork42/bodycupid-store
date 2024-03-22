@@ -60,7 +60,10 @@ export const getStaticProps = async () => {
       sort: [{ field: "priority", direction: "asc" }],
     });
 
-    const { getStore } = await fetchData(getStoreBanners, { id: STORE_ID });
+    const { getStore } = await fetchData(getStoreBanners, {
+      id: STORE_ID,
+      deviceType: "WEB",
+    });
     const { title, name, description, webUrl, imageUrl } = getStore;
 
     const categories = [
