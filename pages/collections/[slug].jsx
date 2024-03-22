@@ -138,7 +138,10 @@ export const getStaticProps = async (context) => {
       storeId: { eq: STORE_ID },
     };
 
-    const { getStore } = await fetchData(getStoreBanners, { id: STORE_ID });
+    const { getStore } = await fetchData(getStoreBanners, {
+      id: STORE_ID,
+      deviceType: "WEB",
+    });
     const { webUrl, name } = getStore;
 
     // Category By Slug
@@ -149,7 +152,13 @@ export const getStaticProps = async (context) => {
 
     if (category) {
       // filter.categoryId = { eq: category.id };
-      const { title, description, imageUrl, name: categoryName } = category;
+      const {
+        title,
+        description,
+        imageUrl,
+        name: categoryName,
+        metadata,
+      } = category;
 
       // Get Product By Category
       const getProducts = fetchData(findProducts, {
@@ -208,10 +217,10 @@ export const getStaticProps = async (context) => {
           pageFilter: filter,
           pageMeta: {
             siteName: name,
-            title: title || categoryName,
-            description,
-            canonical: `${webUrl}/collections/${slug}`,
-            image: getPublicImageURL(imageUrl),
+            title: metadata?.title || title || categoryName,
+            description: metadata?.description || description,
+            canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
+            image: getPublicImageURL(metadata?.image || imageUrl),
           },
         },
         revalidate: 1800,
@@ -229,7 +238,13 @@ export const getStaticProps = async (context) => {
     );
 
     if (collection) {
-      const { title, description, imageUrl, name: collectionName } = collection;
+      const {
+        title,
+        description,
+        imageUrl,
+        name: collectionName,
+        metadata,
+      } = collection;
 
       const otherCollections = await fetchData(searchCollectionTypes, {
         filter: {
@@ -276,10 +291,10 @@ export const getStaticProps = async (context) => {
           filterItems: collections,
           pageMeta: {
             siteName: name,
-            title: title || collectionName,
-            description,
-            canonical: `${webUrl}/collections/${slug}`,
-            image: getPublicImageURL(imageUrl),
+            title: metadata?.title || title || collectionName,
+            description: metadata?.description || description,
+            canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
+            image: getPublicImageURL(metadata?.image || imageUrl),
           },
         },
         revalidate: 1800,
