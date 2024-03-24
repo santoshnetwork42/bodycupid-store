@@ -107,8 +107,8 @@ function Addresses({
       if (adr) {
         onAddressChange({
           id: adr.id,
-          firstName: adr.name.split(" ")[0],
-          lastName: adr.name.split(" ")[1],
+          firstName: adr.name.split(" ")[0] || "",
+          lastName: adr.name.split(" ")[1] || "",
           phone: adr.phone,
           email: adr.email,
           country: adr.country,
