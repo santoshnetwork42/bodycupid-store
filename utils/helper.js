@@ -205,13 +205,15 @@ export async function fetchSearchItems(search) {
       }
     );
     const data = await response.json();
-
-    return data.results.map(({ imageUrl, ...item }) => {
-      const [, slug] = item.link.match(/products\/([^?]+)/);
-      item.slug = slug;
-      item.imageUrl = imageUrl.split("/public/")[1] || "";
-      return item;
-    });
+    return data.results
+      .map(({ imageUrl, benefits, position, ...item }) => {
+        const [, slug] = item.link.match(/products\/([^?]+)/);
+        item.slug = slug;
+        item.imageUrl = imageUrl.split("/public/")[1] || "";
+        item.position = Number(position);
+        return item;
+      })
+      .sort((a, b) => (a.position - b.position > 0 ? 1 : -1));
   } catch (error) {
     console.error("Error fetching items:", error);
     return [];
