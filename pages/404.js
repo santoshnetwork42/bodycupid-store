@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
-import Image from "next/image";
+import Image from "~/components/image";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -32,6 +32,7 @@ function Error404({ store }) {
             alt="error 404"
             width="609"
             height="131"
+            loader="local"
           />
           <h4 className="mt-7 mb-0 ls-m text-uppercase">
             Ooopps! That page can’t be found.

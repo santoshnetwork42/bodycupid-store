@@ -1,8 +1,6 @@
-import React from "react";
-import Image from "next/image";
+import Image from "~/components/image";
 
 import ALink from "~/components/features/custom-link";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function StorySection({ categories }) {
   return (
@@ -20,10 +18,7 @@ export default function StorySection({ categories }) {
                   className="category-img"
                 >
                   <Image
-                    src={
-                      category.staticImage ||
-                      getPublicImageURL(category.imageUrl)
-                    }
+                    src={category.imageUrl}
                     alt={category.name}
                     height={90}
                     width={90}

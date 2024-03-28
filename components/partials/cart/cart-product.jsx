@@ -12,7 +12,7 @@ import {
   productDiscountPercentage,
 } from "~/utils/products";
 import { toDecimal } from "~/utils";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import NextImage from "~/components/image";
 import { getUpdatedCart } from "~/utils/helper";
 import LimitedTimeProductDeal from "~/components/partials/cart/limited-time-product-deal";
 import LimitedTimeProduct from "~/components/partials/cart/limited-time-product";
@@ -123,12 +123,13 @@ function CartProduct({
             )}
             <figure>
               <ALink href={"/products/" + slug} className="p-0 border-2">
-                <img
-                  className="img2"
-                  src={getPublicImageURL(thumbImage)}
-                  width={isSmallSize ? "80" : "147"}
-                  height={isSmallSize ? "80" : "147"}
+                <NextImage
+                  className="img"
+                  src={thumbImage}
+                  width={isSmallSize ? 80 : 147}
+                  height={isSmallSize ? 80 : 147}
                   alt={images?.items[0]?.alt}
+                  priority
                 />
               </ALink>
             </figure>

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import GTM from "react-gtm-module";
 
 import Wisepops from "~/components/scripts/wisepops.jsx";
-import { GTM_ID } from "~/config";
+import { GTM_ID, WISEPOPS_KEY } from "~/config";
 import { useIsInteractive } from "~/utils/contexts/navbar";
 import Affise from "./scripts/Affise/Affise";
 
@@ -16,13 +16,11 @@ export default function Scripts() {
     }
   }, [isInteractive]);
 
-  if (!isInteractive) return <></>;
-
   return (
     <>
       <Analytics />
-      <Wisepops />
       <Affise />
+      {!!isInteractive && <>{!!WISEPOPS_KEY && <Wisepops />}</>}
     </>
   );
 }

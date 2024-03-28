@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
-import { Eye, Star } from "~/components/icons";
+import { Star } from "~/components/icons";
 import { PRODUCT_TAG_LIST } from "~/constant";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
@@ -78,7 +78,8 @@ function ProductTwo(props) {
     return;
   }, [collections]);
 
-  const addToCartHandler = () => {
+  const addToCartHandler = (e) => {
+    e?.preventDefault();
     if (isSearch) {
       showQuickviewHandler();
     } else {
@@ -91,6 +92,7 @@ function ProductTwo(props) {
       logger.verbose("Added product to cart");
       logger.debug("Added product to cart:", product);
     }
+    return false;
   };
 
   const cartItem = useMemo(() => {
@@ -120,23 +122,23 @@ function ProductTwo(props) {
       }
     }
   }
+  const imageKey = isSearch ? product.imageUrl : thumbImage?.imageKey;
 
   return (
     <div className={`product text-left ${adClass} product-card`}>
       {/* <figure className="product-media"> */}
-      <ALink href={`/products/${slug}`}>
-        <Image
-          src={getPublicImageURL(
-            isSearch ? product.imageUrl : thumbImage?.imageKey
-          )}
-          alt={title}
-          height={280}
-          width={280}
-          quality={95}
-          objectFit="contain"
-          priority={!!priority}
-        />
-      </ALink>
+      {!!imageKey && (
+        <ALink href={`/products/${slug}`}>
+          <Image
+            src={imageKey}
+            alt={title}
+            height={450}
+            width={450}
+            quality={95}
+            priority={!!priority}
+          />{" "}
+        </ALink>
+      )}
 
       <div className="product-label-group">
         {discount > 0 && (
@@ -150,62 +152,56 @@ function ProductTwo(props) {
         </div>
       )}
 
-      <div className="product-action-vertical">
-        <ALink
-          href="#"
-          className="btn-product-icon btn-cart"
-          title="Quick View"
-          onClick={showQuickviewHandler}
-        >
-          <Eye color="currentColor" size={18} />
-        </ALink>
-      </div>
       {/* </figure> */}
 
       <div className="product-details card">
-        <div className="details-wrapper">
-          <h3 className="product-name text-uppercase product-card-title p-0 font-weight-semi-bold">
-            <ALink href={`/products/${slug}`}>{title}</ALink>
-          </h3>
-          {/* <div className="product-tags lh-default">
+        <ALink href={`/products/${slug}`}>
+          <div className="details-wrapper">
+            <h3 className="product-name text-uppercase product-card-title p-0 font-weight-semi-bold">
+              {title}
+            </h3>
+            {/* <div className="product-tags lh-default">
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </div> */}
-          <div className="product-coupon">{label}</div>
-          <div className="ratings-container mb-0">
-            <div className="ratings-full d-flex rating-product-list mr-1">
-              <Star size={20} color={"#FAB73B"} />
-            </div>
-            <span className="rating text-black font-weight-bold">{rating}</span>
-            <ALink
-              href={{
-                pathname: `/products/${slug}`,
-                query: { review: true },
-              }}
-              className="rating-reviews text-black font-weight-bold"
-            >
-              ({totalRatings || 0} reviews)
-            </ALink>
-          </div>
-          <div className="product-price product-sm mt-2 mb-2 lh-1">
-            <ins className="new-price ">₹{toDecimal(price || 0)}</ins>
-            {price < listingPrice && listingPrice && (
-              <span className="old-price ml-1 ">
-                <del>₹{toDecimal(listingPrice || 0)}</del>
+            <div className="product-coupon">{label}</div>
+            <div className="ratings-container mb-0">
+              <div className="ratings-full d-flex rating-product-list mr-1">
+                <Star size={20} color={"#FAB73B"} />
+              </div>
+              <span className="rating text-black font-weight-bold">
+                {rating}
               </span>
-            )}
+              <ALink
+                href={{
+                  pathname: `/products/${slug}`,
+                  query: { review: true },
+                }}
+                className="rating-reviews text-black font-weight-bold"
+              >
+                ({totalRatings || 0} reviews)
+              </ALink>
+            </div>
+            <div className="product-price product-sm mt-2 mb-2 lh-1">
+              <ins className="new-price ">₹{toDecimal(price || 0)}</ins>
+              {price < listingPrice && listingPrice && (
+                <span className="old-price ml-1 ">
+                  <del>₹{toDecimal(listingPrice || 0)}</del>
+                </span>
+              )}
+            </div>
           </div>
-        </div>
+        </ALink>
         <div className="product-action">
           {isSearch ? (
-            <ALink
+            <a
               href="#"
               className={`btn-product btn-primary btn-quickview m-0`}
               title="Add to cart"
-              onClick={price > 0 ? addToCartHandler : undefined}
+              onClick={addToCartHandler}
               style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
             >
               View product{" "}
-            </ALink>
+            </a>
           ) : (
             <>
               {!!hasInventory ? (
@@ -219,27 +215,27 @@ function ProductTwo(props) {
                       onChangeQty={changeQty}
                     />
                   ) : (
-                    <ALink
+                    <a
                       href="#"
                       className={`btn-product btn-primary btn-quickview m-0 ${
                         price <= 0 ? "disabled" : ""
                       }`}
                       title="Add to cart"
-                      onClick={price > 0 ? addToCartHandler : undefined}
+                      onClick={addToCartHandler}
                       style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
                     >
                       Add to cart
-                    </ALink>
+                    </a>
                   )}
                 </>
               ) : (
-                <ALink
+                <a
                   href="#"
                   className="btn-product btn-sold-out m-0"
                   title="Sold Out"
                 >
                   Sold Out
-                </ALink>
+                </a>
               )}
             </>
           )}

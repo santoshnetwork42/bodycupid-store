@@ -92,7 +92,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
       couponType === "BUY_X_AT_Y" &&
       c.variants &&
       c.variants.items?.length &&
-      c.variantId !== c.variants.items[0].id
+      c?.variantId !== c?.variants?.items[0]?.id
     ) {
       return false;
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "~/components/image";
 import Reveal from "react-awesome-reveal";
 
 import { fadeIn } from "~/utils/data/keyframes";
@@ -21,6 +21,7 @@ function BrandSection({ brands }) {
                     objectFit="contain"
                     alt="Brand"
                     priority={false}
+                    loader="local"
                   />
                 </figure>
               </div>

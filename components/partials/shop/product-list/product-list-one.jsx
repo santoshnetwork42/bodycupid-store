@@ -140,7 +140,7 @@ function ProductListOne(props) {
           setTotal(total);
           setLoading(false);
         } else {
-          fetchSearchItems(search).then((fetchedItems) => {
+          fetchSearchItems(search, 20).then((fetchedItems) => {
             const productsMapped = setSoldOutLast(fetchedItems);
             setProducts(productsMapped);
             setTotal(fetchedItems.length);

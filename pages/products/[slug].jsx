@@ -160,55 +160,48 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context) => {
-  try {
-    const { params } = context;
-    const { slug } = params;
+  const { params } = context;
+  const { slug } = params;
 
-    const { getStore } = await fetchData(getStoreBanners, {
-      id: STORE_ID,
-      deviceType: "WEB",
-    });
-    const { webUrl, name } = getStore;
+  const { getStore } = await fetchData(getStoreBanners, {
+    id: STORE_ID,
+    deviceType: "WEB",
+  });
+  const { webUrl, name } = getStore;
 
-    // get Product By Slug
-    const {
-      byslugProduct: {
-        items: [product],
-      },
-    } = await fetchData(getProductBySlug, {
-      slug,
-      filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
-      variantFilter: { status: { eq: "ENABLED" } },
-    });
+  // get Product By Slug
+  const {
+    byslugProduct: {
+      items: [product],
+    },
+  } = await fetchData(getProductBySlug, {
+    slug,
+    filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
+    variantFilter: { status: { eq: "ENABLED" } },
+  });
 
-    if (product) {
-      const { pageTitle, productDescription, title, metadata } = product;
-      const { thumbImage } = getProductMeta(product);
+  if (product) {
+    const { pageTitle, productDescription, title, metadata } = product;
+    const { thumbImage } = getProductMeta(product);
 
-      return {
-        props: {
-          slug,
-          product,
-          pageMeta: {
-            siteName: name,
-            title: metadata?.title || title || pageTitle,
-            description: metadata?.description || productDescription,
-            keywords: metadata?.keywords || [],
-            canonical: metadata?.canonical || `${webUrl}/products/${slug}`,
-            image: getPublicImageURL(metadata?.image || thumbImage?.imageKey),
-          },
+    return {
+      props: {
+        slug,
+        product,
+        pageMeta: {
+          siteName: name,
+          title: metadata?.title || title || pageTitle,
+          description: metadata?.description || productDescription,
+          keywords: metadata?.keywords || [],
+          canonical: metadata?.canonical || `${webUrl}/products/${slug}`,
+          image: getPublicImageURL(metadata?.image || thumbImage?.imageKey),
         },
-        revalidate: 1800,
-      };
-    }
-
-    return await handleRedirect(`/products/${slug}`, `/`);
-  } catch (error) {
-    logger.error("error while fetching product based on slug", error);
+      },
+      revalidate: 1800,
+    };
   }
-  return {
-    notFound: true,
-  };
+
+  return await handleRedirect(`/products/${slug}`, `/`);
 };
 
 function mapStateToProps() {

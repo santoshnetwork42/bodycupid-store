@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import Image from "~/components/image";
 
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { UpAngle, DownAngle } from "~/components/icons";
+import { DownAngle, UpAngle } from "~/components/icons";
 
 export default function ThumbOne(props) {
   const { index, images } = props;
@@ -253,7 +252,7 @@ export default function ThumbOne(props) {
             onClick={(e) => activeHandler(e, index)}
           >
             <Image
-              src={getPublicImageURL(item.imageKey)}
+              src={item.imageKey}
               alt={item.alt}
               width={110}
               height={110}

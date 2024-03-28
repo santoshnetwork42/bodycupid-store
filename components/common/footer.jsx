@@ -9,6 +9,7 @@ import {
   Twitter,
   Pinterest,
 } from "~/components/icons";
+import Image from "~/components/image";
 import PaymentLogos from "./partials/payment-logos";
 
 function Footer({ footer, store }) {
@@ -30,6 +31,8 @@ function Footer({ footer, store }) {
                   height="100"
                   objectFit="contain"
                   loading="lazy"
+                  priority={false}
+                  loader="local"
                 />
               </ALink>
             </div>

@@ -1,8 +1,6 @@
-import React from "react";
-
 import ALink from "~/components/features/custom-link";
 
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import NextImage from "~/components/image";
 
 export default function WishListPopup(props) {
   const { product } = props;
@@ -15,11 +13,12 @@ export default function WishListPopup(props) {
         <div className="product product-purchased  product-cart mb-0">
           <figure className="product-media pure-media">
             <ALink href={`/products/${product.slug}`}>
-              <img
-                src={getPublicImageURL(product.images.items[0]?.imageKey)}
+              <NextImage
+                src={product.images.items[0]?.imageKey}
                 alt={product.images.items[0]?.alt}
-                width="90"
-                height="90"
+                width={90}
+                height={90}
+                priority={false}
               />
             </ALink>
           </figure>

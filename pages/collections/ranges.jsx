@@ -45,68 +45,60 @@ function AllCollection(props) {
 }
 
 export const getStaticProps = async () => {
-  try {
-    const filter = {
-      status: { eq: "ENABLED" },
+  const filter = {
+    status: { eq: "ENABLED" },
+    storeId: { eq: STORE_ID },
+    collections: { exists: true },
+  };
+
+  const { getStore } = await fetchData(getStoreBanners, {
+    id: STORE_ID,
+    deviceType: "WEB",
+  });
+  const { title, name, description, webUrl, imageUrl } = getStore;
+
+  const {
+    searchCollectionTypes: { items: collectionsRes },
+  } = await fetchData(searchCollectionTypes, {
+    filter: {
       storeId: { eq: STORE_ID },
-      collections: { exists: true },
-    };
+      isArchive: { eq: false },
+    },
+    sort: [{ field: "priority", direction: "asc" }],
+  });
 
-    const { getStore } = await fetchData(getStoreBanners, {
-      id: STORE_ID,
-      deviceType: "WEB",
-    });
-    const { title, name, description, webUrl, imageUrl } = getStore;
+  const collections = [
+    { name: "All", path: "/collections/all" },
+    { name: "Ranges", path: "/collections/ranges" },
+    ...collectionsRes.map((col) => ({
+      ...col,
+      path: `/collections/${col.slug}`,
+    })),
+  ];
 
-    const {
-      searchCollectionTypes: { items: collectionsRes },
-    } = await fetchData(searchCollectionTypes, {
-      filter: {
-        storeId: { eq: STORE_ID },
-        isArchive: { eq: false },
+  // Get all Products
+  const { searchProducts } = await fetchData(findProducts, {
+    filter,
+    sort: [{ field: "position", direction: "asc" }],
+    variantFilter: { status: { eq: "ENABLED" } },
+    imageLimit: 1,
+  });
+
+  return {
+    props: {
+      products: searchProducts,
+      pageFilter: filter,
+      collections,
+      pageMeta: {
+        siteName: name,
+        title,
+        description,
+        canonical: `${webUrl}/collections/ranges`,
+        image: getPublicImageURL(imageUrl),
       },
-      sort: [{ field: "priority", direction: "asc" }],
-    });
-
-    const collections = [
-      { name: "All", path: "/collections/all" },
-      { name: "Ranges", path: "/collections/ranges" },
-      ...collectionsRes.map((col) => ({
-        ...col,
-        path: `/collections/${col.slug}`,
-      })),
-      { name: "Combos & Gifts", path: "/collections/combos-and-gifts" },
-    ];
-
-    // Get all Products
-    const { searchProducts } = await fetchData(findProducts, {
-      filter,
-      sort: [{ field: "position", direction: "asc" }],
-      variantFilter: { status: { eq: "ENABLED" } },
-      imageLimit: 1,
-    });
-
-    return {
-      props: {
-        products: searchProducts,
-        pageFilter: filter,
-        collections,
-        pageMeta: {
-          siteName: name,
-          title,
-          description,
-          canonical: `${webUrl}/collections/ranges`,
-          image: getPublicImageURL(imageUrl),
-        },
-      },
-      revalidate: 1800,
-    };
-  } catch (error) {
-    logger.error(error);
-    return {
-      notFound: true,
-    };
-  }
+    },
+    revalidate: 1800,
+  };
 };
 
 function mapStateToProps(state) {

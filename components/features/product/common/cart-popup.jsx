@@ -4,6 +4,7 @@ import ALink from "~/components/features/custom-link";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import NextImage from "~/components/image";
 
 export default function CartPopup(props) {
   const { product } = props;
@@ -16,11 +17,12 @@ export default function CartPopup(props) {
         <div className="product product-purchased  product-cart mb-0">
           <figure className="product-media pure-media">
             <ALink href={`/products/${product.slug}`}>
-              <img
-                src={getPublicImageURL(product.images.items[0]?.imageKey)}
+              <NextImage
+                src={product.images.items[0]?.imageKey}
                 alt={product.images.items[0]?.alt}
-                width="90"
-                height="90"
+                width={90}
+                height={90}
+                priority
               />
             </ALink>
           </figure>

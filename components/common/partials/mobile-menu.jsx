@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
 import { connect } from "react-redux";
-import NextImage from "next/image";
 import { useMenu } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
@@ -10,6 +9,7 @@ import { Cross } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
+import Image from "~/components/image";
 
 function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
   const router = useRouter();
@@ -33,6 +33,7 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
 
   const hideMobileMenu = () => {
     document.querySelector("body").classList.remove("mmenu-active");
+    return false;
   };
 
   function onBodyClick(e) {
@@ -63,11 +64,11 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
     <div className="mobile-menu-wrapper">
       <div className="mobile-menu-overlay" onClick={hideMobileMenu}></div>
 
-      <ALink className="mobile-menu-close" href="#" onClick={hideMobileMenu}>
+      <a className="mobile-menu-close" href="#" onClick={hideMobileMenu}>
         <i>
           <Cross color="#000" />
         </i>
-      </ALink>
+      </a>
 
       <div className="mobile-menu-container scrollable pr-0">
         <div className="pt-2 pb-2 pl-3 pr-3">
@@ -80,6 +81,7 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
                 height={70}
                 width={70}
                 objectFit="contain"
+                loader="local"
               />
             </ALink>
           </div>
@@ -133,15 +135,16 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
 
             {!user && (
               <li>
-                <ALink
+                <a
                   href={"#"}
                   onClick={() => {
                     openPasswordLess();
                     hideMobileMenu();
+                    return false;
                   }}
                 >
                   Login
-                </ALink>
+                </a>
               </li>
             )}
             {!!user && (
@@ -149,9 +152,9 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
                 <li>
                   <ALink href="/pages/account">My Account</ALink>
 
-                  <ALink href={"/"} onClick={handleLogout}>
+                  <a href="#" onClick={handleLogout}>
                     Logout
-                  </ALink>
+                  </a>
                 </li>
               </>
             )}

@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import awaitGlobal from "await-global";
 import { API, Amplify, Analytics, Auth, Hub, Logger } from "aws-amplify";
 import Cookie from "js-cookie";
@@ -205,6 +206,8 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <>
+      <SpeedInsights route={router.pathname} />
+
       {!!pageMeta && <NextHead {...pageMeta} />}
       <Provider store={store}>
         <PersistGate

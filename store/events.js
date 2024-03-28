@@ -157,23 +157,25 @@ export function* eventsSaga() {
       const { products, inventory } = e.payload;
       if (Array.isArray(products)) {
         products.forEach((product) => {
-          const recordKey = getRecordKey(product, product.variantId);
-          const payload = {
-            productId: product.id,
-            variantId: product.variantId,
-            cartQty: product.qty,
-            inventoryQty: inventory[recordKey],
-          };
+          if (product) {
+            const recordKey = getRecordKey(product, product.variantId);
+            const payload = {
+              productId: product.id,
+              variantId: product.variantId,
+              cartQty: product.qty,
+              inventoryQty: inventory[recordKey],
+            };
 
-          if (window && window.dataLayer) {
-            window.dataLayer.push({
-              event: "out_of_stock",
-              eventID: uuid(),
-              ...payload,
-            });
+            if (window && window.dataLayer) {
+              window.dataLayer.push({
+                event: "out_of_stock",
+                eventID: uuid(),
+                ...payload,
+              });
+            }
+            // Analytics.record({ name: "out_of_stock", attributes: payload });
+            vercelAnalytics.track("out_of_stock", payload);
           }
-          // Analytics.record({ name: "out_of_stock", attributes: payload });
-          vercelAnalytics.track("out_of_stock", payload);
         });
       }
     } catch (e) {

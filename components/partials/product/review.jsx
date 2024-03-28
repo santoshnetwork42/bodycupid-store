@@ -1,10 +1,8 @@
-import React from "react";
 import ALink from "~/components/features/custom-link";
-import OptimizedImage from "~/components/features/optimized-image";
-import { formateDate, toDecimal } from "~/utils";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { Star } from "~/components/icons";
+import NextImage from "~/components/image";
 import ReadMore from "~/components/layouts/read-more";
+import { formateDate } from "~/utils";
 
 export default function Review({ review = {}, onUpdate }) {
   return (
@@ -61,12 +59,7 @@ export default function Review({ review = {}, onUpdate }) {
           {review.images.map((img) => {
             return (
               <ALink href="#" key={img}>
-                <OptimizedImage
-                  src={getPublicImageURL(img)}
-                  alt="avatar"
-                  width="100"
-                  height="100"
-                />
+                <NextImage src={img} alt="avatar" width={100} height={100} />
               </ALink>
             );
           })}

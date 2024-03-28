@@ -1,14 +1,13 @@
-import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
-import { Share } from "~/components/icons";
 import OwlCarousel from "~/components/features/owl-carousel";
+import { Share } from "~/components/icons";
 
 import ThumbOne from "~/components/partials/product/thumb/thumb-one";
 
 import { mainSlider3 } from "~/utils/data/carousel";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { copyText } from "~/utils/helper";
 
 export default function MediaOne(props) {
@@ -95,7 +94,7 @@ export default function MediaOne(props) {
         {lgImages.map((image, ind) => (
           <div key={image.imageKey}>
             <Image
-              src={getPublicImageURL(image.imageKey)}
+              src={image.imageKey}
               priority={ind === index}
               height={480}
               width={480}

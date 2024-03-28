@@ -1,30 +1,30 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { connect } from "react-redux";
-import { useRouter } from "next/router";
-import Collapse from "react-bootstrap/Collapse";
 import { useProductCoupons } from "@wow-star/utils";
+import { useRouter } from "next/router";
+import { useEffect, useMemo, useState } from "react";
+import Collapse from "react-bootstrap/Collapse";
+import { connect } from "react-redux";
 
+import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import ALink from "~/components/features/custom-link";
-import { Star, Bag, BigDot, Clock } from "~/components/icons";
+import ProductNotify from "~/components/features/product-notify";
 import Quantity from "~/components/features/quantity";
-import { wishlistActions } from "~/store/wishlist";
+import { Bag, BigDot, Clock, Star } from "~/components/icons";
+import NextImage from "~/components/image";
+import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { cartActions } from "~/store/cart";
+import { modalActions } from "~/store/modal";
+import { systemActions } from "~/store/system";
+import { wishlistActions } from "~/store/wishlist";
 import { toDecimal } from "~/utils";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import ProductVariant from "../product-variant";
+import useWindowDimensions from "~/utils/getWindowDimension";
 import {
   deliveryRemainingTime,
   getRecordKey,
   getUpdatedCart,
   scrollWithOffset,
 } from "~/utils/helper";
-import ProductNotify from "~/components/features/product-notify";
 import { getProductInventory } from "~/utils/products";
-import ProductBestPrice from "~/components/partials/product/product-best-price";
-import { systemActions } from "~/store/system";
-import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
-import { modalActions } from "~/store/modal";
-import useWindowDimensions from "~/utils/getWindowDimension";
+import ProductVariant from "../product-variant";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -391,13 +391,12 @@ function DetailOne(props) {
                 <div className="sticky-product-details">
                   <figure className="product-image">
                     <ALink href={"/products/" + product.slug}>
-                      <img
-                        src={getPublicImageURL(
-                          product.images.items[0]?.imageKey
-                        )}
-                        width="90"
-                        height="90"
+                      <NextImage
+                        src={product.images.items[0]?.imageKey}
+                        width={90}
+                        height={90}
                         alt={product.images.items[0]?.alt}
+                        priority
                       />
                     </ALink>
                   </figure>

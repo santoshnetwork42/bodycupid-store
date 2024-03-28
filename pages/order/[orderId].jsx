@@ -1,22 +1,21 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { API, Logger } from "aws-amplify";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { API } from "aws-amplify";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
-import { Logger } from "aws-amplify";
-import { userActions } from "~/store/user";
+import PaymentLoader from "~/components/common/partials/payment-loader";
+import Tag from "~/components/common/tag";
 import ALink from "~/components/features/custom-link";
+import Checkmark from "~/components/icons";
+import NextImage from "~/components/image";
+import { STORE_ID } from "~/config";
 import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
-import { toDecimal, getOrderTotal, formateDate } from "~/utils";
-import PaymentLoader from "~/components/common/partials/payment-loader";
-import fetchData from "~/utils/fetchData";
-import { STORE_ID } from "~/config";
-import Tag from "~/components/common/tag";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { userActions } from "~/store/user";
+import { formateDate, getOrderTotal, toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
+import fetchData from "~/utils/fetchData";
 import { alertToaster } from "~/utils/popupHelper";
-import Checkmark from "~/components/icons";
 
 const logger = new Logger("Orders");
 
@@ -239,16 +238,17 @@ function Order({
                             className="order-image mr-2"
                             href={"/products/" + item.product.slug}
                           >
-                            <img
-                              src={getPublicImageURL(
+                            <NextImage
+                              src={
                                 item.thumbImage ||
-                                  (item.variant?.images?.items[0]?.imageKey
-                                    ? item.variant?.images?.items[0]?.imageKey
-                                    : item.product?.images.items[0]?.imageKey)
-                              )}
+                                (item.variant?.images?.items[0]?.imageKey
+                                  ? item.variant?.images?.items[0]?.imageKey
+                                  : item.product?.images.items[0]?.imageKey)
+                              }
                               alt={item.product?.images.items[0]?.alt}
-                              width="80"
-                              height="88"
+                              width={80}
+                              height={88}
+                              priority
                             />
                           </ALink>
                           <div className="h-fit-content font-weight-semi-bold">
@@ -396,7 +396,8 @@ Order.getInitialProps = async (context) => {
 
     if (
       response?.storeId === STORE_ID &&
-      (response?.status !== "PENDING" || paymentId)
+      ((response?.status !== "PENDING" && response?.status !== "TIMEDOUT") ||
+        paymentId)
     ) {
       return {
         order: {
