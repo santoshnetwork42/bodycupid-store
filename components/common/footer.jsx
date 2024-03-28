@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import Image from "next/image";
 
 import ALink from "~/components/features/custom-link";
 import {
