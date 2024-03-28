@@ -46,7 +46,6 @@ function IntroSection({ banners = [], bannerClicked, homeViewed }) {
                   height={800}
                   objectFit="cover"
                   priority={false}
-                  loader="local"
                 />
               </ALink>
               <ALink
@@ -64,7 +63,6 @@ function IntroSection({ banners = [], bannerClicked, homeViewed }) {
                   src={mobileKey}
                   alt="WOW"
                   priority={false}
-                  loader="local"
                   quality={95}
                   width={575}
                   height={320}

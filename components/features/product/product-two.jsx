@@ -121,7 +121,7 @@ function ProductTwo(props) {
       }
     }
   }
-  const imageKey = isSearch ? product.imageUrl : thumbImage?.imageKey;
+  const imageKey = isSearch ? product?.imageUrl : thumbImage?.imageKey;
 
   return (
     <div className={`product text-left ${adClass} product-card`}>
