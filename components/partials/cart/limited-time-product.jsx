@@ -1,15 +1,13 @@
-import React from "react";
 import { connect } from "react-redux";
 
 import { cartActions } from "~/store/cart";
 
 import ALink from "~/components/features/custom-link";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta, productDiscountPercentage } from "~/utils/products";
-import { toDecimal } from "~/utils";
 import { Check, Delete } from "~/components/icons";
-import useWindowDimensions from "~/utils/getWindowDimension";
 import NextImage from "~/components/image";
+import { toDecimal } from "~/utils";
+import useWindowDimensions from "~/utils/getWindowDimension";
+import { getProductMeta, productDiscountPercentage } from "~/utils/products";
 
 const LimitedTimeProduct = ({ product, removeFromCart }) => {
   const { slug, images, title, listingPrice, recommendPrice } = product;

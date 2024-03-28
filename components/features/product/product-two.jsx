@@ -11,7 +11,6 @@ import { PRODUCT_TAG_LIST } from "~/constant";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { toDecimal } from "~/utils";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
 
 const logger = new Logger("Product-details");

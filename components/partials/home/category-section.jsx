@@ -8,7 +8,6 @@ import { STORE_ID } from "~/config";
 import { getHomePageCategories } from "~/graphql/api";
 import { eventActions } from "~/store/events";
 import { useIsInteractive } from "~/utils/contexts/navbar";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getSource } from "~/utils/helper";
 
 function CategorySection({ tileClicked }) {

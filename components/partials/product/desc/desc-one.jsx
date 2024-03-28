@@ -25,6 +25,7 @@ import { alertToaster } from "../../../../utils/popupHelper";
 import ReadMore from "~/components/layouts/read-more";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { Close } from "~/components/icons";
+import NextImage from "~/components/image";
 
 const reviewDefault = {
   rating: 5,
@@ -514,9 +515,11 @@ function DescOne(props) {
                       <div className=" img-wrapper">
                         {reviewState.images.map((img, index) => (
                           <div className="img_wrp mr-2" key={img}>
-                            <img
-                              src={getPublicImageURL(img)}
+                            <NextImage
+                              src={img}
                               className="img-preview"
+                              height={60}
+                              weight={60}
                               alt=""
                             />
                             <span

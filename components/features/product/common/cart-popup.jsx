@@ -1,10 +1,7 @@
-import React from "react";
-
 import ALink from "~/components/features/custom-link";
 
-import { toDecimal } from "~/utils";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import NextImage from "~/components/image";
+import { toDecimal } from "~/utils";
 
 export default function CartPopup(props) {
   const { product } = props;
