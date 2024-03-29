@@ -1,6 +1,6 @@
 import { useProduct, useProductVariantGroups } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
-import Image from "next/image";
+import Image from "~/components/image";
 import { useMemo } from "react";
 import { connect } from "react-redux";
 
@@ -33,7 +33,6 @@ function ProductTwo(props) {
 
   const [selectedVariant] = useProductVariantGroups(product);
   const productsNew = useProduct(product, selectedVariant?.id);
-  // console.log("productsNew", productsNew);
 
   const {
     title,
@@ -121,7 +120,8 @@ function ProductTwo(props) {
       }
     }
   }
-  const imageKey = isSearch ? product?.imageUrl : thumbImage?.imageKey;
+  const imageKey = isSearch ? product.imageUrl : thumbImage?.imageKey;
+  console.log("image", imageKey);
 
   return (
     <div className={`product text-left ${adClass} product-card`}>
@@ -131,11 +131,12 @@ function ProductTwo(props) {
           <Image
             src={imageKey}
             alt={title}
-            height={450}
-            width={450}
-            quality={95}
+            height={280}
+            width={280}
+            quality={80}
+            objectFit="contain"
             priority={!!priority}
-          />{" "}
+          />
         </ALink>
       )}
 

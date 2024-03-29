@@ -74,7 +74,7 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
         <div className="pt-2 pb-2 pl-3 pr-3">
           <div className="pt-0 pb-0 d-flex align-items-center">
             <ALink href="/" className="logo-footer">
-              <NextImage
+              <Image
                 src="/images/logo.png"
                 loading="eager"
                 alt="logo"

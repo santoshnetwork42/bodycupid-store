@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "~/components/image";
 import { useEffect, useMemo, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
