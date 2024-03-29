@@ -121,7 +121,6 @@ function ProductTwo(props) {
     }
   }
   const imageKey = isSearch ? product.imageUrl : thumbImage?.imageKey;
-  console.log("image", imageKey);
 
   return (
     <div className={`product text-left ${adClass} product-card`}>
