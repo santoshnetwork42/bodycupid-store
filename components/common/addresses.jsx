@@ -63,7 +63,7 @@ function Addresses({
   useEffect(() => {
     (async function () {
       if (user) {
-        // const userAddresses = await getUserAddress();
+        const userAddresses = await getUserAddress();
         // if (!userAddresses.length && isMobile) {
         //   openAllAddressModal();
         // }
