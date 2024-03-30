@@ -1,14 +1,13 @@
-import React from "react";
 import { connect } from "react-redux";
 
 import { cartActions } from "~/store/cart";
 
 import ALink from "~/components/features/custom-link";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta, productDiscountPercentage } from "~/utils/products";
-import { toDecimal } from "~/utils";
 import { Check, Delete } from "~/components/icons";
+import NextImage from "~/components/image";
+import { toDecimal } from "~/utils";
 import useWindowDimensions from "~/utils/getWindowDimension";
+import { getProductMeta, productDiscountPercentage } from "~/utils/products";
 
 const LimitedTimeProduct = ({ product, removeFromCart }) => {
   const { slug, images, title, listingPrice, recommendPrice } = product;
@@ -28,12 +27,13 @@ const LimitedTimeProduct = ({ product, removeFromCart }) => {
           <div className="image-container">
             <figure>
               <ALink href={"/products/" + slug} className="p-0 border-2">
-                <img
+                <NextImage
                   className="img2"
-                  src={getPublicImageURL(thumbImage.imageKey)}
-                  width={isSmallSize ? "80" : "100"}
-                  height={isSmallSize ? "80" : "100"}
+                  src={thumbImage.imageKey}
+                  width={isSmallSize ? 80 : 100}
+                  height={isSmallSize ? 80 : 100}
                   alt={images?.items[0]?.alt}
+                  priority
                 />
               </ALink>
             </figure>

@@ -51,33 +51,26 @@ function AllProduct(props) {
 }
 
 export const getStaticProps = async () => {
-  try {
-    const filter = {
-      status: { eq: "ENABLED" },
-      storeId: { eq: STORE_ID },
-    };
+  const filter = {
+    status: { eq: "ENABLED" },
+    storeId: { eq: STORE_ID },
+  };
 
-    // Get all Product
-    const { searchProducts } = await fetchData(findProducts, {
-      filter,
-      sort: [{ field: "position", direction: "asc" }],
-      variantFilter: { status: { eq: "ENABLED" } },
-      imageLimit: 1,
-      limit: 4,
-    });
+  // Get all Product
+  const { searchProducts } = await fetchData(findProducts, {
+    filter,
+    sort: [{ field: "position", direction: "asc" }],
+    variantFilter: { status: { eq: "ENABLED" } },
+    imageLimit: 1,
+    limit: 4,
+  });
 
-    return {
-      props: {
-        products: searchProducts,
-        pageFilter: filter,
-      },
-    };
-  } catch (error) {
-    logger.error("Error while searching a product", error);
-    return {
-      notFound: true,
-    };
-  }
+  return {
+    props: {
+      products: searchProducts,
+      pageFilter: filter,
+    },
+  };
 };
 
 function mapStateToProps(state) {

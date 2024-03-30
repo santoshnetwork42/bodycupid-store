@@ -1,5 +1,5 @@
 import React from "react";
-import NextImage from "next/image";
+import NextImage from "~/components/image";
 
 function PaymentLogos() {
   return (
@@ -10,6 +10,8 @@ function PaymentLogos() {
         width="200"
         height="50"
         objectFit="contain"
+        priority={false}
+        loader="local"
       />
     </figure>
   );

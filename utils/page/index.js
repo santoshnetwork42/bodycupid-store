@@ -1,11 +1,11 @@
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import fetchData from "~/utils/fetchData";
-import { STORE_ID, GOOGLE_VERIFICATION_TAG } from "~/config";
+import { GOOGLE_VERIFICATION_TAG, STORE_ID } from "~/config";
 import {
   findProducts,
-  getStoreBanners,
   getCollectionType,
+  getStoreBanners,
 } from "~/graphql/api";
+import fetchData from "~/utils/fetchData";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { setSoldOutLast } from "~/utils/products";
 import { getDefaultSorting } from "..";
 
@@ -34,46 +34,39 @@ const getCollectionBySlug = (slug) => {
 };
 
 export const getStaticProps = async () => {
-  try {
-    const [
-      { searchProducts: searchBestSellerProducts },
-      { getStore: store },
-      { searchCollectionTypes: bestSellerCollectionItem },
-    ] = await Promise.all([
-      getSearchProducts({ collections: { eq: "best-seller" } }, 8),
-      fetchData(getStoreBanners, { id: STORE_ID, deviceType: "WEB" }),
-      getCollectionBySlug("best-seller"),
-    ]);
+  const [
+    { searchProducts: searchBestSellerProducts },
+    { getStore: store },
+    { searchCollectionTypes: bestSellerCollectionItem },
+  ] = await Promise.all([
+    getSearchProducts({ collections: { eq: "best-seller" } }, 8),
+    fetchData(getStoreBanners, { id: STORE_ID, deviceType: "WEB" }),
+    getCollectionBySlug("best-seller"),
+  ]);
 
-    const { items: bestSellerItems } = searchBestSellerProducts;
-    const [bestSellerCollection] = bestSellerCollectionItem.items;
+  const { items: bestSellerItems } = searchBestSellerProducts;
+  const [bestSellerCollection] = bestSellerCollectionItem.items;
 
-    const { title, name, description, webUrl, imageUrl, banners } = store;
+  const { title, name, description, webUrl, imageUrl, banners } = store;
 
-    const bestSellerProducts = setSoldOutLast(bestSellerItems);
+  const bestSellerProducts = setSoldOutLast(bestSellerItems);
 
-    return {
-      props: {
-        hero: { banners },
-        bestSellerProducts,
-        pageMeta: {
-          siteName: name,
-          title,
-          description,
-          canonical: webUrl,
-          image: getPublicImageURL(imageUrl),
-          googleVerificationTag: GOOGLE_VERIFICATION_TAG ?? null,
-        },
-        bestSellerDefaultSorting: getDefaultSorting(
-          bestSellerCollection.defaultSorting
-        ),
+  return {
+    props: {
+      hero: { banners },
+      bestSellerProducts,
+      pageMeta: {
+        siteName: name,
+        title,
+        description,
+        canonical: webUrl,
+        image: getPublicImageURL(imageUrl),
+        googleVerificationTag: GOOGLE_VERIFICATION_TAG ?? null,
       },
-      revalidate: 1800,
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      notFound: true,
-    };
-  }
+      bestSellerDefaultSorting: getDefaultSorting(
+        bestSellerCollection.defaultSorting
+      ),
+    },
+    revalidate: 1800,
+  };
 };

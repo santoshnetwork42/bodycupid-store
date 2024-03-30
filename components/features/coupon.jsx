@@ -17,7 +17,7 @@ import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
 import Modal from "~/components/common/modal";
-import Image from "next/image";
+import Image from "~/components/image";
 import { STORE_ID } from "~/config";
 
 const logger = new Logger("Coupon");
@@ -262,6 +262,8 @@ function Coupon(props) {
               alt="Applied Coupon Gif"
               height={450}
               width={500}
+              priority
+              loader="local"
             />
           </div>
           <div className="applied-coupon-modal-ticket">
@@ -270,6 +272,9 @@ function Coupon(props) {
               alt="Applied Coupon Gif"
               layout="fill"
               objectFit="cover"
+              priority
+              sizes="100px"
+              loader="local"
             />
           </div>
           <div className="applied-coupon-modal-info">

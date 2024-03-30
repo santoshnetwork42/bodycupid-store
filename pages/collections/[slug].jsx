@@ -1,30 +1,28 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
+import { useEffect } from "react";
+import { connect } from "react-redux";
 
 import { STORE_ID } from "~/config";
 import {
-  getBasicCategory,
-  getAllCategoriesPath,
-  getAllSubcategoriesPath,
   findProducts,
-  getSubCategoriesByCategoryID,
-  getBasicSubCategory,
-  getStoreBanners,
-  searchCollectionTypes,
+  getAllCategoriesPath,
   getAllCollectionPath,
+  getBasicCategory,
+  getStoreBanners,
+  getSubCategoriesByCategoryID,
+  searchCollectionTypes,
 } from "~/graphql/api";
 
-import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import CategoryHeader from "~/components/common/category-header";
 import NextHead from "~/components/common/next-head";
+import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 
-import fetchData from "~/utils/fetchData";
-import handleRedirect from "~/utils/handleRedirect";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import Image from "~/components/image";
 import { eventActions } from "~/store/events";
+import fetchData from "~/utils/fetchData";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import handleRedirect from "~/utils/handleRedirect";
 import { getSource } from "~/utils/helper";
-import Image from "next/image";
 
 const logger = new Logger("All collections");
 
@@ -71,7 +69,7 @@ function CollectionPage(props) {
           {imageUrl && (
             <div className="text-center pt-4">
               <Image
-                src={getPublicImageURL(imageUrl)}
+                src={imageUrl}
                 alt="Category Image"
                 width={1200}
                 height={305}
@@ -129,185 +127,176 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context) => {
-  try {
-    const { params } = context;
-    const { slug } = params;
+  const { params } = context;
+  const { slug } = params;
 
-    const filter = {
-      status: { eq: "ENABLED" },
-      storeId: { eq: STORE_ID },
-    };
+  const filter = {
+    status: { eq: "ENABLED" },
+    storeId: { eq: STORE_ID },
+  };
 
-    const { getStore } = await fetchData(getStoreBanners, {
-      id: STORE_ID,
-      deviceType: "WEB",
-    });
-    const { webUrl, name } = getStore;
+  const { getStore } = await fetchData(getStoreBanners, {
+    id: STORE_ID,
+    deviceType: "WEB",
+  });
+  const { webUrl, name } = getStore;
 
-    // Category By Slug
-    const [category] = await fetchData(getBasicCategory, {
-      slug,
-      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
-    }).then((resp) => resp.byslugProductCategory.items);
+  // Category By Slug
+  const [category] = await fetchData(getBasicCategory, {
+    slug,
+    filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
+  }).then((resp) => resp.byslugProductCategory.items);
 
-    if (category) {
-      // filter.categoryId = { eq: category.id };
-      const {
-        title,
-        description,
-        imageUrl,
-        name: categoryName,
-        metadata,
-      } = category;
+  if (category) {
+    // filter.categoryId = { eq: category.id };
+    const {
+      title,
+      description,
+      imageUrl,
+      name: categoryName,
+      metadata,
+    } = category;
 
-      // Get Product By Category
-      const getProducts = fetchData(findProducts, {
-        filter: {
-          status: { eq: "ENABLED" },
-          storeId: { eq: STORE_ID },
-          and: [
-            {
-              or: [
-                {
-                  categoryId: { eq: category.id },
-                },
-                {
-                  subCategoryId: { eq: category.id },
-                },
-              ],
-            },
-          ],
-        },
-        sort: [{ field: "position", direction: "asc" }],
-        variantFilter: { status: { eq: "ENABLED" } },
-        imageLimit: 1,
-      });
-
-      // Get Product Sub-Category By Category ID
-      const getSubCategoriesByCategory = fetchData(
-        getSubCategoriesByCategoryID,
-        {
-          filter: {
-            storeId: { eq: STORE_ID },
-            categoryID: { eq: category.id },
-            isArchive: { eq: false },
-          },
-        }
-      );
-
-      const [{ searchProducts }, { searchProductCategories }] =
-        await Promise.all([getProducts, getSubCategoriesByCategory]);
-
-      const filterItems = [
-        { name: "All", path: `/collections/${category.slug}` },
-        ...searchProductCategories.items.map((sub) => ({
-          ...sub,
-          path: `/collections/${sub.slug}`,
-        })),
-      ];
-
-      return {
-        props: {
-          slug,
-          data: category,
-          pageType: "CATEGORY",
-          sectionId: category.id,
-          products: searchProducts,
-          filterItems,
-          pageFilter: filter,
-          pageMeta: {
-            siteName: name,
-            title: metadata?.title || title || categoryName,
-            description: metadata?.description || description,
-            canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
-            image: getPublicImageURL(metadata?.image || imageUrl),
-          },
-        },
-        revalidate: 1800,
-      };
-    }
-
-    const collection = await fetchData(searchCollectionTypes, {
+    // Get Product By Category
+    const getProducts = fetchData(findProducts, {
       filter: {
-        slug: { eq: slug },
+        status: { eq: "ENABLED" },
         storeId: { eq: STORE_ID },
+        and: [
+          {
+            or: [
+              {
+                categoryId: { eq: category.id },
+              },
+              {
+                subCategoryId: { eq: category.id },
+              },
+            ],
+          },
+        ],
+      },
+      sort: [{ field: "position", direction: "asc" }],
+      variantFilter: { status: { eq: "ENABLED" } },
+      imageLimit: 1,
+    });
+
+    // Get Product Sub-Category By Category ID
+    const getSubCategoriesByCategory = fetchData(getSubCategoriesByCategoryID, {
+      filter: {
+        storeId: { eq: STORE_ID },
+        categoryID: { eq: category.id },
         isArchive: { eq: false },
       },
-    }).then((resp) =>
-      resp?.searchCollectionTypes.items.find((item) => item.slug === slug)
+    });
+
+    const [{ searchProducts }, { searchProductCategories }] = await Promise.all(
+      [getProducts, getSubCategoriesByCategory]
     );
 
-    if (collection) {
-      const {
-        title,
-        description,
-        imageUrl,
-        name: collectionName,
-        metadata,
-      } = collection;
+    const filterItems = [
+      { name: "All", path: `/collections/${category.slug}` },
+      ...searchProductCategories.items.map((sub) => ({
+        ...sub,
+        path: `/collections/${sub.slug}`,
+      })),
+    ];
 
-      const otherCollections = await fetchData(searchCollectionTypes, {
-        filter: {
-          storeId: { eq: STORE_ID },
-          slug: { ne: slug },
-          isArchive: { eq: false },
+    return {
+      props: {
+        slug,
+        data: category,
+        pageType: "CATEGORY",
+        sectionId: category.id,
+        products: searchProducts,
+        filterItems,
+        pageFilter: filter,
+        pageMeta: {
+          siteName: name,
+          title: metadata?.title || title || categoryName,
+          description: metadata?.description || description,
+          canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
+          image: getPublicImageURL(metadata?.image || imageUrl),
         },
-        sort: [{ field: "priority", direction: "asc" }],
-      }).then((res) => res.searchCollectionTypes.items);
+      },
+      revalidate: 1800,
+    };
+  }
 
-      const collections = [
-        { name: "All", path: "/collections/ranges" },
-        { name: collectionName, path: `/collections/${slug}` },
-        ...otherCollections.map((col) => ({
-          ...col,
-          path: `/collections/${col.slug}`,
-        })),
-      ];
+  const collection = await fetchData(searchCollectionTypes, {
+    filter: {
+      slug: { eq: slug },
+      storeId: { eq: STORE_ID },
+      isArchive: { eq: false },
+    },
+  }).then((resp) =>
+    resp?.searchCollectionTypes.items.find((item) => item.slug === slug)
+  );
 
-      if (slug !== "combos-and-gifts") {
-        collections.push({
-          name: "Combos & Gifts",
-          path: "/collections/combos-and-gifts",
-        });
-      }
+  if (collection) {
+    const {
+      title,
+      description,
+      imageUrl,
+      name: collectionName,
+      metadata,
+    } = collection;
 
-      // Get Product By tag
-      filter.collections = { eq: slug };
-      const { searchProducts } = await fetchData(findProducts, {
-        filter,
-        sort: [{ field: "position", direction: "asc" }],
-        variantFilter: { status: { eq: "ENABLED" } },
-        imageLimit: 1,
+    const otherCollections = await fetchData(searchCollectionTypes, {
+      filter: {
+        storeId: { eq: STORE_ID },
+        slug: { ne: slug },
+        isArchive: { eq: false },
+      },
+      sort: [{ field: "priority", direction: "asc" }],
+    }).then((res) => res.searchCollectionTypes.items);
+
+    const collections = [
+      { name: "All", path: "/collections/ranges" },
+      { name: collectionName, path: `/collections/${slug}` },
+      ...otherCollections.map((col) => ({
+        ...col,
+        path: `/collections/${col.slug}`,
+      })),
+    ];
+
+    if (slug !== "combos-and-gifts") {
+      collections.push({
+        name: "Combos & Gifts",
+        path: "/collections/combos-and-gifts",
       });
-
-      return {
-        props: {
-          slug,
-          data: collection,
-          pageType: "COLLECTION",
-          sectionId: slug,
-          products: searchProducts,
-          pageFilter: filter,
-          filterItems: collections,
-          pageMeta: {
-            siteName: name,
-            title: metadata?.title || title || collectionName,
-            description: metadata?.description || description,
-            canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
-            image: getPublicImageURL(metadata?.image || imageUrl),
-          },
-        },
-        revalidate: 1800,
-      };
     }
 
-    return await handleRedirect(`/collections/${slug}`);
-  } catch (error) {
-    logger.error("error", error);
+    // Get Product By tag
+    filter.collections = { eq: slug };
+    const { searchProducts } = await fetchData(findProducts, {
+      filter,
+      sort: [{ field: "position", direction: "asc" }],
+      variantFilter: { status: { eq: "ENABLED" } },
+      imageLimit: 1,
+    });
+
+    return {
+      props: {
+        slug,
+        data: collection,
+        pageType: "COLLECTION",
+        sectionId: slug,
+        products: searchProducts,
+        pageFilter: filter,
+        filterItems: collections,
+        pageMeta: {
+          siteName: name,
+          title: metadata?.title || title || collectionName,
+          description: metadata?.description || description,
+          canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
+          image: getPublicImageURL(metadata?.image || imageUrl),
+        },
+      },
+      revalidate: 1800,
+    };
   }
-  return {
-    notFound: true,
-  };
+
+  return await handleRedirect(`/collections/${slug}`);
 };
 
 function mapStateToProps(state) {

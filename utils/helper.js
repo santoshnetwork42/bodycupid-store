@@ -189,7 +189,7 @@ export function initializeMoengageAndAddInfo({
   }
 }
 
-export async function fetchSearchItems(search) {
+export async function fetchSearchItems(search, limit = 20) {
   const NEXT_PUBLIC_TTM_CLIENT_URL = process.env.NEXT_PUBLIC_TTM_CLIENT_URL;
   const NEXT_PUBLIC_TTM_CLIENT_API_KEY =
     process.env.NEXT_PUBLIC_TTM_CLIENT_API_KEY;
@@ -197,7 +197,7 @@ export async function fetchSearchItems(search) {
     process.env.NEXT_PUBLIC_TTM_CLIENT_THRESHOLD;
   try {
     const response = await fetch(
-      `${NEXT_PUBLIC_TTM_CLIENT_URL}/search?query=${search}&threshold=${NEXT_PUBLIC_TTM_CLIENT_THRESHOLD}`,
+      `${NEXT_PUBLIC_TTM_CLIENT_URL}/search?query=${search}&threshold=${NEXT_PUBLIC_TTM_CLIENT_THRESHOLD}&limit=${limit}`,
       {
         headers: {
           Authorization: `Bearer ${NEXT_PUBLIC_TTM_CLIENT_API_KEY}`,
@@ -213,7 +213,7 @@ export async function fetchSearchItems(search) {
         item.position = Number(position);
         return item;
       })
-      .sort((a, b) => (a.position - b.position > 0 ? 1 : -1));
+      .sort((a, b) => (a.position - b.position >= 0 ? 1 : -1));
   } catch (error) {
     console.error("Error fetching items:", error);
     return [];

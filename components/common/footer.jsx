@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import Image from "next/image";
 
 import ALink from "~/components/features/custom-link";
 import {
@@ -9,6 +8,7 @@ import {
   Twitter,
   Pinterest,
 } from "~/components/icons";
+import Image from "~/components/image";
 import PaymentLogos from "./partials/payment-logos";
 
 function Footer({ footer, store }) {
@@ -30,6 +30,8 @@ function Footer({ footer, store }) {
                   height="100"
                   objectFit="contain"
                   loading="lazy"
+                  priority={false}
+                  loader="local"
                 />
               </ALink>
             </div>

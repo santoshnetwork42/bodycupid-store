@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-import Image from "next/image";
+import Image from "~/components/image";
 
+import { connect } from "react-redux";
 import ALink from "~/components/features/custom-link";
 import OwlCarousel from "~/components/features/owl-carousel";
-import { introSlider } from "~/utils/data/carousel";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { connect } from "react-redux";
 import { eventActions } from "~/store/events";
+import { introSlider } from "~/utils/data/carousel";
 import { getSource } from "~/utils/helper";
 
 function IntroSection({ banners = [], bannerClicked, homeViewed }) {
@@ -40,13 +39,13 @@ function IntroSection({ banners = [], bannerClicked, homeViewed }) {
                 className={`d-sm-none intro-slider-link`} //for desktop size
               >
                 <Image
-                  src={getPublicImageURL(webKey)}
+                  src={webKey}
                   alt="WOW"
-                  priority={!index}
                   quality={90}
                   width={1920}
                   height={800}
                   objectFit="cover"
+                  priority={false}
                 />
               </ALink>
               <ALink
@@ -61,9 +60,9 @@ function IntroSection({ banners = [], bannerClicked, homeViewed }) {
                 className="d-none d-sm-show intro-slider-link" //for mobile size
               >
                 <Image
-                  src={getPublicImageURL(mobileKey)}
+                  src={mobileKey}
                   alt="WOW"
-                  priority={!index}
+                  priority={false}
                   quality={95}
                   width={575}
                   height={320}

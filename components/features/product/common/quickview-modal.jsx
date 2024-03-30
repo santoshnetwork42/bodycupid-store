@@ -1,15 +1,14 @@
+import { API, graphqlOperation } from "aws-amplify";
 import { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
-import NextImage from "next/image";
-import { API, graphqlOperation } from "aws-amplify";
+import NextImage from "~/components/image";
 
-import { getQuickViewProduct } from "~/graphql/api";
+import Modal from "~/components/common/modal";
 import OwlCarousel from "~/components/features/owl-carousel";
 import DetailOne from "~/components/partials/product/detail/detail-one";
+import { getQuickViewProduct } from "~/graphql/api";
 import { modalActions } from "~/store/modal";
 import { mainSlider3 } from "~/utils/data/carousel";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import Modal from "~/components/common/modal";
 
 function Quickview(props) {
   const { slug, closeQuickview, isOpen } = props;
@@ -120,7 +119,7 @@ function Quickview(props) {
               {lgImages?.map((item) => (
                 <NextImage
                   key={item.id}
-                  src={getPublicImageURL(item.imageKey)}
+                  src={item.imageKey}
                   imageAlt={item.alt}
                   height={500}
                   width={500}

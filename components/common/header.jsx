@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { connect } from "react-redux";
@@ -9,6 +8,7 @@ import ALink from "~/components/features/custom-link";
 import { Hamburger, User } from "~/components/icons";
 import { modalActions } from "~/store/modal";
 import { headerBorderRemoveList } from "~/utils/data/menu";
+import Image from "~/components/image";
 
 const CartMenu = dynamic(
   () => import("~/components/common/partials/cart-menu"),
@@ -69,6 +69,7 @@ function Header({ navbar, auth, openPasswordLess, setCartVisibility }) {
                   height={100}
                   quality={100}
                   priority
+                  loader="local"
                   objectFit="contain"
                 />
               </ALink>

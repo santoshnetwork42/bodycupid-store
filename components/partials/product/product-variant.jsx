@@ -1,8 +1,7 @@
-import React, { useMemo } from "react";
-import Image from "next/image";
+import { useMemo } from "react";
+import Image from "~/components/image";
 
 import { toDecimal } from "~/utils";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function ProductVariant({ item, onSelect, selected }) {
   const { listingPrice, price } = item;
@@ -30,7 +29,7 @@ export default function ProductVariant({ item, onSelect, selected }) {
       <div className="image-wrapper d-flex justify-content-center">
         <Image
           className="product-image"
-          src={getPublicImageURL(item.images?.items[0]?.imageKey)}
+          src={item.images?.items[0]?.imageKey}
           alt={item.title}
           priority
           height={100}

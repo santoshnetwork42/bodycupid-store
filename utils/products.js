@@ -129,8 +129,8 @@ export const productDiscountPercentage = ({ price, listingPrice }) => {
 
 export const setSoldOutLast = (items) => {
   let soldOutProducts = [];
-  const products = items.reduce((acc, prod) => {
-    if (!("hasInventory" in prod)) {
+  const products = items.filter(Boolean).reduce((acc, prod) => {
+    if (!prod.hasOwnProperty("hasInventory")) {
       const { hasInventory } = getProductInventory(prod);
       if (hasInventory) {
         return [...acc, { ...prod, hasInventory }];

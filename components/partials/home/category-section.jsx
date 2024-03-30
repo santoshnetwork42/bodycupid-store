@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import Image from "~/components/image";
 
-import ALink from "~/components/features/custom-link";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { eventActions } from "~/store/events";
-import { connect } from "react-redux";
-import { getSource } from "~/utils/helper";
-import { useIsInteractive } from "~/utils/contexts/navbar";
 import { API, graphqlOperation } from "aws-amplify";
-import { getHomePageCategories } from "~/graphql/api";
+import { connect } from "react-redux";
+import ALink from "~/components/features/custom-link";
 import { STORE_ID } from "~/config";
+import { getHomePageCategories } from "~/graphql/api";
+import { eventActions } from "~/store/events";
+import { useIsInteractive } from "~/utils/contexts/navbar";
+import { getSource } from "~/utils/helper";
 
 function CategorySection({ tileClicked }) {
   const source = getSource();
@@ -56,11 +55,11 @@ function CategorySection({ tileClicked }) {
                     }}
                   >
                     <Image
-                      src={getPublicImageURL(category.imageUrl)}
+                      src={category.imageUrl}
                       alt={category.name}
                       height={220}
                       width={220}
-                      quality={90}
+                      quality={80}
                       className="category-media"
                     />
                   </ALink>

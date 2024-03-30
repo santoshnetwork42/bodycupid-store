@@ -1,30 +1,30 @@
-import React, { useCallback, useState, useEffect, useMemo } from "react";
+import { API, graphqlOperation } from "aws-amplify";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";
-import { API, graphqlOperation } from "aws-amplify";
 import { STORE_ID } from "~/config";
 
-import { modalActions } from "~/store/modal";
+import Loader from "~/components/common/partials/loader";
+import Accordion from "~/components/features/accordion/accordion";
+import Card from "~/components/features/accordion/card";
+import SkillBar from "~/components/features/skill-bar";
+import TokenPagination from "~/components/features/token-pagination";
+import { Close } from "~/components/icons";
+import NextImage from "~/components/image";
+import ReadMore from "~/components/layouts/read-more";
 import {
   createReview,
   getReviews,
   getReviewsAnalytics,
   updateReview,
 } from "~/graphql/api";
+import { modalActions } from "~/store/modal";
+import { errorHandler } from "~/utils/errorHandler";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
+import { uploadImages } from "~/utils/imageupload";
+import { alertToaster } from "../../../../utils/popupHelper";
 import RatingStar from "../rating-star";
 import Review from "../review";
-import TokenPagination from "~/components/features/token-pagination";
-import Accordion from "~/components/features/accordion/accordion";
-import Card from "~/components/features/accordion/card";
-import { uploadImages } from "~/utils/imageupload";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { errorHandler } from "~/utils/errorHandler";
-import SkillBar from "~/components/features/skill-bar";
-import Loader from "~/components/common/partials/loader";
-import { alertToaster } from "../../../../utils/popupHelper";
-import ReadMore from "~/components/layouts/read-more";
-import { useWindowDimensions } from "~/utils/getWindowDimension";
-import { Close } from "~/components/icons";
 
 const reviewDefault = {
   rating: 5,
@@ -514,9 +514,11 @@ function DescOne(props) {
                       <div className=" img-wrapper">
                         {reviewState.images.map((img, index) => (
                           <div className="img_wrp mr-2" key={img}>
-                            <img
-                              src={getPublicImageURL(img)}
+                            <NextImage
+                              src={img}
                               className="img-preview"
+                              height={60}
+                              weight={60}
                               alt=""
                             />
                             <span

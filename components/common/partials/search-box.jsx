@@ -1,15 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import NextImage from "next/image";
+import React, { useCallback, useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
-import { eventActions } from "~/store/events";
 import ALink from "~/components/features/custom-link";
 import { MagnifyingGlass, Search } from "~/components/icons";
+import NextImage from "~/components/image";
+import { eventActions } from "~/store/events";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
-import { getSource } from "~/utils/helper";
-import { fetchSearchItems } from "~/utils/helper";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { fetchSearchItems, getSource } from "~/utils/helper";
 
 function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const router = useRouter();
@@ -187,7 +185,7 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
                   key={`search-result-${index}`}
                 >
                   <NextImage
-                    src={getPublicImageURL(thumbImage?.imageKey)}
+                    src={thumbImage?.imageKey}
                     width={40}
                     height={40}
                     alt={thumbImage.alt}

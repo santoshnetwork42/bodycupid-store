@@ -45,66 +45,57 @@ function AllProduct(props) {
 }
 
 export const getStaticProps = async () => {
-  try {
-    const filter = {
-      status: { eq: "ENABLED" },
+  const filter = {
+    status: { eq: "ENABLED" },
+    storeId: { eq: STORE_ID },
+  };
+
+  //get all categories
+  const { searchProductCategories } = await fetchData(getMenuCategories, {
+    filter: {
       storeId: { eq: STORE_ID },
-    };
+      isArchive: { eq: false },
+    },
+    sort: [{ field: "priority", direction: "asc" }],
+  });
 
-    //get all categories
-    const { searchProductCategories } = await fetchData(getMenuCategories, {
-      filter: {
-        storeId: { eq: STORE_ID },
-        isArchive: { eq: false },
+  const { getStore } = await fetchData(getStoreBanners, {
+    id: STORE_ID,
+    deviceType: "WEB",
+  });
+  const { title, name, description, webUrl, imageUrl } = getStore;
+
+  const categories = [
+    { name: "all", path: "/collections/all" },
+    ...searchProductCategories.items.map((cat) => ({
+      ...cat,
+      path: `/collections/${cat.slug}`,
+    })),
+  ];
+
+  // Get all Product
+  const { searchProducts } = await fetchData(findProducts, {
+    filter,
+    sort: [{ field: "position", direction: "asc" }],
+    variantFilter: { status: { eq: "ENABLED" } },
+    imageLimit: 1,
+  });
+
+  return {
+    props: {
+      categories,
+      products: searchProducts,
+      pageFilter: filter,
+      pageMeta: {
+        siteName: name,
+        title,
+        description,
+        canonical: `${webUrl}/collections/all`,
+        image: getPublicImageURL(imageUrl),
       },
-      sort: [{ field: "priority", direction: "asc" }],
-    });
-
-    const { getStore } = await fetchData(getStoreBanners, {
-      id: STORE_ID,
-      deviceType: "WEB",
-    });
-    const { title, name, description, webUrl, imageUrl } = getStore;
-
-    const categories = [
-      { name: "all", path: "/collections/all" },
-      ...searchProductCategories.items.map((cat) => ({
-        ...cat,
-        path: `/collections/${cat.slug}`,
-      })),
-      { name: "Ranges", path: "/collections/ranges" },
-      { name: "Combos & Gifts", path: "/collections/combos-and-gifts" },
-    ];
-
-    // Get all Product
-    const { searchProducts } = await fetchData(findProducts, {
-      filter,
-      sort: [{ field: "position", direction: "asc" }],
-      variantFilter: { status: { eq: "ENABLED" } },
-      imageLimit: 1,
-    });
-
-    return {
-      props: {
-        categories,
-        products: searchProducts,
-        pageFilter: filter,
-        pageMeta: {
-          siteName: name,
-          title,
-          description,
-          canonical: `${webUrl}/collections/all`,
-          image: getPublicImageURL(imageUrl),
-        },
-      },
-      revalidate: 1800,
-    };
-  } catch (error) {
-    logger.error(error);
-    return {
-      notFound: true,
-    };
-  }
+    },
+    revalidate: 1800,
+  };
 };
 
 function mapStateToProps(state) {

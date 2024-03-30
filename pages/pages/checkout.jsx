@@ -16,35 +16,32 @@ import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 
-import { toDecimal } from "~/utils";
-import { cartActions } from "~/store/cart";
-import { modalActions } from "~/store/modal";
-import { eventActions } from "~/store/events";
 import Addresses from "~/components/common/addresses";
-import loadScript from "~/utils/loadScript";
-import { RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import Passwordless from "~/components/common/partials/passwordless";
-import { isValidAddress } from "~/utils/address";
 import PaymentLoader from "~/components/common/partials/payment-loader";
+import Card from "~/components/features/accordion/card";
+import PaymentMethods from "~/components/features/payment-radio";
 import {
   DownAngle,
   RightAngle,
   ShoppingCart,
   UpAngle,
 } from "~/components/icons";
-import Card from "~/components/features/accordion/card";
-import PaymentMethods from "~/components/features/payment-radio";
-import { alertToaster } from "~/utils/popupHelper";
-import { useWindowDimensions } from "~/utils/getWindowDimension";
-import {
-  NavbarContext,
-  useGuestCheckout,
-  useNavBarState,
-} from "~/utils/contexts/navbar";
+import NextImage from "~/components/image";
+import { RAZORPAY_KEY, RAZORPAY_SCRIPT } from "~/config";
 import { COD_ENABLED, MAX_COD_AMOUNT, PREPAID_ENABLED } from "~/constant";
-import { productDiscountPercentage } from "~/utils/products";
+import { cartActions } from "~/store/cart";
+import { eventActions } from "~/store/events";
+import { modalActions } from "~/store/modal";
+import { toDecimal } from "~/utils";
+import { isValidAddress } from "~/utils/address";
+import { useGuestCheckout, useNavBarState } from "~/utils/contexts/navbar";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { checkAffiseValidity } from "~/utils/helper";
+import loadScript from "~/utils/loadScript";
+import { alertToaster } from "~/utils/popupHelper";
+import { productDiscountPercentage } from "~/utils/products";
 
 const logger = new Logger("Checkout");
 
@@ -394,13 +391,12 @@ function Checkout(props) {
                                   <td className="m-0 p-0">
                                     <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
                                       <figure>
-                                        <img
-                                          src={getPublicImageURL(
-                                            item?.thumbImage
-                                          )}
-                                          width="100"
-                                          height="100"
+                                        <NextImage
+                                          src={item?.thumbImage}
+                                          width={100}
+                                          height={100}
                                           alt={item?.images?.items[0]?.alt}
+                                          priority
                                         />
                                       </figure>
                                       <div className="text-left text-primary w-100 mr-5 ml-2">

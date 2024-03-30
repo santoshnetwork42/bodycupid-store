@@ -8,6 +8,7 @@ export default function ALink({
   content,
   style,
   target,
+  prefetch,
   ...props
 }) {
   const preventDefault = (e) => {
@@ -21,7 +22,7 @@ export default function ALink({
   };
 
   return content ? (
-    <Link {...props}>
+    <Link {...props} prefetch={!!prefetch}>
       <a
         className={className}
         style={style}
@@ -34,7 +35,7 @@ export default function ALink({
       </a>
     </Link>
   ) : (
-    <Link {...props}>
+    <Link {...props} prefetch={!!prefetch}>
       <a
         className={className}
         style={style}

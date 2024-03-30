@@ -13,19 +13,27 @@ export default function Card(props) {
     iconClass,
     type = "normal",
     url,
-    onLinkClick = () => {},
+    onLinkClick,
     id,
     hideDropDown,
     ...restProps
   } = props;
+
+  const onInternalLinkClick = (e) => {
+    e?.preventDefault();
+    if (onLinkClick) {
+      onLinkClick();
+    }
+    return false;
+  };
 
   return "normal" === type ? (
     <SlideToggle {...restProps} collapsed={expanded ? false : true}>
       {({ onToggle, setCollapsibleElement, toggleState }) => (
         <div className={`card ${adClass}`}>
           <div id={id} className={`card-header`} onClick={onToggle}>
-            <ALink
-              onClick={onLinkClick}
+            <a
+              onClick={onInternalLinkClick}
               href="#"
               className={`toggle-button ${toggleState.toLowerCase()}`}
             >
@@ -36,7 +44,7 @@ export default function Card(props) {
                   <DownAngle size={12} color="currentColor" />
                 </i>
               )}
-            </ALink>
+            </a>
           </div>
 
           <div ref={setCollapsibleElement}>
@@ -49,8 +57,8 @@ export default function Card(props) {
     <SlideToggle collapsed={expanded ? false : true}>
       {({ onToggle, setCollapsibleElement, toggleState }) => (
         <>
-          <ALink
-            href={url ? url : "#"}
+          <a
+            href={url || "#"}
             content={title}
             className={`parse-content ${toggleState.toLowerCase()}`}
             onClick={(e) => {
@@ -59,7 +67,7 @@ export default function Card(props) {
                 onLinkClick();
               }
             }}
-          ></ALink>
+          ></a>
 
           <div ref={setCollapsibleElement} className="overflow-hidden">
             {props.children}
@@ -71,7 +79,7 @@ export default function Card(props) {
     <SlideToggle collapsed={expanded ? false : true}>
       {({ onToggle, setCollapsibleElement, toggleState }) => (
         <>
-          <ALink onClick={onLinkClick} href={url ? url : "#"}>
+          <ALink onClick={onLinkClick} href={url || "#"}>
             {title}
             <span
               className={`toggle-btn ${toggleState.toLowerCase()}`}
@@ -79,6 +87,7 @@ export default function Card(props) {
                 e.stopPropagation();
                 e.preventDefault();
                 onToggle();
+                return !!url;
               }}
             >
               {!hideDropDown &&

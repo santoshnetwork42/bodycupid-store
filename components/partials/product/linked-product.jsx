@@ -1,18 +1,18 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 
+import ALink from "~/components/features/custom-link";
+import NextImage from "~/components/image";
 import { getLinkedProducts } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
-import { toDecimal } from "~/utils";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getTotalPriceByField } from "~/utils/helper";
-import RatingStar from "./rating-star";
-import ALink from "~/components/features/custom-link";
 import { modalActions } from "~/store/modal";
-import { getProductMeta } from "~/utils/products";
+import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
+import { getTotalPriceByField } from "~/utils/helper";
+import { getProductMeta } from "~/utils/products";
+import RatingStar from "./rating-star";
 
 function LinkedProducts({
   product,
@@ -111,11 +111,12 @@ function LinkedProducts({
             <div className="d-flex d-sm-column mt-sm-2 product align-items-center ml-6 ">
               {i > 0 && <i className="fas fa-plus mr-6"></i>}
               <div className="image-wrapper">
-                <img
-                  src={getPublicImageURL(lp?.thumbImage?.imageKey)}
+                <NextImage
+                  src={lp?.thumbImage?.imageKey}
                   alt={lp?.thumbImage?.alt}
-                  width="80"
-                  height="88"
+                  width={80}
+                  height={88}
+                  priority={false}
                 />
 
                 <div className="product-price">
