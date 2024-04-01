@@ -349,6 +349,17 @@
   line-height: normal;
 }
 
+.coupon-note {
+  a {
+    text-decoration: underline !important;
+    display: inline !important;
+  }
+  p {
+    font-size: 1.15rem !important;
+    display: flex;
+    gap: 0.2rem;
+  }
+}
 .coupon-remove {
   font-size: 16px;
 }

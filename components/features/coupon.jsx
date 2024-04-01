@@ -338,6 +338,7 @@ function Coupon(props) {
               {featuredCoupons
                 .filter((c) => !!c.coupon)
                 .map(({ allowed, coupon, message }) => {
+                  const { couponNote } = coupon || "";
                   let className = "btn btn-link ml-2 btn-apply";
                   if (!allowed) {
                     className = `${className} btn-disabled`;
@@ -395,8 +396,8 @@ function Coupon(props) {
                           {showAsterik && "*"}
                         </div>
                       </div>
-                      <div className="d-flex justify-content-between ">
-                        <p className="m-0 coupon-message">{message}</p>
+                      <div className="d-flex justify-content-between">
+                        <CouponNoteComponent couponNote={couponNote} />
                         {appliedCoupon?.code !== coupon.code && (
                           <div className="d-flex flex-column justify-content-end">
                             <button
@@ -434,6 +435,35 @@ function mapStateToProps(state) {
     appliedCoupon: state.cart.coupon,
   };
 }
+
+const CouponNoteComponent = ({ couponNote }) => {
+  if (!couponNote) {
+    return <div></div>;
+  }
+  // Parse the HTML string to a DOM element
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(couponNote, "text/html");
+
+  // Find the <p> element and replace it with a <div>
+  const pElements = doc.getElementsByTagName("p");
+  while (pElements.length > 0) {
+    const pElement = pElements[0];
+    const divElement = doc.createElement("div");
+    divElement.innerHTML = pElement.innerHTML;
+    pElement.parentNode.replaceChild(divElement, pElement);
+  }
+
+  // Serialize the DOM back to a string
+  const updatedHtmlString = doc.body.innerHTML;
+
+  // Use dangerouslySetInnerHTML to set the modified HTML string
+  return (
+    <div
+      className="coupon-note"
+      dangerouslySetInnerHTML={{ __html: updatedHtmlString }}
+    />
+  );
+};
 
 export default connect(mapStateToProps, {
   addToCart: cartActions.addToCart,
