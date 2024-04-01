@@ -24,13 +24,21 @@ export const getMenuCategories = /* GraphQL */ `
         isArchive
         storeId
         imageUrl
+        metadata {
+          title
+          description
+          keywords
+          image
+          canonical
+          noIndex
+        }
       }
     }
   }
 `;
 
 export const getSubCategoriesByCategoryID = /* GraphQL */ `
-  query SearchProductCategories(
+  query SearchProductSubCategories(
     $filter: SearchableProductCategoryFilterInput
     $sort: [SearchableProductCategorySortInput]
     $limit: Int
@@ -56,6 +64,14 @@ export const getSubCategoriesByCategoryID = /* GraphQL */ `
         storeId
         imageUrl
         categoryID
+        metadata {
+          title
+          description
+          keywords
+          image
+          canonical
+          noIndex
+        }
       }
     }
   }
@@ -133,6 +149,14 @@ export const getHomePageCategories = /* GraphQL */ `
         imageUrl
         priority
         isArchive
+        metadata {
+          title
+          description
+          keywords
+          image
+          canonical
+          noIndex
+        }
       }
     }
   }
@@ -187,6 +211,7 @@ export const getQuickViewProduct = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -561,6 +586,7 @@ export const getOrder = /* GraphQL */ `
         location
         area
       }
+      appliedRewardPoints
       billingAddress {
         name
         country
@@ -583,7 +609,10 @@ export const getOrder = /* GraphQL */ `
       taxExempted
       cFormProvided
       thirdPartyShipping
+      totalCashbackRefunded
+      cashbackEarned
       currency
+      prepaidDiscount
       paymentType
       sla
       priority
@@ -627,6 +656,11 @@ export const getOrder = /* GraphQL */ `
             images {
               items {
                 id
+                alt
+                width
+                height
+                imageKey
+                isThumb
               }
             }
           }
@@ -816,6 +850,7 @@ export const findProducts = /* GraphQL */ `
           name
           slug
         }
+        benefits
         slug
         price
         sku
@@ -838,6 +873,9 @@ export const findProducts = /* GraphQL */ `
           title
           description
           keywords
+          image
+          canonical
+          noIndex
         }
         rating
         totalRatings
@@ -1767,6 +1805,15 @@ export const searchCollectionTypes = /* GraphQL */ `
         imageUrl
         defaultSorting
         isArchive
+        bannerUrl
+        metadata {
+          title
+          description
+          keywords
+          image
+          canonical
+          noIndex
+        }
       }
     }
   }
