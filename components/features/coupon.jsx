@@ -440,6 +440,7 @@ const CouponNoteComponent = ({ couponNote }) => {
   if (!couponNote) {
     return <div></div>;
   }
+
   // Parse the HTML string to a DOM element
   const parser = new DOMParser();
   const doc = parser.parseFromString(couponNote, "text/html");
