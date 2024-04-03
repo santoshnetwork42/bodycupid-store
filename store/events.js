@@ -315,11 +315,17 @@ export function* eventsSaga() {
     try {
       const { product } = e.payload;
       const { qty } = product;
-      const { value, pixel, vercel, ga, moengage } = itemMapper(product);
-      const eventName = qty > 0 ? "add_to_cart" : "remove_from_cart";
 
       const userData = yield select((state) => state.user.data);
       const user = userMapper(userData);
+
+      const { value, pixel, vercel, ga, moengage } = itemMapper(
+        product,
+        null,
+        user
+      );
+
+      const eventName = qty > 0 ? "add_to_cart" : "remove_from_cart";
 
       trackEvent("Add To Cart", moengage.addToCart);
       if (window && window.dataLayer) {
@@ -346,7 +352,13 @@ export function* eventsSaga() {
   yield takeEvery(cartActions.REMOVE_FROM_CART, function* saga(e) {
     try {
       const { product } = e.payload;
-      const { value, pixel, vercel, ga, moengage } = itemMapper(product);
+      const userData = yield select((state) => state.user.data);
+      const user = userMapper(userData);
+      const { value, pixel, vercel, ga, moengage } = itemMapper(
+        product,
+        null,
+        user
+      );
 
       trackEvent("Removed From Cart", moengage.removedFromCart);
       if (window && window.dataLayer) {
@@ -376,7 +388,13 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.VIEW_ITEM, function* saga(e) {
     try {
       const { product } = e.payload;
-      const { value, pixel, vercel, ga, moengage } = itemMapper(product);
+      const userData = yield select((state) => state.user.data);
+      const user = userMapper(userData);
+      const { value, pixel, vercel, ga, moengage } = itemMapper(
+        product,
+        null,
+        user
+      );
 
       trackEvent("Product Viewed", moengage.productViewed);
 
@@ -409,7 +427,7 @@ export function* eventsSaga() {
       const userData = yield select((state) => state.user.data);
       const user = userMapper(userData, address);
       const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
-      const { ga, pixel, vercel } = orderMapper(products, coupon);
+      const { ga, pixel, vercel } = orderMapper(products, coupon, user);
       const { orderCreated } = moEngagedOrderMapper(
         products,
         coupon,
@@ -529,7 +547,13 @@ export function* eventsSaga() {
       const {
         cart: { data, coupon },
       } = yield select();
-      const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
+      const userData = yield select((state) => state.user.data);
+      const user = userMapper(userData);
+      const { pinpoint, ga, value, pixel, vercel } = orderMapper(
+        data,
+        coupon,
+        user
+      );
       const { checkoutStarted } = moEngagedOrderMapper(data, coupon);
 
       trackEvent("Checkout Started", checkoutStarted);
@@ -593,7 +617,9 @@ export function* eventsSaga() {
         cart: { data, coupon },
       } = yield select();
 
-      const { ga, value, pixel } = orderMapper(data, coupon);
+      const userData = yield select((state) => state.user.data);
+      const user = userMapper(userData);
+      const { ga, value, pixel } = orderMapper(data, coupon, user);
       const { cartViewed } = moEngagedOrderMapper(data, coupon);
 
       trackEvent("Cart Viewed", cartViewed);
@@ -655,7 +681,10 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.VIEW_LIST_ITEM, function* saga(e) {
     try {
       const { id, name, products } = e.payload;
-      const { ga, pixel } = orderMapper(products);
+      const userData = yield select((state) => state.user.data);
+      const user = userMapper(userData);
+      const { ga, pixel } = orderMapper(products, null, user);
+
       if (window && window.dataLayer) {
         window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
         window.dataLayer.push({
