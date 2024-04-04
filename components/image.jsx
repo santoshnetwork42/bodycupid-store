@@ -8,7 +8,7 @@ export default function NextImage({ loader = "custom", ...props }) {
     <Image
       {...props}
       loader={({ src, width, quality }) =>
-        getPublicImageURL(src, width, quality)
+        getPublicImageURL(encodeURI(src), width, quality)
       }
     />
   );

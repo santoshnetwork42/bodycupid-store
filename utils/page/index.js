@@ -64,7 +64,7 @@ export const getStaticProps = async () => {
         googleVerificationTag: GOOGLE_VERIFICATION_TAG ?? null,
       },
       bestSellerDefaultSorting: getDefaultSorting(
-        bestSellerCollection.defaultSorting
+        bestSellerCollection?.defaultSorting
       ),
     },
     revalidate: 1800,
