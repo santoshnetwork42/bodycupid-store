@@ -1,3 +1,5 @@
+import { v4 as uuid } from "uuid";
+
 import { addPhonePrefix, getSource, removePhonePrefix } from "~/utils/helper";
 import {
   getFirstVariant,
@@ -7,8 +9,7 @@ import {
 } from "~/utils/products";
 import { getCouponDiscount } from "../coupons";
 import { getPublicImageURL } from "../getPublicImageUrl";
-
-export const itemMapper = (product, coupon) => {
+export const itemMapper = (product, coupon, user) => {
   let {
     variantId,
     id,
@@ -101,6 +102,7 @@ export const itemMapper = (product, coupon) => {
       num_items: 1,
       value: price,
       price: price,
+      external_id: user?.id || uuid(),
     },
     pinpoint: {
       item_id: id,
@@ -140,7 +142,7 @@ export const itemMapper = (product, coupon) => {
   };
 };
 
-export const orderMapper = (products, coupon) => {
+export const orderMapper = (products, coupon, user) => {
   const defaultAttribute = {
     content_ids: [],
     content_category: [],
@@ -177,6 +179,7 @@ export const orderMapper = (products, coupon) => {
           content_ids: [...pixel.content_ids, ...pixelNew.content_ids],
           num_items: pixel.num_items + pixelNew.num_items,
           value: pixel.value + pixelNew.value,
+          external_id: user?.id || uuid(),
         },
         pinpoint: [...pinpoint, pinpointNew],
         vercel: [...vercel, vercelNew],
@@ -212,7 +215,7 @@ export const userMapper = (userData, address) => {
   } = address || {};
 
   if (userData) {
-    const { phone, firstName, lastName, email, gender, dob, totalOrders } =
+    const { id, phone, firstName, lastName, email, gender, dob, totalOrders } =
       userData;
     return {
       phone: addPhonePrefix(aP || phone),
@@ -226,6 +229,7 @@ export const userMapper = (userData, address) => {
       state,
       country,
       pinCode,
+      id,
     };
   }
 
