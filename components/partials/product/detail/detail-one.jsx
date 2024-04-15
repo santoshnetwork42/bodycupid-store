@@ -46,7 +46,6 @@ function DetailOne(props) {
     removeFromCart,
     closeQuickview,
   } = props;
-
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [isSticky, setIsSticky] = useState(isStickyCart);
@@ -463,9 +462,10 @@ function DetailOne(props) {
                     {!cartItem && (
                       <button
                         className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                          cartActive ? "" : "disabled"
+                          cartActive && product?.isAtcEnabled ? "" : "disabled"
                         }`}
                         onClick={addToCartHandler}
+                        disabled={!product?.isAtcEnabled}
                       >
                         <i>
                           <Bag color="currentColor" size={20} />
@@ -529,9 +529,10 @@ function DetailOne(props) {
                     <div className={`cart-button-wrapper ${adClass}`}>
                       <button
                         className={`btn-product btn-cart ls-normal font-weight-semi-bold btn-cart-width ${
-                          cartActive ? "" : "disabled"
+                          cartActive && product?.isAtcEnabled ? "" : "disabled"
                         }`}
                         onClick={addToCartHandler}
+                        disabled={!product?.isAtcEnabled}
                       >
                         <i>
                           <Bag color="currentColor" size={20} />
