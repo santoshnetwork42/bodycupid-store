@@ -317,6 +317,9 @@ export const getProductBySlug = /* GraphQL */ `
         vendor
         collections
         isFeatured
+        isFeedEnabled
+        isSearchFeedEnabled
+        isAtcEnabled
         categoryId
         subCategoryId
         category {
@@ -563,6 +566,7 @@ export const applyCoupon = /* GraphQL */ `
       applicableCollections
       applicableProducts
       paymentMethod
+      applyPrepaidDiscount
     }
   }
 `;
