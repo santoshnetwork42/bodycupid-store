@@ -197,7 +197,9 @@ export async function fetchSearchItems(search, limit = 20) {
     process.env.NEXT_PUBLIC_TTM_CLIENT_THRESHOLD;
   try {
     const response = await fetch(
-      `${NEXT_PUBLIC_TTM_CLIENT_URL}/search?query=${search}&threshold=${NEXT_PUBLIC_TTM_CLIENT_THRESHOLD}&limit=${limit}`,
+      `${NEXT_PUBLIC_TTM_CLIENT_URL}/search?query=${encodeURIComponent(
+        search
+      )}&threshold=${NEXT_PUBLIC_TTM_CLIENT_THRESHOLD}&limit=${limit}`,
       {
         headers: {
           Authorization: `Bearer ${NEXT_PUBLIC_TTM_CLIENT_API_KEY}`,
@@ -205,16 +207,7 @@ export async function fetchSearchItems(search, limit = 20) {
       }
     );
     const data = await response.json();
-
-    return data.results
-      .map(({ imageUrl, benefits, position, ...item }) => {
-        const [, slug] = item.link.match(/products\/([^?]+)/);
-        item.slug = slug;
-        item.imageUrl = imageUrl.split("/public/")[1] || "";
-        item.position = Number(position);
-        return item;
-      })
-      .sort((a, b) => (a.position - b.position >= 0 ? 1 : -1));
+    return data?.results || [];
   } catch (error) {
     console.error("Error fetching items:", error);
     return [];

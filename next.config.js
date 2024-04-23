@@ -77,6 +77,11 @@ const nextConfig = withBundleAnalyzer({
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/collections/search",
+        destination: "/search",
+        permanent: true,
+      },
     ];
   },
 

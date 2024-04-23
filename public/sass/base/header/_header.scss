@@ -488,6 +488,21 @@
     }
   }
 
+   .search-box-container {
+    flex: 1;
+    align-items: center;
+    display: flex;
+    border: 2px solid;
+    padding: 0 5rem 0 1.55rem;
+    border-radius: 5px;
+    border-color: #1a181e;
+    font-family: inherit;
+    background-color: #f7f7f7;
+    color: #999;
+    font-size: 16px !important;
+    cursor: pointer;
+  }
+
   .select-box {
     background-color: #f4f4f4;
 

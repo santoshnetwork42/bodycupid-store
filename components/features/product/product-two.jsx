@@ -1,8 +1,8 @@
 import { useProduct, useProductVariantGroups } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
-import Image from "~/components/image";
 import { useMemo } from "react";
 import { connect } from "react-redux";
+import Image from "~/components/image";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
@@ -78,18 +78,15 @@ function ProductTwo(props) {
 
   const addToCartHandler = (e) => {
     e?.preventDefault();
-    if (isSearch) {
-      showQuickviewHandler();
-    } else {
-      setCartVisibility(true);
-      addToCart({
-        ...product,
-        section,
-        qty: 1,
-      });
-      logger.verbose("Added product to cart");
-      logger.debug("Added product to cart:", product);
-    }
+    setCartVisibility(true);
+    addToCart({
+      ...productsNew,
+      section,
+      qty: productsNew?.minimumOrderQuantity || 1,
+    });
+    logger.verbose("Added product to cart");
+    logger.debug("Added product to cart:", product);
+
     return false;
   };
 
@@ -120,15 +117,15 @@ function ProductTwo(props) {
       }
     }
   }
-  const imageKey = isSearch ? product.imageUrl : thumbImage?.imageKey;
+  // const imageKey = isSearch ? product.imageUrl : thumbImage?.imageKey;
 
   return (
     <div className={`product text-left ${adClass} product-card`}>
       {/* <figure className="product-media"> */}
-      {!!imageKey && (
+      {!!thumbImage?.imageKey && (
         <ALink href={`/products/${slug}`}>
           <Image
-            src={imageKey}
+            src={thumbImage?.imageKey}
             alt={title}
             height={280}
             width={280}
@@ -191,52 +188,40 @@ function ProductTwo(props) {
           </div>
         </ALink>
         <div className="product-action">
-          {isSearch ? (
-            <a
-              href="#"
-              className={`btn-product btn-primary btn-quickview m-0`}
-              title="Add to cart"
-              onClick={addToCartHandler}
-              style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
-            >
-              View product{" "}
-            </a>
-          ) : (
+          {!!hasInventory ? (
             <>
-              {!!hasInventory ? (
-                <>
-                  {!!cartItem ? (
-                    <Quantity
-                      isProductList={true}
-                      qty={cartItem.qty}
-                      max={currentInventory}
-                      product={product}
-                      onChangeQty={changeQty}
-                    />
-                  ) : (
-                    <a
-                      href="#"
-                      className={`btn-product btn-primary btn-quickview m-0 ${
-                        price <= 0 ? "disabled" : ""
-                      }`}
-                      title="Add to cart"
-                      onClick={addToCartHandler}
-                      style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
-                    >
-                      Add to cart
-                    </a>
-                  )}
-                </>
+              {!!cartItem ? (
+                <Quantity
+                  isProductList={true}
+                  qty={cartItem.qty}
+                  max={currentInventory}
+                  product={productsNew}
+                  minimumOrderQuantity={productsNew?.minimumOrderQuantity || 1}
+                  maximumOrderQuantity={productsNew?.maximumOrderQuantity || 99}
+                  onChangeQty={changeQty}
+                />
               ) : (
                 <a
                   href="#"
-                  className="btn-product btn-sold-out m-0"
-                  title="Sold Out"
+                  className={`btn-product btn-primary btn-quickview m-0 ${
+                    price <= 0 ? "disabled" : ""
+                  }`}
+                  title="Add to cart"
+                  onClick={addToCartHandler}
+                  style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
                 >
-                  Sold Out
+                  Add to cart
                 </a>
               )}
             </>
+          ) : (
+            <a
+              href="#"
+              className="btn-product btn-sold-out m-0"
+              title="Sold Out"
+            >
+              Sold Out
+            </a>
           )}
         </div>
       </div>
