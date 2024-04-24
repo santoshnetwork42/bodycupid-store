@@ -85,7 +85,7 @@ function ProductTwo(props) {
       addToCart({
         ...product,
         section,
-        qty: 1,
+        qty: productsNew?.minimumOrderQuantity || 1,
       });
       logger.verbose("Added product to cart");
       logger.debug("Added product to cart:", product);
@@ -211,6 +211,15 @@ function ProductTwo(props) {
                       qty={cartItem.qty}
                       max={currentInventory}
                       product={product}
+                      totalItemQty={
+                        cartItem.qty || productsNew?.minimumOrderQuantity
+                      }
+                      minimumOrderQuantity={
+                        productsNew?.minimumOrderQuantity || 1
+                      }
+                      maximumOrderQuantity={
+                        productsNew?.maximumOrderQuantity || 99
+                      }
                       onChangeQty={changeQty}
                     />
                   ) : (

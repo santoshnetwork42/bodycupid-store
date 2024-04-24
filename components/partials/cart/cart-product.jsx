@@ -39,7 +39,7 @@ function CartProduct({
     title,
     price,
     listingPrice,
-    variantId,
+    variantId: selectedVariant,
     cartItemType,
     extraQty = 0,
     disableChange = false,
@@ -53,27 +53,47 @@ function CartProduct({
 
   const { isSmallSize } = useWindowDimensions();
 
+  console.log("selectedVariantttt", selectedVariant);
+  console.log("variantssss", variants);
+
   const changeVariant = (e) => {
     const variant = variants.items.find((c) => c.id === e.target.value);
+    const {
+      id: selectedId,
+      listingPrice,
+      price,
+      minimumOrderQuantity,
+      maximumOrderQuantity,
+    } = variant;
     const newRecordKey = `${id}-${e.target.value}`;
 
     const cartItem = cartList.find((c) => c.recordKey === newRecordKey);
-    if (cartItem) {
-      const updatedCart = [...cartList]
-        .filter((c) => c.recordKey !== recordKey)
-        .map((c) => {
-          if (c.recordKey === newRecordKey) return { ...c, qty: c.qty + qty };
-          return c;
-        });
-      updateCart(updatedCart);
-    } else {
+    if (!cartItem) {
       const updatedCart = getUpdatedCart(cartList, recordKey, {
+        qty: minimumOrderQuantity || 1,
         recordKey: newRecordKey,
-        listingPrice: variant.listingPrice,
-        price: variant.price,
-        variantId: e.target.value,
+        listingPrice: listingPrice,
+        price: price,
+        variantId: selectedId,
       });
       updateCart(updatedCart);
+    } else {
+      let finalQty = cartItem.qty + qty;
+      if (maximumOrderQuantity) {
+        finalQty =
+          cartItem.qty + qty <= maximumOrderQuantity
+            ? cartItem.qty + qty
+            : maximumOrderQuantity;
+      }
+
+      const updatedCart = getUpdatedCart(cartList, cartItem.recordKey, {
+        qty: finalQty,
+        listingPrice: listingPrice,
+        price: price,
+        variantId: selectedId,
+      });
+      updateCart(updatedCart);
+      removeFromCart(item);
     }
   };
 
@@ -98,8 +118,16 @@ function CartProduct({
   const outOfStock = qty > inventory;
 
   const { hasInventory, currentInventory } = useMemo(
-    () => getProductInventory(item, variantId),
-    [variantId, slug]
+    () => getProductInventory(item, selectedVariant),
+    [selectedVariant, slug]
+  );
+
+  const totalItemQty = useMemo(
+    () =>
+      item && cartList
+        ? cartList.find((i) => i.recordKey === item.recordKey)?.qty || 0
+        : 0,
+    [item, cartList]
   );
 
   return (
@@ -222,7 +250,7 @@ function CartProduct({
                     <select
                       name={`${recordKey}`}
                       className="form-control-drop-down"
-                      value={variantId}
+                      value={selectedVariant}
                       onChange={(e) => {
                         changeVariant(e);
                       }}
@@ -246,12 +274,30 @@ function CartProduct({
                         )}
                       </>
                     ) : (
-                      <Quantity
-                        product={item}
-                        qty={qty}
-                        max={inventory}
-                        onChangeQty={onChangeQty}
-                      />
+                      <div className="d-flex-col gap-8">
+                        <Quantity
+                          product={item}
+                          totalItemQty={totalItemQty}
+                          minimumOrderQuantity={
+                            selectedVariant?.minimumOrderQuantity ||
+                            item?.minimumOrderQuantity
+                          }
+                          maximumOrderQuantity={
+                            selectedVariant?.maximumOrderQuantity ||
+                            item?.maximumOrderQuantity
+                          }
+                          qty={qty}
+                          max={inventory}
+                          onChangeQty={onChangeQty}
+                        />
+                        {selectedVariant?.minimumOrderQuantity &&
+                          selectedVariant?.minimumOrderQuantity > 1 && (
+                            <p className="text-primary lh-1 font-size-12 mb-0 min-order-msg">
+                              Minimum Order Quantity:{" "}
+                              {selectedVariant?.minimumOrderQuantity}
+                            </p>
+                          )}
+                      </div>
                     )}
                   </div>
                 )}
@@ -280,7 +326,7 @@ function CartProduct({
                   <select
                     name={`${recordKey}`}
                     className="form-control-drop-down"
-                    value={variantId}
+                    value={selectedVariant}
                     onChange={(e) => {
                       changeVariant(e);
                     }}
@@ -305,12 +351,30 @@ function CartProduct({
                     )}
                   </>
                 ) : (
-                  <Quantity
-                    product={item}
-                    qty={qty}
-                    max={inventory}
-                    onChangeQty={onChangeQty}
-                  />
+                  <div className="d-flex-col gap-8">
+                    <Quantity
+                      product={item}
+                      totalItemQty={totalItemQty}
+                      minimumOrderQuantity={
+                        selectedVariant?.minimumOrderQuantity ||
+                        item?.minimumOrderQuantity
+                      }
+                      maximumOrderQuantity={
+                        selectedVariant?.maximumOrderQuantity ||
+                        item?.maximumOrderQuantity
+                      }
+                      qty={qty}
+                      max={inventory}
+                      onChangeQty={onChangeQty}
+                    />
+                    {selectedVariant?.minimumOrderQuantity &&
+                      selectedVariant?.minimumOrderQuantity > 1 && (
+                        <p className="text-primary lh-1 font-size-12 mb-0 min-order-msg">
+                          Minimum Order Quantity:{" "}
+                          {selectedVariant?.minimumOrderQuantity}
+                        </p>
+                      )}
+                  </div>
                 )}
               </div>
             )}

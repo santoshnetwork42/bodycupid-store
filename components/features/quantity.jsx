@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import { Minus, Plus } from "~/components/icons";
+import AlertPopup from "./product/common/alert-popup";
 
-export default function Quantity({ qty = 1, ...props }) {
+export default function Quantity({
+  qty = 1,
+  totalItemQty,
+  minimumOrderQuantity,
+  maximumOrderQuantity,
+  ...props
+}) {
   const {
     isProductList = false,
     adClass = `${
@@ -10,6 +18,10 @@ export default function Quantity({ qty = 1, ...props }) {
     }`,
     product,
   } = props;
+
+  const maxOrderCaution = `You cannot add more than ${maximumOrderQuantity} quantities of ${
+    product?.title || ""
+  }`;
 
   const [quantity, setQuantity] = useState(parseInt(qty));
 
@@ -26,13 +38,24 @@ export default function Quantity({ qty = 1, ...props }) {
 
   function minusQuantity() {
     if (quantity > 0) {
-      setQuantity(parseInt(quantity) - 1);
+      if (quantity === minimumOrderQuantity) {
+        setQuantity(0);
+      } else {
+        setQuantity(parseInt(quantity) - 1);
+      }
     }
   }
 
   function plusQuantity() {
     if (!product.isInventoryEnabled || quantity < props.max) {
-      setQuantity(parseInt(quantity) + 1);
+      if (totalItemQty === maximumOrderQuantity) {
+        toast(<AlertPopup message={maxOrderCaution} status="info" />, {
+          position: "bottom-center",
+          autoClose: 2000,
+        });
+      } else {
+        setQuantity(parseInt(quantity) + 1);
+      }
     }
   }
 

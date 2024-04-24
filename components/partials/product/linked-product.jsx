@@ -68,7 +68,7 @@ function LinkedProducts({
 
   const addToCartHandler = () => {
     selected.map((product) => {
-      addToCart({ ...product, qty: 1 });
+      addToCart({ ...product, qty: product?.minimumOrderQuantity || 1 });
     });
   };
 

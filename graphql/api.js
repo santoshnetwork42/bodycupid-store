@@ -182,6 +182,8 @@ export const getQuickViewProduct = /* GraphQL */ `
     ) {
       items {
         id
+        minimumOrderQuantity
+        maximumOrderQuantity
         variantGroups {
           variantGroupId
           variantGroupOptionIds
@@ -227,6 +229,8 @@ export const getQuickViewProduct = /* GraphQL */ `
         variants(filter: $variantFilter) {
           items {
             id
+            minimumOrderQuantity
+            maximumOrderQuantity
             productId
             title
             price
@@ -308,6 +312,8 @@ export const getProductBySlug = /* GraphQL */ `
     ) {
       items {
         id
+        minimumOrderQuantity
+        maximumOrderQuantity
         variantGroups {
           variantGroupId
           variantGroupOptionIds
@@ -375,6 +381,8 @@ export const getProductBySlug = /* GraphQL */ `
         variants(filter: $variantFilter) {
           items {
             id
+            minimumOrderQuantity
+            maximumOrderQuantity
             productId
             title
             price
@@ -845,6 +853,8 @@ export const findProducts = /* GraphQL */ `
     ) {
       items {
         id
+        minimumOrderQuantity
+        maximumOrderQuantity
         title
         collections
         vendor
@@ -892,6 +902,8 @@ export const findProducts = /* GraphQL */ `
         variants(filter: $variantFilter, limit: $variantLimit) {
           items {
             id
+            minimumOrderQuantity
+            maximumOrderQuantity
             title
             price
             position
@@ -941,6 +953,8 @@ export const getProductById = /* GraphQL */ `
   query GetProduct($id: ID!) {
     getProduct(id: $id) {
       id
+      minimumOrderQuantity
+      maximumOrderQuantity
       title
       collections
       vendor
@@ -974,6 +988,8 @@ export const getProductById = /* GraphQL */ `
       variants {
         items {
           id
+          minimumOrderQuantity
+          maximumOrderQuantity
           title
           price
           position
@@ -1122,6 +1138,8 @@ export const searchProductsBasic = /* GraphQL */ `
     ) {
       items {
         id
+        minimumOrderQuantity
+        maximumOrderQuantity
         title
         collections
         slug

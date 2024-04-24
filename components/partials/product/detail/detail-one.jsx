@@ -173,14 +173,14 @@ function DetailOne(props) {
         addToCart({
           ...product,
           name: tmpName,
-          qty: 1,
+          qty: product?.minimumOrderQuantity || 1,
           price: tmpPrice,
           variantId: selectedVariant,
         });
       } else {
         addToCart({
           ...product,
-          qty: 1,
+          qty: product?.minimumOrderQuantity || 1,
           price: product.price,
         });
       }
@@ -440,6 +440,21 @@ function DetailOne(props) {
                         max={currentInventory}
                         qty={cartItem?.qty}
                         product={product}
+                        totalItemQty={
+                          cartItem?.qty ||
+                          selectedVariant?.minimumOrderQuantity ||
+                          product?.minimumOrderQuantity
+                        }
+                        minimumOrderQuantity={
+                          selectedVariant?.minimumOrderQuantity ||
+                          product?.minimumOrderQuantity ||
+                          1
+                        }
+                        maximumOrderQuantity={
+                          selectedVariant?.maximumOrderQuantity ||
+                          product?.maximumOrderQuantity ||
+                          99
+                        }
                         onChangeQty={changeQty}
                       />
                     )}
@@ -475,6 +490,13 @@ function DetailOne(props) {
                     )}
                   </div>
                 </div>
+                {!!cartItem &&
+                  product?.minimumOrderQuantity &&
+                  product?.minimumOrderQuantity > 1 && (
+                    <p className="text-primary lh-1">
+                      Minimum Order Quantity: {product?.minimumOrderQuantity}
+                    </p>
+                  )}
               </div>
             </div>
           ) : (
@@ -504,6 +526,21 @@ function DetailOne(props) {
                             qty={cartItem?.qty}
                             max={currentInventory}
                             product={product}
+                            totalItemQty={
+                              cartItem?.qty ||
+                              selectedVariant?.minimumOrderQuantity ||
+                              product?.minimumOrderQuantity
+                            }
+                            minimumOrderQuantity={
+                              selectedVariant?.minimumOrderQuantity ||
+                              product?.minimumOrderQuantity ||
+                              1
+                            }
+                            maximumOrderQuantity={
+                              selectedVariant?.maximumOrderQuantity ||
+                              product?.maximumOrderQuantity ||
+                              99
+                            }
                             onChangeQty={changeQty}
                           />
                         </div>
