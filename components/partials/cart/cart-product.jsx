@@ -1,22 +1,23 @@
-import React, { useMemo } from "react";
-import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
+import { useEffect, useMemo, useState } from "react";
+import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
 import { Delete, Free } from "~/components/icons";
 
+import { useProductVariantGroups } from "@wow-star/utils";
+import NextImage from "~/components/image";
+import LimitedTimeProduct from "~/components/partials/cart/limited-time-product";
+import LimitedTimeProductDeal from "~/components/partials/cart/limited-time-product-deal";
 import { cartActions } from "~/store/cart";
+import { toDecimal } from "~/utils";
+import useWindowDimensions from "~/utils/getWindowDimension";
+import { getUpdatedCart } from "~/utils/helper";
 import {
   getProductInventory,
   productDiscountPercentage,
 } from "~/utils/products";
-import { toDecimal } from "~/utils";
-import NextImage from "~/components/image";
-import { getUpdatedCart } from "~/utils/helper";
-import LimitedTimeProductDeal from "~/components/partials/cart/limited-time-product-deal";
-import LimitedTimeProduct from "~/components/partials/cart/limited-time-product";
-import useWindowDimensions from "~/utils/getWindowDimension";
 
 const logger = new Logger("Cart-products");
 
@@ -39,7 +40,8 @@ function CartProduct({
     title,
     price,
     listingPrice,
-    variantId: selectedVariant,
+    // variantId: selectedVariant,
+    variantId,
     cartItemType,
     extraQty = 0,
     disableChange = false,
@@ -53,49 +55,53 @@ function CartProduct({
 
   const { isSmallSize } = useWindowDimensions();
 
-  console.log("selectedVariantttt", selectedVariant);
-  console.log("variantssss", variants);
+  console.log("cart product", item);
 
-  const changeVariant = (e) => {
-    const variant = variants.items.find((c) => c.id === e.target.value);
-    const {
-      id: selectedId,
-      listingPrice,
-      price,
-      minimumOrderQuantity,
-      maximumOrderQuantity,
-    } = variant;
-    const newRecordKey = `${id}-${e.target.value}`;
+  const [selectedVariant, variantGroup, onVariantChange] =
+    useProductVariantGroups(item, variantId);
 
-    const cartItem = cartList.find((c) => c.recordKey === newRecordKey);
-    if (!cartItem) {
-      const updatedCart = getUpdatedCart(cartList, recordKey, {
-        qty: minimumOrderQuantity || 1,
-        recordKey: newRecordKey,
-        listingPrice: listingPrice,
-        price: price,
-        variantId: selectedId,
-      });
-      updateCart(updatedCart);
-    } else {
-      let finalQty = cartItem.qty + qty;
-      if (maximumOrderQuantity) {
-        finalQty =
-          cartItem.qty + qty <= maximumOrderQuantity
-            ? cartItem.qty + qty
-            : maximumOrderQuantity;
-      }
+  const [variantUpdate, setVariantUpdate] = useState(false);
 
-      const updatedCart = getUpdatedCart(cartList, cartItem.recordKey, {
-        qty: finalQty,
-        listingPrice: listingPrice,
-        price: price,
-        variantId: selectedId,
-      });
-      updateCart(updatedCart);
-      removeFromCart(item);
-    }
-  };
+  // const changeVariant = (e) => {
+  //   const variant = variants.items.find((c) => c.id === e.target.value);
+  //   const {
+  //     id: selectedId,
+  //     listingPrice,
+  //     price,
+  //     minimumOrderQuantity,
+  //     maximumOrderQuantity,
+  //   } = variant;
+  //   const newRecordKey = `${id}-${e.target.value}`;
+
+  //   const cartItem = cartList.find((c) => c.recordKey === newRecordKey);
+  //   if (!cartItem) {
+  //     const updatedCart = getUpdatedCart(cartList, recordKey, {
+  //       qty: minimumOrderQuantity || 1,
+  //       recordKey: newRecordKey,
+  //       listingPrice: listingPrice,
+  //       price: price,
+  //       variantId: selectedId,
+  //     });
+  //     updateCart(updatedCart);
+  //   } else {
+  //     let finalQty = cartItem.qty + qty;
+  //     if (maximumOrderQuantity) {
+  //       finalQty =
+  //         cartItem.qty + qty <= maximumOrderQuantity
+  //           ? cartItem.qty + qty
+  //           : maximumOrderQuantity;
+  //     }
+
+  //     const updatedCart = getUpdatedCart(cartList, cartItem.recordKey, {
+  //       qty: finalQty,
+  //       listingPrice: listingPrice,
+  //       price: price,
+  //       variantId: selectedId,
+  //     });
+  //     updateCart(updatedCart);
+  //     removeFromCart(item);
+  //   }
+  // };
 
   const onChangeQty = (newQty) => {
     const finalQty = newQty + extraQty;
@@ -118,17 +124,92 @@ function CartProduct({
   const outOfStock = qty > inventory;
 
   const { hasInventory, currentInventory } = useMemo(
-    () => getProductInventory(item, selectedVariant),
-    [selectedVariant, slug]
+    () => getProductInventory(item, variantId),
+    [variantId, slug]
   );
 
-  const totalItemQty = useMemo(
-    () =>
-      item && cartList
-        ? cartList.find((i) => i.recordKey === item.recordKey)?.qty || 0
-        : 0,
-    [item, cartList]
-  );
+  const handleOnChangeVariant = (v1, v2) => {
+    onVariantChange(v1, v2);
+  };
+
+  useEffect(() => {
+    if (selectedVariant && variantUpdate) {
+      const {
+        id: selectedId,
+        listingPrice,
+        price,
+        minimumOrderQuantity,
+        maximumOrderQuantity,
+      } = selectedVariant;
+      const newRecordKey = `${id}-${selectedId}`;
+      const cartItem = cartList.find((c) => c.recordKey === newRecordKey);
+
+      if (!cartItem) {
+        const updatedCart = getUpdatedCart(cartList, recordKey, {
+          qty: minimumOrderQuantity || 1,
+          recordKey: newRecordKey,
+          listingPrice: listingPrice,
+          price: price,
+          variantId: selectedId,
+        });
+        updateCart(updatedCart);
+      } else {
+        let finalQty = cartItem.qty + qty;
+        if (maximumOrderQuantity) {
+          finalQty =
+            cartItem.qty + qty <= maximumOrderQuantity
+              ? cartItem.qty + qty
+              : maximumOrderQuantity;
+        }
+
+        const updatedCart = getUpdatedCart(cartList, cartItem.recordKey, {
+          qty: finalQty,
+          listingPrice: listingPrice,
+          price: price,
+          variantId: selectedId,
+        });
+        updateCart(updatedCart);
+        removeFromCart(item);
+      }
+    }
+    setVariantUpdate(false);
+  }, [selectedVariant]);
+
+  const [selectedVariantGroupOptions, setSelectedVariantGroupOptions] =
+    useState([]);
+
+  useEffect(() => {
+    if (selectedVariant && variantGroup) {
+      const { productVariantOptionIds } = selectedVariant;
+      const finalGroup = productVariantOptionIds?.reduce((result, v1Item) => {
+        const v2Item = variantGroup.find(
+          (item) => item.id === v1Item.variantGroupId
+        );
+        if (v2Item) {
+          const option = v2Item.variantOptions.find(
+            (option) => option.id === v1Item.variantGroupOptionId
+          );
+          if (option) {
+            result.push({
+              variantGroupId: v1Item.variantGroupId,
+              variantGroupOptionId: v1Item.variantGroupOptionId,
+              label: option.label,
+            });
+          }
+        }
+        return result;
+      }, []);
+      setSelectedVariantGroupOptions([...(finalGroup || [])]);
+    }
+  }, [variantGroup, selectedVariant]);
+
+  // const totalItemQty = useMemo(
+  //   () =>
+  //     item && cartList
+  //       ? cartList.find((i) => i.recordKey === item.recordKey)?.qty || 0
+  //       : 0,
+  //   [item, cartList]
+  // );
 
   return (
     <div className="m-0 p-0 border-no">
@@ -244,24 +325,49 @@ function CartProduct({
               )}
             </div>
             {!outOfStock && !isSmallSize && !isFreeProduct && (
-              <div className="cart-item-quantity">
-                {!!item?.variants?.items.length && !disableChange && (
-                  <div className="card-margin-bottom ml-2">
-                    <select
-                      name={`${recordKey}`}
-                      className="form-control-drop-down"
-                      value={selectedVariant}
-                      onChange={(e) => {
-                        changeVariant(e);
-                      }}
-                    >
-                      {variants.items.map((v) => (
-                        <option key={v.id} value={v.id}>
-                          {v.title}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+              <div className="cart-item-quantity mt-2">
+                {!!variantGroup && !disableChange && (
+                  <>
+                    {variantGroup.map((v1, index) => {
+                      return (
+                        <div className="card-margin-bottom" key={v1.id}>
+                          <select
+                            name={`${v1.id}`}
+                            className="form-control-drop-down"
+                            value={`${selectedVariantGroupOptions[index]?.variantGroupOptionId}`}
+                            onChange={(e) => {
+                              setVariantUpdate(true);
+                              handleOnChangeVariant(v1.id, e.target.value);
+                            }}
+                          >
+                            {v1.variantOptions.map((v) => {
+                              return v.active ? (
+                                <option key={v.id} value={v.id}>
+                                  {v.label}
+                                </option>
+                              ) : null;
+                            })}
+                          </select>
+                        </div>
+                      );
+                    })}
+                  </>
+                  // <div className="card-margin-bottom ml-2">
+                  //   <select
+                  //     name={`${recordKey}`}
+                  //     className="form-control-drop-down"
+                  //     value={selectedVariant}
+                  //     onChange={(e) => {
+                  //       changeVariant(e);
+                  //     }}
+                  //   >
+                  //     {variants.items.map((v) => (
+                  //       <option key={v.id} value={v.id}>
+                  //         {v.title}
+                  //       </option>
+                  //     ))}
+                  //   </select>
+                  // </div>
                 )}
                 {!disableChange && (
                   <div className="product-quantity mb-0">
@@ -277,7 +383,6 @@ function CartProduct({
                       <div className="d-flex-col gap-8">
                         <Quantity
                           product={item}
-                          totalItemQty={totalItemQty}
                           minimumOrderQuantity={
                             selectedVariant?.minimumOrderQuantity ||
                             item?.minimumOrderQuantity
@@ -319,25 +424,52 @@ function CartProduct({
           )}
         </div>
         {isSmallSize && !isFreeProduct && !outOfStock && (
-          <div className="d-flex justify-content-between mr-1">
+          <div className="d-flex justify-content-between mr-1 mt-1">
             <div>
-              {!!item?.variants?.items.length && !disableChange && (
-                <div className="card-margin-bottom ml-2">
-                  <select
-                    name={`${recordKey}`}
-                    className="form-control-drop-down"
-                    value={selectedVariant}
-                    onChange={(e) => {
-                      changeVariant(e);
-                    }}
-                  >
-                    {variants.items.map((v) => (
-                      <option key={v.id} value={v.id}>
-                        {v.title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+              {!!variantGroup && !disableChange && (
+                <>
+                  {variantGroup.map((v1, index) => {
+                    return (
+                      <>
+                        <div className="card-margin-bottom" key={v1.id}>
+                          <select
+                            name={`${v1.id}`}
+                            className="form-control-drop-down"
+                            value={`${selectedVariantGroupOptions[index]?.variantGroupOptionId}`}
+                            onChange={(e) => {
+                              setVariantUpdate(true);
+                              handleOnChangeVariant(v1.id, e.target.value);
+                            }}
+                          >
+                            {v1.variantOptions.map((v) => {
+                              return (
+                                <option key={v.id} value={v.id}>
+                                  {v.label}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        </div>
+                      </>
+                    );
+                  })}
+                </>
+                // <div className="card-margin-bottom ml-2">
+                //   <select
+                //     name={`${recordKey}`}
+                //     className="form-control-drop-down"
+                //     value={selectedVariant}
+                //     onChange={(e) => {
+                //       changeVariant(e);
+                //     }}
+                //   >
+                //     {variants.items.map((v) => (
+                //       <option key={v.id} value={v.id}>
+                //         {v.title}
+                //       </option>
+                //     ))}
+                //   </select>
+                // </div>
               )}
             </div>
             {!disableChange && (
@@ -354,7 +486,6 @@ function CartProduct({
                   <div className="d-flex-col gap-8">
                     <Quantity
                       product={item}
-                      totalItemQty={totalItemQty}
                       minimumOrderQuantity={
                         selectedVariant?.minimumOrderQuantity ||
                         item?.minimumOrderQuantity

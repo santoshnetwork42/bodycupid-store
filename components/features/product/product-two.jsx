@@ -55,11 +55,6 @@ function ProductTwo(props) {
     logger.verbose("Opened quick view for product:", slug);
   };
 
-  // const {  } = useMemo(
-  //   () => getProductInventory(product),
-  //   [product]
-  // );
-
   const label = product.collectionsList?.length
     ? product.collectionsList?.find((col) => !!col.label)?.label
     : null;
@@ -83,7 +78,7 @@ function ProductTwo(props) {
     } else {
       setCartVisibility(true);
       addToCart({
-        ...product,
+        ...productsNew,
         section,
         qty: productsNew?.minimumOrderQuantity || 1,
       });
@@ -210,10 +205,7 @@ function ProductTwo(props) {
                       isProductList={true}
                       qty={cartItem.qty}
                       max={currentInventory}
-                      product={product}
-                      totalItemQty={
-                        cartItem.qty || productsNew?.minimumOrderQuantity
-                      }
+                      product={productsNew}
                       minimumOrderQuantity={
                         productsNew?.minimumOrderQuantity || 1
                       }

@@ -13,6 +13,11 @@ const VariantCard = (props) => {
         variant.selected ? "btn-selected" : ""
       } ${variant.active ? "" : "btn-inactive justify-content-center"}`}
       onClick={onChange}
+      style={{
+        border: "1px solid",
+        borderRadius: "12px",
+        padding: "6px",
+      }}
     >
       <div>
         {save > 0 && <div className="save-label">Save ₹{save}</div>}

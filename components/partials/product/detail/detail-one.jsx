@@ -1,4 +1,4 @@
-import { useProductCoupons } from "@wow-star/utils";
+import { useCartItems, useProductCoupons } from "@wow-star/utils";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
@@ -25,6 +25,7 @@ import {
 } from "~/utils/helper";
 import { getProductInventory } from "~/utils/products";
 import ProductVariant from "../product-variant";
+import VariantCard from "../variant-card";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -39,27 +40,58 @@ function DetailOne(props) {
     data: product,
     isStickyCart = false,
     adClass = "",
-    defaultVariant,
-    variantId: selectedVariant = defaultVariant,
-    setVariant = () => {},
+    // defaultVariant,
+    // variantId: selectedVariant = defaultVariant,
+    // setVariant = () => {},
+    variantId: variant,
+    selectedVariant,
     addToCart,
     removeFromCart,
     closeQuickview,
+    onVariantChange,
+    variantGroup,
   } = props;
+
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [isSticky, setIsSticky] = useState(isStickyCart);
 
+  const {
+    id,
+    title,
+    price,
+    listingPrice,
+    rating = 0,
+    totalOrders,
+    additionalInfo,
+    longDescription,
+    totalRatings,
+    variants,
+    hasInventory,
+    currentInventory = 0,
+    discount,
+    isAtcEnabled,
+  } = product || {};
+
+  const cartItems = useCartItems({
+    showLTOProducts: false,
+    showNonApplicableFreeProducts: true,
+  });
+
+  const totalOrderCount = useMemo(() => {
+    return Math.ceil((totalOrders || 0) / 1000) * 1000;
+  }, [product, totalOrders]);
+
   const cartItem = useMemo(() => {
-    if (cartList.length) {
-      const recordKey = getRecordKey(product, selectedVariant);
-      const cartItem = cartList.find((cl) => cl.recordKey === recordKey);
+    if (cartItems.length && product) {
+      const recordKey = getRecordKey(product, selectedVariant?.id);
+      const cartItem = cartItems.find((cl) => cl.recordKey === recordKey);
       return cartItem;
     }
     return null;
-  }, [cartList, selectedVariant]);
+  }, [cartItems, product, selectedVariant]);
 
-  const bestCoupon = useProductCoupons(product, selectedVariant);
+  const bestCoupon = useProductCoupons(product, variant);
   const { isSmallSize: isMobile } = useWindowDimensions();
 
   const today = new Date();
@@ -71,11 +103,10 @@ function DetailOne(props) {
         .map((item) => ({ ...item })),
     [product?.variants?.items]
   );
-
-  const { hasInventory, currentInventory } = useMemo(
-    () => getProductInventory(product, selectedVariant),
-    [selectedVariant, sizes, product?.slug]
-  );
+  // const { hasInventory, currentInventory } = useMemo(
+  //   () => getProductInventory(product, selectedVariant),
+  //   [selectedVariant, sizes, product?.slug]
+  // );
 
   // decide if the product is wishlisted
   // const isWishlisted = useMemo(
@@ -96,11 +127,11 @@ function DetailOne(props) {
     };
   }, []);
 
-  useEffect(() => {
-    return () => {
-      resetValueHandler();
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     resetValueHandler();
+  //   };
+  // }, []);
 
   useEffect(() => {
     setCurIndex(-1);
@@ -111,12 +142,10 @@ function DetailOne(props) {
 
   useEffect(() => {
     if (product.variants.items.length > 0) {
-      if (selectedVariant) {
+      if (variant) {
         setCartActive(true);
         setCurIndex(
-          product.variants.items.findIndex(
-            (item) => item.id === selectedVariant
-          )
+          product.variants.items.findIndex((item) => item.id === variant)
         );
       } else {
         setCartActive(false);
@@ -124,7 +153,7 @@ function DetailOne(props) {
     } else {
       setCartActive(true);
     }
-  }, [selectedVariant, product]);
+  }, [variant, product]);
 
   // const wishlistHandler = (e) => {
   //   e.preventDefault();
@@ -142,49 +171,60 @@ function DetailOne(props) {
   //   }
   // };
 
-  const setVariantHandler = (variant) => {
-    if (setVariant) {
-      if (variant === "null") {
-        setVariant(null);
-      } else {
-        setVariant(variant);
-      }
-    }
-  };
+  // const setVariantHandler = (variant) => {
+  //   if (setVariant) {
+  //     if (variant === "null") {
+  //       setVariant(null);
+  //     } else {
+  //       setVariant(variant);
+  //     }
+  //   }
+  // };
+
+  // const addToCartHandler = () => {
+  //   setCartVisibility(true);
+  //   closeQuickview();
+  //   if (hasInventory) {
+  //     if (product.variants.items.length > 0) {
+  //       let tmpName = product.title,
+  //         tmpPrice;
+
+  //       if (selectedVariant) {
+  //         const variant = product.variants.items.find(
+  //           (i) => i.id === selectedVariant
+  //         );
+  //         if (variant) {
+  //           tmpName = `${tmpName} - ${variant.title}`;
+  //           tmpPrice = variant.price;
+  //         }
+  //       }
+
+  //       addToCart({
+  //         ...product,
+  //         name: tmpName,
+  //         qty: product?.minimumOrderQuantity || 1,
+  //         price: tmpPrice,
+  //         variantId: selectedVariant,
+  //       });
+  //     } else {
+  //       addToCart({
+  //         ...product,
+  //         qty: product?.minimumOrderQuantity || 1,
+  //         price: product.price,
+  //       });
+  //     }
+  //   }
+  // };
 
   const addToCartHandler = () => {
     setCartVisibility(true);
     closeQuickview();
-    if (hasInventory) {
-      if (product.variants.items.length > 0) {
-        let tmpName = product.title,
-          tmpPrice;
 
-        if (selectedVariant) {
-          const variant = product.variants.items.find(
-            (i) => i.id === selectedVariant
-          );
-          if (variant) {
-            tmpName = `${tmpName} - ${variant.title}`;
-            tmpPrice = variant.price;
-          }
-        }
-
-        addToCart({
-          ...product,
-          name: tmpName,
-          qty: product?.minimumOrderQuantity || 1,
-          price: tmpPrice,
-          variantId: selectedVariant,
-        });
-      } else {
-        addToCart({
-          ...product,
-          qty: product?.minimumOrderQuantity || 1,
-          price: product.price,
-        });
-      }
-    }
+    addToCart({
+      ...product,
+      qty: product?.minimumOrderQuantity || 1,
+      variantId: selectedVariant?.id,
+    });
   };
 
   useEffect(() => {
@@ -193,9 +233,9 @@ function DetailOne(props) {
     }
   }, []);
 
-  const resetValueHandler = () => {
-    setVariant(null);
-  };
+  // const resetValueHandler = () => {
+  //   setVariant(null);
+  // };
 
   const onReviewClick = () => {
     scrollWithOffset("product-review", 120, (ele) => {
@@ -206,7 +246,7 @@ function DetailOne(props) {
   function changeQty(qty) {
     if (cartItem) {
       if (qty) {
-        const recordKey = getRecordKey(product, selectedVariant);
+        const recordKey = getRecordKey(product, selectedVariant?.id);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
       } else {
@@ -214,32 +254,35 @@ function DetailOne(props) {
       }
     }
   }
-  const { price, listingPrice, save } = useMemo(() => {
-    const {
-      price,
-      listingPrice,
-      variants: { items },
-    } = product;
 
-    if (curIndex > -1 && Array.isArray(items)) {
-      const { price: p, listingPrice: lp } = items[curIndex] || {};
-      return {
-        price: p,
-        listingPrice: lp,
-        save: Math.round(((lp - p) * 100) / lp),
-      };
-    }
+  const save = Math.round(((listingPrice - price) * 100) / listingPrice);
 
-    return {
-      price,
-      listingPrice,
-      save: Math.round(((listingPrice - price) * 100) / listingPrice),
-    };
-  }, [product, curIndex]);
+  // const { price, listingPrice, save } = useMemo(() => {
+  //   const {
+  //     price,
+  //     listingPrice,
+  //     variants: { items },
+  //   } = product;
 
-  const totalOrderCount = useMemo(() => {
-    return Math.ceil(product.totalOrders / 1000) * 1000;
-  });
+  //   if (curIndex > -1 && Array.isArray(items)) {
+  //     const { price: p, listingPrice: lp } = items[curIndex] || {};
+  //     return {
+  //       price: p,
+  //       listingPrice: lp,
+  //       save: Math.round(((lp - p) * 100) / lp),
+  //     };
+  //   }
+
+  //   return {
+  //     price,
+  //     listingPrice,
+  //     save: Math.round(((listingPrice - price) * 100) / listingPrice),
+  //   };
+  // }, [product, curIndex]);
+
+  // const totalOrderCount = useMemo(() => {
+  //   return Math.ceil(product.totalOrders / 1000) * 1000;
+  // });
 
   return (
     <div className={`product-details ${adClass}`}>
@@ -355,7 +398,7 @@ function DetailOne(props) {
             <ProductBestPrice {...bestCoupon} price={price} />
           )}
 
-          {sizes.length > 1 && (
+          {/* {sizes.length > 1 && (
             <>
               <div className="product-form product-variations product-size mb-1 mt-3">
                 <div className="product-form-group overflow-auto">
@@ -373,6 +416,39 @@ function DetailOne(props) {
                 </div>
               </div>
             </>
+          )} */}
+
+          {!!variantGroup && product?.variants?.items?.length > 0 && (
+            <div>
+              {variantGroup
+                ?.sort((a, b) => (a.position > b.position ? 1 : -1))
+                ?.map((v1, index) => {
+                  return (
+                    // <div className="product-form product-variations product-size mb-1 mt-3">
+                    //   <div className="product-form-group overflow-auto">
+                    <div className="d-flex variant-gap" key={v1.id}>
+                      {v1.variantOptions
+                        ?.sort((a, b) => (a?.position > b?.position ? 1 : -1))
+                        ?.map((v2) => {
+                          return (
+                            <>
+                              <VariantCard
+                                key={v2.id}
+                                variant={v2}
+                                onChange={() => {
+                                  onVariantChange(v1.id, v2.id);
+                                }}
+                              />
+                            </>
+                          );
+                        })}
+                    </div>
+                    //   </div>
+                    // </div>
+                  );
+                })}
+              <></>
+            </div>
           )}
 
           {today.getHours() > 8 && today.getHours() < 15 && (
@@ -440,11 +516,6 @@ function DetailOne(props) {
                         max={currentInventory}
                         qty={cartItem?.qty}
                         product={product}
-                        totalItemQty={
-                          cartItem?.qty ||
-                          selectedVariant?.minimumOrderQuantity ||
-                          product?.minimumOrderQuantity
-                        }
                         minimumOrderQuantity={
                           selectedVariant?.minimumOrderQuantity ||
                           product?.minimumOrderQuantity ||
@@ -456,6 +527,7 @@ function DetailOne(props) {
                           99
                         }
                         onChangeQty={changeQty}
+                        extraClass="wrap"
                       />
                     )}
 
@@ -477,10 +549,10 @@ function DetailOne(props) {
                     {!cartItem && (
                       <button
                         className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                          cartActive && product?.isAtcEnabled ? "" : "disabled"
+                          cartActive && isAtcEnabled ? "" : "disabled"
                         }`}
                         onClick={addToCartHandler}
-                        disabled={!product?.isAtcEnabled}
+                        disabled={!isAtcEnabled}
                       >
                         <i>
                           <Bag color="currentColor" size={20} />
@@ -500,7 +572,10 @@ function DetailOne(props) {
               </div>
             </div>
           ) : (
-            <ProductNotify productId={product.id} variantId={selectedVariant} />
+            <ProductNotify
+              productId={product?.id}
+              variantId={selectedVariant?.id}
+            />
           )}
 
           {isMobile && isSticky && (
@@ -526,11 +601,6 @@ function DetailOne(props) {
                             qty={cartItem?.qty}
                             max={currentInventory}
                             product={product}
-                            totalItemQty={
-                              cartItem?.qty ||
-                              selectedVariant?.minimumOrderQuantity ||
-                              product?.minimumOrderQuantity
-                            }
                             minimumOrderQuantity={
                               selectedVariant?.minimumOrderQuantity ||
                               product?.minimumOrderQuantity ||
@@ -566,10 +636,10 @@ function DetailOne(props) {
                     <div className={`cart-button-wrapper ${adClass}`}>
                       <button
                         className={`btn-product btn-cart ls-normal font-weight-semi-bold btn-cart-width ${
-                          cartActive && product?.isAtcEnabled ? "" : "disabled"
+                          cartActive && isAtcEnabled ? "" : "disabled"
                         }`}
                         onClick={addToCartHandler}
-                        disabled={!product?.isAtcEnabled}
+                        disabled={!isAtcEnabled}
                       >
                         <i>
                           <Bag color="currentColor" size={20} />
@@ -581,8 +651,8 @@ function DetailOne(props) {
                 </div>
               ) : (
                 <ProductNotify
-                  productId={product.id}
-                  variantId={selectedVariant}
+                  productId={product?.id}
+                  variantId={selectedVariant?.id}
                 />
               )}
             </>

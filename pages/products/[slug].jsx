@@ -1,3 +1,4 @@
+import { useProduct, useProductVariantGroups } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -36,8 +37,16 @@ function ProductDefault(props) {
   const { query } = router;
   const { variantId } = query;
 
-  const [selectedVariant, setVariant] = useState(variantId);
+  // const [selectedVariant, setVariant] = useState(variantId);
   const isInteractive = useIsInteractive();
+
+  const [selectedVariant, variantGroup, onVariantChange] =
+    useProductVariantGroups(product, variantId);
+  const packageProduct = useProduct(product, selectedVariant?.id);
+
+  const handleVariantChange = (groupId, variantId) => {
+    onVariantChange(groupId, variantId);
+  };
 
   useEffect(() => {
     if (isInteractive) {
@@ -104,11 +113,12 @@ function ProductDefault(props) {
 
                 <div className="col-md-6">
                   <DetailOne
-                    data={product}
-                    defaultVariant={defaultVariantId}
-                    variantId={selectedVariant}
-                    setVariant={setVariant}
+                    data={packageProduct}
                     isNav={true}
+                    onVariantChange={handleVariantChange}
+                    variantGroup={variantGroup}
+                    variantId={selectedVariant?.id}
+                    selectedVariant={selectedVariant}
                   />
                 </div>
               </div>

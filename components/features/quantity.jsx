@@ -6,7 +6,6 @@ import AlertPopup from "./product/common/alert-popup";
 
 export default function Quantity({
   qty = 1,
-  totalItemQty,
   minimumOrderQuantity,
   maximumOrderQuantity,
   ...props
@@ -48,7 +47,7 @@ export default function Quantity({
 
   function plusQuantity() {
     if (!product.isInventoryEnabled || quantity < props.max) {
-      if (totalItemQty === maximumOrderQuantity) {
+      if (quantity === maximumOrderQuantity) {
         toast(<AlertPopup message={maxOrderCaution} status="info" />, {
           position: "bottom-center",
           autoClose: 2000,
