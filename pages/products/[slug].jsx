@@ -37,7 +37,6 @@ function ProductDefault(props) {
   const { query } = router;
   const { variantId } = query;
 
-  // const [selectedVariant, setVariant] = useState(variantId);
   const isInteractive = useIsInteractive();
 
   const [selectedVariant, variantGroup, onVariantChange] =

@@ -40,7 +40,6 @@ function CartProduct({
     title,
     price,
     listingPrice,
-    // variantId: selectedVariant,
     variantId,
     cartItemType,
     extraQty = 0,
@@ -61,47 +60,6 @@ function CartProduct({
     useProductVariantGroups(item, variantId);
 
   const [variantUpdate, setVariantUpdate] = useState(false);
-
-  // const changeVariant = (e) => {
-  //   const variant = variants.items.find((c) => c.id === e.target.value);
-  //   const {
-  //     id: selectedId,
-  //     listingPrice,
-  //     price,
-  //     minimumOrderQuantity,
-  //     maximumOrderQuantity,
-  //   } = variant;
-  //   const newRecordKey = `${id}-${e.target.value}`;
-
-  //   const cartItem = cartList.find((c) => c.recordKey === newRecordKey);
-  //   if (!cartItem) {
-  //     const updatedCart = getUpdatedCart(cartList, recordKey, {
-  //       qty: minimumOrderQuantity || 1,
-  //       recordKey: newRecordKey,
-  //       listingPrice: listingPrice,
-  //       price: price,
-  //       variantId: selectedId,
-  //     });
-  //     updateCart(updatedCart);
-  //   } else {
-  //     let finalQty = cartItem.qty + qty;
-  //     if (maximumOrderQuantity) {
-  //       finalQty =
-  //         cartItem.qty + qty <= maximumOrderQuantity
-  //           ? cartItem.qty + qty
-  //           : maximumOrderQuantity;
-  //     }
-
-  //     const updatedCart = getUpdatedCart(cartList, cartItem.recordKey, {
-  //       qty: finalQty,
-  //       listingPrice: listingPrice,
-  //       price: price,
-  //       variantId: selectedId,
-  //     });
-  //     updateCart(updatedCart);
-  //     removeFromCart(item);
-  //   }
-  // };
 
   const onChangeQty = (newQty) => {
     const finalQty = newQty + extraQty;
@@ -202,14 +160,6 @@ function CartProduct({
       setSelectedVariantGroupOptions([...(finalGroup || [])]);
     }
   }, [variantGroup, selectedVariant]);
-
-  // const totalItemQty = useMemo(
-  //   () =>
-  //     item && cartList
-  //       ? cartList.find((i) => i.recordKey === item.recordKey)?.qty || 0
-  //       : 0,
-  //   [item, cartList]
-  // );
 
   return (
     <div className="m-0 p-0 border-no">
@@ -352,22 +302,6 @@ function CartProduct({
                       );
                     })}
                   </>
-                  // <div className="card-margin-bottom ml-2">
-                  //   <select
-                  //     name={`${recordKey}`}
-                  //     className="form-control-drop-down"
-                  //     value={selectedVariant}
-                  //     onChange={(e) => {
-                  //       changeVariant(e);
-                  //     }}
-                  //   >
-                  //     {variants.items.map((v) => (
-                  //       <option key={v.id} value={v.id}>
-                  //         {v.title}
-                  //       </option>
-                  //     ))}
-                  //   </select>
-                  // </div>
                 )}
                 {!disableChange && (
                   <div className="product-quantity mb-0">
@@ -454,22 +388,6 @@ function CartProduct({
                     );
                   })}
                 </>
-                // <div className="card-margin-bottom ml-2">
-                //   <select
-                //     name={`${recordKey}`}
-                //     className="form-control-drop-down"
-                //     value={selectedVariant}
-                //     onChange={(e) => {
-                //       changeVariant(e);
-                //     }}
-                //   >
-                //     {variants.items.map((v) => (
-                //       <option key={v.id} value={v.id}>
-                //         {v.title}
-                //       </option>
-                //     ))}
-                //   </select>
-                // </div>
               )}
             </div>
             {!disableChange && (

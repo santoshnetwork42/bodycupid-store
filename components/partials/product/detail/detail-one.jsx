@@ -40,9 +40,6 @@ function DetailOne(props) {
     data: product,
     isStickyCart = false,
     adClass = "",
-    // defaultVariant,
-    // variantId: selectedVariant = defaultVariant,
-    // setVariant = () => {},
     variantId: variant,
     selectedVariant,
     addToCart,
@@ -103,16 +100,6 @@ function DetailOne(props) {
         .map((item) => ({ ...item })),
     [product?.variants?.items]
   );
-  // const { hasInventory, currentInventory } = useMemo(
-  //   () => getProductInventory(product, selectedVariant),
-  //   [selectedVariant, sizes, product?.slug]
-  // );
-
-  // decide if the product is wishlisted
-  // const isWishlisted = useMemo(
-  //   () => wishlist.some((i) => i.id === product?.id),
-  //   [wishlist, product?.id]
-  // );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -126,12 +113,6 @@ function DetailOne(props) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  // useEffect(() => {
-  //   return () => {
-  //     resetValueHandler();
-  //   };
-  // }, []);
 
   useEffect(() => {
     setCurIndex(-1);
@@ -171,51 +152,6 @@ function DetailOne(props) {
   //   }
   // };
 
-  // const setVariantHandler = (variant) => {
-  //   if (setVariant) {
-  //     if (variant === "null") {
-  //       setVariant(null);
-  //     } else {
-  //       setVariant(variant);
-  //     }
-  //   }
-  // };
-
-  // const addToCartHandler = () => {
-  //   setCartVisibility(true);
-  //   closeQuickview();
-  //   if (hasInventory) {
-  //     if (product.variants.items.length > 0) {
-  //       let tmpName = product.title,
-  //         tmpPrice;
-
-  //       if (selectedVariant) {
-  //         const variant = product.variants.items.find(
-  //           (i) => i.id === selectedVariant
-  //         );
-  //         if (variant) {
-  //           tmpName = `${tmpName} - ${variant.title}`;
-  //           tmpPrice = variant.price;
-  //         }
-  //       }
-
-  //       addToCart({
-  //         ...product,
-  //         name: tmpName,
-  //         qty: product?.minimumOrderQuantity || 1,
-  //         price: tmpPrice,
-  //         variantId: selectedVariant,
-  //       });
-  //     } else {
-  //       addToCart({
-  //         ...product,
-  //         qty: product?.minimumOrderQuantity || 1,
-  //         price: product.price,
-  //       });
-  //     }
-  //   }
-  // };
-
   const addToCartHandler = () => {
     setCartVisibility(true);
     closeQuickview();
@@ -232,10 +168,6 @@ function DetailOne(props) {
       onReviewClick();
     }
   }, []);
-
-  // const resetValueHandler = () => {
-  //   setVariant(null);
-  // };
 
   const onReviewClick = () => {
     scrollWithOffset("product-review", 120, (ele) => {
@@ -256,33 +188,6 @@ function DetailOne(props) {
   }
 
   const save = Math.round(((listingPrice - price) * 100) / listingPrice);
-
-  // const { price, listingPrice, save } = useMemo(() => {
-  //   const {
-  //     price,
-  //     listingPrice,
-  //     variants: { items },
-  //   } = product;
-
-  //   if (curIndex > -1 && Array.isArray(items)) {
-  //     const { price: p, listingPrice: lp } = items[curIndex] || {};
-  //     return {
-  //       price: p,
-  //       listingPrice: lp,
-  //       save: Math.round(((lp - p) * 100) / lp),
-  //     };
-  //   }
-
-  //   return {
-  //     price,
-  //     listingPrice,
-  //     save: Math.round(((listingPrice - price) * 100) / listingPrice),
-  //   };
-  // }, [product, curIndex]);
-
-  // const totalOrderCount = useMemo(() => {
-  //   return Math.ceil(product.totalOrders / 1000) * 1000;
-  // });
 
   return (
     <div className={`product-details ${adClass}`}>
@@ -398,34 +303,12 @@ function DetailOne(props) {
             <ProductBestPrice {...bestCoupon} price={price} />
           )}
 
-          {/* {sizes.length > 1 && (
-            <>
-              <div className="product-form product-variations product-size mb-1 mt-3">
-                <div className="product-form-group overflow-auto">
-                  <div className="d-flex">
-                    {sizes.map((item) => (
-                      <div key={item.id}>
-                        <ProductVariant
-                          onSelect={setVariantHandler}
-                          selected={selectedVariant}
-                          item={item}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </>
-          )} */}
-
           {!!variantGroup && product?.variants?.items?.length > 0 && (
             <div>
               {variantGroup
                 ?.sort((a, b) => (a.position > b.position ? 1 : -1))
                 ?.map((v1, index) => {
                   return (
-                    // <div className="product-form product-variations product-size mb-1 mt-3">
-                    //   <div className="product-form-group overflow-auto">
                     <div className="d-flex variant-gap" key={v1.id}>
                       {v1.variantOptions
                         ?.sort((a, b) => (a?.position > b?.position ? 1 : -1))
@@ -443,8 +326,6 @@ function DetailOne(props) {
                           );
                         })}
                     </div>
-                    //   </div>
-                    // </div>
                   );
                 })}
               <></>
