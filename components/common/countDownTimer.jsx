@@ -69,6 +69,7 @@ const Timer = () => {
       <p className="announcement font-size-12 mb-0">
         {timerTitle.toLocaleUpperCase()}
       </p>
+
       <div className="d-flex justify-content-center align-items-center gap-6 mb-2">
         <div className="d-flex-col justify-content-center align-items-center">
           <p className="font-size-18 font-weight-bold mb-0">{timeLeft.days}</p>
