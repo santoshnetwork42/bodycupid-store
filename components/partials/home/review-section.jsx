@@ -44,6 +44,7 @@ export default function ReviewSection() {
                     alt={testimonial.name}
                     width={70}
                     height={70}
+                    loader="local"
                   />
                 </figure>
                 <div className="d-flex align-item-center mb-2 justify-content-center">

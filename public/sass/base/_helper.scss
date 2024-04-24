@@ -62,6 +62,11 @@
   display: flex !important;
 }
 
+.d-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
 .d-inline-flex {
   display: inline-flex !important;
 }
@@ -408,4 +413,22 @@
 
 .border-bottom-none {
   border-bottom: none !important;
+}
+
+@for $i from 0 through 100 {
+  .font-weight-#{$i} {
+    font-weight: #{$i * 100};
+  }
+
+  .font-size-#{$i} {
+    font-size: #{$i}px;
+  }
+
+  .line-height-#{$i} {
+    line-height: #{$i}px;
+  }
+
+  .lock-margin-#{$i} {
+    margin-top: #{$i}px;
+  }
 }

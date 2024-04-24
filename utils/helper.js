@@ -205,7 +205,6 @@ export async function fetchSearchItems(search, limit = 20) {
       }
     );
     const data = await response.json();
-
     return data.results
       .map(({ imageUrl, benefits, position, ...item }) => {
         const [, slug] = item.link.match(/products\/([^?]+)/);
