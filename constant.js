@@ -23,5 +23,11 @@ export const GEOCODING_API_URL =
 export const MAX_COD_AMOUNT = "MAX_COD_AMOUNT";
 export const COD_ENABLED = "COD_ENABLED";
 export const PREPAID_ENABLED = "PREPAID_ENABLED";
+export const TIMER_TTILE = "TIMER_TTILE";
+export const TIMER_DESCRIPTION = "TIMER_DESCRIPTION";
+export const TIMER_COLOR = "TIMER_COLOR";
+export const TIMER_BG_COLOR = "TIMER_BG_COLOR";
+export const TIMER_END_TIME = "TIMER_END_TIME";
+export const TIMER_ENABLED = "TIMER_ENABLED";
 
 export const LIMITED_TIME_DEAL_DURATION = 2;

@@ -37,6 +37,9 @@ const MobileMenu = dynamic(
 const Announcement = dynamic(() => import("~/components/common/announcement"), {
   ssr: false,
 });
+const Timer = dynamic(() => import("~/components/common/countDownTimer"), {
+  ssr: false,
+});
 const StickyCheckout = dynamic(
   () => import("~/components/common/sticky-checkout"),
   { ssr: false }
@@ -115,6 +118,7 @@ function Layout({
         /> */}
       </Head>
       <div className="page-wrapper">
+        {isInteractive && <Timer />}
         {isInteractive && <Announcement showTopRunner={navbar.showTopRunner} />}
 
         <Header navbar={navbar} />
