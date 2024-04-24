@@ -83,13 +83,13 @@ function DetailOne(props) {
   }, [product, totalOrders]);
 
   const cartItem = useMemo(() => {
-    if (cartItems.length && product) {
+    if (cartList.length && product) {
       const recordKey = getRecordKey(product, selectedVariant?.id);
-      const cartItem = cartItems.find((cl) => cl.recordKey === recordKey);
+      const cartItem = cartList.find((cl) => cl.recordKey === recordKey);
       return cartItem;
     }
     return null;
-  }, [cartItems, product, selectedVariant]);
+  }, [cartList, product, selectedVariant]);
 
   const bestCoupon = useProductCoupons(product, variant);
   const { isSmallSize: isMobile } = useWindowDimensions();

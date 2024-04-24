@@ -89,7 +89,7 @@ function ProductTwo(props) {
   };
 
   const cartItem = useMemo(() => {
-    const recordKey = getRecordKey(product);
+    const recordKey = getRecordKey(productsNew);
     return cartList.find((cl) => cl.recordKey === recordKey);
   }, [cartList]);
 
