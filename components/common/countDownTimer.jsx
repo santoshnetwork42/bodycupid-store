@@ -63,7 +63,7 @@ const Timer = () => {
 
   return (
     <div
-      className=" announcement d-flex-col align-items-center pb-2 pt-2"
+      className="announcement d-flex-col align-items-center pb-2 pt-2"
       style={{ background: timerBgColor, color: timerColor }}
     >
       <p className="announcement font-size-12 mb-0">

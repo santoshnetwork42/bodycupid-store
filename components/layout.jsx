@@ -118,7 +118,7 @@ function Layout({
         /> */}
       </Head>
       <div className="page-wrapper">
-        {/* {isInteractive && <Timer />} */}
+        {isInteractive && <Timer />}
         {isInteractive && <Announcement showTopRunner={navbar.showTopRunner} />}
 
         <Header navbar={navbar} />
