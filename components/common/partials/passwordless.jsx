@@ -17,9 +17,15 @@ import { userActions } from "~/store/user";
 import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
 
-import { getUser } from "~/graphql/api";
+import {
+  ensureUserAndDispatchOTP,
+  getUser,
+  verifyCustomOTP,
+} from "~/graphql/api";
 import { eventActions } from "~/store/events";
 import useWindowDimensions from "~/utils/getWindowDimension";
+import fetchData from "~/utils/fetchData";
+import { STORE_ID } from "~/config";
 
 const logger = new Logger("Login-without-password");
 
@@ -32,7 +38,12 @@ function Passwordless({
   setUser,
   login,
   OtpRequested,
+  setCustomUser,
+  customSignup,
+  customSignupProp,
 }) {
+  const forceCustomSignup = !!(customSignup || customSignupProp);
+
   const router = useRouter();
   const { query } = router;
   const { isSmallSize: isMobile } = useWindowDimensions();
@@ -129,6 +140,28 @@ function Passwordless({
 
           closeModal();
           if (redirect) router.push("/pages/checkout");
+        } else if (confirmSignUp === "CUSTOM_SIGN_IN") {
+          const response = await fetchData(verifyCustomOTP, {
+            storeId: STORE_ID,
+            phone: addPhonePrefix(state.phone),
+            otp: state.confirmationCode.join(""),
+          });
+
+          const { isVerified } = response?.verifyCustomOTP;
+
+          if (isVerified) {
+            setCustomUser(state.phone);
+            closeModal();
+            store.dispatch(
+              eventActions.auth("signup", {
+                userId: null,
+                phone: addPhonePrefix(state.phone),
+              })
+            );
+            if (redirect) router.push("/pages/checkout");
+          } else {
+            setOtpError(true);
+          }
         } else {
           const { signInUserSession } = await Auth.sendCustomChallengeAnswer(
             currentUser,
@@ -173,7 +206,22 @@ function Passwordless({
           await Auth.resendSignUp(addPhonePrefix(state.phone));
           setConfirmSignUp("SIGNUP");
         } else if (error.code === "UserNotFoundException") {
-          await handleSignup();
+          if (!forceCustomSignup) {
+            await handleSignup();
+          } else {
+            const response = await fetchData(ensureUserAndDispatchOTP, {
+              storeId: STORE_ID,
+              phone: addPhonePrefix(state.phone),
+            });
+            const { isExistingUser } = response?.ensureUserAndDispatchOTP;
+            console.log("isExistingUser :>> ", isExistingUser);
+            setSeconds(30);
+            if (isExistingUser) {
+              await handleSignup();
+            } else {
+              setConfirmSignUp("CUSTOM_SIGN_IN");
+            }
+          }
         } else {
           alertToaster(error.message, "error");
         }
@@ -439,6 +487,7 @@ function mapStateToProps(state) {
     auth: !!state.user.data,
     isOpen: state.modal.passwordless,
     redirect: !!state.modal.loginRedirect,
+    customSignup: !!state.modal.customSignup,
   };
 }
 
@@ -448,4 +497,5 @@ export default connect(mapStateToProps, {
   setUser: userActions.setUser,
   login: eventActions.logIn,
   OtpRequested: eventActions.OtpRequested,
+  setCustomUser: userActions.setCustomUser,
 })(Passwordless);
