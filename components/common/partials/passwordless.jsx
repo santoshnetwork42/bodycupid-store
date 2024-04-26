@@ -214,7 +214,7 @@ function Passwordless({
               phone: addPhonePrefix(state.phone),
             });
             const { isExistingUser } = response?.ensureUserAndDispatchOTP;
-            console.log("isExistingUser :>> ", isExistingUser);
+
             setSeconds(30);
             if (isExistingUser) {
               await handleSignup();
