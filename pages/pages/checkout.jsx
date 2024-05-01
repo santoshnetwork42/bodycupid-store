@@ -63,6 +63,7 @@ function Checkout(props) {
     openLogin,
     addPaymentInfo,
     validateCart,
+    customUser,
   } = props;
 
   const { name } = store || {};
@@ -167,7 +168,7 @@ function Checkout(props) {
     try {
       e.preventDefault();
       const isAffiseTrackingValid = checkAffiseValidity();
-      if (!guestCheckout && (!user || !user.isActive)) {
+      if (!guestCheckout && !customUser && (!user || !user.isActive)) {
         emptyCart();
         router.replace("/pages/order-failed");
         return;
@@ -272,13 +273,12 @@ function Checkout(props) {
       <Head>
         <title>{name} | Checkout</title>
       </Head>
-
       <h1 className="d-none">{name} - Checkout</h1>
-
       {paymentLoader && <PaymentLoader loading={paymentLoader} />}
 
-      {!user && !guestCheckout && <Passwordless forceOpen redirect={false} />}
-
+      {!user && !guestCheckout && !customUser && (
+        <Passwordless forceOpen redirect={false} customSignupProp={true} />
+      )}
       <div className={`checkout-page-content page-content pb-10`}>
         <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
           <h3 className="title title-simple title-step">
@@ -306,24 +306,6 @@ function Checkout(props) {
         <div className={"container mt-0 md-7"}>
           {cartList.length > 0 && totalListingPrice > 0 ? (
             <>
-              {!user && (
-                <div className="row">
-                  <div className="card accordion col-lg-12">
-                    <Card
-                      type="parse"
-                      title="<div class='alert alert-light alert-primary alert-icon mb-4 card-header'>
-                                <i class='fas fa-exclamation-circle'></i> <span class='text-body'>Returning customer?</span> <a href='#' class='text-primary collapse'>Click here to login</a>
-                            </div>"
-                      onLinkClick={() => openLogin(false)}
-                    >
-                      <div className="alert-body collapsed">
-                        <Passwordless redirect={false} />
-                      </div>
-                    </Card>
-                  </div>
-                </div>
-              )}
-
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
                 {!isMobile && (
@@ -771,6 +753,7 @@ function mapStateToProps(state) {
   return {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
+    customUser: state.user.custom,
     appliedCoupon: state.cart.coupon,
     store: state.system.store,
     metadata: state.system.meta,

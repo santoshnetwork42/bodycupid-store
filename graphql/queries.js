@@ -1447,6 +1447,11 @@ export const getStoreSetting = /* GraphQL */ `
         GUEST_CHECKOUT
         BLOCK_INVENTORY
         COD_ENABLED
+        TIMER_TTILE
+        TIMER_DESCRIPTION
+        TIMER_COLOR
+        TIMER_END_TIME
+        TIMER_ENABLED
         PREPAID_ENABLED
         __typename
       }

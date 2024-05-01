@@ -2103,3 +2103,19 @@ export const sendAffiseAnalytics = /* GraphQL */ `
     }
   }
 `;
+
+export const ensureUserAndDispatchOTP = /* GraphQL */ `
+  query EnsureUserAndDispatchOTP($storeId: ID!, $phone: AWSPhone!) {
+    ensureUserAndDispatchOTP(storeId: $storeId, phone: $phone) {
+      isExistingUser
+    }
+  }
+`;
+
+export const verifyCustomOTP = /* GraphQL */ `
+  query VerifyCustomOTP($storeId: ID!, $phone: AWSPhone!, $otp: String!) {
+    verifyCustomOTP(storeId: $storeId, phone: $phone, otp: $otp) {
+      isVerified
+    }
+  }
+`;

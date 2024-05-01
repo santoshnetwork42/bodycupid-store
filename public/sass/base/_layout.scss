@@ -23,6 +23,7 @@
 .container {
   @include css(max-width, base, _container-width);
 }
+
 .divider {
   display: inline-block;
   vertical-align: middle;

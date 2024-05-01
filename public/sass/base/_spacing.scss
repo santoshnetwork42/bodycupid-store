@@ -36,6 +36,10 @@
 	.pr-#{$i} {
 		padding-right: #{$i*0.5}rem !important;
 	}
+
+	.gap-#{$i} {
+		gap: #{$i}px !important;
+	  }
 }
 
 .p-0 {

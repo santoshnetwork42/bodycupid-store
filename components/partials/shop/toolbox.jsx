@@ -123,8 +123,8 @@ export default function ToolBox(props) {
         }`}
       >
         {type === "horizontal" ? <SidebarFilterThree /> : ""}
-        <div className="toolbox-left d-flex justify-content-between w-100 align-items-start">
-          {!!filterItems?.length && (
+        <div className="toolbox-left d-flex justify-content-end w-100 align-items-start">
+          {/* {!!filterItems?.length && (
             <div className="filters-container d-flex mb-5 align-items-center">
               {filterItems.map((item, i) => {
                 return (
@@ -145,7 +145,7 @@ export default function ToolBox(props) {
                 );
               })}
             </div>
-          )}
+          )} */}
           <div
             className={`toolbox-item toolbox-sort ${
               type === "boxed" || type === "banner"

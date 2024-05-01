@@ -1377,6 +1377,11 @@ export const createStoreSetting = /* GraphQL */ `
         GUEST_CHECKOUT
         BLOCK_INVENTORY
         COD_ENABLED
+        TIMER_TTILE
+        TIMER_DESCRIPTION
+        TIMER_COLOR
+        TIMER_END_TIME
+        TIMER_ENABLED
         PREPAID_ENABLED
         __typename
       }
@@ -2442,6 +2447,11 @@ export const updateConfiguration = /* GraphQL */ `
       GUEST_CHECKOUT
       BLOCK_INVENTORY
       COD_ENABLED
+      TIMER_TTILE
+      TIMER_DESCRIPTION
+      TIMER_COLOR
+      TIMER_END_TIME
+      TIMER_ENABLED
       PREPAID_ENABLED
       __typename
     }
@@ -3506,6 +3516,11 @@ export const updateStoreSetting = /* GraphQL */ `
         GUEST_CHECKOUT
         BLOCK_INVENTORY
         COD_ENABLED
+        TIMER_TTILE
+        TIMER_DESCRIPTION
+        TIMER_COLOR
+        TIMER_END_TIME
+        TIMER_ENABLED
         PREPAID_ENABLED
         __typename
       }

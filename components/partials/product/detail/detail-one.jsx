@@ -230,7 +230,7 @@ function DetailOne(props) {
       };
     }
 
-    return {
+  return {
       price,
       listingPrice,
       save: Math.round(((listingPrice - price) * 100) / listingPrice),
