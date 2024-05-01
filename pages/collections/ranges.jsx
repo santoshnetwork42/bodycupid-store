@@ -110,5 +110,6 @@ function mapStateToProps(state) {
 const Component = connect(mapStateToProps)(React.memo(AllCollection));
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;
+Component.showTimer = true;
 
 export default Component;
