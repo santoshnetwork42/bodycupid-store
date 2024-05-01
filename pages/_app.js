@@ -46,6 +46,7 @@ const App = ({ Component, pageProps }) => {
     ...navbar,
     hideSearch: !!Component.hideSearch,
     showTopRunner: !!Component.showTopRunner,
+    showTimer: !!Component.showTimer,
     couponBanner: !!Component.couponBanner,
     hideCart: !!Component.hideCart,
   };

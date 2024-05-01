@@ -310,5 +310,6 @@ const Component = connect(mapStateToProps, {
 })(CollectionPage);
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;
+Component.showTimer = true;
 
 export default Component;

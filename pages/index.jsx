@@ -83,4 +83,5 @@ function HomePage({
 
 HomePage.showStickyCheckout = true;
 HomePage.showTopRunner = true;
+HomePage.showTimer = true;
 export default HomePage;

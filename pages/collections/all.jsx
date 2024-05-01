@@ -107,5 +107,6 @@ function mapStateToProps(state) {
 const Component = connect(mapStateToProps)(React.memo(AllProduct));
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;
+Component.showTimer = true;
 
 export default Component;
