@@ -28,6 +28,7 @@ const initialState = {
   loginRedirect: true,
   passwordless: false,
   allAddressModal: false,
+  customSignup: false,
 };
 
 function modalReducer(state = initialState, action) {
@@ -75,10 +76,16 @@ function modalReducer(state = initialState, action) {
         ...state,
         passwordless: true,
         loginRedirect: action.payload.redirect,
+        customSignup: !!action.payload.customSignup,
       };
 
     case actionTypes.CLOSE_PASSWORDLESS:
-      return { ...state, passwordless: false, loginRedirect: true };
+      return {
+        ...state,
+        passwordless: false,
+        loginRedirect: true,
+        customSignup: false,
+      };
 
     case actionTypes.OPEN_ALL_ADDRESS_MODAL:
       return {
@@ -107,7 +114,10 @@ export const modalActions = {
     payload: { modalType },
   }),
 
-  setCartVisibility: (payload) => ({ type: actionTypes.SET_CART_VISIBILITY, payload }),
+  setCartVisibility: (payload) => ({
+    type: actionTypes.SET_CART_VISIBILITY,
+    payload,
+  }),
 
   openQuickview: (slug) => ({
     type: actionTypes.OPEN_QUICKVIEW,
@@ -119,9 +129,9 @@ export const modalActions = {
     payload: { redirect },
   }),
   closeLoginModal: () => ({ type: actionTypes.CLOSE_LOGIN }),
-  openPasswordlessModal: (redirect = false) => ({
+  openPasswordlessModal: (redirect = false, customSignup = false) => ({
     type: actionTypes.OPEN_PASSWORDLESS,
-    payload: { redirect },
+    payload: { redirect, customSignup },
   }),
   closePasswordlessModal: () => ({ type: actionTypes.CLOSE_PASSWORDLESS }),
   openAllAddressModal: () => ({

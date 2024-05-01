@@ -13,8 +13,15 @@ import { fetchCityAndState } from "~/utils/addAddress";
 import { eventActions } from "~/store/events";
 
 const AddressForm = (props) => {
-  const { defaultAddress, user, onAddress, onSubmit, addressAdded } = props;
-  const { firstName, lastName, email, phone } = user || {};
+  const {
+    defaultAddress,
+    customUser,
+    user,
+    onAddress,
+    onSubmit,
+    addressAdded,
+  } = props;
+  const { firstName, lastName, email, phone } = user || customUser || {};
 
   const [address, setAddress] = useSetState({
     firstName: firstName || "",
@@ -34,13 +41,13 @@ const AddressForm = (props) => {
   });
 
   useEffect(() => {
-    if (user) {
+    if (user || customUser) {
       setAddress((prevState) => ({
         ...prevState,
-        phone: user.phone || "",
+        phone: user?.phone || customUser?.phone || "",
       }));
     }
-  }, [user]);
+  }, [user || customUser]);
 
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -99,6 +106,11 @@ const AddressForm = (props) => {
               addressAdded(tempAddress, totalPrice);
             }
             onSubmit(response);
+          } else if (customUser) {
+            if (!address.id) {
+              addressAdded(tempAddress, totalPrice);
+              onSubmit(tempAddress);
+            }
           } else {
             onSubmit(tempAddress);
           }
@@ -297,6 +309,7 @@ const AddressForm = (props) => {
 function mapStateToProps(state) {
   return {
     user: state.user.data,
+    customUser: state.user.custom,
   };
 }
 

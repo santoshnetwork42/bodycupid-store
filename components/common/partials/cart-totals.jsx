@@ -21,6 +21,7 @@ function CartTotal({
   appliedCoupon,
   onProceedToCheckout,
   user,
+  customUser,
   cartList,
   isSmall,
   setCartVisibility,
@@ -70,18 +71,19 @@ function CartTotal({
 
     startCheckout();
 
-    if (user || guestCheckout) {
+    if (user || guestCheckout || customUser) {
       router.push("/pages/checkout");
       logger.verbose("Redirecting to checkout page");
       return true;
     }
 
-    openLogin(true);
+    openLogin(true, true);
     logger.verbose("Opening login modal");
     return false;
   }, [
     user,
     guestCheckout,
+    customUser,
     isInventoryCheckSuccess,
     appliedCoupon,
     cartList,
@@ -280,6 +282,7 @@ function mapStateToProps(state) {
   return {
     appliedCoupon: state.cart.coupon,
     user: state.user.data,
+    customUser: !!state.user.custom,
     cartList: state.cart.data ? state.cart.data : [],
   };
 }

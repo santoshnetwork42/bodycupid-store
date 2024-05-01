@@ -83,5 +83,6 @@ const Component = connect(mapStateToProps)(React.memo(AllProduct));
 Component.showStickyCheckout = true;
 Component.hideSearch = true;
 Component.showTopRunner = true;
+Component.showTimer = true;
 
 export default Component;

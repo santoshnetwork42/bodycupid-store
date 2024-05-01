@@ -9,10 +9,12 @@ export const actionTypes = {
   UPDATE_USER: "UPDATE_USER",
   REFRESH_USER: "REFRESH_USER",
   UPDATE_USER_FIELDS: "UPDATE_USER_FIELD",
+  SET_CUSTOM_USER: "SET_CUSTOM_USER",
 };
 
 const initialState = {
   data: null,
+  custom: null,
 };
 
 function userReducer(state = initialState, action) {
@@ -29,6 +31,8 @@ function userReducer(state = initialState, action) {
     case actionTypes.REFRESH_USER:
       return initialState;
 
+    case actionTypes.SET_CUSTOM_USER:
+      return { ...state, custom: action.payload.user };
     default:
       return state;
   }
@@ -43,6 +47,10 @@ export const userActions = {
   removeUser: () => ({
     type: actionTypes.REFRESH_USER,
     payload: { user: null },
+  }),
+  setCustomUser: (phone) => ({
+    type: actionTypes.SET_CUSTOM_USER,
+    payload: { user: { phone } },
   }),
 };
 

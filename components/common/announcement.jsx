@@ -16,7 +16,7 @@ const Announcement = ({ store, showTopRunner }) => {
     announcements?.filter((announcement) => !announcement.isArchive) || [];
 
   return (
-    <div className="sticky-header">
+    <div>
       {!!showTopRunner &&
         isReady &&
         Array.isArray(filteredAnnouncements) &&

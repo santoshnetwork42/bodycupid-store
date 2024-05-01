@@ -222,5 +222,6 @@ const Component = connect(mapStateToProps, {
 })(ProductDefault);
 
 Component.showTopRunner = true;
+Component.showTimer = true;
 
 export default Component;
