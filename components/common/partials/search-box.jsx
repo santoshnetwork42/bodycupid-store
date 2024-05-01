@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { MagnifyingGlass, Search } from "~/components/icons";
 import { eventActions } from "~/store/events";
+import AutoTyper from "~/components/features/auto-typing";
+import { useIsInteractive } from "~/utils/contexts/navbar";
 
 function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const router = useRouter();
@@ -10,6 +12,8 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const [timer, setTimer] = useState(null);
   const dispatch = useDispatch();
   const { pathname } = router;
+
+  const isInteractive = useIsInteractive();
 
   useEffect(() => {
     document.querySelector("body").addEventListener("click", onBodyClick);
@@ -133,7 +137,19 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
             }}
           >
             <div id="search-input" type="text" name="search" required>
-              <p className="m-0 font-size-16">Search for products...</p>
+              {!isInteractive ? (
+                <p className="m-0 font-size-16">Search for products...</p>
+              ) : (
+                <AutoTyper
+                  dataText={[
+                    "Search for Ubtan",
+                    "Search for Face Serum",
+                    "Search for Vitamin C",
+                    "Search for Face Wash",
+                    "Search for Face Mask",
+                  ]}
+                />
+              )}
             </div>
           </button>
         )}
