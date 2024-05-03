@@ -1,39 +1,57 @@
-import React from "react";
+import React, { useMemo } from "react";
 import ALink from "~/components/features/custom-link";
 import { toDecimal } from "~/utils";
+import Image from "~/components/image";
 
 const VariantCard = (props) => {
   const { variant, onChange } = props;
 
   const { price, listingPrice } = variant;
-  const save = Math.round(listingPrice - price);
+  const save = useMemo(() => {
+    if (listingPrice && listingPrice > price) {
+      return Math.round(((listingPrice - price) * 100) / listingPrice);
+    }
+    return 0;
+  }, [listingPrice, price]);
   return (
     <div
-      className={`btn-padding width-variant cursor-pointer d-flex align-items-center ${
-        variant.selected ? "btn-selected" : ""
-      } ${variant.active ? "" : "btn-inactive justify-content-center"}`}
+      key={variant.id}
+      className={`variant-card-wrapper ${variant.selected ? "selected" : ""} ${
+        variant.active ? "" : "btn-inactive justify-content-center"
+      }`}
       onClick={onChange}
-      style={{
-        border: "1px solid",
-        borderRadius: "12px",
-        padding: "6px",
-      }}
     >
-      <div>
-        {save > 0 && <div className="save-label">Save ₹{save}</div>}
-        <div className={`label ${price > 0 ? "wrap" : ""}`}>
-          {variant.label}
+      <div className="product-label-group">
+        {save > 0 && (
+          <label className="product-label label-sale">-{save}%</label>
+        )}
+      </div>
+
+      <div className="image-wrapper d-flex justify-content-center">
+        <Image
+          className="product-image"
+          src={variant.images?.items[0]?.imageKey}
+          alt={variant.title}
+          priority
+          height={100}
+          width={100}
+          quality={95}
+        />
+      </div>
+
+      <div className="product-detail">
+        <div className="product-title">
+          <div>{variant.title || variant.label}</div>
         </div>
-        {price > 0 && (
-          <div className="large-price-text font-weight-bold">
-            {`${price >= listingPrice ? "MRP: " : ""}  ₹${toDecimal(price)}`}
-          </div>
-        )}
-        {listingPrice > price && (
-          <>
-            <del className="listing-price">MRP: ₹{listingPrice}</del>{" "}
-          </>
-        )}
+
+        <div className="product-price mb-2 d-flex mt-2">
+          <ins className="new-price mr-2">₹{toDecimal(price)}</ins>{" "}
+          {listingPrice > price && (
+            <>
+              <del className="old-price mr-2">₹{toDecimal(listingPrice)}</del>{" "}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

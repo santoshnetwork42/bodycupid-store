@@ -304,30 +304,32 @@ function DetailOne(props) {
           )}
 
           {!!variantGroup && product?.variants?.items?.length > 0 && (
-            <div>
-              {variantGroup
-                ?.sort((a, b) => (a.position > b.position ? 1 : -1))
-                ?.map((v1, index) => {
-                  return (
-                    <div className="d-flex variant-gap" key={v1.id}>
-                      {v1.variantOptions
-                        ?.sort((a, b) => (a?.position > b?.position ? 1 : -1))
-                        ?.map((v2) => {
-                          return (
-                            <>
-                              <VariantCard
-                                key={v2.id}
-                                variant={v2}
-                                onChange={() => {
-                                  onVariantChange(v1.id, v2.id);
-                                }}
-                              />
-                            </>
-                          );
-                        })}
-                    </div>
-                  );
-                })}
+            <div className="product-form product-variations product-size mb-1 mt-3">
+              <div className="product-form-group overflow-auto">
+                {variantGroup
+                  ?.sort((a, b) => (a.position > b.position ? 1 : -1))
+                  ?.map((v1, index) => {
+                    return (
+                      <div className="d-flex" key={v1.id}>
+                        {v1.variantOptions
+                          ?.sort((a, b) => (a?.position > b?.position ? 1 : -1))
+                          ?.map((v2) => {
+                            return (
+                              <>
+                                <VariantCard
+                                  key={v2.id}
+                                  variant={v2}
+                                  onChange={() => {
+                                    onVariantChange(v1.id, v2.id);
+                                  }}
+                                />
+                              </>
+                            );
+                          })}
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           )}
 

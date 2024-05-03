@@ -273,12 +273,12 @@ function CartProduct({
               )}
             </div>
             {!outOfStock && !isSmallSize && !isFreeProduct && (
-              <div className="cart-item-quantity mt-2">
+              <div className="cart-item-quantity">
                 {!!variantGroup && !disableChange && (
                   <>
                     {variantGroup.map((v1, index) => {
                       return (
-                        <div className="card-margin-bottom" key={v1.id}>
+                        <div className="card-margin-bottom ml-2" key={v1.id}>
                           <select
                             name={`${v1.id}`}
                             className="form-control-drop-down"
@@ -291,7 +291,7 @@ function CartProduct({
                             {v1.variantOptions.map((v) => {
                               return v.active ? (
                                 <option key={v.id} value={v.id}>
-                                  {v.label}
+                                  {v.title}
                                 </option>
                               ) : null;
                             })}
@@ -356,14 +356,14 @@ function CartProduct({
           )}
         </div>
         {isSmallSize && !isFreeProduct && !outOfStock && (
-          <div className="d-flex justify-content-between mr-1 mt-1">
+          <div className="d-flex justify-content-between mr-1">
             <div>
               {!!variantGroup && !disableChange && (
                 <>
                   {variantGroup.map((v1, index) => {
                     return (
                       <>
-                        <div className="card-margin-bottom" key={v1.id}>
+                        <div className="card-margin-bottom ml-2" key={v1.id}>
                           <select
                             name={`${v1.id}`}
                             className="form-control-drop-down"
@@ -376,7 +376,7 @@ function CartProduct({
                             {v1.variantOptions.map((v) => {
                               return (
                                 <option key={v.id} value={v.id}>
-                                  {v.label}
+                                  {v.title}
                                 </option>
                               );
                             })}
