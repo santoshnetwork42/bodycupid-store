@@ -328,7 +328,6 @@ function DetailOne(props) {
                     </div>
                   );
                 })}
-              <></>
             </div>
           )}
 

@@ -73,18 +73,15 @@ function ProductTwo(props) {
 
   const addToCartHandler = (e) => {
     e?.preventDefault();
-    if (isSearch) {
-      showQuickviewHandler();
-    } else {
-      setCartVisibility(true);
-      addToCart({
-        ...productsNew,
-        section,
-        qty: productsNew?.minimumOrderQuantity || 1,
-      });
-      logger.verbose("Added product to cart");
-      logger.debug("Added product to cart:", product);
-    }
+    setCartVisibility(true);
+    addToCart({
+      ...productsNew,
+      section,
+      qty: productsNew?.minimumOrderQuantity || 1,
+    });
+    logger.verbose("Added product to cart");
+    logger.debug("Added product to cart:", product);
+
     return false;
   };
 
@@ -115,19 +112,19 @@ function ProductTwo(props) {
       }
     }
   }
-  const imageKey = isSearch ? product.imageUrl : thumbImage?.imageKey;
+  // const imageKey = isSearch ? product.imageUrl : thumbImage?.imageKey;
 
   return (
     <div className={`product text-left ${adClass} product-card`}>
       {/* <figure className="product-media"> */}
-      {!!imageKey && (
+      {!!thumbImage?.imageKey && (
         <ALink href={`/products/${slug}`}>
           <Image
-            src={imageKey}
+            src={thumbImage?.imageKey}
             alt={title}
             height={280}
             width={280}
-            quality={80}
+            quality={50}
             objectFit="contain"
             priority={!!priority}
           />

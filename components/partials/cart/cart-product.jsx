@@ -54,8 +54,6 @@ function CartProduct({
 
   const { isSmallSize } = useWindowDimensions();
 
-  console.log("cart product", item);
-
   const [selectedVariant, variantGroup, onVariantChange] =
     useProductVariantGroups(item, variantId);
 
