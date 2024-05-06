@@ -126,7 +126,7 @@ function ProductTwo(props) {
   return (
     <div className={`product text-left ${adClass} product-card`}>
       {/* <figure className="product-media"> */}
-      {!!thumbImage?.imageKey && (
+
       {!!thumbImage?.imageKey && (
         <ALink href={`/products/${slug}`}>
           <Image
