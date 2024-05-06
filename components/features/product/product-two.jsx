@@ -48,8 +48,6 @@ function ProductTwo(props) {
     discount,
   } = productsNew || {};
 
-  // const { price, listingPrice } = useProductPrice(product);
-
   const showQuickviewHandler = () => {
     openQuickview(slug);
     logger.verbose("Opened quick view for product:", slug);
@@ -73,15 +71,6 @@ function ProductTwo(props) {
 
   const addToCartHandler = (e) => {
     e?.preventDefault();
-    setCartVisibility(true);
-    addToCart({
-      ...productsNew,
-      section,
-      qty: productsNew?.minimumOrderQuantity || 1,
-    });
-    logger.verbose("Added product to cart");
-    logger.debug("Added product to cart:", product);
-
     setCartVisibility(true);
     addToCart({
       ...productsNew,
