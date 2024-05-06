@@ -327,11 +327,14 @@ function CartProduct({
                           max={inventory}
                           onChangeQty={onChangeQty}
                         />
-                        {selectedVariant?.minimumOrderQuantity &&
-                          selectedVariant?.minimumOrderQuantity > 1 && (
+                        {(selectedVariant?.minimumOrderQuantity ||
+                          item?.minimumOrderQuantity) &&
+                          (selectedVariant?.minimumOrderQuantity > 1 ||
+                            item?.minimumOrderQuantity > 1) && (
                             <p className="text-primary lh-1 font-size-12 mb-0 min-order-msg">
                               Minimum Order Quantity:{" "}
-                              {selectedVariant?.minimumOrderQuantity}
+                              {selectedVariant?.minimumOrderQuantity ||
+                                item?.minimumOrderQuantity}
                             </p>
                           )}
                       </div>
@@ -414,11 +417,14 @@ function CartProduct({
                       max={inventory}
                       onChangeQty={onChangeQty}
                     />
-                    {selectedVariant?.minimumOrderQuantity &&
-                      selectedVariant?.minimumOrderQuantity > 1 && (
+                    {(selectedVariant?.minimumOrderQuantity ||
+                      item?.minimumOrderQuantity) &&
+                      (selectedVariant?.minimumOrderQuantity > 1 ||
+                        item?.minimumOrderQuantity > 1) && (
                         <p className="text-primary lh-1 font-size-12 mb-0 min-order-msg">
                           Minimum Order Quantity:{" "}
-                          {selectedVariant?.minimumOrderQuantity}
+                          {selectedVariant?.minimumOrderQuantity ||
+                            item?.minimumOrderQuantity}
                         </p>
                       )}
                   </div>
