@@ -1,25 +1,30 @@
-import React from "react";
 import Head from "next/head";
-import { connect } from "react-redux";
 import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
-import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
-import { findProducts } from "~/graphql/api";
-import { STORE_ID } from "~/config";
-import fetchData from "~/utils/fetchData";
 import SearchBox from "~/components/common/partials/search-box";
-import CategoryHeader from "~/components/common/category-header";
+import { STORE_ID } from "~/config";
+import { findProducts } from "~/graphql/api";
+import fetchData from "~/utils/fetchData";
 
-import { Logger } from "aws-amplify";
-
-const logger = new Logger("search");
+import SearchListOne from "~/components/partials/shop/product-list/search-list-one";
 
 function AllProduct(props) {
-  const { store, products, pageFilter } = props;
+  const { store, products, pageFilter, isSearch } = props;
   const { name } = store || {};
 
   const { query } = useRouter();
   const { search } = query;
+
+  useEffect(() => {
+    const inputField = document.getElementById("search-input");
+
+    if (inputField) {
+      inputField.focus();
+      inputField.value = "";
+    }
+  }, []);
 
   return (
     <main className="main">
@@ -31,16 +36,17 @@ function AllProduct(props) {
 
       <div className="page-content pb-3">
         <div className="container">
-          <CategoryHeader name={`Results Of ${search}`} />
+          {/* {!!search && <CategoryHeader name={`Results Of ${search}`} />} */}
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 mn-4 d-sm-show">
               <SearchBox defaultSearch={search} />
             </div>
             <div className="col-lg-12 main-content">
-              <ProductListOne
+              <SearchListOne
                 sectionId="Search"
                 products={products}
                 pageFilter={pageFilter}
+                isSearch={isSearch}
               />
             </div>
           </div>
@@ -54,6 +60,7 @@ export const getStaticProps = async () => {
   const filter = {
     status: { eq: "ENABLED" },
     storeId: { eq: STORE_ID },
+    collections: { eq: "best-seller" },
   };
 
   // Get all Product
@@ -62,7 +69,7 @@ export const getStaticProps = async () => {
     sort: [{ field: "position", direction: "asc" }],
     variantFilter: { status: { eq: "ENABLED" } },
     imageLimit: 1,
-    limit: 4,
+    limit: 16,
   });
 
   return {

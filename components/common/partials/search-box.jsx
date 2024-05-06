@@ -1,36 +1,19 @@
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
-import ALink from "~/components/features/custom-link";
 import { MagnifyingGlass, Search } from "~/components/icons";
-import NextImage from "~/components/image";
 import { eventActions } from "~/store/events";
-import { toDecimal } from "~/utils";
-import { errorHandler } from "~/utils/errorHandler";
-import { fetchSearchItems, getSource } from "~/utils/helper";
+import AutoTyper from "~/components/features/auto-typing";
+import { useIsInteractive } from "~/utils/contexts/navbar";
 
 function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const router = useRouter();
   const [search, setSearch] = useState(defaultSearch);
   const [timer, setTimer] = useState(null);
-  const [data, setData] = useState([]);
   const dispatch = useDispatch();
-  const source = getSource();
+  const { pathname } = router;
 
-  const searchProducts = useCallback(async (searchTerm) => {
-    try {
-      fetchSearchItems(searchTerm).then((fetchedItems) => {
-        setData(fetchedItems);
-        productSearched({
-          "search term": searchTerm,
-          "Item Count": fetchedItems?.length,
-          source: source,
-        });
-      });
-    } catch (error) {
-      errorHandler(error);
-    }
-  }, []);
+  const isInteractive = useIsInteractive();
 
   useEffect(() => {
     document.querySelector("body").addEventListener("click", onBodyClick);
@@ -48,9 +31,9 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
     if (search.length > 2) {
       if (timer) clearTimeout(timer);
       let timerId = setTimeout(() => {
-        searchProducts(search);
+        onSubmitSearch();
         setTimer(null);
-      }, 800);
+      }, 400);
 
       setTimer(timerId);
     }
@@ -62,27 +45,6 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
         .querySelector(".header-search.show-results")
         .classList.remove("show-results");
   }, [router.pathname]);
-
-  function removeXSSAttacks(html) {
-    const SCRIPT_REGEX = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-
-    // Removing the <script> tags
-    while (SCRIPT_REGEX.test(html)) {
-      html = html.replace(SCRIPT_REGEX, "");
-    }
-
-    // Removing all events from tags...
-    html = html.replace(/ on\w+="[^"]*"/g, "");
-
-    return {
-      __html: html,
-    };
-  }
-
-  function matchEmphasize(name) {
-    let regExp = new RegExp(search, "i");
-    return name.replace(regExp, (match) => "<strong>" + match + "</strong>");
-  }
 
   function onSearchClick(e) {
     e.stopPropagation();
@@ -111,12 +73,16 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
     setSearch(e.target.value);
   }
 
-  async function onSubmitSearchForm(e) {
+  function onSubmitSearchForm(e) {
     e.preventDefault();
+    onSubmitSearch();
+  }
+
+  async function onSubmitSearch() {
     dispatch(eventActions.search(search));
     document.querySelector(".header-search")?.classList.toggle("show");
     await router.push({
-      pathname: "/collections/search",
+      pathname: "/search",
       query: { search },
     });
 
@@ -145,19 +111,48 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
         </a>
       )}
       <div className="input-wrapper">
-        <input
-          type="text"
-          className="form-control"
-          name="search"
-          autoComplete="off"
-          value={search}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") onSubmitSearchForm(e);
-          }}
-          onChange={onSearchChange}
-          placeholder="Search..."
-          required
-        />
+        {pathname === "/search" ? (
+          <input
+            id="search-input"
+            type="text"
+            className="form-control"
+            name="search"
+            autoComplete="off"
+            value={search}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") onSubmitSearchForm(e);
+            }}
+            onChange={onSearchChange}
+            placeholder="Search for products..."
+            required
+            autoFocus
+          />
+        ) : (
+          <button
+            className="form-control search-box-container"
+            onClick={async () => {
+              await router.push({
+                pathname: "/search",
+              });
+            }}
+          >
+            <div id="search-input" type="text" name="search" required>
+              {!isInteractive ? (
+                <p className="m-0 font-size-16">Search for products...</p>
+              ) : (
+                <AutoTyper
+                  dataText={[
+                    "Search for Ubtan",
+                    "Search for Face Serum",
+                    "Search for Vitamin C",
+                    "Search for Face Wash",
+                    "Search for Face Mask",
+                  ]}
+                />
+              )}
+            </div>
+          </button>
+        )}
 
         <button
           className="btn btn-search"
@@ -167,46 +162,6 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
         >
           <MagnifyingGlass color="currentColor" size={20} />
         </button>
-
-        <div className="live-search-list bg-white scrollable">
-          {search.length > 2 &&
-            data?.map((product, index) => {
-              const images =
-                product.images?.items.sort((a, b) => a.position - b.position) ||
-                [];
-
-              const thumbImage = images.find((i) => i.isThumb) ||
-                images[0] || { imageKey: product.imageUrl };
-
-              return (
-                <ALink
-                  href={`/products/${product.slug}`}
-                  className="autocomplete-suggestion"
-                  key={`search-result-${index}`}
-                >
-                  <NextImage
-                    src={thumbImage?.imageKey}
-                    width={40}
-                    height={40}
-                    alt={thumbImage.alt}
-                    loading="eager"
-                    priority
-                  />
-                  <div
-                    className="search-name ml-1"
-                    dangerouslySetInnerHTML={removeXSSAttacks(
-                      matchEmphasize(product.title)
-                    )}
-                  ></div>
-                  <span className="search-price">
-                    <span className="new-price">
-                      ₹{toDecimal(product.price)}
-                    </span>
-                  </span>
-                </ALink>
-              );
-            })}
-        </div>
       </div>
     </div>
   );

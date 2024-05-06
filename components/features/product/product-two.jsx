@@ -1,8 +1,8 @@
 import { useProduct, useProductVariantGroups } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
-import Image from "~/components/image";
 import { useMemo } from "react";
 import { connect } from "react-redux";
+import Image from "~/components/image";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
@@ -82,6 +82,15 @@ function ProductTwo(props) {
     logger.verbose("Added product to cart");
     logger.debug("Added product to cart:", product);
 
+    setCartVisibility(true);
+    addToCart({
+      ...productsNew,
+      section,
+      qty: productsNew?.minimumOrderQuantity || 1,
+    });
+    logger.verbose("Added product to cart");
+    logger.debug("Added product to cart:", product);
+
     return false;
   };
 
@@ -117,6 +126,7 @@ function ProductTwo(props) {
   return (
     <div className={`product text-left ${adClass} product-card`}>
       {/* <figure className="product-media"> */}
+      {!!thumbImage?.imageKey && (
       {!!thumbImage?.imageKey && (
         <ALink href={`/products/${slug}`}>
           <Image
