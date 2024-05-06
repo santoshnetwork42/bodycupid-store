@@ -61,10 +61,10 @@ function NavbarProvider({ children, cartList, appliedCoupon, user }) {
   );
 }
 
-export const useNavBarState = () => useContext(NavbarContext);
+export const useNavBarState = () => useContext(NavbarContext) || {};
 
 export const useIsInteractive = () => {
-  const { isInteractive } = useContext(NavbarContext);
+  const { isInteractive } = useContext(NavbarContext) || {};
   return !!isInteractive;
 };
 
