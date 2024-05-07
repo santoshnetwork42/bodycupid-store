@@ -433,7 +433,6 @@ function CartProduct({
             )}
           </div>
         )}
-
         {(!cartItemType || cartItemType === "CART") && (
           <>
             {!!ltoDeal && !outOfStock && (
