@@ -38,7 +38,7 @@ const PaymentMethods = ({
           <p>
             {description}
             {showUpdateCoupon && (
-              <ALink href={"/pages/cart"} className="lh-1">
+              <ALink href={"/?cart=1"} className="lh-1">
                 Update coupon
               </ALink>
             )}

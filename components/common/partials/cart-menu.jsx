@@ -28,6 +28,9 @@ function CartMenu(props) {
   } = props;
 
   const router = useRouter();
+  const { query, asPath } = router;
+  const { cart: forceOpenCart } = query;
+
   const cartItems = useCartItems({
     showLTOProducts: false,
     showNonApplicableFreeProducts: true,
@@ -64,8 +67,10 @@ function CartMenu(props) {
   }, [isCartOpen]);
 
   useEffect(() => {
-    setCartVisibility(false);
-  }, [router.asPath]);
+    if (!forceOpenCart) {
+      setCartVisibility(false);
+    }
+  }, [asPath]);
 
   return (
     <div className=" side-bar  d-flex align-items-center p-unset mr-0 mr-lg-2">
