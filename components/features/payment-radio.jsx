@@ -45,9 +45,11 @@ const PaymentMethods = ({
           </p>
         </div>
       </div>
-      <p className="payment-card-amount m-0 font-weight-semi-bold">
-        ₹{toDecimal(amount, 0)}
-      </p>
+      {!disabled && (
+        <p className="payment-card-amount m-0 font-weight-semi-bold">
+          ₹{toDecimal(amount, 0)}
+        </p>
+      )}
     </div>
   );
 };
