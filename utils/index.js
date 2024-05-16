@@ -542,6 +542,18 @@ export const formateDate = (date) => {
   return `${dd} ${monthName} ${yyyy}, ${hh}:${mm} ${ap}`;
 };
 
+export const formateReviewDate = (date) => {
+  const dt = date ? new Date(date) : new Date();
+  const dd = String(dt.getDate()).padStart(2, "0");
+
+  const monthName = dt.toLocaleString("en-IN", {
+    month: "long",
+  });
+  const yyyy = dt.getFullYear();
+
+  return `${dd} ${monthName} ${yyyy}`;
+};
+
 export const getFreeProductTotal = (cartList) => {
   const filteredCart = cartList.filter(
     (c) => c.cartItemType === "AUTO_FREE_PRODUCT"

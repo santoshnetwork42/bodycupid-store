@@ -2,7 +2,7 @@ import ALink from "~/components/features/custom-link";
 import { Star } from "~/components/icons";
 import NextImage from "~/components/image";
 import ReadMore from "~/components/layouts/read-more";
-import { formateDate } from "~/utils";
+import { formateReviewDate } from "~/utils";
 
 export default function Review({ review = {}, onUpdate }) {
   return (
@@ -29,7 +29,9 @@ export default function Review({ review = {}, onUpdate }) {
                 );
               })}
             </div>
-            <div className="mt-1 ml-2">{formateDate(review.updatedAt)}</div>{" "}
+            <div className="mt-1 ml-2">
+              {formateReviewDate(review.createdAt)}
+            </div>{" "}
           </div>
 
           <div className="d-flex justify-content-between">
