@@ -16,7 +16,7 @@ import { formateDate, getOrderTotal, toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import fetchData from "~/utils/fetchData";
 import { alertToaster } from "~/utils/popupHelper";
-
+import ThankYouPageBanner from "~/public/images/banners/buy8@1999-category.jpg";
 const logger = new Logger("Orders");
 
 function Order({
@@ -147,6 +147,24 @@ function Order({
         </div>
 
         <div className="container pt-7">
+          <div className="d-flex justify-content-center align-items-center mb-4">
+            <ALink
+              className="order-image"
+              href={
+                "/collections/fragrance-bundle-offer?utm_source=thank_you_page"
+              }
+            >
+              <NextImage
+                src={"/images/banners/buy8@1999-category.jpg"}
+                alt={"collections-fragrance-bundle-offer"}
+                loader="local"
+                width={1400}
+                height={400}
+                objectFit="cover"
+                priority
+              />
+            </ALink>
+          </div>
           <div className="d-flex justify-content-between">
             <h2 className="title title-simple text-left mr-2 mt-1 font-weight-bold text-uppercase">
               Order Details
@@ -363,7 +381,7 @@ function Order({
             <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
               <ALink
                 className="btn btn-icon-left btn-dark mr-2 btn-back btn-rounded btn-md"
-                href="/collections/all"
+                href="/collections/fragrance-bundle-offer?utm_source=thank_you_page"
               >
                 Return to shop
               </ALink>
