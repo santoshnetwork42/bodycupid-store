@@ -16,7 +16,7 @@ import { formateDate, getOrderTotal, toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import fetchData from "~/utils/fetchData";
 import { alertToaster } from "~/utils/popupHelper";
-import ThankYouPageBanner from "~/public/images/banners/buy8@1999-category.jpg";
+
 const logger = new Logger("Orders");
 
 function Order({
