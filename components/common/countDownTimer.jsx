@@ -19,7 +19,9 @@ const Timer = ({ displayTimer }) => {
   const timerDescription = useConfiguration(TIMER_DESCRIPTION, "");
   const timerColor = useConfiguration(TIMER_COLOR, "#FFFFFF");
   const timerBgColor = useConfiguration(TIMER_BG_COLOR, "#2E8B57");
-  const targetDate = useConfiguration(TIMER_END_TIME);
+  const startDate = useConfiguration(TIMER_START_TIME);
+  const endDate = useConfiguration(TIMER_END_TIME);
+  const isDaily = useConfiguration(IS_DAILY_TIMER, false);
 
   const [showTimer, setShowTimer] = useState(timerEnabled);
 
@@ -31,11 +33,25 @@ const Timer = ({ displayTimer }) => {
   });
 
   useEffect(() => {
-    if (targetDate) {
+    if (endDate) {
       const interval = setInterval(() => {
-        const timeInSeconds = dayjs(targetDate).diff(dayjs());
+        const currentTime = dayjs();
+        const start = dayjs(startDate);
+        const end = dayjs(endDate);
 
-        if (timeInSeconds <= 0) {
+        if (currentTime.isAfter(start) && currentTime.isBefore(end)) {
+          const timeInSeconds = dayjs(end).diff(dayjs());
+
+          const { days, hours, minutes, seconds } =
+            countTimeFromSeconds(timeInSeconds);
+          setTimeLeft({
+            days: isDaily ? "00" : days,
+            hours,
+            minutes,
+            seconds,
+          });
+          setShowTimer(timerEnabled);
+        } else {
           setTimeLeft({
             days: "00",
             hours: "00",
@@ -43,21 +59,11 @@ const Timer = ({ displayTimer }) => {
             seconds: "00",
           });
           setShowTimer(false);
-        } else {
-          const { days, hours, minutes, seconds } =
-            countTimeFromSeconds(timeInSeconds);
-          setTimeLeft({
-            days,
-            hours,
-            minutes,
-            seconds,
-          });
-          setShowTimer(timerEnabled);
         }
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [targetDate]);
+  }, [endDate]);
 
   if (!timerEnabled || !showTimer) return <></>;
 
