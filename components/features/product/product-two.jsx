@@ -69,6 +69,8 @@ function ProductTwo(props) {
     return;
   }, [collections]);
 
+  const productLabel = label || tag;
+
   const addToCartHandler = (e) => {
     e?.preventDefault();
     setCartVisibility(true);
@@ -135,9 +137,11 @@ function ProductTwo(props) {
         )}
       </div>
 
-      {!!tag && (
+      {!!productLabel && (
         <div className="product-tags-group">
-          <label className="product-label label-best-seller">{tag}</label>
+          <label className="product-label label-best-seller">
+            {productLabel}
+          </label>
         </div>
       )}
 
