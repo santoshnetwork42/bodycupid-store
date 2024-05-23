@@ -871,6 +871,7 @@ export const findProducts = /* GraphQL */ `
         position
         collectionsList {
           label
+          priority
         }
         listingPrice
         tags

@@ -53,9 +53,14 @@ function ProductTwo(props) {
     logger.verbose("Opened quick view for product:", slug);
   };
 
-  const label = product.collectionsList?.length
-    ? product.collectionsList?.find((col) => !!col.label)?.label
-    : null;
+  let selectedLabel = product?.collectionsList?.length
+    ? product?.collectionsList?.find((col) => !!col.label)
+    : "";
+  product?.collectionsList?.map((item) => {
+    if (!!item?.label && item?.priority > selectedLabel?.priority) {
+      selectedLabel = item;
+    }
+  });
 
   const tag = useMemo(() => {
     if (PRODUCT_TAG_LIST.includes(tagSlug)) {
@@ -69,7 +74,7 @@ function ProductTwo(props) {
     return;
   }, [collections]);
 
-  const productLabel = label || tag;
+  const productLabel = selectedLabel?.label || tag;
 
   const addToCartHandler = (e) => {
     e?.preventDefault();
@@ -156,7 +161,7 @@ function ProductTwo(props) {
             {/* <div className="product-tags lh-default">
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </div> */}
-            <div className="product-coupon">{label}</div>
+            <div className="product-coupon">{selectedLabel?.label}</div>
             <div className="ratings-container mb-0">
               <div className="ratings-full d-flex rating-product-list mr-1">
                 <Star size={20} color={"#FAB73B"} />
