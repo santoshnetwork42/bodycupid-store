@@ -57,7 +57,7 @@ function ProductTwo(props) {
     ? product?.collectionsList?.find((col) => !!col.label)
     : "";
   product?.collectionsList?.map((item) => {
-    if (!!item?.label && item?.priority > selectedLabel?.priority) {
+    if (!!item?.label?.trim() && item?.priority > selectedLabel?.priority) {
       selectedLabel = item;
     }
   });
@@ -74,7 +74,7 @@ function ProductTwo(props) {
     return;
   }, [collections]);
 
-  const productLabel = selectedLabel?.label || tag;
+  const productLabel = selectedLabel?.label?.trim() || tag;
 
   const addToCartHandler = (e) => {
     e?.preventDefault();
@@ -161,7 +161,7 @@ function ProductTwo(props) {
             {/* <div className="product-tags lh-default">
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </div> */}
-            <div className="product-coupon">{selectedLabel?.label}</div>
+            <div className="product-coupon">{selectedLabel?.label?.trim()}</div>
             <div className="ratings-container mb-0">
               <div className="ratings-full d-flex rating-product-list mr-1">
                 <Star size={20} color={"#FAB73B"} />
