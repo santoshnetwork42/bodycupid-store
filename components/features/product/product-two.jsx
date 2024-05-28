@@ -10,7 +10,7 @@ import { Star } from "~/components/icons";
 import { PRODUCT_TAG_LIST } from "~/constant";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
-import { toDecimal } from "~/utils";
+import { getCartCount, toDecimal } from "~/utils";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
 
 const logger = new Logger("Product-details");
@@ -48,6 +48,12 @@ function ProductTwo(props) {
     discount,
   } = productsNew || {};
 
+  const totalCartItems =
+    getCartCount(cartList) + productsNew?.minimumOrderQuantity || 1;
+
+  const showCartModal =
+    totalCartItems > 0 && totalCartItems % 8 !== 0 ? false : true;
+
   const showQuickviewHandler = () => {
     openQuickview(slug);
     logger.verbose("Opened quick view for product:", slug);
@@ -71,12 +77,15 @@ function ProductTwo(props) {
 
   const addToCartHandler = (e) => {
     e?.preventDefault();
-    setCartVisibility(true);
     addToCart({
       ...productsNew,
       section,
       qty: productsNew?.minimumOrderQuantity || 1,
     });
+    if (tagSlug === "bundle-offer") {
+      showCartModal && setCartVisibility(true);
+    } else setCartVisibility(true);
+
     logger.verbose("Added product to cart");
     logger.debug("Added product to cart:", product);
 
@@ -96,6 +105,7 @@ function ProductTwo(props) {
         const recordKey = getRecordKey(product);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
+        tagSlug === "bundle-offer" && showCartModal && setCartVisibility(true);
         logger.verbose("Updated product quantity in cart");
         logger.debug(
           "Updated product quantity in cart:",
