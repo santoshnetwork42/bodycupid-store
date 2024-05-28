@@ -2018,6 +2018,8 @@ export const getCollectionType = /* GraphQL */ `
         slug
         defaultSorting
         isArchive
+        imageUrl
+        name
       }
     }
   }

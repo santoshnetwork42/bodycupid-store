@@ -2,6 +2,7 @@ import { GOOGLE_VERIFICATION_TAG, STORE_ID } from "~/config";
 import {
   findProducts,
   getCollectionType,
+  getHomePageCategories,
   getStoreBanners,
 } from "~/graphql/api";
 import fetchData from "~/utils/fetchData";
@@ -9,8 +10,8 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { setSoldOutLast } from "~/utils/products";
 import { getDefaultSorting } from "..";
 
-const getSearchProducts = (filter, limit) =>
-  fetchData(findProducts, {
+export const getSearchProducts = async (filter, limit) => {
+  const res = await fetchData(findProducts, {
     filter: {
       storeId: { eq: STORE_ID },
       status: { eq: "ENABLED" },
@@ -24,13 +25,31 @@ const getSearchProducts = (filter, limit) =>
     imageLimit: 1,
   });
 
-const getCollectionBySlug = (slug) => {
-  return fetchData(getCollectionType, {
+  return res;
+};
+
+const getCollectionBySlug = async (slug) => {
+  const res = await fetchData(getCollectionType, {
     filter: {
       storeId: { eq: STORE_ID },
       slug: { eq: slug },
     },
   });
+  return res;
+};
+
+const getProductSubCategory = async (limit) => {
+  const res = await fetchData(getHomePageCategories, {
+    filter: {
+      isFeatured: { eq: true },
+      storeId: { eq: STORE_ID },
+      isArchive: { eq: false },
+    },
+    limit,
+    sort: [{ field: "priority", direction: "asc" }],
+  });
+
+  return res;
 };
 
 export const getStaticProps = async () => {
@@ -38,23 +57,36 @@ export const getStaticProps = async () => {
     { searchProducts: searchBestSellerProducts },
     { getStore: store },
     { searchCollectionTypes: bestSellerCollectionItem },
+    { searchProducts: searchFeaturedProducts },
+    { searchCollectionTypes: featuredCollectionItem },
+    { searchProductCategories: productSubCategoriesItem },
   ] = await Promise.all([
     getSearchProducts({ collections: { eq: "best-seller" } }, 8),
     fetchData(getStoreBanners, { id: STORE_ID, deviceType: "WEB" }),
     getCollectionBySlug("best-seller"),
+    getSearchProducts({ collections: { eq: "featured" } }, 8),
+    getCollectionBySlug("featured"),
+    getProductSubCategory(8),
   ]);
 
   const { items: bestSellerItems } = searchBestSellerProducts;
-  const [bestSellerCollection] = bestSellerCollectionItem.items;
+  const [bestSellerCollection] = bestSellerCollectionItem?.items;
+  const { items: featuredItems } = searchFeaturedProducts;
+  const [featuredCollection] = featuredCollectionItem?.items;
+  const productSubCategories = productSubCategoriesItem?.items;
 
   const { title, name, description, webUrl, imageUrl, banners } = store;
 
   const bestSellerProducts = setSoldOutLast(bestSellerItems);
+  const featuredProducts = setSoldOutLast(featuredItems);
 
   return {
     props: {
+      store,
       hero: { banners },
       bestSellerProducts,
+      featuredProducts,
+      productSubCategories,
       pageMeta: {
         siteName: name,
         title,
@@ -66,6 +98,7 @@ export const getStaticProps = async () => {
       bestSellerDefaultSorting: getDefaultSorting(
         bestSellerCollection?.defaultSorting
       ),
+      featuredCollection,
     },
     revalidate: 1800,
   };
