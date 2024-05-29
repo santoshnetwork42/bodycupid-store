@@ -74,7 +74,6 @@ export const getStaticProps = async () => {
   const { items: featuredItems } = searchFeaturedProducts;
   const [featuredCollection] = featuredCollectionItem?.items;
   const productSubCategories = productSubCategoriesItem?.items;
-
   const { title, name, description, webUrl, imageUrl, banners } = store;
 
   const bestSellerProducts = setSoldOutLast(bestSellerItems);

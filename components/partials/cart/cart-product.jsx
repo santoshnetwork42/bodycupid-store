@@ -1,4 +1,3 @@
-import { Logger } from "aws-amplify";
 import { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 
@@ -18,8 +17,6 @@ import {
   getProductInventory,
   productDiscountPercentage,
 } from "~/utils/products";
-
-const logger = new Logger("Cart-products");
 
 function CartProduct({
   item,

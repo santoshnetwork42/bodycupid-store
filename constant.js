@@ -29,5 +29,6 @@ export const TIMER_COLOR = "TIMER_COLOR";
 export const TIMER_BG_COLOR = "TIMER_BG_COLOR";
 export const TIMER_END_TIME = "TIMER_END_TIME";
 export const TIMER_ENABLED = "TIMER_ENABLED";
+export const BLOCK_INVENTORY = "BLOCK_INVENTORY";
 
 export const LIMITED_TIME_DEAL_DURATION = 2;
