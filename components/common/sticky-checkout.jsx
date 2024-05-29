@@ -22,7 +22,7 @@ function StickyFooter(props) {
     return (
       totalCartItems > 0 &&
       cartList.some((cart) => {
-        const hasSpecialOffer = cart.collections.includes("bundle-offer");
+        const hasSpecialOffer = cart?.collections?.includes("bundle-offer");
         return hasSpecialOffer;
       })
     );
