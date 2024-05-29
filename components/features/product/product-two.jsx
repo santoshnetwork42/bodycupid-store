@@ -48,11 +48,11 @@ function ProductTwo(props) {
     discount,
   } = productsNew || {};
 
-  const totalCartItems =
-    getCartCount(cartList) + productsNew?.minimumOrderQuantity || 1;
+  // const totalCartItems =
+  //   getCartCount(cartList) + productsNew?.minimumOrderQuantity || 1;
 
-  const showCartModal =
-    totalCartItems > 0 && totalCartItems % 8 !== 0 ? false : true;
+  // const showCartModal =
+  //   totalCartItems > 0 && totalCartItems % 8 !== 0 ? false : true;
 
   const showQuickviewHandler = () => {
     openQuickview(slug);
@@ -82,9 +82,9 @@ function ProductTwo(props) {
       section,
       qty: productsNew?.minimumOrderQuantity || 1,
     });
-    if (tagSlug === "bundle-offer") {
-      showCartModal && setCartVisibility(true);
-    } else setCartVisibility(true);
+    // if (tagSlug === "bundle-offer") {
+    //   showCartModal && setCartVisibility(true);
+    // } else setCartVisibility(true);
 
     logger.verbose("Added product to cart");
     logger.debug("Added product to cart:", product);
@@ -105,7 +105,7 @@ function ProductTwo(props) {
         const recordKey = getRecordKey(product);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
-        tagSlug === "bundle-offer" && showCartModal && setCartVisibility(true);
+        // tagSlug === "bundle-offer" && showCartModal && setCartVisibility(true);
         logger.verbose("Updated product quantity in cart");
         logger.debug(
           "Updated product quantity in cart:",
