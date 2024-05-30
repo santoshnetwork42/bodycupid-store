@@ -961,6 +961,19 @@
   }
 }
 
+.sticky-container {
+  position: fixed;
+  bottom: 104px;
+  width: 100vw;
+  max-width: 500px;
+  z-index: 12;
+  left: calc(50vw - 25rem);
+
+  .coupon-discount-bar{
+    margin: auto;
+  }
+}
+
 .stick-bottom-button-order {
   padding: 0 !important;
 }
@@ -1073,6 +1086,13 @@
     bottom: -1px !important;
     left: 0;
     border-radius: 0 !important;
+  }
+
+  .sticky-container {
+    width: 100vw !important;
+    bottom: 62px !important;
+    z-index: 12;
+    left: 0;
   }
 
   .card-title {
