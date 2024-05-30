@@ -179,21 +179,17 @@ function ProductTwo(props) {
             )}
 
             <div className="ratings-container mb-0">
-              <div className="ratings-full d-flex rating-product-list mr-1">
-                <Star size={20} color={"#FAB73B"} />
-              </div>
-              <span className="rating text-black font-weight-bold">
-                {rating}
-              </span>
-              <ALink
-                href={{
-                  pathname: `/products/${slug}`,
-                  query: { review: true },
-                }}
-                className="rating-reviews text-black font-weight-bold"
-              >
-                ({totalRatings || 0} reviews)
-              </ALink>
+              {!!totalRatings && totalRatings > 0 && (
+                <>
+                  <div className="ratings-full d-flex rating-product-list mr-1">
+                    <Star size={18} color={"#FAB73B"} />
+                  </div>
+                  <span className="rating text-black font-weight-bold">
+                    {rating}
+                  </span>
+                  ({totalRatings} reviews)
+                </>
+              )}
             </div>
             <div className="product-price product-sm mt-2 mb-2 lh-1">
               <ins className="new-price ">₹{toDecimal(price || 0)}</ins>
