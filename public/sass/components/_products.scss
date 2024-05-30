@@ -491,7 +491,7 @@
   }
 
   .details-wrapper {
-    height: 11.4rem;
+    height: 12.5rem;
     margin-bottom: 2rem;
   }
 
@@ -641,6 +641,18 @@
 
 .ratings-full {
   cursor: pointer;
+}
+
+.product-card-benefits {
+  color: #057508;
+  font-size: 13px;
+  margin: 0 0 4px;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.35em;
+  min-height: 2.7em;
 }
 
 .ratings-full,

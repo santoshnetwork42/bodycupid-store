@@ -171,7 +171,12 @@ function ProductTwo(props) {
             {/* <div className="product-tags lh-default">
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </div> */}
-            <div className="product-coupon">{selectedLabel?.label?.trim()}</div>
+            {/* <div className="product-coupon">{selectedLabel?.label?.trim()}</div> */}
+            {!!product?.benefits && (
+              <div className="product-card-benefits">
+                {product?.benefits.join(" | ")}
+              </div>
+            )}
             <div className="ratings-container mb-0">
               <div className="ratings-full d-flex rating-product-list mr-1">
                 <Star size={20} color={"#FAB73B"} />
