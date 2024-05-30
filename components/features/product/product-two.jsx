@@ -165,7 +165,7 @@ function ProductTwo(props) {
       <div className="product-details card">
         <ALink href={`/products/${slug}`}>
           <div className="details-wrapper">
-            <h3 className="product-name text-uppercase product-card-title p-0 font-weight-semi-bold">
+            <h3 className="product-name product-title-min-height text-uppercase product-card-title p-0 font-weight-semi-bold">
               {title}
             </h3>
             {/* <div className="product-tags lh-default">
@@ -177,6 +177,7 @@ function ProductTwo(props) {
                 {product?.benefits.join(" | ")}
               </div>
             )}
+
             <div className="ratings-container mb-0">
               <div className="ratings-full d-flex rating-product-list mr-1">
                 <Star size={20} color={"#FAB73B"} />
