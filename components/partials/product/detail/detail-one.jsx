@@ -253,33 +253,24 @@ function DetailOne(props) {
 
       <p className="mb-2 lh-default text-dark">Inclusive of all taxes</p>
 
-      <div className="ratings-container">
-        <div className="ratings-full mt-0 lh-1" onClick={onReviewClick}>
-          {Array.from({ length: 5 }).map((_, index) => {
-            const isFilled = index + 1 <= product.rating;
-
-            return (
-              <Star
-                key={`rs-${product.id}-${index}`}
-                size={16}
-                color={isFilled ? "#FAB73B" : "#D9D9D9"}
-              />
-            );
-          })}
-          <span className="tooltiptext tooltip-top">
-            {toDecimal(product.rating)}
+      <div className="ratings-container mb-3 gap-4">
+        <div
+          className="ratings-full d-flex rating-product-list"
+          onClick={onReviewClick}
+        >
+          <Star size={14} color={"#FAB73B"} />
+        </div>
+        <div className="d-flex gap-5 align-items-center">
+          <span className="rating text-black font-size-18 font-weight-semi-bold plp-rating-font-size">
+            {rating}
+          </span>
+          <span className="rating text-black ">|</span>
+          <span className="rating text-black font-size-18 font-weight-semi-bold plp-rating-font-size">
+            {totalRatings || 0} reviews
           </span>
         </div>
-
-        {!!product.totalRatings && (
-          <div
-            onClick={onReviewClick}
-            className="rating-reviews cursor-pointer"
-          >
-            ( {product.totalRatings} reviews )
-          </div>
-        )}
       </div>
+
       <div className="d-flex text-success align-items-center mb-3 lh-default">
         {!!product.totalOrders && (
           <p className="text-success font-weight-semi-bold mb-0 lh-1">

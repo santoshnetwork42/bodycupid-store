@@ -628,15 +628,15 @@
   margin-top: 4px;
   @include print_css(product, rating);
 
-  .rating-product-list {
-    padding-bottom: 3px;
-  }
-
   .rating {
     font-size: 1.3rem;
     text-align: center;
     line-height: 1;
   }
+}
+
+.plp-rating-font-size {
+  font-size: 14px !important;
 }
 
 .ratings-full {
