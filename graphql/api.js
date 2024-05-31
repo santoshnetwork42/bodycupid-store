@@ -320,6 +320,8 @@ export const getProductBySlug = /* GraphQL */ `
         }
         title
         brand
+        label
+        labelColor
         vendor
         collections
         isFeatured
@@ -858,6 +860,8 @@ export const findProducts = /* GraphQL */ `
         title
         collections
         vendor
+        label
+        labelColor
         status
         isFeatured
         category {
@@ -871,6 +875,7 @@ export const findProducts = /* GraphQL */ `
         position
         collectionsList {
           label
+          labelColor
           priority
         }
         listingPrice
@@ -959,6 +964,8 @@ export const getProductById = /* GraphQL */ `
       title
       collections
       vendor
+      label
+      labelColor
       subCategory {
         name
         slug

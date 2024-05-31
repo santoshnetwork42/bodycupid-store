@@ -80,7 +80,11 @@ function ProductTwo(props) {
     return;
   }, [collections]);
 
-  const productLabel = selectedLabel?.label?.trim() || tag;
+  const productTopLabel = selectedLabel?.label?.trim() || tag;
+  const productTopLabelColor =
+    selectedLabel?.labelColor?.trim() === "#000000"
+      ? "#17B31B"
+      : selectedLabel?.labelColor?.trim() || "#17B31B";
 
   const addToCartHandler = (e) => {
     e?.preventDefault();
@@ -129,6 +133,14 @@ function ProductTwo(props) {
   }
   // const imageKey = isSearch ? product.imageUrl : thumbImage?.imageKey;
 
+  const productCardTagStyle = {
+    backgroundColor: product?.labelColor || "#00ad86",
+  };
+
+  const productLabelStyle = {
+    backgroundColor: productTopLabelColor,
+  };
+
   return (
     <div className={`product text-left ${adClass} product-card`}>
       {/* <figure className="product-media"> */}
@@ -152,15 +164,26 @@ function ProductTwo(props) {
         )}
       </div>
 
-      {!!productLabel && (
+      {!!productTopLabel && (
         <div className="product-tags-group">
-          <label className="product-label label-best-seller">
-            {productLabel}
+          <label
+            className="product-label label-best-seller"
+            style={productLabelStyle}
+          >
+            {productTopLabel}
           </label>
         </div>
       )}
 
       {/* </figure> */}
+
+      {!!product?.label?.trim() && (
+        <div className="product-card-tag" style={productCardTagStyle}>
+          <p className="mb-0 font-size-12 font-weight-bolder">
+            {product?.label?.toUpperCase()}
+          </p>
+        </div>
+      )}
 
       <div className="product-details card">
         <ALink href={`/products/${slug}`}>

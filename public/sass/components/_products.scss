@@ -327,7 +327,7 @@
   &.label-best-seller {
     border-top-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    @include print_css(product, label, bestseller);
+    // @include print_css(product, label, bestseller);
   }
 
   &.label-sale {
@@ -632,6 +632,19 @@
     font-size: 1.3rem;
     text-align: center;
     line-height: 1;
+  }
+}
+
+.product-card-tag {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  color: white;
+  padding: 0.1rem 3rem;
+  border-radius: 4rem;
+  max-width: 20rem;
+  p {
+    font-family: sans-serif;
   }
 }
 
