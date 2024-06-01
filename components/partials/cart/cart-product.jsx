@@ -274,12 +274,19 @@ function CartProduct({
                 {!!variantGroup && !disableChange && (
                   <>
                     {variantGroup.map((v1, index) => {
+                      const selectedOptionValue =
+                        selectedVariantGroupOptions?.find(
+                          (item) => item.variantGroupId === v1.id
+                        )?.variantGroupOptionId ??
+                        selectedVariantGroupOptions[index]
+                          ?.variantGroupOptionId;
+
                       return (
                         <div className="card-margin-bottom ml-2" key={v1.id}>
                           <select
                             name={`${v1.id}`}
                             className="form-control-drop-down"
-                            value={`${selectedVariantGroupOptions[index]?.variantGroupOptionId}`}
+                            value={`${selectedOptionValue}`}
                             onChange={(e) => {
                               setVariantUpdate(true);
                               handleOnChangeVariant(v1.id, e.target.value);
@@ -361,13 +368,19 @@ function CartProduct({
               {!!variantGroup && !disableChange && (
                 <>
                   {variantGroup.map((v1, index) => {
+                     const selectedOptionValue =
+                     selectedVariantGroupOptions?.find(
+                       (item) => item.variantGroupId === v1.id
+                     )?.variantGroupOptionId ??
+                     selectedVariantGroupOptions[index]
+                       ?.variantGroupOptionId;
                     return (
                       <>
                         <div className="card-margin-bottom ml-2" key={v1.id}>
                           <select
                             name={`${v1.id}`}
                             className="form-control-drop-down"
-                            value={`${selectedVariantGroupOptions[index]?.variantGroupOptionId}`}
+                            value={`${selectedOptionValue}`}
                             onChange={(e) => {
                               setVariantUpdate(true);
                               handleOnChangeVariant(v1.id, e.target.value);
