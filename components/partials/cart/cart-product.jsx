@@ -288,7 +288,7 @@ function CartProduct({
                             {v1.variantOptions.map((v) => {
                               return v.active ? (
                                 <option key={v.id} value={v.id}>
-                                  {v.title}
+                                  {v.title || v.label}
                                 </option>
                               ) : null;
                             })}
@@ -376,7 +376,7 @@ function CartProduct({
                             {v1.variantOptions.map((v) => {
                               return (
                                 <option key={v.id} value={v.id}>
-                                  {v.title}
+                                  {v.title || v.label}
                                 </option>
                               );
                             })}
