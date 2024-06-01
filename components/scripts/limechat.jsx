@@ -34,7 +34,7 @@ function LimeChat() {
     console.log("Limechat script loaded");
     let whatsAppBtn = new LimeChatWhatsapp({
       phoneNumber: "918147657386",
-      prefill_text: "Hey, Let's chat about WowSkinScience.",
+      prefill_text: "Hey, Let's chat about Body Cupid.",
       button_message_mobile: "Chat with us",
       button_message_desktop: "Chat with us",
       display_on: "both",
@@ -79,7 +79,6 @@ function LimeChat() {
       <Script
         data-cfasync="false"
         src={`https://s3.ap-south-1.amazonaws.com/cdn.limechat.ai/packs/js/whatsapp_widget/LC_whatsapp_widget.js`}
-        strategy="afterInteractive"
         onLoad={handleScriptLoad}
       />
     </>
