@@ -1,44 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "~/components/image";
 
-import { API, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
 import ALink from "~/components/features/custom-link";
-import { STORE_ID } from "~/config";
-import { getHomePageCategories } from "~/graphql/api";
 import { eventActions } from "~/store/events";
-import { useIsInteractive } from "~/utils/contexts/navbar";
 import { getSource } from "~/utils/helper";
 
-function CategorySection({ tileClicked }) {
+function CategorySection({ tileClicked, categories }) {
   const source = getSource();
-  const isInteractive = useIsInteractive();
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    if (isInteractive) {
-      API.graphql(
-        graphqlOperation(getHomePageCategories, {
-          limit: 8,
-          filter: {
-            isFeatured: { eq: true },
-            storeId: { eq: STORE_ID },
-            isArchive: { eq: false },
-          },
-          sort: [{ field: "priority", direction: "asc" }],
-        })
-      )
-        .then((res) => res.data.searchProductCategories.items)
-        .then(setCategories);
-    }
-  }, [isInteractive]);
 
   return (
     <section className="ellipse-section pt-6">
       <div className="container">
         <h2 className="title capitalize-title">Browse Our Categories</h2>
         <div className="row elements">
-          {categories.map((category, index) => {
+          {categories?.map((category, index) => {
             return (
               <div key={category.id} className="col-3">
                 <div className="category category-spacing category-ellipse text-uppercase">

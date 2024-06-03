@@ -22,7 +22,7 @@ function NextHead({
         <meta name="google-site-verification" content={googleVerificationTag} />
       )}
 
-      <link rel="canonical" id="canonical" href={canonical} />
+      <link rel="canonical" href={canonical} />
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />

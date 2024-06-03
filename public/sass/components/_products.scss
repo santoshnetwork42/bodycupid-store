@@ -327,7 +327,7 @@
   &.label-best-seller {
     border-top-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    @include print_css(product, label, bestseller);
+    // @include print_css(product, label, bestseller);
   }
 
   &.label-sale {
@@ -491,7 +491,7 @@
   }
 
   .details-wrapper {
-    height: 11.4rem;
+    height: 12.5rem;
     margin-bottom: 2rem;
   }
 
@@ -628,10 +628,6 @@
   margin-top: 4px;
   @include print_css(product, rating);
 
-  .rating-product-list {
-    padding-bottom: 3px;
-  }
-
   .rating {
     font-size: 1.3rem;
     text-align: center;
@@ -639,8 +635,41 @@
   }
 }
 
+.product-card-tag {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  color: white;
+  padding: 0.1rem 3rem;
+  border-radius: 4rem;
+  max-width: 20rem;
+  p {
+    font-family: sans-serif;
+  }
+}
+
+.product-title-min-height {
+  min-height: 4rem;
+}
+
+.plp-rating-font-size {
+  font-size: 14px !important;
+}
+
 .ratings-full {
   cursor: pointer;
+}
+
+.product-card-benefits {
+  color: #057508;
+  font-size: 13px;
+  margin: 0 0 4px;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.35em;
+  min-height: 2.7em;
 }
 
 .ratings-full,

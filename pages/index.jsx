@@ -25,9 +25,12 @@ export { getStaticProps } from "~/utils/page";
 function HomePage({
   hero,
   bestSellerProducts,
+  featuredProducts,
   store,
   pageMeta,
   bestSellerDefaultSorting,
+  featuredCollection,
+  productSubCategories,
 }) {
   const { name } = store || {};
   const { isSmallSize } = useWindowDimensions();
@@ -61,10 +64,11 @@ function HomePage({
         <RenderProductCollection
           title="Our featured"
           slug="featured"
-          filter={{ collections: { eq: "featured" } }}
+          products={featuredProducts}
+          collection={featuredCollection}
         />
 
-        <CategorySection />
+        <CategorySection categories={productSubCategories} />
         <ReviewSection />
         <BrandSection
           brands={[

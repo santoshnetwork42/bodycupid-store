@@ -142,11 +142,13 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
               ) : (
                 <AutoTyper
                   dataText={[
-                    "Search for Ubtan",
-                    "Search for Face Serum",
-                    "Search for Vitamin C",
+                    "Search for Shower Gel",
                     "Search for Face Wash",
-                    "Search for Face Mask",
+                    "Search for Body Lotion",
+                    "Search for Body Scrub",
+                    "Search for Perfume",
+                    "Search for Body Mist",
+                    "Search for Gift Set",
                   ]}
                 />
               )}

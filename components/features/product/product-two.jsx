@@ -10,7 +10,7 @@ import { Star } from "~/components/icons";
 import { PRODUCT_TAG_LIST } from "~/constant";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
-import { toDecimal } from "~/utils";
+import { getCartCount, toDecimal } from "~/utils";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
 
 const logger = new Logger("Product-details");
@@ -48,14 +48,25 @@ function ProductTwo(props) {
     discount,
   } = productsNew || {};
 
+  // const totalCartItems =
+  //   getCartCount(cartList) + productsNew?.minimumOrderQuantity || 1;
+
+  // const showCartModal =
+  //   totalCartItems > 0 && totalCartItems % 8 !== 0 ? false : true;
+
   const showQuickviewHandler = () => {
     openQuickview(slug);
     logger.verbose("Opened quick view for product:", slug);
   };
 
-  const label = product.collectionsList?.length
-    ? product.collectionsList?.find((col) => !!col.label)?.label
-    : null;
+  let selectedLabel = product?.collectionsList?.length
+    ? product?.collectionsList?.find((col) => !!col.label)
+    : "";
+  product?.collectionsList?.map((item) => {
+    if (!!item?.label?.trim() && item?.priority > selectedLabel?.priority) {
+      selectedLabel = item;
+    }
+  });
 
   const tag = useMemo(() => {
     if (PRODUCT_TAG_LIST.includes(tagSlug)) {
@@ -69,14 +80,23 @@ function ProductTwo(props) {
     return;
   }, [collections]);
 
+  const productTopLabel = selectedLabel?.label?.trim() || tag;
+  const productTopLabelColor =
+    selectedLabel?.labelColor?.trim() === "#000000"
+      ? "#17B31B"
+      : selectedLabel?.labelColor?.trim() || "#17B31B";
+
   const addToCartHandler = (e) => {
     e?.preventDefault();
-    setCartVisibility(true);
     addToCart({
       ...productsNew,
       section,
       qty: productsNew?.minimumOrderQuantity || 1,
     });
+    // if (tagSlug === "bundle-offer") {
+    //   showCartModal && setCartVisibility(true);
+    // } else setCartVisibility(true);
+
     logger.verbose("Added product to cart");
     logger.debug("Added product to cart:", product);
 
@@ -96,6 +116,7 @@ function ProductTwo(props) {
         const recordKey = getRecordKey(product);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
+        // tagSlug === "bundle-offer" && showCartModal && setCartVisibility(true);
         logger.verbose("Updated product quantity in cart");
         logger.debug(
           "Updated product quantity in cart:",
@@ -111,6 +132,14 @@ function ProductTwo(props) {
     }
   }
   // const imageKey = isSearch ? product.imageUrl : thumbImage?.imageKey;
+
+  const productCardTagStyle = {
+    backgroundColor: product?.labelColor || "#00ad86",
+  };
+
+  const productLabelStyle = {
+    backgroundColor: productTopLabelColor,
+  };
 
   return (
     <div className={`product text-left ${adClass} product-card`}>
@@ -135,40 +164,55 @@ function ProductTwo(props) {
         )}
       </div>
 
-      {!!tag && (
+      {!!productTopLabel && (
         <div className="product-tags-group">
-          <label className="product-label label-best-seller">{tag}</label>
+          <label
+            className="product-label label-best-seller"
+            style={productLabelStyle}
+          >
+            {productTopLabel}
+          </label>
         </div>
       )}
 
       {/* </figure> */}
 
+      {!!product?.label?.trim() && (
+        <div className="product-card-tag" style={productCardTagStyle}>
+          <p className="mb-0 font-size-12 font-weight-bolder">
+            {product?.label?.toUpperCase()}
+          </p>
+        </div>
+      )}
+
       <div className="product-details card">
         <ALink href={`/products/${slug}`}>
           <div className="details-wrapper">
-            <h3 className="product-name text-uppercase product-card-title p-0 font-weight-semi-bold">
+            <h3 className="product-name product-title-min-height text-uppercase product-card-title p-0 font-weight-semi-bold">
               {title}
             </h3>
             {/* <div className="product-tags lh-default">
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </div> */}
-            <div className="product-coupon">{label}</div>
-            <div className="ratings-container mb-0">
-              <div className="ratings-full d-flex rating-product-list mr-1">
-                <Star size={20} color={"#FAB73B"} />
+            {/* <div className="product-coupon">{selectedLabel?.label?.trim()}</div> */}
+            {!!product?.benefits && (
+              <div className="product-card-benefits">
+                {product?.benefits.join(" | ")}
               </div>
-              <span className="rating text-black font-weight-bold">
-                {rating}
-              </span>
-              <ALink
-                href={{
-                  pathname: `/products/${slug}`,
-                  query: { review: true },
-                }}
-                className="rating-reviews text-black font-weight-bold"
-              >
-                ({totalRatings || 0} reviews)
-              </ALink>
+            )}
+
+            <div className="ratings-container mb-0">
+              {!!totalRatings && totalRatings > 0 && (
+                <>
+                  <div className="ratings-full d-flex rating-product-list mr-1">
+                    <Star size={18} color={"#FAB73B"} />
+                  </div>
+                  <span className="rating text-black font-weight-bold">
+                    {rating}
+                  </span>
+                  ({totalRatings} reviews)
+                </>
+              )}
             </div>
             <div className="product-price product-sm mt-2 mb-2 lh-1">
               <ins className="new-price ">₹{toDecimal(price || 0)}</ins>

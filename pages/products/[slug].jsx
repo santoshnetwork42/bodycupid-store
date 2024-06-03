@@ -22,7 +22,8 @@ import { useIsInteractive } from "~/utils/contexts/navbar";
 import fetchData from "~/utils/fetchData";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import handleRedirect from "~/utils/handleRedirect";
-import { getProductMeta } from "~/utils/products";
+import { getSearchProducts } from "~/utils/page";
+import { getProductMeta, setSoldOutLast } from "~/utils/products";
 
 const RenderProductCollection = dynamic(() =>
   import("~/components/partials/home/render-product-collection")
@@ -31,7 +32,7 @@ const RenderProductCollection = dynamic(() =>
 const logger = new Logger("Products");
 
 function ProductDefault(props) {
-  const { product, pageMeta, viewItem } = props;
+  const { product, pageMeta, viewItem, relatedProducts } = props;
 
   const router = useRouter();
   const { query } = router;
@@ -55,23 +56,6 @@ function ProductDefault(props) {
       });
     }
   }, [product, isInteractive]);
-
-  const relatedProductFilter = useMemo(() => {
-    if (!!product) {
-      const { id, categoryId, subCategoryId } = product || {};
-      const filter = {
-        id: { ne: id },
-      };
-      if (subCategoryId) {
-        filter.subCategoryId = { eq: subCategoryId };
-      } else {
-        filter.categoryId = { eq: categoryId };
-      }
-      return filter;
-    }
-
-    return null;
-  }, [product]);
 
   const { defaultVariantId } = useMemo(() => {
     const { variants = {} } = product || {};
@@ -129,10 +113,10 @@ function ProductDefault(props) {
               <DescOne key={`desc-one=${product.id}`} product={product} />
             </div>
 
-            {!!relatedProductFilter && (
+            {!!relatedProducts && (
               <RenderProductCollection
-                filter={relatedProductFilter}
                 title="Related products"
+                products={relatedProducts}
               />
             )}
           </div>
@@ -193,10 +177,32 @@ export const getStaticProps = async (context) => {
     const { pageTitle, productDescription, title, metadata } = product;
     const { thumbImage } = getProductMeta(product);
 
+    //get related product's filter
+    let relatedProductsFilter = {};
+    if (!!product) {
+      const { id, categoryId, subCategoryId } = product || {};
+      relatedProductsFilter = {
+        id: { ne: id },
+      };
+      if (subCategoryId) {
+        relatedProductsFilter.subCategoryId = { eq: subCategoryId };
+      } else {
+        relatedProductsFilter.categoryId = { eq: categoryId };
+      }
+    }
+
+    const [{ searchProducts: searchRelatedProducts }] = await Promise.all([
+      getSearchProducts(relatedProductsFilter, 10),
+    ]);
+
+    const { items: relatedProductItems } = searchRelatedProducts;
+    const relatedProducts = setSoldOutLast(relatedProductItems);
+
     return {
       props: {
         slug,
         product,
+        relatedProducts,
         pageMeta: {
           siteName: name,
           title: metadata?.title || title || pageTitle,

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Star } from "~/components/icons";
+import { GradientStar, Star } from "~/components/icons";
 
 export default function RatingStar({
   editable = false,
@@ -8,20 +8,16 @@ export default function RatingStar({
   value: defValue = 0,
 }) {
   const [value, setValue] = useState(defValue);
+  let productRating = value;
+
   if (!editable) {
     return (
       <div className="ratings-container m-0 pointer-none">
-        <div className="ratings-full">
+        <div className="ratings-full mt-0 lh-1">
           {Array.from({ length: 5 }).map((_, index) => {
-            const isFilled = index + 1 <= value;
-
-            return (
-              <Star
-                key={`star-${index}`}
-                size={16}
-                color={isFilled ? "#FAB73B" : "#D9D9D9"}
-              />
-            );
+            const fill = Math.min(productRating, 1) * 100;
+            productRating = productRating > 1 ? productRating - 1 : 0;
+            return <GradientStar key={index} size={16} fill={fill} />;
           })}
         </div>
       </div>
