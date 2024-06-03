@@ -185,6 +185,10 @@ function DetailOne(props) {
     }
   }
 
+  console.log(
+    variantGroup,
+    ">>>variantGroupvariantGroupvariantGroupvariantGroup<<<"
+  );
   const save = Math.round(((listingPrice - price) * 100) / listingPrice);
 
   return (
