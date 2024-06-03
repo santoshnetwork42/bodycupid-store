@@ -4,13 +4,9 @@ import { useEffect, useState } from "react";
 
 function LimeChat() {
   const router = useRouter();
-  const [isHome, setIsHome] = useState(false);
   const [whatsappButton, setWhatsappButton] = useState(null);
 
-  useEffect(() => {
-    setIsHome(router.pathname === "/");
-  }, [router.pathname]);
-  console.log("here");
+  const isHome = router.pathname === "/";
   const ele = document.getElementsByClassName("WhatsAppButton__root");
 
   useEffect(() => {
@@ -18,7 +14,7 @@ function LimeChat() {
       const array = Array.prototype.slice.call(ele);
       if (array.length) {
         if (!isHome) {
-          array?.forEach((e) => {
+          array.forEach((e) => {
             e.remove();
           });
         }
@@ -28,13 +24,12 @@ function LimeChat() {
         }
       }
     }
-  }, [router, isHome, whatsappButton]);
+  }, [isHome, whatsappButton]);
 
   const handleScriptLoad = () => {
-    console.log("Limechat script loaded");
     let whatsAppBtn = new LimeChatWhatsapp({
-      phoneNumber: "918147657386",
-      prefill_text: "Hey, Let's chat about Body Cupid.",
+      phone: "918147657386",
+      prefill_text: "Hey, Let's chat about Bodycupid.",
       button_message_mobile: "Chat with us",
       button_message_desktop: "Chat with us",
       display_on: "both",
@@ -79,6 +74,7 @@ function LimeChat() {
       <Script
         data-cfasync="false"
         src={`https://s3.ap-south-1.amazonaws.com/cdn.limechat.ai/packs/js/whatsapp_widget/LC_whatsapp_widget.js`}
+        strategy="afterInteractive"
         onLoad={handleScriptLoad}
       />
     </>
