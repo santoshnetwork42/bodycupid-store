@@ -29,6 +29,7 @@ function StickyFooter(props) {
   }, [cartList]);
 
   if (!cartList.length || !showStickyCheckout) return <></>;
+  
   return (
     <div className="sticky-container">
       {showDiscount && <CouponDiscountBar />}
