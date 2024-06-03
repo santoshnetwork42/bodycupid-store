@@ -58,43 +58,44 @@ const App = ({ Component, pageProps }) => {
     hideChatbot: !!Component.hideChatbot,
   };
 
-  const destroySession = useCallback(() => {
-    store.__persistor.purge();
-    store.dispatch(rootActions.destroySession());
-  }, [store]);
-
-  const setUser = useCallback(async () => {
+  const destroySession = async () => {
     try {
-      const state = store.getState();
-      if (!state.user.data) {
+      store.__persistor.purge();
+      store.dispatch(rootActions.destroySession());
+      await Auth.signOut();
+    } catch (error) {
+      logger.error(error);
+    }
+  };
+  const setUser = async () => {
+    try {
+      const lsuser = localStorage.getItem(`${STORE_PREFIX}-user`);
+      const parsedUser = lsuser ? JSON.parse(lsuser).data : null;
+
+      if (!parsedUser || parsedUser === "null") {
         const user = await Auth.currentAuthenticatedUser().catch(() => null);
-        if (user?.attributes?.sub) {
+
+        if (!!user) {
           const {
             data: { getUser: getUserResponse },
           } = await API.graphql({
             query: getUser,
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
-
           store.dispatch(userActions.setUser(getUserResponse));
-          // await Analytics.updateEndpoint({
-          //   userId: getUserResponse.id,
-          //   userAttributes: {
-          //     username: [getUserResponse.id],
-          //     email: [getUserResponse.email || null],
-          //     phone: [getUserResponse.phone || null],
-          //     firstName: [getUserResponse.firstName || null],
-          //     lastName: [getUserResponse.lastName || null],
-          //   },
-          // }).catch(() => null);
+        }
+      } else {
+        const user = await getCurrentUser().catch(() => null);
+        if (!user) {
+          destroySession();
         }
       }
     } catch (error) {
+      destroySession();
       logger.error(error);
       errorHandler(error);
-      destroySession();
     }
-  }, [store, destroySession]);
+  };
 
   const setStore = useCallback(async () => {
     try {
@@ -159,27 +160,21 @@ const App = ({ Component, pageProps }) => {
     }
   }, []);
 
-  const initSession = useCallback(async () => {
-    setStore();
-    setUser();
-  }, [setStore, setUser]);
-
   useEffect(() => {
-    const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
     const hubListenerCancelToken = Hub.listen("auth", async (authEvent) => {
-      const {
-        payload: { event, data },
-      } = authEvent;
-      if (event === "signOut") {
+      const { event } = authEvent.payload;
+      if (event === "signedOut") {
         logger.info("Signing out");
         destroySession();
         store.dispatch(eventActions.auth("logout"));
-      } else if (loggedInEvents.includes(event)) {
-        initSession();
+      } else {
+        setStore();
+        setUser();
       }
     });
 
-    initSession();
+    setStore();
+    setUser();
 
     return () => hubListenerCancelToken();
   }, []);
