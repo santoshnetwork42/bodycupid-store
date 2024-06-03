@@ -162,6 +162,7 @@ export default function ToolBox(props) {
                 onChange={(e) => onChangeAttri(e, "sortby")}
               >
                 <option value="default">Recommended</option>
+                <option value="availability">Availability</option>
                 <option value="best-seller">Best sellers</option>
                 <option value="popularity">Highest rated</option>
                 <option value="price-high">Price - High to Low</option>
