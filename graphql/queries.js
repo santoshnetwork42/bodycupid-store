@@ -1451,6 +1451,8 @@ export const getStoreSetting = /* GraphQL */ `
         TIMER_DESCRIPTION
         TIMER_COLOR
         TIMER_END_TIME
+        TIMER_START_TIME
+        IS_DAILY_TIMER
         TIMER_ENABLED
         PREPAID_ENABLED
         __typename
