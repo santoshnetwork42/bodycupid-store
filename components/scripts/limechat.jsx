@@ -42,7 +42,7 @@ function LimeChat() {
       right_margin_desktop: 48,
       display_size_mobile: 44,
       position_mobile: "right",
-      bottom_margin_mobile: 70,
+      bottom_margin_mobile: 100,
       left_margin_mobile: 24,
       right_margin_mobile: 24,
       show_pop_up: true,
