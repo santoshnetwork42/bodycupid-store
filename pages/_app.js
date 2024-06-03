@@ -85,7 +85,7 @@ const App = ({ Component, pageProps }) => {
           store.dispatch(userActions.setUser(getUserResponse));
         }
       } else {
-        const user = await getCurrentUser().catch(() => null);
+        const user = await Auth.currentAuthenticatedUser().catch(() => null);
         if (!user) {
           destroySession();
         }
