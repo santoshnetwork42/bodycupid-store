@@ -23,8 +23,6 @@ import {
   getUpdatedCart,
   scrollWithOffset,
 } from "~/utils/helper";
-import { getProductInventory } from "~/utils/products";
-import ProductVariant from "../product-variant";
 import VariantCard from "../variant-card";
 
 function DetailOne(props) {
