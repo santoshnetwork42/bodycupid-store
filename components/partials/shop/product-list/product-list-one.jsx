@@ -72,13 +72,13 @@ function ProductListOne(props) {
       !Number.isNaN(Number(maxprice)) &&
       Number(minprice)
     ) {
-      filter.price = {
+      filter.defaultPrice = {
         range: [Number(minprice), Number(maxprice)],
       };
     } else if (!Number.isNaN(Number(minprice)) && Number(minprice)) {
-      filter.price = { gte: Number(minprice) };
+      filter.defaultPrice = { gte: Number(minprice) };
     } else if (!Number.isNaN(Number(maxprice)) && Number(maxprice)) {
-      filter.price = { lte: Number(maxprice) };
+      filter.defaultPrice = { lte: Number(maxprice) };
     }
     switch (sortby) {
       case "latest":
@@ -88,10 +88,13 @@ function ProductListOne(props) {
         sortBy.push({ field: "rating", direction: "desc" });
         break;
       case "price-low":
-        sortBy.push({ field: "price", direction: "asc" });
+        sortBy.push({ field: "defaultPrice", direction: "asc" });
         break;
       case "price-high":
-        sortBy.push({ field: "price", direction: "desc" });
+        sortBy.push({ field: "defaultPrice", direction: "desc" });
+        break;
+      case "availability":
+        sortBy.push({ field: "defaultInventory", direction: "desc" });
         break;
       case "best-seller":
         sortBy.push({ field: "totalOrders", direction: "desc" });

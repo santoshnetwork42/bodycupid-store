@@ -882,6 +882,8 @@ export const findProducts = /* GraphQL */ `
         tags
         inventory
         blockedInventory
+        defaultPrice
+        defaultInventory
         subCategoryId
         variantGroups {
           variantGroupId
