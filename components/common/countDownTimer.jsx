@@ -24,8 +24,14 @@ const Timer = ({ displayTimer }) => {
   const timerDescription = useConfiguration(TIMER_DESCRIPTION, "");
   const timerColor = useConfiguration(TIMER_COLOR, "#FFFFFF");
   const timerBgColor = useConfiguration(TIMER_BG_COLOR, "#2E8B57");
-  const startDateConfig = useConfiguration(TIMER_START_TIME);
-  const endDateConfig = useConfiguration(TIMER_END_TIME);
+  const startDateConfig = useConfiguration(
+    TIMER_START_TIME,
+    new Date().toISOString()
+  );
+  const endDateConfig = useConfiguration(
+    TIMER_END_TIME,
+    new Date().toISOString()
+  );
   const isDaily = useConfiguration(IS_DAILY_TIMER, false);
 
   const [timeLeft, setTimeLeft] = useState({
