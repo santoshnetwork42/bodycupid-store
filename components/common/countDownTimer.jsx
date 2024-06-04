@@ -56,7 +56,7 @@ const Timer = ({ displayTimer }) => {
           if (currentTime >= startTime && currentTime <= endTime) {
             const durationInSeconds = dayjs(endDateConfig).diff(now);
             if (durationInSeconds > 0) {
-              const { days, hours, minutes, seconds } =
+              const { hours, minutes, seconds } =
                 countTimeFromSeconds(durationInSeconds);
               setTimeLeft({
                 days: "00",
