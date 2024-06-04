@@ -11,7 +11,7 @@ import { getCartCount, toDecimal } from "~/utils";
 import { useNavBarState } from "~/utils/contexts/navbar";
 
 function StickyFooter(props) {
-  const { cartList, showStickyCheckout, setCartVisibility, slug } = props;
+  const { cartList, showStickyCheckout, setCartVisibility } = props;
   const { isRewardApplied } = useNavBarState();
   const router = useRouter();
 
