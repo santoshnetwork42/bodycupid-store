@@ -59,7 +59,7 @@ const Timer = ({ displayTimer }) => {
               const { days, hours, minutes, seconds } =
                 countTimeFromSeconds(durationInSeconds);
               setTimeLeft({
-                days: isDaily ? "00" : days,
+                days: "00",
                 hours,
                 minutes,
                 seconds,
