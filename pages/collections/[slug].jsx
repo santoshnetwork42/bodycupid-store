@@ -84,6 +84,7 @@ function CollectionPage(props) {
                 products={products}
                 pageFilter={pageFilter}
                 filterItems={filterItems}
+                defaultSorting={data?.defaultSorting}
               />
             </div>
           </div>

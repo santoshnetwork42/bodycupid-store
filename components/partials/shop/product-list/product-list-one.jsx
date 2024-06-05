@@ -33,6 +33,7 @@ function ProductListOne(props) {
     filterItems,
     viewList,
     sectionId,
+    defaultSorting,
   } = props;
 
   const router = useRouter();
@@ -205,7 +206,11 @@ function ProductListOne(props) {
   return (
     <>
       {isToolbox && !search && (
-        <ToolBox type={type} filterItems={filterItems} />
+        <ToolBox
+          type={type}
+          filterItems={filterItems}
+          defaultSorting={defaultSorting}
+        />
       )}
 
       <InfiniteScroll

@@ -5,9 +5,10 @@ import ALink from "~/components/features/custom-link";
 
 import SidebarFilterThree from "~/components/partials/shop/sidebar/sidebar-filter-three";
 import { getDefaultSorting } from "~/utils";
+import { sortingOptionsForCollection } from "~/utils/helper";
 
 export default function ToolBox(props) {
-  const { type = "left", filterItems } = props;
+  const { type = "left", filterItems, defaultSorting = "default" } = props;
   const router = useRouter();
   const query = router.query;
   const { asPath } = router;
@@ -158,7 +159,9 @@ export default function ToolBox(props) {
               <select
                 name="orderby"
                 className="form-control"
-                defaultValue={query.sortby ? query.sortby : "default"}
+                defaultValue={
+                  query.sortby || sortingOptionsForCollection[defaultSorting]
+                }
                 onChange={(e) => onChangeAttri(e, "sortby")}
               >
                 <option value="default">Recommended</option>
