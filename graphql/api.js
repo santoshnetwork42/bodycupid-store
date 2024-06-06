@@ -1899,6 +1899,7 @@ export const getRedirects = /* GraphQL */ `
     getRedirects(slug: $slug, storeId: $storeId) {
       slug
       redirect
+      hitCount
     }
   }
 `;
