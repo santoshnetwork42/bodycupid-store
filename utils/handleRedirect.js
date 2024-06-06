@@ -29,13 +29,13 @@ const handleRedirect = async (path, defaultRedirect = "/collections/all") => {
     };
   }
 
-  if (!!pageRedirect?.slug && !!pageRedirect?.hitCount) {
+  if (!!pageRedirect?.slug) {
     logger.verbose("handleRedirect > updateRedirects");
     await fetchData(updateRedirects, {
       input: {
         storeId: STORE_ID,
         slug: path,
-        hitCount: pageRedirect.hitCount + 1,
+        hitCount: (pageRedirect?.hitCount || 0) + 1,
       },
     });
   }
