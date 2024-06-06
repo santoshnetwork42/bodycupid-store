@@ -3,7 +3,7 @@ import { extname } from "path";
 
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
-import { getRedirects, createRedirects } from "~/graphql/api";
+import { getRedirects, createRedirects, updateRedirects } from "~/graphql/api";
 
 const logger = new Logger("HandleRedirect", "VERBOSE");
 
@@ -27,6 +27,17 @@ const handleRedirect = async (path, defaultRedirect = "/collections/all") => {
         permanent: true,
       },
     };
+  }
+
+  if (!!pageRedirect?.slug && !!pageRedirect?.hitCount) {
+    logger.verbose("handleRedirect > updateRedirects");
+    await fetchData(updateRedirects, {
+      input: {
+        storeId: STORE_ID,
+        slug: path,
+        hitCount: pageRedirect.hitCount + 1,
+      },
+    });
   }
 
   if (!pageRedirect && !extension) {
