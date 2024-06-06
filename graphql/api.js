@@ -1911,6 +1911,19 @@ export const createRedirects = /* GraphQL */ `
   }
 `;
 
+export const updateRedirects = /* GraphQL */ `
+  mutation UpdateRedirects($input: UpdateRedirectsInput!) {
+    updateRedirects(input: $input) {
+      id
+      storeId
+      slug
+      hitCount
+      redirect
+      updatedAt
+    }
+  }
+`;
+
 export const searchConfigurations = /* GraphQL */ `
   query SearchConfigurations(
     $filter: SearchableConfigurationFilterInput
