@@ -267,11 +267,35 @@ export const getStaticProps = async (context) => {
       });
     }
 
+    const sortBy = [];
+    switch (collection.defaultSorting) {
+      case "LATEST":
+        sortBy.push({ field: "createdAt", direction: "desc" });
+        break;
+      case "HIGHEST_RATED":
+        sortBy.push({ field: "rating", direction: "desc" });
+        break;
+      case "PRICE_LOW_TO_HIGH":
+        sortBy.push({ field: "defaultPrice", direction: "asc" });
+        break;
+      case "PRICE_HIGH_TO_LOW":
+        sortBy.push({ field: "defaultPrice", direction: "desc" });
+        break;
+      case "AVAILABILITY":
+        sortBy.push({ field: "defaultInventory", direction: "desc" });
+        break;
+      case "BEST_SELLERS":
+        sortBy.push({ field: "totalOrders", direction: "desc" });
+        break;
+      default:
+        sortBy.push({ field: "position", direction: "asc" });
+    }
+
     // Get Product By tag
     filter.collections = { eq: slug };
     const { searchProducts } = await fetchData(findProducts, {
       filter,
-      sort: [{ field: "position", direction: "asc" }],
+      sort: sortBy,
       variantFilter: { status: { eq: "ENABLED" } },
       imageLimit: 1,
     });
