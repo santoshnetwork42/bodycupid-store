@@ -46,6 +46,7 @@ const handleRedirect = async (path, defaultRedirect = "/collections/all") => {
       input: {
         storeId: STORE_ID,
         slug: path,
+        hitCount: 1,
       },
     });
   }
