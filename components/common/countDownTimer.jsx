@@ -123,13 +123,6 @@ const Timer = ({ displayTimer }) => {
         <div className="d-flex justify-content-center align-items-center gap-6 mb-2">
           <div className="d-flex-col justify-content-center align-items-center">
             <p className="font-size-18 font-weight-bold mb-0">
-              {timeLeft.days}
-            </p>
-            <p className="font-size-12 line-height-14 mb-0">DAYS</p>
-          </div>
-          <span>:</span>
-          <div className="d-flex-col justify-content-center align-items-center">
-            <p className="font-size-18 font-weight-bold mb-0">
               {timeLeft.hours}
             </p>
             <p className="font-size-12 line-height-14 mb-0">HOURS</p>
