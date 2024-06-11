@@ -14,7 +14,7 @@
     "@sentry/nextjs": "^7.47.0",
     "@vercel/analytics": "^1.0.1",
     "@vercel/speed-insights": "^1.0.10",
-    "@wow-star/utils": "1.0.173-beta.1",
+    "@wow-star/utils": "1.0.175-beta.2",
     "await-global": "^2.0.0",
     "aws-amplify": "^5.0.11",
     "dayjs": "^1.11.10",
