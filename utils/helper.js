@@ -66,7 +66,14 @@ export const removeHoverEffect = () => {
     );
   }
 
-  if (hasTouch()) {
+  function isMobile() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return /android|iphone|ipod|blackberry|iemobile|opera mini/i.test(
+      userAgent
+    );
+  }
+
+  if (hasTouch() && isMobile()) {
     try {
       for (var si in document.styleSheets) {
         var styleSheet = document.styleSheets[si];
