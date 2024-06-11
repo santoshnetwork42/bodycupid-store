@@ -36,6 +36,7 @@ function CollectionPage(props) {
     data,
     pageMeta,
     categoryViewed,
+    sortBy,
   } = props;
   const { name } = store || {};
   const source = getSource();
@@ -85,6 +86,8 @@ function CollectionPage(props) {
                 pageFilter={pageFilter}
                 filterItems={filterItems}
                 defaultSorting={data?.defaultSorting}
+                nextToken={products?.nextToken}
+                sortBy={sortBy}
               />
             </div>
           </div>
@@ -217,6 +220,7 @@ export const getStaticProps = async (context) => {
           description: metadata?.description || description,
           canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
           image: getPublicImageURL(metadata?.image || imageUrl),
+          noIndex: metadata?.noIndex || false,
         },
       },
       revalidate: 1800,
@@ -309,12 +313,14 @@ export const getStaticProps = async (context) => {
         products: searchProducts,
         pageFilter: filter,
         filterItems: collections,
+        sortBy,
         pageMeta: {
           siteName: name,
           title: metadata?.title || title || collectionName,
           description: metadata?.description || description,
           canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
           image: getPublicImageURL(metadata?.image || imageUrl),
+          noIndex: metadata?.noIndex || false,
         },
       },
       revalidate: 1800,

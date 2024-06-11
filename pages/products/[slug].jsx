@@ -210,6 +210,7 @@ export const getStaticProps = async (context) => {
           keywords: metadata?.keywords || [],
           canonical: metadata?.canonical || `${webUrl}/products/${slug}`,
           image: getPublicImageURL(metadata?.image || thumbImage?.imageKey),
+          noIndex: metadata?.noIndex || false,
         },
       },
       revalidate: 1800,

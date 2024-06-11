@@ -34,6 +34,8 @@ function ProductListOne(props) {
     viewList,
     sectionId,
     defaultSorting,
+    nextToken: fromPropsNextToken = "",
+    sortBy: sortbyFromProps = [],
   } = props;
 
   const router = useRouter();
@@ -57,7 +59,7 @@ function ProductListOne(props) {
   const [applyFilters, resetFilter] = useState(
     !!sortby || !!search?.trim() || minprice || maxprice
   );
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(fromPropsNextToken || null);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -101,7 +103,11 @@ function ProductListOne(props) {
         sortBy.push({ field: "totalOrders", direction: "desc" });
         break;
       default:
-        sortBy.push({ field: "position", direction: "asc" });
+        if (sortbyFromProps.length > 0) {
+          sortBy.push(...sortbyFromProps);
+        } else {
+          sortBy.push({ field: "position", direction: "asc" });
+        }
     }
 
     return {

@@ -376,6 +376,9 @@ export const getProductBySlug = /* GraphQL */ `
           title
           description
           keywords
+          image
+          canonical
+          noIndex
         }
         continueSellingOutOfStock
         hasVarient
@@ -828,6 +831,14 @@ export const getBasicCategory = /* GraphQL */ `
         isArchive
         bannerUrl
         categoryID
+        metadata {
+          title
+          description
+          keywords
+          image
+          canonical
+          noIndex
+        }
       }
     }
   }
