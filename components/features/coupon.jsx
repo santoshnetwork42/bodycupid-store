@@ -32,6 +32,7 @@ function Coupon(props) {
     addToCart,
     removeFromCart,
     layout = "cart",
+    storedCouponCode,
   } = props;
 
   const [coupon, setCoupon] = useState("");
@@ -70,7 +71,14 @@ function Coupon(props) {
   const bestCouponCode = useBestCoupon();
 
   useEffect(() => {
-    if (bestCouponCode) {
+    if (storedCouponCode) {
+      if (
+        (!appliedCoupon || appliedCoupon?.autoApplied) &&
+        appliedCoupon?.code !== storedCouponCode
+      ) {
+        applyCouponCode(storedCouponCode, true);
+      }
+    } else if (bestCouponCode) {
       if (
         (!appliedCoupon || appliedCoupon?.autoApplied) &&
         appliedCoupon?.code !== bestCouponCode
@@ -433,6 +441,7 @@ function mapStateToProps(state) {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
+    storedCouponCode: state.cart.storedCouponCode,
   };
 }
 

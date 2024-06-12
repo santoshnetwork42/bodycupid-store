@@ -16,6 +16,7 @@ import {
 } from "~/utils";
 import { useIsInteractive } from "~/utils/contexts/navbar";
 import { removeHoverEffect } from "~/utils/helper";
+import { cartActions } from "~/store/cart";
 
 const Footer = dynamic(() => import("~/components/common/footer"));
 const Passwordless = dynamic(
@@ -56,9 +57,15 @@ function Layout({
   closeQuickview,
   closeLogin,
   closePasswordless,
+  storeCoupon,
 }) {
   const router = useRouter();
   const isInteractive = useIsInteractive();
+
+  const couponCode = router?.query?.couponCode?.split("&")[0];
+  if (couponCode) {
+    storeCoupon(couponCode);
+  }
 
   useEffect(() => {
     removeHoverEffect();
@@ -155,4 +162,5 @@ export default connect(null, {
   closeQuickview: modalActions.closeQuickview,
   closeLogin: modalActions.closeLoginModal,
   closePasswordless: modalActions.closePasswordlessModal,
+  storeCoupon: cartActions.storeCoupon,
 })(Layout);
