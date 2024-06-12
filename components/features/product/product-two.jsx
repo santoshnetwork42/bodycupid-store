@@ -12,6 +12,7 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { getCartCount, toDecimal } from "~/utils";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
+import EmblaCarousel from "../react-embla";
 
 const logger = new Logger("Product-details");
 
@@ -142,22 +143,44 @@ function ProductTwo(props) {
     backgroundColor: productTopLabelColor,
   };
 
+  const lgImages = useMemo(() => {
+    const images = [...productsNew.images.items];
+    images.sort((a, b) => a.position - b.position);
+    return images;
+  }, [product]);
+
   return (
     <div className={`product text-left ${adClass} product-card`}>
       {/* <figure className="product-media"> */}
-      {!!thumbImage?.imageKey && (
-        <ALink href={`/products/${slug}`}>
-          <Image
-            src={thumbImage?.imageKey}
-            alt={title}
-            height={280}
-            width={280}
-            quality={50}
-            objectFit="contain"
-            priority={!!priority}
-          />
-        </ALink>
-      )}
+      <EmblaCarousel
+        options={{
+          loop: false,
+          align: "center",
+        }}
+        controlsAbsolute
+      >
+        {!!lgImages.length &&
+          lgImages?.map((image, index) => (
+            <div
+              key={image.imageKey}
+              style={{
+                flex: "0 0 100%",
+              }}
+            >
+              <ALink href={`/products/${slug}`}>
+                <Image
+                  src={image.imageKey}
+                  alt={title}
+                  height={280}
+                  width={280}
+                  quality={50}
+                  objectFit="cover"
+                  priority={!!priority}
+                />
+              </ALink>
+            </div>
+          ))}
+      </EmblaCarousel>
 
       <div className="product-label-group">
         {discount > 0 && (
@@ -196,11 +219,11 @@ function ProductTwo(props) {
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </div> */}
             {/* <div className="product-coupon">{selectedLabel?.label?.trim()}</div> */}
-            {!!product?.benefits && (
+            {/* {!!product?.benefits && (
               <div className="product-card-benefits">
                 {product?.benefits.join(" | ")}
               </div>
-            )}
+            )} */}
 
             <div className="ratings-container mb-0">
               {!!totalRatings && totalRatings > 0 && (
