@@ -1572,6 +1572,13 @@ export const getStoreBanners = /* GraphQL */ `
         isArchive
         priority
       }
+      announcements {
+        label
+        link
+        color
+        textColor
+        isArchive
+      }
     }
   }
 `;
