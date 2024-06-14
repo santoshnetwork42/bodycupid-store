@@ -574,7 +574,7 @@
   min-height: 18rem;
   border-radius: 0.5rem;
   .mobile-address-content {
-    width: 22rem;
+    width: 28rem;
   }
   .combined-address {
     display: -webkit-box;
@@ -582,7 +582,14 @@
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: 3rem; /* Adjust according to the line height and number of lines */
-    line-height: 1.5rem; /* Line height for two lines */
+    line-height: 2rem; /* Line height for two lines */
   }
+}
+
+.address-card-limit {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

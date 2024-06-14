@@ -179,7 +179,7 @@ function Addresses({
                         )}
                         <div className="ml-2">
                           <h5
-                            className={`card-title text-uppercase mb-1 ${
+                            className={`card-title mb-1 ${
                               adr.id === selected?.id && !!onAddressChange
                                 ? "collapse"
                                 : " "
@@ -187,34 +187,34 @@ function Addresses({
                           >
                             {adr.name}
                           </h5>
-                          <div className="add-lables-values">
+                          <div className="add-lables-values d-flex-col gap-2">
                             {adr?.email && (
                               <span className="checkout-email-lable">
                                 {adr?.email} <br />
                               </span>
                             )}
+                            <span className="address-card-limit">
+                              {combineLandmarkAndArea(adr?.landmark, adr?.area)}
+                            </span>
 
-                            {adr?.phone && (
-                              <span>
-                                {adr?.phone} <br />
-                              </span>
-                            )}
                             <div className="add-wrap">
-                              <span className="add-address">
-                                {adr?.address && (
-                                  <span className="">
-                                    {adr?.address}, &nbsp;
-                                  </span>
+                              <div className="d-flex">
+                                {adr?.city && <span>{adr?.city}</span>}{" "}
+                                {adr?.city && adr?.pinCode && (
+                                  <span>&nbsp;-&nbsp;</span>
                                 )}
-                                {adr?.area && <span>{adr?.area}, &nbsp;</span>}
-                                {adr?.landmark && (
-                                  <span>{adr?.landmark}, &nbsp;</span>
-                                )}
-                              </span>
+                                {adr?.pinCode && <span>{adr?.pinCode}</span>}
+                              </div>
+                              {adr?.state && <span>{adr?.state} &nbsp;</span>}
 
-                              <span>
-                                {`${adr?.city}, ${adr?.state}, ${adr?.pinCode}`}
-                              </span>
+                              {adr?.phone && (
+                                <div className="d-flex gap-2">
+                                  <span>Mobile:</span>
+                                  <span>
+                                    {adr?.phone} <br />
+                                  </span>
+                                </div>
+                              )}
                             </div>
                           </div>
                           <div className="add-bottom-btn mt-2">
@@ -226,15 +226,16 @@ function Addresses({
                                 setOpen(true);
                               }}
                             >
-                              Edit <i className="far fa-edit"></i>
+                              Edit
                             </ALink>
+                            <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                             {user && (
                               <ALink
                                 href="#"
-                                className="btn btn-link btn-secondary btn-underline ml-3"
+                                className="btn btn-link btn-secondary btn-underline"
                                 onClick={() => removeAddress(adr.id, user?.id)}
                               >
-                                Delete <i className="far fa-trash-alt"></i>
+                                Remove
                               </ALink>
                             )}
                           </div>
@@ -337,19 +338,22 @@ function Addresses({
                     key={adr.id}
                   >
                     <div className="d-flex-col gap-2 mobile-address-content">
-                      <ALink
-                        href="#"
-                        className={`text-body text-normal ls-m ${
-                          adr.id === selected?.id ? "collapse" : ""
-                        }`}
-                        onClick={() => {
-                          setSelected(adr);
-                          closeAllAddressModal();
-                        }}
-                      >
-                        <h5 className="card-title m-0">{adr.name}</h5>
-                      </ALink>
-                      <div className="d-flex-col gap-2">
+                      <div className="card-header">
+                        <ALink
+                          href="#"
+                          className={`text-body text-normal ls-m ${
+                            adr.id === selected?.id ? "collapse" : ""
+                          }`}
+                          onClick={() => {
+                            setSelected(adr);
+                            closeAllAddressModal();
+                          }}
+                        >
+                          <h5 className="card-title m-0">{adr.name}</h5>
+                        </ALink>
+                      </div>
+
+                      <div className="d-flex-col gap-2 ml-5">
                         <span className="combined-address">
                           {combineLandmarkAndArea(adr?.landmark, adr?.area)}
                         </span>
@@ -373,7 +377,7 @@ function Addresses({
                         )}
                       </div>
                     </div>
-                    <div className="add-bottom-btn d-flex gap-2 align-items-center">
+                    <div className="add-bottom-btn d-flex gap-2 align-items-center ml-5">
                       <ALink
                         href="#"
                         className="btn btn-link btn-secondary  btn-link-black"
