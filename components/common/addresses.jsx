@@ -101,6 +101,22 @@ function Addresses({
     setDefaultAddress(null);
   };
 
+  const combineLandmarkAndArea = (landmark = "", area = "") => {
+    let combinedString = "";
+
+    if (landmark) {
+      combinedString += landmark;
+    }
+    if (landmark && area) {
+      combinedString += ", ";
+    }
+    if (area) {
+      combinedString += area;
+    }
+
+    return combinedString;
+  };
+
   useEffect(() => {
     if (onAddressChange && selected) {
       const adr = addresses.find((a) => a.id === selected.id);
@@ -248,7 +264,7 @@ function Addresses({
         </>
       )}
 
-      {!!selected && variant === "CHECKOUT" && (
+      {/* {!!selected && variant === "CHECKOUT" && (
         <div className="row d-sm-show p-0">
           <div className="bg-white mobile-checkout-address d-flex">
             <div className="mobile-address-heading">
@@ -274,7 +290,7 @@ function Addresses({
             </button>
           </div>
         </div>
-      )}
+      )} */}
 
       {!selected && variant === "CHECKOUT" && (
         <div className="row d-sm-show">
@@ -310,7 +326,112 @@ function Addresses({
         />
       </Modal>
 
-      <Modal
+      {isMobile && (
+        <div className="d-flex-col gap-10 pt-2 pr-2 pb-2 pl-2">
+          {!!addresses?.length && !isAddressFormVisible ? (
+            <>
+              <div className="d-flex gap-10 address-cards-wrapper">
+                {addresses.map((adr) => (
+                  <div
+                    className="mobile-address-wrapper d-flex-col pl-2 pr-2 pt-2 pb-2"
+                    key={adr.id}
+                  >
+                    <div className="d-flex-col gap-2 mobile-address-content">
+                      <ALink
+                        href="#"
+                        className={`text-body text-normal ls-m ${
+                          adr.id === selected?.id ? "collapse" : ""
+                        }`}
+                        onClick={() => {
+                          setSelected(adr);
+                          closeAllAddressModal();
+                        }}
+                      >
+                        <h5 className="card-title m-0">{adr.name}</h5>
+                      </ALink>
+                      <div className="d-flex-col gap-2">
+                        <span className="combined-address">
+                          {combineLandmarkAndArea(adr?.landmark, adr?.area)}
+                        </span>
+
+                        <div className="d-flex">
+                          {adr?.city && <span>{adr?.city}</span>}{" "}
+                          {adr?.city && adr?.pinCode && (
+                            <span>&nbsp;-&nbsp;</span>
+                          )}
+                          {adr?.pinCode && <span>{adr?.pinCode}</span>}
+                        </div>
+                        {adr?.state && <span>{adr?.state} &nbsp;</span>}
+
+                        {adr?.phone && (
+                          <div className="d-flex gap-2">
+                            <span>Mobile:</span>
+                            <span>
+                              {adr?.phone} <br />
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="add-bottom-btn d-flex gap-2 align-items-center">
+                      <ALink
+                        href="#"
+                        className="btn btn-link btn-secondary  btn-link-black"
+                        onClick={() => {
+                          setDefaultAddress({ ...adr });
+                          setIsAddressFormVisible(true);
+                        }}
+                      >
+                        Edit
+                      </ALink>
+                      <span>&nbsp;|&nbsp;</span>
+                      {user && (
+                        <ALink
+                          href="#"
+                          className="btn btn-link btn-secondary "
+                          onClick={() => removeAddress(adr.id, user?.id)}
+                        >
+                          Remove
+                        </ALink>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {!user && !!guestCheckout && addresses.length > 0 ? (
+                <></>
+              ) : (
+                <div className="d-flex">
+                  <button
+                    onClick={() => {
+                      setIsAddressFormVisible(true);
+                    }}
+                    className={`btn btn-primary `}
+                  >
+                    ADD NEW ADDRESS
+                  </button>
+                </div>
+              )}
+            </>
+          ) : (
+            <AddressForm
+              defaultAddress={defaultAddress}
+              onSubmit={(response) => {
+                setIsAddressFormVisible(false);
+                closeAllAddressModal();
+                onAddress(response);
+              }}
+              onClose={() => {
+                closeAllAddressModal();
+                setIsAddressFormVisible(false);
+              }}
+              onAddress={onAddressChange}
+            />
+          )}
+        </div>
+      )}
+
+      {/* <Modal
         isOpen={isAddressesModal}
         onRequestClose={() => {
           closeAllAddressModal();
@@ -402,7 +523,7 @@ function Addresses({
             />
           )}
         </div>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }
