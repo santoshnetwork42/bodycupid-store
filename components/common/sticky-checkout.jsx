@@ -60,6 +60,7 @@ function StickyFooter(props) {
       progress,
       progressMessage,
       buttonText,
+      setCartVisibility,
     });
   }
   return (

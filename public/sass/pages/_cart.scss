@@ -1418,6 +1418,11 @@
   display: block;
   width: 100%;
   text-transform: capitalize;
+
+  :hover > & {
+    background-color: #C3C3C3;
+    color: #fff;
+  }
 }
 
 .progress-button.active {

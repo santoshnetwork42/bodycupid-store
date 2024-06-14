@@ -6,6 +6,7 @@ export const showProgressBar = ({
   progress,
   progressMessage,
   buttonText,
+  setCartVisibility,
 }) => (
   <div className="sticky-progress-container stick-bottom-button">
     <div className="progress-bar-container">
