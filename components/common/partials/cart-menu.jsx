@@ -1,6 +1,11 @@
-import { useCartItems, useCartTotal, useInventory } from "@wow-star/utils";
+import {
+  useCartItems,
+  useCartTotal,
+  useFeaturedCoupons,
+  useInventory,
+} from "@wow-star/utils";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
 
@@ -14,6 +19,7 @@ import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
 import { getTotalPrice, toDecimal } from "~/utils";
 import { useNavBarState } from "~/utils/contexts/navbar";
+import { ProgressBar } from "../progress-bar";
 
 const logger = new Logger("Cart");
 
@@ -72,6 +78,37 @@ function CartMenu(props) {
     }
   }, [asPath]);
 
+  //passed true for getting cart item number only
+  const { filteredFeaturedCoupons: featuredCoupons = [] } =
+    useFeaturedCoupons(true);
+
+  const bxayCoupon = useMemo(() => {
+    return featuredCoupons.find(
+      ({ coupon }) =>
+        coupon && coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
+    );
+  }, [featuredCoupons]);
+
+  const showProgressBar = useMemo(() => {
+    return (
+      cartList?.some((cart) => cart?.collections?.includes("bundle-offer")) &&
+      bxayCoupon &&
+      (!appliedCoupon || appliedCoupon.code === bxayCoupon.coupon.code)
+    );
+  }, [bxayCoupon, appliedCoupon, cartList]);
+
+  const { current, max, progress } = useMemo(() => {
+    if (showProgressBar) {
+      const cartItemsToAdd =
+        typeof bxayCoupon?.message === "number" ? bxayCoupon?.message : 0;
+      const max = bxayCoupon?.coupon?.buyXQuantity;
+      const current = max - cartItemsToAdd;
+      const progress = (current / max) * 100;
+      return { current, max, progress };
+    }
+    return { current: 0, max: 0, progress: 0 };
+  }, [showProgressBar, bxayCoupon]);
+
   return (
     <div className=" side-bar  d-flex align-items-center p-unset mr-0 mr-lg-2">
       <ALink
@@ -117,7 +154,18 @@ function CartMenu(props) {
             {cartItems.length > 0 ? (
               <>
                 <div className=" ">
-                  <CouponDiscountBar />
+                  {showProgressBar ? (
+                    <div className="cart-progress-container">
+                      <ProgressBar
+                        current={current}
+                        max={max}
+                        progress={progress}
+                      />
+                    </div>
+                  ) : (
+                    <CouponDiscountBar />
+                  )}
+
                   <div className="shop-table cart-table lh-default sidebar-padding mt-4">
                     <div key={appliedCoupon?.id}>
                       {cartItems.map((item) => (

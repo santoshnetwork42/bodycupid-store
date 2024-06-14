@@ -6,7 +6,7 @@ import ALink from "~/components/features/custom-link";
 import { modalActions } from "~/store/modal";
 import { toDecimal } from "~/utils";
 import { useNavBarState } from "~/utils/contexts/navbar";
-import { showProgressBar } from "./sticky-progress-bar";
+import { ShowProgressBar } from "./sticky-progress-bar";
 
 function StickyFooter(props) {
   const { cartList, showStickyCheckout, setCartVisibility, appliedCoupon } =
@@ -30,10 +30,12 @@ function StickyFooter(props) {
     );
   }, [cartList, router?.query?.slug]);
 
-  const bxayCoupon = featuredCoupons.find(
-    ({ coupon }) =>
-      coupon && coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
-  );
+  const bxayCoupon = useMemo(() => {
+    return featuredCoupons.find(
+      ({ coupon }) =>
+        coupon && coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
+    );
+  }, [featuredCoupons]);
 
   if (!cartList?.length || !showStickyCheckout) return <></>;
 
@@ -54,7 +56,8 @@ function StickyFooter(props) {
     const buttonText = bxayCoupon?.allowed
       ? `Go to Cart (${current}/${max})`
       : `Buy ${max} @ ₹${bxayCoupon.coupon.getYAmount} (${current}/${max})`;
-    return showProgressBar({
+
+    return ShowProgressBar({
       current,
       max,
       progress,
