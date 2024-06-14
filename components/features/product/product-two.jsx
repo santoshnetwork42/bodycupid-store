@@ -12,7 +12,6 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { getCartCount, toDecimal } from "~/utils";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
-import EmblaCarousel from "../react-embla";
 
 const logger = new Logger("Product-details");
 
@@ -152,7 +151,20 @@ function ProductTwo(props) {
   return (
     <div className={`product text-left ${adClass} product-card`}>
       {/* <figure className="product-media"> */}
-      <EmblaCarousel
+      {!!thumbImage?.imageKey && (
+        <ALink href={`/products/${slug}`}>
+          <Image
+            src={thumbImage?.imageKey}
+            alt={title}
+            height={280}
+            width={280}
+            quality={50}
+            objectFit="contain"
+            priority={!!priority}
+          />
+        </ALink>
+      )}
+      {/* <EmblaCarousel
         options={{
           loop: false,
           align: "center",
@@ -180,7 +192,7 @@ function ProductTwo(props) {
               </ALink>
             </div>
           ))}
-      </EmblaCarousel>
+      </EmblaCarousel> */}
 
       <div className="product-label-group">
         {discount > 0 && (
