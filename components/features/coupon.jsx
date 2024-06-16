@@ -16,9 +16,11 @@ import { CloseIcon, RightAngle, CouponTag } from "~/components/icons";
 import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
-import Modal from "~/components/common/modal";
+import Modal from "react-modal";
 import Image from "~/components/image";
 import { STORE_ID } from "~/config";
+
+Modal.setAppElement("#__next");
 
 const logger = new Logger("Coupon");
 
@@ -244,50 +246,38 @@ function Coupon(props) {
         isCloseIcon={false}
         onRequestClose={closeModal}
         shouldReturnFocusAfterClose={false}
-        overlayClassName="auth-modal-overlay login-modal-container"
+        overlayClassName={{
+          base: "applied-coupon-modal-overlay",
+        }}
         className="applied-coupon-modal"
       >
         <div className="applied-coupon-modal-container">
-          <div
-            className="close-icon"
-            title="Remove this product"
-            onClick={closeModal}
-          >
-            <CloseIcon size={36} color="gray" />
-          </div>
-
-          <div className="applied-coupon-modal-image">
+          <div>
             <Image
-              src="/images/applied-coupon.gif"
-              alt="Applied Coupon Gif"
-              height={450}
-              width={500}
+              src="/images/logo.png"
+              alt="logo"
+              width={52}
+              height={52}
+              quality={100}
               priority
               loader="local"
+              objectFit="contain"
             />
           </div>
-          <div className="applied-coupon-modal-ticket">
-            <Image
-              src="/images/coupon-circle-with-ticket.svg"
-              alt="Applied Coupon Gif"
-              layout="fill"
-              objectFit="cover"
-              priority
-              sizes="100px"
-              loader="local"
-            />
-          </div>
+          <div className="applied-coupon-modal-line"></div>
           <div className="applied-coupon-modal-info">
-            <div className="modal-title">
-              "{appliedCoupon?.code || "Your"}" applied!
-              {couponTotal > 0 && (
-                <>
-                  <div className="modal-amount">
-                    ₹{toDecimal(couponTotal)} saved
-                  </div>
-                </>
-              )}
-            </div>
+            {couponTotal > 0 && (
+              <>
+                <div className="modal-amount">
+                  ₹{toDecimal(couponTotal)} Saved
+                </div>
+              </>
+            )}
+            {appliedCoupon?.code && (
+              <div className="modal-title">
+                "{appliedCoupon?.code || "Your"}" Applied!
+              </div>
+            )}
           </div>
         </div>
       </Modal>
