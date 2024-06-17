@@ -1307,6 +1307,12 @@
   display: flex;
 }
 
+.applied-coupon-modal-confetti{
+  position: absolute;
+  z-index: -1;
+  top:-100%
+}
+
 .applied-coupon-modal-container {
   width: 408px;
   // height: 210px;

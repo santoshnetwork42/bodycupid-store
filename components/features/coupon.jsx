@@ -251,6 +251,16 @@ function Coupon(props) {
         }}
         className="applied-coupon-modal"
       >
+        <div className="applied-coupon-modal-confetti">
+          <Image
+            src="/images/applied-coupon.gif"
+            alt="Applied Coupon Gif"
+            height={450}
+            width={500}
+            priority
+            loader="local"
+          />
+        </div>
         <div className="applied-coupon-modal-container">
           <div>
             <Image
