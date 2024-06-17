@@ -294,7 +294,6 @@ function Addresses({
           </div>
         </div>
       )} */}
-
       {!selected && variant === "CHECKOUT" && (
         <div className="row d-sm-show">
           <div
