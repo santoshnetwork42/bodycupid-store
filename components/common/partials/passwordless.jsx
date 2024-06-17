@@ -365,7 +365,7 @@ function Passwordless({
                               <div className="prefix">+91</div>
                               <input
                                 type="tel"
-                                className="form-control mobile-number-input"
+                                className="form-control mobile-number-input mb-0"
                                 id="singin-phone-2"
                                 name="singin-phone"
                                 placeholder="Phone number *"
