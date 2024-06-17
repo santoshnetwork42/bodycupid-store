@@ -228,7 +228,9 @@ function Addresses({
                             >
                               Edit
                             </ALink>
-                            <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                            {!!adr?.id && (
+                              <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                            )}
                             {user && (
                               <ALink
                                 href="#"
@@ -388,7 +390,7 @@ function Addresses({
                       >
                         Edit
                       </ALink>
-                      <span>&nbsp;|&nbsp;</span>
+                      {!!adr?.id && <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>}
                       {user && (
                         <ALink
                           href="#"
