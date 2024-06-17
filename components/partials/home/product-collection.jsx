@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import Reveal from "react-awesome-reveal";
 
 import ALink from "~/components/features/custom-link";
+import EmblaCarousel from "~/components/features/react-embla";
 import ProductTwo from "~/components/features/product/product-two";
 import { productSlider, productSliderLarge } from "~/utils/data/carousel";
 import { fadeIn } from "~/utils/data/keyframes";
-import OwlCarousel from "~/components/features/owl-carousel";
 
 function ProductCollection({
   products = [],
@@ -50,39 +50,19 @@ function ProductCollection({
           )}
         </div>
 
-        <OwlCarousel
-          id={`product-carousel-${slug}`}
-          adClass="owl-theme owl-nav-full"
-          options={!large ? productSlider : productSliderLarge}
-        >
-          {products.map((item, index) => (
-            <ProductTwo
-              adClass="mb-4 text-center"
-              slug={slug}
-              product={item}
-              key={`top-selling-product-${item.id}`}
-              section={{
-                id: title.toLowerCase().replace(/\ /g, "-"),
-                name: title,
-              }}
-              priority={!!(priority && index < 4)}
-            />
-          ))}
-        </OwlCarousel>
-
-        {/* <EmblaCarousel
+        <EmblaCarousel
           id={`product-carousel-${slug}`}
           options={{
             loop: false,
             align: "center",
             slidesToScroll: "auto",
           }}
-          containerStyle={{ marginLeft: "-1rem" }}
+          containerStyle={{ marginRight: "-2rem" }}
         >
           {products.map((item, index) => (
             <div
               key={`top-selling-product-${item.id}`}
-              style={{ paddingLeft: "1rem" }}
+              style={{ paddingRight: "20px" }}
               className="product-collection-item"
             >
               <ProductTwo
@@ -97,7 +77,7 @@ function ProductCollection({
               />
             </div>
           ))}
-        </EmblaCarousel> */}
+        </EmblaCarousel>
       </section>
     </Reveal>
   );
