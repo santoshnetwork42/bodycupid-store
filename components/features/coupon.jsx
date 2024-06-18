@@ -117,6 +117,9 @@ function Coupon(props) {
         if (allowed) {
           applyCoupon({ ...couponResponse, autoApplied: !!autoApplied });
           openModal();
+          setTimeout(() => {
+            closeModal();
+          }, 2000);
 
           isSliderOpen && closeSlider();
           logger.info("Applied coupon:", response);

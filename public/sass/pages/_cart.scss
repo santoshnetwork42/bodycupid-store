@@ -1395,7 +1395,7 @@
   height: 6px;
   border-radius: 25px;
   background-color: #fed613;
-  transition: width 0.3s ease-in-out;
+  transition: width 0.4s ease-in-out;
 }
 
 .indicator {
@@ -1424,6 +1424,7 @@
 
 .indicator.current {
   transform: translateX(-80%);
+  transition: left 0.4s ease-in-out; 
 }
 
 .progress-text{
