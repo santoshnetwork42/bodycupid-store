@@ -225,15 +225,17 @@ function CartProduct({
                     </>
                   ) : (
                     <>
-                      <p className="m-0 product-discount-listing">
-                        {price < listingPrice && (
-                          <del className="summary-subtotal-listingprice mr-1">
-                            ₹{toDecimal(listingPrice)}
-                          </del>
-                        )}
-                        <span className="sm-product-amount font-weight-semi-bold">
-                          ₹{toDecimal(price)}
-                        </span>
+                      <p className="d-flex gap-8 m-0 product-discount-listing">
+                        <div>
+                          {price < listingPrice && (
+                            <del className="summary-subtotal-listingprice mr-1">
+                              ₹{toDecimal(listingPrice)}
+                            </del>
+                          )}
+                          <span className="sm-product-amount font-weight-semi-bold">
+                            ₹{toDecimal(price)}
+                          </span>
+                        </div>
                         {productDiscountPercentage(item) > 0 && (
                           <div>
                             <span
