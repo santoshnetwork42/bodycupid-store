@@ -356,7 +356,7 @@ function Passwordless({
                       selectedTabPanelClassName="active"
                     >
                       <p className="mb-0">
-                        {confirmSignUp ? "" : "Mobile Number"}
+                        {confirmSignUp ? "" : "Mobile Number*"}
                       </p>
 
                       <div className="mt-2">
@@ -370,7 +370,7 @@ function Passwordless({
                                   className="form-control mobile-number-input mb-0"
                                   id="singin-phone-2"
                                   name="singin-phone"
-                                  placeholder="Phone number *"
+                                  placeholder="Phone number"
                                   required
                                   maxLength={10}
                                   value={removePhonePrefix(state.phone)}
@@ -498,7 +498,7 @@ function Passwordless({
                         {!confirmSignUp && (
                           <form onSubmit={handleSignIn}>
                             <div className="form-group mb-3">
-                              <p className="mb-2">Mobile Number</p>
+                              <p className="mb-2">Mobile Number*</p>
                               <div className="input-tel">
                                 <div className="prefix">+91</div>
                                 <input
@@ -506,7 +506,7 @@ function Passwordless({
                                   className="form-control prevent-zoom"
                                   id="singin-phone-2"
                                   name="singin-phone"
-                                  placeholder="Phone number *"
+                                  placeholder="Phone number"
                                   required
                                   maxLength={10}
                                   value={removePhonePrefix(state.phone)}
