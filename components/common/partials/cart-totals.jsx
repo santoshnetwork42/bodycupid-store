@@ -92,14 +92,14 @@ function CartTotal({
   ]);
 
   return (
-    <div className="bg-white border-none">
-      <h3 className="summary-title summary-title2 text-left font-weight-bold pt-2">
+    <div className="border-none cart-total-container">
+      <h3 className="summary-title summary-title2 text-left font-weight-bold pt-2 bg-white">
         Payment Summary
       </h3>
       <div
         className={`${appliedCoupon ? "table-margin-applied" : "table-margin"}`}
       >
-        <div className="summary summary2">
+        <div className="summary summary2 bg-white">
           <table className="shipping">
             <tbody>
               <tr className="summary-subtotal">
@@ -214,7 +214,7 @@ function CartTotal({
             </tbody>
           </table>
         </div>
-        <div className={"mt-3 mb-3"}>
+        <div className={"mt-3 pt-1 pb-1 mb-3 avg-delivery-container"}>
           <p className="m-0 font-weight-bold">
             Average delivery time: <span>3-5 days</span>
           </p>

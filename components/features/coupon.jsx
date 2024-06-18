@@ -119,7 +119,7 @@ function Coupon(props) {
           openModal();
           setTimeout(() => {
             closeModal();
-          }, 2000);
+          }, 3000);
 
           isSliderOpen && closeSlider();
           logger.info("Applied coupon:", response);

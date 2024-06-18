@@ -166,7 +166,7 @@ function CartMenu(props) {
                     <CouponDiscountBar />
                   )}
 
-                  <div className="shop-table cart-table lh-default sidebar-padding mt-4">
+                  <div className="shop-table cart-table lh-default sidebar-padding">
                     <div key={appliedCoupon?.id}>
                       {cartItems.map((item) => (
                         <CartProduct
@@ -182,7 +182,7 @@ function CartMenu(props) {
 
                 <aside
                   id="cart-details"
-                  className="text-primary sticky-sidebar-wrapper pb-6 sidebar-padding"
+                  className="text-primary sticky-sidebar-wrapper pb-6"
                 >
                   <div
                     className="sticky-sidebar"
