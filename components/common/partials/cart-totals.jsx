@@ -236,8 +236,12 @@ function CartTotal({
         <Coupon isSmall />
         <div>
           {!!totalAmountSaved && (
-            <div className="summary-saving-lable-container m-0 pr-2 pl-2 text-center border-top">
-              <p className={`saving-lable background-alice ${isSmallSize ? "label-size" : ""}`}>
+            <div className="summary-saving-lable-container m-0 text-center border-top">
+              <p
+                className={`saving-lable background-alice ${
+                  isSmallSize ? "label-size" : ""
+                }`}
+              >
                 🎊 Cheers!
                 <span> You saved {`₹${toDecimal(totalAmountSaved)} `}</span>
               </p>
