@@ -430,7 +430,7 @@ function CartProduct({
                       item?.minimumOrderQuantity) &&
                       (selectedVariant?.minimumOrderQuantity > 1 ||
                         item?.minimumOrderQuantity > 1) && (
-                        <p className="text-primary lh-1 font-size-12 mb-0 min-order-msg">
+                        <p className="text-primary lh-1 font-size-12 mb-0 min-order-msg-mobile">
                           Minimum Order Quantity:{" "}
                           {selectedVariant?.minimumOrderQuantity ||
                             item?.minimumOrderQuantity}
