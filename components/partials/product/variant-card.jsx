@@ -13,7 +13,7 @@ const VariantCard = (props) => {
     }
     return 0;
   }, [listingPrice, price]);
-  return (
+  return price ? (
     <div
       key={variant.id}
       className={`variant-card-wrapper ${variant.selected ? "selected" : ""} ${
@@ -51,6 +51,20 @@ const VariantCard = (props) => {
               <del className="old-price mr-2">₹{toDecimal(listingPrice)}</del>{" "}
             </>
           )}
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div
+      key={variant.id}
+      className={`variant-card-wrapper pt-1 h-10 ${
+        variant.selected ? "selected" : ""
+      } ${variant.active ? "" : "btn-inactive justify-content-center"}`}
+      onClick={onChange}
+    >
+      <div className="product-detail">
+        <div className="product-title">
+          <div>{variant.title || variant.label}</div>
         </div>
       </div>
     </div>

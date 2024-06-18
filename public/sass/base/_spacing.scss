@@ -63,6 +63,17 @@
 	margin-right: auto !important;
 }
 
+@for $i from 0 through 50 {
+    .h-#{$i} {
+        height: #{$i*0.5}rem !important;
+    }
+}
+@for $i from 0 through 50 {
+    .w-#{$i} {
+        width: #{$i*0.5}rem !important;
+    }
+}
+
 @include mq('sm') {
 	@for $i from 0 through 10 {
 	    .mt-sm-#{$i} {
