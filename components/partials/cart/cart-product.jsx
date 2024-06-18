@@ -271,6 +271,90 @@ function CartProduct({
                 </div>
               )}
             </div>
+            {isSmallSize && !isFreeProduct && !outOfStock && (
+              <div className="d-flex justify-content-between mr-1 ml-2">
+                <div>
+                  {!!variantGroup && !disableChange && (
+                    <>
+                      {variantGroup.map((v1, index) => {
+                        const selectedOptionValue =
+                          selectedVariantGroupOptions?.find(
+                            (item) => item.variantGroupId === v1.id
+                          )?.variantGroupOptionId ??
+                          selectedVariantGroupOptions[index]
+                            ?.variantGroupOptionId;
+                        return (
+                          <>
+                            <div
+                              className="card-margin-bottom ml-2"
+                              key={v1.id}
+                            >
+                              <select
+                                name={`${v1.id}`}
+                                className="form-control-drop-down"
+                                value={`${selectedOptionValue}`}
+                                onChange={(e) => {
+                                  setVariantUpdate(true);
+                                  handleOnChangeVariant(v1.id, e.target.value);
+                                }}
+                              >
+                                {v1.variantOptions.map((v) => {
+                                  return (
+                                    <option key={v.id} value={v.id}>
+                                      {v.title || v.label}
+                                    </option>
+                                  );
+                                })}
+                              </select>
+                            </div>
+                          </>
+                        );
+                      })}
+                    </>
+                  )}
+                </div>
+                {!disableChange && (
+                  <div className="product-quantity">
+                    {cartItemType === "FREE_PRODUCT" ? (
+                      <>
+                        {!!qty && (
+                          <p className="text-grey mb-2 lh-1 text-alignment">
+                            Qty:{qty}
+                          </p>
+                        )}
+                      </>
+                    ) : (
+                      <div className="d-flex-col gap-8">
+                        <Quantity
+                          product={item}
+                          minimumOrderQuantity={
+                            selectedVariant?.minimumOrderQuantity ||
+                            item?.minimumOrderQuantity
+                          }
+                          maximumOrderQuantity={
+                            selectedVariant?.maximumOrderQuantity ||
+                            item?.maximumOrderQuantity
+                          }
+                          qty={qty}
+                          max={inventory}
+                          onChangeQty={onChangeQty}
+                        />
+                        {(selectedVariant?.minimumOrderQuantity ||
+                          item?.minimumOrderQuantity) &&
+                          (selectedVariant?.minimumOrderQuantity > 1 ||
+                            item?.minimumOrderQuantity > 1) && (
+                            <p className="text-primary lh-1 font-size-12 mb-0 min-order-msg">
+                              Minimum Order Quantity:{" "}
+                              {selectedVariant?.minimumOrderQuantity ||
+                                item?.minimumOrderQuantity}
+                            </p>
+                          )}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
             {!outOfStock && !isSmallSize && !isFreeProduct && (
               <div className="cart-item-quantity">
                 {!!variantGroup && !disableChange && (
@@ -364,86 +448,7 @@ function CartProduct({
             </div>
           )}
         </div>
-        {isSmallSize && !isFreeProduct && !outOfStock && (
-          <div className="d-flex justify-content-between mr-1">
-            <div>
-              {!!variantGroup && !disableChange && (
-                <>
-                  {variantGroup.map((v1, index) => {
-                    const selectedOptionValue =
-                      selectedVariantGroupOptions?.find(
-                        (item) => item.variantGroupId === v1.id
-                      )?.variantGroupOptionId ??
-                      selectedVariantGroupOptions[index]?.variantGroupOptionId;
-                    return (
-                      <>
-                        <div className="card-margin-bottom ml-2" key={v1.id}>
-                          <select
-                            name={`${v1.id}`}
-                            className="form-control-drop-down"
-                            value={`${selectedOptionValue}`}
-                            onChange={(e) => {
-                              setVariantUpdate(true);
-                              handleOnChangeVariant(v1.id, e.target.value);
-                            }}
-                          >
-                            {v1.variantOptions.map((v) => {
-                              return (
-                                <option key={v.id} value={v.id}>
-                                  {v.title || v.label}
-                                </option>
-                              );
-                            })}
-                          </select>
-                        </div>
-                      </>
-                    );
-                  })}
-                </>
-              )}
-            </div>
-            {!disableChange && (
-              <div className="product-quantity">
-                {cartItemType === "FREE_PRODUCT" ? (
-                  <>
-                    {!!qty && (
-                      <p className="text-grey mb-2 lh-1 text-alignment">
-                        Qty:{qty}
-                      </p>
-                    )}
-                  </>
-                ) : (
-                  <div className="d-flex-col gap-8">
-                    <Quantity
-                      product={item}
-                      minimumOrderQuantity={
-                        selectedVariant?.minimumOrderQuantity ||
-                        item?.minimumOrderQuantity
-                      }
-                      maximumOrderQuantity={
-                        selectedVariant?.maximumOrderQuantity ||
-                        item?.maximumOrderQuantity
-                      }
-                      qty={qty}
-                      max={inventory}
-                      onChangeQty={onChangeQty}
-                    />
-                    {(selectedVariant?.minimumOrderQuantity ||
-                      item?.minimumOrderQuantity) &&
-                      (selectedVariant?.minimumOrderQuantity > 1 ||
-                        item?.minimumOrderQuantity > 1) && (
-                        <p className="text-primary lh-1 font-size-12 mb-0 min-order-msg-mobile">
-                          Minimum Order Quantity:{" "}
-                          {selectedVariant?.minimumOrderQuantity ||
-                            item?.minimumOrderQuantity}
-                        </p>
-                      )}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        )}
+
         {(!cartItemType || cartItemType === "CART") && (
           <>
             {!!ltoDeal && !outOfStock && (
