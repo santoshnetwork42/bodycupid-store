@@ -368,12 +368,11 @@ function CartProduct({
               {!!variantGroup && !disableChange && (
                 <>
                   {variantGroup.map((v1, index) => {
-                     const selectedOptionValue =
-                     selectedVariantGroupOptions?.find(
-                       (item) => item.variantGroupId === v1.id
-                     )?.variantGroupOptionId ??
-                     selectedVariantGroupOptions[index]
-                       ?.variantGroupOptionId;
+                    const selectedOptionValue =
+                      selectedVariantGroupOptions?.find(
+                        (item) => item.variantGroupId === v1.id
+                      )?.variantGroupOptionId ??
+                      selectedVariantGroupOptions[index]?.variantGroupOptionId;
                     return (
                       <>
                         <div className="card-margin-bottom ml-2" key={v1.id}>
@@ -402,7 +401,7 @@ function CartProduct({
               )}
             </div>
             {!disableChange && (
-              <div className="product-quantity w-0">
+              <div className="product-quantity">
                 {cartItemType === "FREE_PRODUCT" ? (
                   <>
                     {!!qty && (
