@@ -237,7 +237,7 @@ function CartTotal({
         <div>
           {!!totalAmountSaved && (
             <div className="summary-saving-lable-container m-0 pr-2 pl-2 text-center border-top">
-              <p className={`saving-lable ${isSmallSize ? "label-size" : ""}`}>
+              <p className={`saving-lable background-alice ${isSmallSize ? "label-size" : ""}`}>
                 🎊 Cheers!
                 <span> You saved {`₹${toDecimal(totalAmountSaved)} `}</span>
               </p>
