@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
 import { useRouter } from "next/router";
@@ -50,6 +50,7 @@ function CartTotal({
   });
 
   const guestCheckout = useGuestCheckout();
+  const avgDeliveryTimeRef = useRef(null);
 
   const {
     ready: isInventoryCheckReady,
@@ -90,6 +91,12 @@ function CartTotal({
     outOfStockItems,
     inventoryMapping,
   ]);
+
+  const onDetailClick = () => {
+    if (avgDeliveryTimeRef.current) {
+      avgDeliveryTimeRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="border-none cart-total-container">
@@ -214,7 +221,11 @@ function CartTotal({
             </tbody>
           </table>
         </div>
-        <div className={"mt-3 pt-1 pb-1 mb-3 avg-delivery-container"}>
+        <div
+          className={"mt-3 pt-1 pb-1 mb-3 avg-delivery-container"}
+          id="avg-delivery-time"
+          ref={avgDeliveryTimeRef}
+        >
           <p className="m-0 font-weight-bold">
             Average delivery time: <span>3-5 days</span>
           </p>
@@ -223,6 +234,16 @@ function CartTotal({
 
       <div id="sidebar-footer" className="sidebar-footer p-0 box-shadow-coupon">
         <Coupon isSmall />
+        <div>
+          {!!totalAmountSaved && (
+            <div className="summary-saving-lable-container m-0 p-0 text-center">
+              <p className={`saving-lable ${isSmallSize ? "label-size" : ""}`}>
+                🎊 Cheers! You saved
+                <span> {`₹${toDecimal(totalAmountSaved)} `}</span>
+              </p>
+            </div>
+          )}
+        </div>
         <div className="cart-sticky-checkout">
           <div className="d-flex">
             <div className="flex-45">
@@ -231,15 +252,11 @@ function CartTotal({
                 ₹{toDecimal(prepaidGrandTotal)}
               </div>
               {!!totalAmountSaved && (
-                <div className="summary-saving-lable-container m-0 p-0">
-                  <p
-                    className={`saving-lable ${
-                      isSmallSize ? "label-size" : ""
-                    }`}
-                  >
-                    You saved
-                    <span> {`₹${toDecimal(totalAmountSaved)} `}</span>
-                  </p>
+                <div
+                  className="summary-saving-lable-container m-0 p-0"
+                  onClick={onDetailClick}
+                >
+                  <p className={"m-0 font-size-12 "}>View details</p>
                 </div>
               )}
             </div>
