@@ -136,8 +136,9 @@ const AddressForm = (props) => {
       title="Address"
       isOpen={true}
       onClose={onClose}
-      maxHeight={60}
+      maxHeight={50}
       description="Hey! Tell us where to deliver."
+      showOverlay
     >
       <div className="bg-white mb-6">
         <form className="form" onSubmit={addAddress}>
