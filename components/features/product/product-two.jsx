@@ -48,11 +48,17 @@ function ProductTwo(props) {
     discount,
   } = productsNew || {};
 
-  const totalCartItems =
-    getCartCount(cartList) + productsNew?.minimumOrderQuantity || 1;
+  const bundleOfferCartList = cartList?.filter((cart) =>
+    cart?.collections?.includes("bundle-offer")
+  );
+
+  const totalBundleOfferCartItems =
+    getCartCount(bundleOfferCartList) + productsNew?.minimumOrderQuantity || 1;
 
   const showCartModal =
-    totalCartItems > 0 && totalCartItems % 8 !== 0 ? false : true;
+    totalBundleOfferCartItems > 0 && totalBundleOfferCartItems % 8 !== 0
+      ? false
+      : true;
 
   const showQuickviewHandler = () => {
     openQuickview(slug);
@@ -95,8 +101,7 @@ function ProductTwo(props) {
     });
     if (tagSlug === "bundle-offer") {
       showCartModal && setCartVisibility(true);
-    }
-    // else setCartVisibility(true);
+    } else setCartVisibility(true);
 
     logger.verbose("Added product to cart");
     logger.debug("Added product to cart:", product);
