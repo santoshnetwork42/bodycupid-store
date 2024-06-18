@@ -88,6 +88,15 @@ function DetailOne(props) {
     return null;
   }, [cartList, product, selectedVariant]);
 
+  const cartLocalState = useMemo(() => {
+    if (cartList.length && product) {
+      const recordKey = getRecordKey(product, selectedVariant?.id);
+      const cartItem = cartList.find((cl) => cl.recordKey === recordKey);
+      return cartItem;
+    }
+    return null;
+  }, [cartList, product, selectedVariant]);
+
   const bestCoupon = useProductCoupons(product, variant);
   const { isSmallSize: isMobile } = useWindowDimensions();
 
@@ -387,7 +396,7 @@ function DetailOne(props) {
                     {!!cartItem && (
                       <Quantity
                         max={currentInventory}
-                        qty={cartItem?.qty}
+                        qty={cartLocalState?.qty}
                         product={product}
                         minimumOrderQuantity={
                           selectedVariant?.minimumOrderQuantity ||
@@ -398,6 +407,12 @@ function DetailOne(props) {
                           selectedVariant?.maximumOrderQuantity ||
                           product?.maximumOrderQuantity ||
                           99
+                        }
+                        totalItemQty={
+                          cartLocalState?.qty ||
+                          selectedVariant?.minimumOrderQuantity ||
+                          product?.minimumOrderQuantity ||
+                          1
                         }
                         onChangeQty={changeQty}
                         extraClass="wrap"
@@ -471,7 +486,7 @@ function DetailOne(props) {
                       <div className="d-flex m-0 w-100 sm-around w-full">
                         <div className="m-0">
                           <Quantity
-                            qty={cartItem?.qty}
+                            qty={cartLocalState?.qty}
                             max={currentInventory}
                             product={product}
                             minimumOrderQuantity={
@@ -483,6 +498,12 @@ function DetailOne(props) {
                               selectedVariant?.maximumOrderQuantity ||
                               product?.maximumOrderQuantity ||
                               99
+                            }
+                            totalItemQty={
+                              cartLocalState?.qty ||
+                              selectedVariant?.minimumOrderQuantity ||
+                              product?.minimumOrderQuantity ||
+                              1
                             }
                             onChangeQty={changeQty}
                           />

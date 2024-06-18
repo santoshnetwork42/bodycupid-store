@@ -56,6 +56,14 @@ function CartProduct({
 
   const [variantUpdate, setVariantUpdate] = useState(false);
 
+  const totalItemQty = useMemo(
+    () =>
+      item && cartList
+        ? cartList.find((i) => i.recordKey === item.recordKey)?.qty || 0
+        : 0,
+    [item, cartList]
+  );
+
   const onChangeQty = (newQty) => {
     const finalQty = newQty + extraQty;
     const cartData = getUpdatedCart(cartList, recordKey, {
@@ -320,6 +328,7 @@ function CartProduct({
                             selectedVariant?.maximumOrderQuantity ||
                             item?.maximumOrderQuantity
                           }
+                          totalItemQty={totalItemQty}
                           qty={qty}
                           max={inventory}
                           onChangeQty={onChangeQty}
@@ -410,6 +419,7 @@ function CartProduct({
                         selectedVariant?.maximumOrderQuantity ||
                         item?.maximumOrderQuantity
                       }
+                      totalItemQty={totalItemQty}
                       qty={qty}
                       max={inventory}
                       onChangeQty={onChangeQty}

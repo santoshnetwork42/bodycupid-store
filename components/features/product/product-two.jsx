@@ -253,6 +253,12 @@ function ProductTwo(props) {
                         productsNew?.maximumOrderQuantity || 99
                       }
                       onChangeQty={changeQty}
+                      totalItemQty={
+                        cartItem?.qty ||
+                        selectedVariant?.minimumOrderQuantity ||
+                        product?.minimumOrderQuantity ||
+                        1
+                      }
                     />
                   ) : (
                     <a
