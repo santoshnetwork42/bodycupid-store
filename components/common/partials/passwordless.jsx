@@ -588,14 +588,14 @@ function Passwordless({
                               </div>
                             </div>
                           )}
-                          <button
+                          {/* <button
                             className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
                             type="submit"
                             disabled={loading}
                           >
                             Confirm
                             {loading && <div className="spin-loader ml-2" />}
-                          </button>
+                          </button> */}
                           {!seconds ? (
                             <ALink href="#" onClick={handleSignIn}>
                               <p className="resend-label mt-2">
