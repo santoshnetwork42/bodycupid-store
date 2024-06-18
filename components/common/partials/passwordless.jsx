@@ -488,7 +488,7 @@ function Passwordless({
                     <TabList className="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5 flex-no-wrap">
                       <Tab className="nav-item">
                         <span className="nav-link border-no lh-1 ls-default">
-                          {confirmSignUp ? "OTP Verification" : "Mobile Number"}
+                          {confirmSignUp ? "OTP Verification" : "Sign In"}
                         </span>
                       </Tab>
                     </TabList>
@@ -498,6 +498,7 @@ function Passwordless({
                         {!confirmSignUp && (
                           <form onSubmit={handleSignIn}>
                             <div className="form-group mb-3">
+                              <p className="mb-2">Mobile Number</p>
                               <div className="input-tel">
                                 <div className="prefix">+91</div>
                                 <input
