@@ -63,6 +63,7 @@ const App = ({ Component, pageProps }) => {
       store.__persistor.purge();
       store.dispatch(rootActions.destroySession());
       await Auth.signOut();
+      localStorage.removeItem(`${STORE_PREFIX}-user`);
     } catch (error) {
       logger.error(error);
     }
