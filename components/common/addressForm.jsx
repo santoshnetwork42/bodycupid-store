@@ -13,6 +13,7 @@ import { fetchCityAndState } from "~/utils/addAddress";
 import { eventActions } from "~/store/events";
 import BottomDrawer from "~/components/common/bottomDrawer";
 import useWindowDimensions from "~/utils/getWindowDimension";
+import { userActions } from "~/store/user";
 
 const AddressForm = (props) => {
   const {
@@ -23,21 +24,26 @@ const AddressForm = (props) => {
     onSubmit,
     addressAdded,
     onClose,
+    setIsValidAddress,
+    noAddress,
+    variant,
+    setUserLocalAddress,
+    userAddress,
   } = props;
   const { firstName, lastName, email, phone } = user || customUser || {};
   const { isSmallSize: isMobile } = useWindowDimensions();
 
   const [address, setAddress] = useSetState({
-    firstName: firstName || "",
-    lastName: lastName || "",
-    email: email || null,
-    phone: phone || "",
-    address: "",
-    state: "AN",
-    city: "",
-    pinCode: "",
-    landmark: "",
-    area: "",
+    firstName: userAddress?.firstName || firstName || "",
+    lastName: userAddress?.lastName || lastName || "",
+    email: userAddress?.email || email || null,
+    phone: userAddress?.phone || phone || "",
+    address: userAddress?.address || "",
+    state: userAddress?.state || "AN",
+    city: userAddress?.city || "",
+    pinCode: userAddress?.pinCode || "",
+    landmark: userAddress?.landmark || "",
+    area: userAddress?.area || "",
   });
 
   const { totalPrice } = useCartTotal({
@@ -80,21 +86,42 @@ const AddressForm = (props) => {
     if (defaultAddress?.name) {
       setAddress({
         ...defaultAddress,
-        firstName: defaultAddress.name.split(" ")[0] || "",
-        lastName: defaultAddress.name.split(" ")[1] || "",
+        firstName: defaultAddress?.name?.split(" ")[0] || "",
+        lastName: defaultAddress?.name?.split(" ")[1] || "",
       });
     }
   }, [defaultAddress]);
 
   const addAddress = useCallback(
     async (e) => {
-      e.preventDefault();
+      e?.preventDefault();
       setLoading(true);
-      try {
-        const formErrors = await validateAddress(address, "ALL");
-        if (!formErrors) {
+      const err = await validateAddress(address, "ALL");
+      if (variant === "CHECKOUT") setIsValidAddress(!err);
+
+      if (!err) {
+        try {
           const tempAddress = getProperAddress(address);
-          if (user) {
+          if (variant === "CARD") {
+            //for logged and from address tab in account
+            const key = address.id ? "updateUserAddress" : "createUserAddress";
+            const {
+              data: { [key]: response },
+            } = await API.graphql({
+              query: address.id ? updateUserAddress : createUserAddress,
+              variables: { input: { ...tempAddress, userID: user.id } },
+              authMode: "AMAZON_COGNITO_USER_POOLS",
+            });
+            if (!address.id) {
+              addressAdded(tempAddress, totalPrice);
+            }
+            onSubmit(response);
+          } else if (noAddress) {
+            onAddress({
+              ...address,
+              name: address?.firstName + " " + address.lastName,
+            });
+          } else if (user) {
             if (onAddress) {
               onAddress(tempAddress);
             }
@@ -110,28 +137,38 @@ const AddressForm = (props) => {
               addressAdded(tempAddress, totalPrice);
             }
             onSubmit(response);
-          } else if (customUser) {
-            if (!address.id) {
-              addressAdded(tempAddress, totalPrice);
-              onSubmit(tempAddress);
-            }
           } else {
-            onSubmit(tempAddress);
+            onAddress({
+              ...address,
+              name: address?.firstName + " " + address.lastName,
+            });
           }
-        } else {
-          setErrors(formErrors);
+
+          setLoading(false);
+        } catch (errors) {
+          errorHandler(errors);
+          setLoading(false);
         }
-        setLoading(false);
-      } catch (errors) {
-        errorHandler(errors);
+      } else {
+        if (variant === "CARD" || !noAddress) setErrors(err);
         setLoading(false);
       }
       return false;
     },
-    [address, user, onSubmit, setErrors]
+    [address, user, onSubmit]
   );
 
-  return isMobile ? (
+  useEffect(async () => {
+    if (variant === "CHECKOUT" && noAddress) addAddress();
+    setUserLocalAddress(address);
+  }, [address]);
+
+  useEffect(() => {
+    return () => {
+      setUserLocalAddress(null);
+    };
+  }, []);
+  return isMobile && !noAddress ? (
     <BottomDrawer
       title="Address"
       isOpen={true}
@@ -194,7 +231,7 @@ const AddressForm = (props) => {
                   </div>
                 </div>
                 <div className="col-xs-6">
-                  <label>Email Address</label>
+                  <label>Email Address *</label>
                   <input
                     type="email"
                     className="form-control"
@@ -307,21 +344,23 @@ const AddressForm = (props) => {
             </div>
           )}
 
-          <button
-            className="mobile-drawer-address-btn btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
-            type="submit"
-            disabled={loading}
-          >
-            {address.id || isEditMode ? "Save Address" : "Add Address"}
-            {loading && <div className="spin-loader ml-2" />}
-          </button>
+          {(variant === "CARD" || !noAddress) && (
+            <button
+              className="mobile-drawer-address-btn btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
+              type="submit"
+              disabled={loading}
+            >
+              {address.id || isEditMode ? "Save Address" : "Add Address"}
+              {loading && <div className="spin-loader ml-2" />}
+            </button>
+          )}
         </form>
       </div>
     </BottomDrawer>
   ) : (
-    <div className="container bg-white pt-3 pb-3 border-regular">
+    <div className="bg-white pl-3 pt-3 pr-3">
       <form className="form" onSubmit={addAddress}>
-        <div className="row">
+        <div className="">
           <div className="col-lg-12  mb-lg-0 pr-lg-4">
             <div className="row">
               <div className="col-xs-6">
@@ -373,7 +412,7 @@ const AddressForm = (props) => {
                 </div>
               </div>
               <div className="col-xs-6">
-                <label>Email Address</label>
+                <label>Email Address *</label>
                 <input
                   type="email"
                   className="form-control"
@@ -484,14 +523,16 @@ const AddressForm = (props) => {
           </div>
         )}
 
-        <button
-          className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
-          type="submit"
-          disabled={loading}
-        >
-          {address.id || isEditMode ? "Save Address" : "Add Address"}
-          {loading && <div className="spin-loader ml-2" />}
-        </button>
+        {(variant === "CARD" || !noAddress) && (
+          <button
+            className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center mb-2"
+            type="submit"
+            disabled={loading}
+          >
+            {address.id || isEditMode ? "Save Address" : "Add Address"}
+            {loading && <div className="spin-loader ml-2" />}
+          </button>
+        )}
       </form>
     </div>
   );
@@ -501,9 +542,11 @@ function mapStateToProps(state) {
   return {
     user: state.user.data,
     customUser: state.user.custom,
+    userAddress: state.user.userAddress,
   };
 }
 
 export default connect(mapStateToProps, {
   addressAdded: eventActions.addressAdded,
+  setUserLocalAddress: userActions.setUserLocalAddress,
 })(AddressForm);

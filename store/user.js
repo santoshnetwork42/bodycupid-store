@@ -10,11 +10,13 @@ export const actionTypes = {
   REFRESH_USER: "REFRESH_USER",
   UPDATE_USER_FIELDS: "UPDATE_USER_FIELD",
   SET_CUSTOM_USER: "SET_CUSTOM_USER",
+  SET_USER_LOCAL_ADDRESS: "SET_USER_LOCAL_ADDRESS",
 };
 
 const initialState = {
   data: null,
   custom: null,
+  userAddress: null,
 };
 
 function userReducer(state = initialState, action) {
@@ -33,6 +35,8 @@ function userReducer(state = initialState, action) {
 
     case actionTypes.SET_CUSTOM_USER:
       return { ...state, custom: action.payload.user };
+    case actionTypes.SET_USER_LOCAL_ADDRESS:
+      return { ...state, userAddress: action.payload.userAddress };
     default:
       return state;
   }
@@ -51,6 +55,10 @@ export const userActions = {
   setCustomUser: (phone) => ({
     type: actionTypes.SET_CUSTOM_USER,
     payload: { user: { phone } },
+  }),
+  setUserLocalAddress: (address) => ({
+    type: actionTypes.SET_USER_LOCAL_ADDRESS,
+    payload: { userAddress: { ...address } },
   }),
 };
 

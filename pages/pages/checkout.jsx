@@ -19,7 +19,6 @@ import ALink from "~/components/features/custom-link";
 import Addresses from "~/components/common/addresses";
 import Passwordless from "~/components/common/partials/passwordless";
 import PaymentLoader from "~/components/common/partials/payment-loader";
-import Card from "~/components/features/accordion/card";
 import PaymentMethods from "~/components/features/payment-radio";
 import {
   DownAngle,
@@ -34,7 +33,6 @@ import { cartActions } from "~/store/cart";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
 import { toDecimal } from "~/utils";
-import { isValidAddress } from "~/utils/address";
 import { useGuestCheckout, useNavBarState } from "~/utils/contexts/navbar";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
@@ -88,7 +86,8 @@ function Checkout(props) {
   const router = useRouter();
   const [payMethod, setFirst] = useState(prepaidEnabled ? "PREPAID" : "COD");
   const [shippingAddress, setAddress] = useState(null);
-  const [formErorr, setFormErorr] = useState(null);
+  const [formError, setFormError] = useState(null);
+  const [isValidAddress, setIsValidAddress] = useState(false);
   const [isCollapse, setIsCollapse] = useState(false);
   const [paymentLoader, setPaymentLoader] = useState(false);
 
@@ -105,6 +104,9 @@ function Checkout(props) {
 
   const isFirst = payMethod === "PREPAID";
 
+  useEffect(() => {
+    setFormError(null);
+  }, [shippingAddress]);
   // useEffect(() => {
   //   startCheckout();
   //   logger.verbose("Checkout component initialized");
@@ -198,7 +200,7 @@ function Checkout(props) {
       if (!success) {
         alertToaster("Something went wrong. Try Again!");
         if (code === "INVALID_ADDRESS") {
-          setFormErorr(formError);
+          setFormError(formError);
         }
         setPaymentLoader(false);
       }
@@ -313,6 +315,7 @@ function Checkout(props) {
                     <Addresses
                       onAddressChange={setAddress}
                       variant="CHECKOUT"
+                      setIsValidAddress={setIsValidAddress}
                     />
                   </div>
                 )}
@@ -607,9 +610,18 @@ function Checkout(props) {
 
                       {!!isMobile && (
                         <div className="col-lg-6 mb-lg-0 pr-lg-4 p-0 d-sm-show">
+                          {
+                            <div>
+                              <h5 className="payment-heading">Address</h5>
+                              <div className="mb-1 pl-3 pb-0">
+                                Hey! Tell us where to deliver.
+                              </div>
+                            </div>
+                          }
                           <Addresses
                             onAddressChange={setAddress}
                             variant="CHECKOUT"
+                            setIsValidAddress={setIsValidAddress}
                           />
                         </div>
                       )}
@@ -670,7 +682,7 @@ function Checkout(props) {
                         </div>
                       </div>
 
-                      {!!formErorr && (
+                      {!!formError && (
                         <div className="overflow-hidden mb-4 ">
                           <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
                             <ul className="m-0">
@@ -681,6 +693,7 @@ function Checkout(props) {
                           </div>
                         </div>
                       )}
+
                       <div
                         className={`d-flex justify-content-center ${
                           isMobile
@@ -688,7 +701,7 @@ function Checkout(props) {
                             : ""
                         }`}
                       >
-                        {!isValidAddress(shippingAddress) && !!isMobile && (
+                        {/* {!isValidAddress && !!isMobile && user && (
                           <button
                             onClick={() => {
                               openAllAddressModal();
@@ -698,22 +711,20 @@ function Checkout(props) {
                             Add new address
                             {loading && <div className="spin-loader ml-2" />}
                           </button>
-                        )}
-                        {(!!isValidAddress(shippingAddress) || !isMobile) && (
+                        )} */}
+                        {
                           <button
                             onClick={(e) => {
                               placeOrder(e);
                             }}
                             disabled={
                               !isReady ||
-                              !isValidAddress(shippingAddress) ||
+                              !isValidAddress ||
                               !isInventoryCheckReady ||
                               loading
                             }
                             className={`btn pb-4 pt-4 m-0 d-flex justify-content-center align-items-center btn-order ${
-                              !!isValidAddress(shippingAddress)
-                                ? "btn-primary"
-                                : "btn-disabled"
+                              isValidAddress ? "btn-primary" : "btn-disabled"
                             }`}
                           >
                             Place Order
@@ -721,7 +732,7 @@ function Checkout(props) {
                               <div className="spin-loader ml-2" />
                             )}
                           </button>
-                        )}
+                        }
                       </div>
                     </div>
                   </div>
