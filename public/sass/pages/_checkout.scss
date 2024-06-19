@@ -568,11 +568,19 @@
 .address-cards-wrapper::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
+
+.card-border-radius {
+  border-radius: 1rem;
+}
+
 .mobile-address-wrapper {
-  background-color: white;
+  background-color: transparent;
+  flex-wrap: nowrap;
   justify-content: space-between;
   min-height: 18rem;
   border-radius: 0.5rem;
+  overflow: scroll;
+  padding: 1rem;
   .mobile-address-content {
     width: 28rem;
   }

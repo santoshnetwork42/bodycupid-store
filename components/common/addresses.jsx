@@ -156,7 +156,13 @@ function Addresses({
     <div className="container">
       {!noAddress && (
         <>
-          <div className="row ">
+          <div
+            className={`row ${
+              isMobile
+                ? "d-flex mobile-address-wrapper address-cards-wrapper"
+                : ""
+            }`}
+          >
             {variant !== "CHECKOUT" && (
               <p className="mb-2">
                 The following addresses can be used on the checkout page.
@@ -171,8 +177,8 @@ function Addresses({
                     addressSelected(adr, totalPrice);
                   }}
                 >
-                  <div className={`card card-address w-100`}>
-                    <div className="card-body pr-4 pl-3 pt-2 pb-2 cursor-pointer bg-white">
+                  <div className={`card card-border-radius card-address w-100`}>
+                    <div className="card-border-radius card-body pr-4 pl-3 pt-2 pb-2 cursor-pointer bg-white">
                       <div className="d-flex">
                         {variant === "CHECKOUT" && (
                           <i className="radio-icon">
@@ -261,7 +267,7 @@ function Addresses({
                 setOpen(true);
                 setDefaultAddress(null);
               }}
-              className={`btn btn-primary w-50`}
+              className={`btn btn-primary w-50 ${isMobile ? "ml-2" : ""}`}
             >
               ADD NEW ADDRESS
             </button>
