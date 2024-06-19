@@ -27,6 +27,8 @@ import useWindowDimensions from "~/utils/getWindowDimension";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 import BottomDrawer from "~/components/common/bottomDrawer";
+import AlertPopup from "~/components/features/product/common/alert-popup";
+import { toast } from "react-toastify";
 
 const logger = new Logger("Login-without-password");
 
@@ -179,6 +181,13 @@ function Passwordless({
             setOtpError(true);
           }
         }
+        toast(
+          <AlertPopup message={"Logged In Successfully"} status="success" />,
+          {
+            position: "top-center",
+            autoClose: 2000,
+          }
+        );
       } catch (error) {
         logger.error(error);
         errorHandler(error);
