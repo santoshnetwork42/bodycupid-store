@@ -189,13 +189,12 @@ function CartProduct({
             </figure>
           </div>
           <div
-            className={`cart-item-container ${
-              isSmallSize ? "small-size" : ""
-            } ${
-              isFreeProduct || cartItemType === "AUTO_FREE_PRODUCT_DISABLED"
-                ? "free-product"
-                : ""
-            }`}
+            className={`cart-item-container small-size
+             ${
+               isFreeProduct || cartItemType === "AUTO_FREE_PRODUCT_DISABLED"
+                 ? "free-product"
+                 : ""
+             }`}
           >
             <div className="text-left text-primary w-100 pr-2 ml-2">
               <div
@@ -356,7 +355,7 @@ function CartProduct({
               </div>
             )}
             {!outOfStock && !isSmallSize && !isFreeProduct && (
-              <div className="cart-item-quantity">
+              <div className="cart-item-quantity ml-2">
                 {!!variantGroup && !disableChange && (
                   <>
                     {variantGroup.map((v1, index) => {
