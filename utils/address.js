@@ -77,7 +77,7 @@ export const validateAddress = async (address, paymentType = "ALL") => {
     error.phone = "Please enter valid phone number";
   }
   if (!email?.trim() || !EMAIl_REGEX.test(email?.trim())) {
-    error.phone = "Please enter valid email";
+    error.email = "Please enter valid email";
   }
 
   if (!isValidPinCode) {
