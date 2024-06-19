@@ -156,6 +156,11 @@ function Addresses({
     <div className="container">
       {!noAddress && (
         <>
+          {variant !== "CHECKOUT" && (
+            <p className="mb-2">
+              The following addresses can be used on the checkout page.
+            </p>
+          )}
           <div
             className={`row ${
               isMobile
@@ -163,11 +168,6 @@ function Addresses({
                 : ""
             }`}
           >
-            {variant !== "CHECKOUT" && (
-              <p className="mb-2">
-                The following addresses can be used on the checkout page.
-              </p>
-            )}
             {addresses.map((adr) => (
               <Fragment key={adr.id}>
                 <div
