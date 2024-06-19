@@ -66,7 +66,14 @@ export const removeHoverEffect = () => {
     );
   }
 
-  if (hasTouch()) {
+  function isMobile() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return /android|iphone|ipod|blackberry|iemobile|opera mini/i.test(
+      userAgent
+    );
+  }
+
+  if (hasTouch() && isMobile()) {
     try {
       for (var si in document.styleSheets) {
         var styleSheet = document.styleSheets[si];
@@ -319,3 +326,13 @@ export const checkAffiseValidity = () => {
     return false;
   }
 };
+
+export const sortingOptionsForCollection = Object.freeze({
+  RECOMMENDED: "default",
+  LATEST: "latest",
+  BEST_SELLERS: "best-seller",
+  HIGHEST_RATED: "popularity",
+  PRICE_HIGH_TO_LOW: "price-high",
+  PRICE_LOW_TO_HIGH: "price-low",
+  AVAILABILITY: "availability",
+});

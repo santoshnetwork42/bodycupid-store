@@ -36,6 +36,7 @@ function CollectionPage(props) {
     data,
     pageMeta,
     categoryViewed,
+    sortBy,
   } = props;
   const { name } = store || {};
   const source = getSource();
@@ -84,6 +85,9 @@ function CollectionPage(props) {
                 products={products}
                 pageFilter={pageFilter}
                 filterItems={filterItems}
+                defaultSorting={data?.defaultSorting}
+                nextToken={products?.nextToken}
+                sortBy={sortBy}
               />
             </div>
           </div>
@@ -216,6 +220,7 @@ export const getStaticProps = async (context) => {
           description: metadata?.description || description,
           canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
           image: getPublicImageURL(metadata?.image || imageUrl),
+          noIndex: metadata?.noIndex || false,
         },
       },
       revalidate: 1800,
@@ -266,11 +271,35 @@ export const getStaticProps = async (context) => {
       });
     }
 
+    const sortBy = [];
+    switch (collection.defaultSorting) {
+      case "LATEST":
+        sortBy.push({ field: "createdAt", direction: "desc" });
+        break;
+      case "HIGHEST_RATED":
+        sortBy.push({ field: "rating", direction: "desc" });
+        break;
+      case "PRICE_LOW_TO_HIGH":
+        sortBy.push({ field: "defaultPrice", direction: "asc" });
+        break;
+      case "PRICE_HIGH_TO_LOW":
+        sortBy.push({ field: "defaultPrice", direction: "desc" });
+        break;
+      case "AVAILABILITY":
+        sortBy.push({ field: "defaultInventory", direction: "desc" });
+        break;
+      case "BEST_SELLERS":
+        sortBy.push({ field: "totalOrders", direction: "desc" });
+        break;
+      default:
+        sortBy.push({ field: "position", direction: "asc" });
+    }
+
     // Get Product By tag
     filter.collections = { eq: slug };
     const { searchProducts } = await fetchData(findProducts, {
       filter,
-      sort: [{ field: "position", direction: "asc" }],
+      sort: sortBy,
       variantFilter: { status: { eq: "ENABLED" } },
       imageLimit: 1,
     });
@@ -284,12 +313,14 @@ export const getStaticProps = async (context) => {
         products: searchProducts,
         pageFilter: filter,
         filterItems: collections,
+        sortBy,
         pageMeta: {
           siteName: name,
           title: metadata?.title || title || collectionName,
           description: metadata?.description || description,
           canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
           image: getPublicImageURL(metadata?.image || imageUrl),
+          noIndex: metadata?.noIndex || false,
         },
       },
       revalidate: 1800,

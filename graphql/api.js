@@ -376,6 +376,9 @@ export const getProductBySlug = /* GraphQL */ `
           title
           description
           keywords
+          image
+          canonical
+          noIndex
         }
         continueSellingOutOfStock
         hasVarient
@@ -828,6 +831,14 @@ export const getBasicCategory = /* GraphQL */ `
         isArchive
         bannerUrl
         categoryID
+        metadata {
+          title
+          description
+          keywords
+          image
+          canonical
+          noIndex
+        }
       }
     }
   }
@@ -882,6 +893,8 @@ export const findProducts = /* GraphQL */ `
         tags
         inventory
         blockedInventory
+        defaultPrice
+        defaultInventory
         subCategoryId
         variantGroups {
           variantGroupId
@@ -1559,6 +1572,13 @@ export const getStoreBanners = /* GraphQL */ `
         isArchive
         priority
       }
+      announcements {
+        label
+        link
+        color
+        textColor
+        isArchive
+      }
     }
   }
 `;
@@ -1897,6 +1917,7 @@ export const getRedirects = /* GraphQL */ `
     getRedirects(slug: $slug, storeId: $storeId) {
       slug
       redirect
+      hitCount
     }
   }
 `;
@@ -1905,6 +1926,19 @@ export const createRedirects = /* GraphQL */ `
   mutation CreateRedirects($input: CreateRedirectsInput!) {
     createRedirects(input: $input) {
       id
+    }
+  }
+`;
+
+export const updateRedirects = /* GraphQL */ `
+  mutation UpdateRedirects($input: UpdateRedirectsInput!) {
+    updateRedirects(input: $input) {
+      id
+      storeId
+      slug
+      hitCount
+      redirect
+      updatedAt
     }
   }
 `;

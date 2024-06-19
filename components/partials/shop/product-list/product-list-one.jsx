@@ -33,6 +33,9 @@ function ProductListOne(props) {
     filterItems,
     viewList,
     sectionId,
+    defaultSorting,
+    nextToken: fromPropsNextToken = "",
+    sortBy: sortbyFromProps = [],
   } = props;
 
   const router = useRouter();
@@ -56,7 +59,7 @@ function ProductListOne(props) {
   const [applyFilters, resetFilter] = useState(
     !!sortby || !!search?.trim() || minprice || maxprice
   );
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(fromPropsNextToken || null);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -72,13 +75,13 @@ function ProductListOne(props) {
       !Number.isNaN(Number(maxprice)) &&
       Number(minprice)
     ) {
-      filter.price = {
+      filter.defaultPrice = {
         range: [Number(minprice), Number(maxprice)],
       };
     } else if (!Number.isNaN(Number(minprice)) && Number(minprice)) {
-      filter.price = { gte: Number(minprice) };
+      filter.defaultPrice = { gte: Number(minprice) };
     } else if (!Number.isNaN(Number(maxprice)) && Number(maxprice)) {
-      filter.price = { lte: Number(maxprice) };
+      filter.defaultPrice = { lte: Number(maxprice) };
     }
     switch (sortby) {
       case "latest":
@@ -88,16 +91,23 @@ function ProductListOne(props) {
         sortBy.push({ field: "rating", direction: "desc" });
         break;
       case "price-low":
-        sortBy.push({ field: "price", direction: "asc" });
+        sortBy.push({ field: "defaultPrice", direction: "asc" });
         break;
       case "price-high":
-        sortBy.push({ field: "price", direction: "desc" });
+        sortBy.push({ field: "defaultPrice", direction: "desc" });
+        break;
+      case "availability":
+        sortBy.push({ field: "defaultInventory", direction: "desc" });
         break;
       case "best-seller":
         sortBy.push({ field: "totalOrders", direction: "desc" });
         break;
       default:
-        sortBy.push({ field: "position", direction: "asc" });
+        if (sortbyFromProps.length > 0) {
+          sortBy.push(...sortbyFromProps);
+        } else {
+          sortBy.push({ field: "position", direction: "asc" });
+        }
     }
 
     return {
@@ -202,7 +212,11 @@ function ProductListOne(props) {
   return (
     <>
       {isToolbox && !search && (
-        <ToolBox type={type} filterItems={filterItems} />
+        <ToolBox
+          type={type}
+          filterItems={filterItems}
+          defaultSorting={defaultSorting}
+        />
       )}
 
       <InfiniteScroll

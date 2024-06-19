@@ -180,6 +180,7 @@ export const orderMapper = (products, coupon, user) => {
           num_items: pixel.num_items + pixelNew.num_items,
           value: pixel.value + pixelNew.value,
           external_id: user?.id || uuid(),
+          coupon_code: coupon?.code || "",
         },
         pinpoint: [...pinpoint, pinpointNew],
         vercel: [...vercel, vercelNew],

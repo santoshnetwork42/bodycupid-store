@@ -640,11 +640,12 @@
   left: 50%;
   transform: translate(-50%, -75%);
   color: white;
-  padding: 0.1rem 3rem;
+  padding: 0.1rem 1rem;
   border-radius: 4rem;
   max-width: 20rem;
   p {
     font-family: sans-serif;
+    min-width: 10rem;
   }
 }
 

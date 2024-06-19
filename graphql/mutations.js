@@ -1382,6 +1382,8 @@ export const createStoreSetting = /* GraphQL */ `
         TIMER_COLOR
         TIMER_END_TIME
         TIMER_ENABLED
+        TIMER_START_TIME
+        IS_DAILY_TIMER
         PREPAID_ENABLED
         __typename
       }
@@ -2452,6 +2454,8 @@ export const updateConfiguration = /* GraphQL */ `
       TIMER_COLOR
       TIMER_END_TIME
       TIMER_ENABLED
+      TIMER_START_TIME
+      IS_DAILY_TIMER
       PREPAID_ENABLED
       __typename
     }
@@ -3520,6 +3524,8 @@ export const updateStoreSetting = /* GraphQL */ `
         TIMER_DESCRIPTION
         TIMER_COLOR
         TIMER_END_TIME
+        TIMER_START_TIME
+        IS_DAILY_TIMER
         TIMER_ENABLED
         PREPAID_ENABLED
         __typename

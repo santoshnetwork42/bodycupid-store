@@ -8,6 +8,7 @@ function NextHead({
   image,
   canonical,
   googleVerificationTag,
+  noIndex,
 }) {
   return (
     <Head>
@@ -27,7 +28,7 @@ function NextHead({
       <meta name="title" content={title} />
       <meta name="description" content={description} />
       <meta name="keywords" content={siteName} />
-
+      {noIndex && <meta name="robots" content="noindex" />}
       <meta property="og:site_name" content={siteName} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} key="ogtitle" />

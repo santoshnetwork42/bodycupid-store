@@ -184,6 +184,12 @@ export const getStaticProps = async (context) => {
       relatedProductsFilter = {
         id: { ne: id },
       };
+
+      //remove slob product collection
+      relatedProductsFilter.collections = {
+        ne: "slob",
+      };
+
       if (subCategoryId) {
         relatedProductsFilter.subCategoryId = { eq: subCategoryId };
       } else {
@@ -210,6 +216,7 @@ export const getStaticProps = async (context) => {
           keywords: metadata?.keywords || [],
           canonical: metadata?.canonical || `${webUrl}/products/${slug}`,
           image: getPublicImageURL(metadata?.image || thumbImage?.imageKey),
+          noIndex: metadata?.noIndex || false,
         },
       },
       revalidate: 1800,

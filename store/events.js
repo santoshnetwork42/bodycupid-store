@@ -49,6 +49,7 @@ export const actionTypes = {
   TOP_NAVBAR_CLICKED: "TOP_NAVBAR_CLICKED",
   REMOVED_FROM_CART: "REMOVED_FROM_CART",
   PRICE_MISMATCH: "PRICE_MISMATCH",
+  APPLY_COUPONS: "APPLY_COUPONS",
 };
 
 const initialState = {
@@ -606,6 +607,28 @@ export function* eventsSaga() {
       //     coupon: coupon?.code || "",
       //   });
       // });
+    } catch (e) {
+      errorHandler(e);
+    }
+  });
+
+  yield takeEvery(actionTypes.APPLY_COUPONS, function* saga(e) {
+    try {
+      const {
+        cart: { data, coupon },
+      } = yield select();
+      const userData = yield select((state) => state.user.data);
+      const user = userMapper(userData);
+      const { pixel } = orderMapper(data, coupon, user);
+
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
+          event: "add_coupon_code",
+          eventID: uuid(),
+          attribute: pixel,
+        });
+      }
     } catch (e) {
       errorHandler(e);
     }
