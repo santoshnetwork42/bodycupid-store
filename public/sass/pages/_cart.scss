@@ -1488,7 +1488,11 @@
 .cart-progress-container {
   display: flex;
   background-color: #ffd61330;
-  padding: 18px 0;
+  padding: 14px 0;
   justify-content: center;
   border-bottom: 0.7px solid #e5e5e5;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
 }
