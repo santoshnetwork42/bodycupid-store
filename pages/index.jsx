@@ -39,7 +39,7 @@ function HomePage({
   return (
     <main className="main home searchBar">
       <NextHead {...pageMeta} />
-      <Fomo />
+      {/* <Fomo /> */}
       <h1 className="d-none">{name} - Homepage</h1>
       <div className="page-content page-content-wrapper">
         <div className="intro-section">
