@@ -1,3 +1,4 @@
+import { useFomoProducts } from "@wow-star/utils";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -60,6 +61,8 @@ function Layout({
   const router = useRouter();
   const isInteractive = useIsInteractive();
 
+  const fomo = useFomoProducts();
+
   useEffect(() => {
     removeHoverEffect();
   }, []);
@@ -84,6 +87,12 @@ function Layout({
       window.removeEventListener("resize", resizeHandler);
     };
   }, []);
+
+  useEffect(() => {
+    if (isInteractive) {
+      localStorage.setItem("fomo-products", JSON.stringify(fomo));
+    }
+  });
 
   useEffect(() => {
     closeQuickview();

@@ -25,6 +25,7 @@ import ABProvider from "~/utils/contexts/ab";
 import NavbarProvider from "~/utils/contexts/navbar";
 import { errorHandler } from "~/utils/errorHandler";
 import { wrapper } from "../store/index.js";
+import { FomoProvider } from "~/utils/contexts/fomoContext.js";
 
 Amplify.configure({
   ...awsconfig,
@@ -216,12 +217,14 @@ const App = ({ Component, pageProps }) => {
           loading={<Header navbar={{ hideCart: true, hideMainMenu: true }} />}
         >
           <ABProvider>
-            <NavbarProvider>
-              <Layout navbar={navbarProps} footer={footerProps}>
-                <Scripts />
-                <Component {...pageProps} />
-              </Layout>
-            </NavbarProvider>
+            <FomoProvider>
+              <NavbarProvider>
+                <Layout navbar={navbarProps} footer={footerProps}>
+                  <Scripts />
+                  <Component {...pageProps} />
+                </Layout>
+              </NavbarProvider>
+            </FomoProvider>
           </ABProvider>
         </PersistGate>
       </Provider>
