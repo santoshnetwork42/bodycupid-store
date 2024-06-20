@@ -10,8 +10,13 @@ export const ShowProgressBar = ({
   setCartVisibility,
 }) => (
   <div className="sticky-progress-container stick-bottom-button">
-    <ProgressBar current={current} max={max} progress={progress} />
-    <p className="progress-text">{progressMessage}</p>
+    <ProgressBar
+      current={current}
+      max={max}
+      progress={progress}
+      progressMessage={progressMessage}
+    />
+
     <ALink
       href="#"
       onClick={() => current === max && setCartVisibility(true)}

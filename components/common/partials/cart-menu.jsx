@@ -97,14 +97,18 @@ function CartMenu(props) {
     );
   }, [bxayCoupon, appliedCoupon, cartList]);
 
-  const { current, max, progress } = useMemo(() => {
+  const { current, max, progress, progressMessage } = useMemo(() => {
     if (showProgressBar) {
       const cartItemsToAdd =
         typeof bxayCoupon?.message === "number" ? bxayCoupon?.message : 0;
       const max = bxayCoupon?.coupon?.buyXQuantity;
       const current = max - cartItemsToAdd;
       const progress = (current / max) * 100;
-      return { current, max, progress };
+      const progressMessage = bxayCoupon?.allowed
+        ? `🥳 Congrats, 'Buy ${bxayCoupon.coupon.buyXQuantity} @ ₹${bxayCoupon.coupon.getYAmount} Coupon is applied!`
+        : `Select ${cartItemsToAdd} More Products to Avail Offer! 🎁`;
+
+      return { current, max, progress, progressMessage };
     }
     return { current: 0, max: 0, progress: 0 };
   }, [showProgressBar, bxayCoupon]);
@@ -160,6 +164,7 @@ function CartMenu(props) {
                         current={current}
                         max={max}
                         progress={progress}
+                        progressMessage={progressMessage}
                       />
                     </div>
                   ) : (
