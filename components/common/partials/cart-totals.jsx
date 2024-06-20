@@ -242,7 +242,7 @@ function CartTotal({
                   isSmallSize ? "label-size" : ""
                 }`}
               >
-                🎊 Cheers!
+                🎊 Congrats!
                 <span> You saved {`₹${toDecimal(totalAmountSaved)} `}</span>
               </p>
             </div>
