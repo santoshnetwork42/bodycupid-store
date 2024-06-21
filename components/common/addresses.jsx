@@ -171,7 +171,7 @@ function Addresses({
             {addresses.map((adr) => (
               <Fragment key={adr.id}>
                 <div
-                  className={`col-sm-6 mb-4 accordion-border`}
+                  className={`col-sm-6 mb-2 accordion-border`}
                   onClick={() => {
                     setSelected(adr);
                     addressSelected(adr, totalPrice);
@@ -267,9 +267,11 @@ function Addresses({
                 setOpen(true);
                 setDefaultAddress(null);
               }}
-              className={`btn btn-primary w-50 ${isMobile ? "ml-2" : ""}`}
+              className={`btn address-button-styling w-50 ${
+                isMobile ? "ml-2" : ""
+              }`}
             >
-              ADD NEW ADDRESS
+              + Add New Address
             </button>
           )}
         </>

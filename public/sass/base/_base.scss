@@ -722,6 +722,12 @@ button {
   max-width: 20rem;
 }
 
+.address-button-styling {
+  background: white !important;
+  border: 0.5px solid #6f4632 !important;
+  color: #6f4632 !important;
+  border-radius: 0.5rem;
+}
 // Bottom drawer styling starts here
 .drawer {
   position: fixed;
