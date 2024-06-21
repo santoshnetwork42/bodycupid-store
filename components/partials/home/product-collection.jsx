@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import Reveal from "react-awesome-reveal";
 
 import ALink from "~/components/features/custom-link";
-import OwlCarousel from "~/components/features/owl-carousel";
 import ProductTwo from "~/components/features/product/product-two";
-import { productSlider, productSliderLarge } from "~/utils/data/carousel";
+import EmblaCarousel from "~/components/features/react-embla";
 import { fadeIn } from "~/utils/data/keyframes";
 
 function ProductCollection({
@@ -50,25 +49,34 @@ function ProductCollection({
           )}
         </div>
 
-        <OwlCarousel
+        <EmblaCarousel
           id={`product-carousel-${slug}`}
-          adClass="owl-theme owl-nav-full"
-          options={!large ? productSlider : productSliderLarge}
+          options={{
+            loop: false,
+            align: "center",
+            slidesToScroll: "auto",
+          }}
+          containerStyle={{ marginRight: "-2rem" }}
         >
           {products.map((item, index) => (
-            <ProductTwo
-              adClass="mb-4 text-center"
-              slug={slug}
-              product={item}
+            <div
               key={`top-selling-product-${item.id}`}
-              section={{
-                id: title.toLowerCase().replace(/\ /g, "-"),
-                name: title,
-              }}
-              priority={!!(priority && index < 4)}
-            />
+              style={{ paddingRight: "20px" }}
+              className="product-collection-item"
+            >
+              <ProductTwo
+                adClass="text-center mb-4"
+                slug={slug}
+                product={item}
+                section={{
+                  id: title.toLowerCase().replace(/\ /g, "-"),
+                  name: title,
+                }}
+                priority={!!(priority && index < 4)}
+              />
+            </div>
           ))}
-        </OwlCarousel>
+        </EmblaCarousel>
       </section>
     </Reveal>
   );

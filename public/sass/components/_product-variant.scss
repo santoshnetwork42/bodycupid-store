@@ -53,7 +53,7 @@
 
     .product-title {
         margin-top: 10px;
-        overflow: hidden;
+        overflow: auto;
         text-overflow: ellipsis;
         display: -webkit-box;
         white-space: nowrap !important;
@@ -67,7 +67,6 @@
         color: #222;
         display: -webkit-box;
         -webkit-line-clamp: 2;
-        overflow: hidden;
         -webkit-box-orient: vertical;
 
         .product-desc {
@@ -78,6 +77,9 @@
         }
     }
 
+    .product-title::-webkit-scrollbar {
+        display: none;
+    }
     .old-price {
         font-size: 12px !important;
         text-decoration: line-through;

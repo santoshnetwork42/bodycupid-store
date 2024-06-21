@@ -23,6 +23,7 @@ function Addresses({
   openAllAddressModal,
   closeAllAddressModal,
   addressSelected,
+  setIsValidAddress,
 }) {
   const { isSmallSize: isMobile } = useWindowDimensions();
   const [loading, setLoading] = useState(!!user);
@@ -30,7 +31,7 @@ function Addresses({
   const [addresses, setAddresses] = useState([]);
   const [isOpen, setOpen] = useState(false);
   const [defaultAddress, setDefaultAddress] = useState({});
-  const [isAddressFormVisible, setIsAddressFormVisible] = useState(false);
+  const [noAddress, setNoAddress] = useState(false);
 
   const { totalPrice } = useCartTotal({
     paymentType: "PREPAID",
@@ -51,6 +52,10 @@ function Addresses({
       });
       setAddresses(userAddresses.items);
       setLoading(false);
+
+      if (variant === "CHECKOUT" && !!userAddresses?.total) {
+        setIsValidAddress(true);
+      }
       setSelected(userAddresses.items[0]);
       addressSelected(userAddresses.items[0], totalPrice);
       return userAddresses.items;
@@ -101,14 +106,30 @@ function Addresses({
     setDefaultAddress(null);
   };
 
+  const combineLandmarkAndArea = (landmark = "", area = "") => {
+    let combinedString = "";
+
+    if (landmark) {
+      combinedString += landmark;
+    }
+    if (landmark && area) {
+      combinedString += ", ";
+    }
+    if (area) {
+      combinedString += area;
+    }
+
+    return combinedString;
+  };
+
   useEffect(() => {
     if (onAddressChange && selected) {
-      const adr = addresses.find((a) => a.id === selected.id);
+      const adr = addresses?.find((a) => a.id === selected.id);
       if (adr) {
         onAddressChange({
           id: adr.id,
-          firstName: adr.name.split(" ")[0] || "",
-          lastName: adr.name.split(" ")[1] || "",
+          firstName: adr?.firstName || adr?.name?.split(" ")[0] || "",
+          lastName: adr?.lastName || adr?.name?.split(" ")[1] || "",
           phone: adr.phone,
           email: adr.email,
           country: adr.country,
@@ -119,38 +140,45 @@ function Addresses({
           address: adr.address,
           location: adr.location,
           area: adr.area,
+          name: adr?.firstName + " " + adr?.lastName,
         });
       } else {
         onAddressChange(null);
       }
     }
+
+    setNoAddress(!addresses?.length);
   }, [selected, addresses]);
 
   if (loading) return <></>;
 
   return (
     <div className="container">
-      {addresses.length > 0 && (
+      {!noAddress && (
         <>
-          <div className="row ">
-            {variant !== "CHECKOUT" && (
-              <p className="mb-2">
-                The following addresses can be used on the checkout page.
-              </p>
-            )}
+          {variant !== "CHECKOUT" && (
+            <p className="mb-2">
+              The following addresses can be used on the checkout page.
+            </p>
+          )}
+          <div
+            className={`row ${
+              isMobile
+                ? "d-flex mobile-address-wrapper address-cards-wrapper"
+                : ""
+            }`}
+          >
             {addresses.map((adr) => (
               <Fragment key={adr.id}>
                 <div
-                  className={`col-sm-6 mb-4 accordion-border ${
-                    variant === "CHECKOUT" && "d-sm-none"
-                  }`}
+                  className={`col-sm-6 mb-2 accordion-border`}
                   onClick={() => {
                     setSelected(adr);
                     addressSelected(adr, totalPrice);
                   }}
                 >
-                  <div className={`card card-address w-100`}>
-                    <div className="card-body pr-4 pl-3 pt-2 pb-2 cursor-pointer bg-white">
+                  <div className={`card card-border-radius card-address w-100`}>
+                    <div className="card-border-radius card-body pr-4 pl-3 pt-2 pb-2 cursor-pointer bg-white">
                       <div className="d-flex">
                         {variant === "CHECKOUT" && (
                           <i className="radio-icon">
@@ -163,7 +191,7 @@ function Addresses({
                         )}
                         <div className="ml-2">
                           <h5
-                            className={`card-title text-uppercase mb-1 ${
+                            className={`card-title mb-1 ${
                               adr.id === selected?.id && !!onAddressChange
                                 ? "collapse"
                                 : " "
@@ -171,34 +199,34 @@ function Addresses({
                           >
                             {adr.name}
                           </h5>
-                          <div className="add-lables-values">
+                          <div className="add-lables-values d-flex-col gap-2">
                             {adr?.email && (
                               <span className="checkout-email-lable">
                                 {adr?.email} <br />
                               </span>
                             )}
+                            <span className="address-card-limit">
+                              {combineLandmarkAndArea(adr?.landmark, adr?.area)}
+                            </span>
 
-                            {adr?.phone && (
-                              <span>
-                                {adr?.phone} <br />
-                              </span>
-                            )}
                             <div className="add-wrap">
-                              <span className="add-address">
-                                {adr?.address && (
-                                  <span className="">
-                                    {adr?.address}, &nbsp;
-                                  </span>
+                              <div className="d-flex">
+                                {adr?.city && <span>{adr?.city}</span>}{" "}
+                                {adr?.city && adr?.pinCode && (
+                                  <span>&nbsp;-&nbsp;</span>
                                 )}
-                                {adr?.area && <span>{adr?.area}, &nbsp;</span>}
-                                {adr?.landmark && (
-                                  <span>{adr?.landmark}, &nbsp;</span>
-                                )}
-                              </span>
+                                {adr?.pinCode && <span>{adr?.pinCode}</span>}
+                              </div>
+                              {adr?.state && <span>{adr?.state} &nbsp;</span>}
 
-                              <span>
-                                {`${adr?.city}, ${adr?.state}, ${adr?.pinCode}`}
-                              </span>
+                              {adr?.phone && (
+                                <div className="d-flex gap-2">
+                                  <span>Mobile:</span>
+                                  <span>
+                                    {adr?.phone} <br />
+                                  </span>
+                                </div>
+                              )}
                             </div>
                           </div>
                           <div className="add-bottom-btn mt-2">
@@ -210,15 +238,18 @@ function Addresses({
                                 setOpen(true);
                               }}
                             >
-                              Edit <i className="far fa-edit"></i>
+                              Edit
                             </ALink>
+                            {!!adr?.id && (
+                              <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                            )}
                             {user && (
                               <ALink
                                 href="#"
-                                className="btn btn-link btn-secondary btn-underline ml-3"
+                                className="btn btn-link btn-secondary btn-underline"
                                 onClick={() => removeAddress(adr.id, user?.id)}
                               >
-                                Delete <i className="far fa-trash-alt"></i>
+                                Remove
                               </ALink>
                             )}
                           </div>
@@ -230,53 +261,23 @@ function Addresses({
               </Fragment>
             ))}
           </div>
-          {!user && !!guestCheckout && addresses.length > 0 ? (
-            <></>
-          ) : (
+          {user && (
             <button
               onClick={() => {
                 setOpen(true);
                 setDefaultAddress(null);
               }}
-              className={`btn btn-primary w-50 ${
-                variant === "CHECKOUT" && "d-sm-none"
+              className={`btn address-button-styling w-50 ${
+                isMobile ? "ml-2" : ""
               }`}
             >
-              ADD NEW ADDRESS
+              + Add New Address
             </button>
           )}
         </>
       )}
 
-      {!!selected && variant === "CHECKOUT" && (
-        <div className="row d-sm-show p-0">
-          <div className="bg-white mobile-checkout-address d-flex">
-            <div className="mobile-address-heading">
-              <p className="m-0 lh-default">
-                Deliver to:{" "}
-                <span className="address-user-name">
-                  {selected.name}, {selected?.pinCode}
-                </span>
-              </p>
-              {selected?.address && (
-                <span className="mobile-address-label">
-                  {selected?.address} &nbsp;
-                </span>
-              )}
-            </div>
-            <button
-              onClick={() => {
-                openAllAddressModal();
-              }}
-              className="btn btn-primary btn-change"
-            >
-              Change
-            </button>
-          </div>
-        </div>
-      )}
-
-      {!selected && variant === "CHECKOUT" && (
+      {/* {!selected && variant === "CHECKOUT" && !!addresses.length && (
         <div className="row d-sm-show">
           <div
             className={`bg-white border-regular d-flex checkout-add-address-btn`}
@@ -288,11 +289,17 @@ function Addresses({
             <p className="m-0 add-address-label">Add new address</p>
           </div>
         </div>
-      )}
+      )} */}
 
-      {!addresses.length && (
-        <div className={`${variant === "CHECKOUT" && "row d-sm-none"}`}>
-          <AddressForm onSubmit={onAddress} onAddress={onAddressChange} />
+      {noAddress && (
+        <div className={``}>
+          <AddressForm
+            onSubmit={onAddress}
+            onAddress={onAddressChange}
+            setIsValidAddress={setIsValidAddress}
+            noAddress={noAddress}
+            variant={variant}
+          />
         </div>
       )}
 
@@ -307,101 +314,13 @@ function Addresses({
           defaultAddress={defaultAddress}
           onSubmit={onAddress}
           onAddress={onAddressChange}
+          setIsValidAddress={setIsValidAddress}
+          noAddress={noAddress}
+          variant={variant}
+          onClose={() => {
+            setOpen(false);
+          }}
         />
-      </Modal>
-
-      <Modal
-        isOpen={isAddressesModal}
-        onRequestClose={() => {
-          closeAllAddressModal();
-          setIsAddressFormVisible(false);
-        }}
-        shouldReturnFocusAfterClose={false}
-        overlayClassName="all-address-modal-overlay"
-        className="bg-img all-address-popup"
-      >
-        <div className="checkout">
-          {!!addresses?.length && !isAddressFormVisible ? (
-            <>
-              {addresses.map((adr) => (
-                <div className="address-card mb-2" key={adr.id}>
-                  <div className="card-header">
-                    <ALink
-                      href="#"
-                      className={`text-body text-normal ls-m ${
-                        adr.id === selected?.id ? "collapse" : ""
-                      }`}
-                      onClick={() => {
-                        setSelected(adr);
-                        closeAllAddressModal();
-                      }}
-                    >
-                      <h5 className="card-title text-uppercase m-0">
-                        {adr.name}
-                      </h5>
-                    </ALink>
-                  </div>
-                  <div className="checkout card-body  cursor-pointer bg-white pl-5">
-                    <div className="add-lables-values">
-                      {adr?.phone && (
-                        <span>
-                          {adr?.phone} <br />
-                        </span>
-                      )}
-                      {adr?.address && <span>{adr?.address}</span>}
-                      {adr?.pincode && <span>{adr?.pinCode}</span>}
-                    </div>
-                  </div>
-                  <div className="add-bottom-btn pl-5 mb-1">
-                    <ALink
-                      href="#"
-                      className="btn btn-link btn-secondary btn-underline btn-link-black"
-                      onClick={() => {
-                        setDefaultAddress({ ...adr });
-                        setIsAddressFormVisible(true);
-                      }}
-                    >
-                      Edit <i className="far fa-edit"></i>
-                    </ALink>
-                    {user && (
-                      <ALink
-                        href="#"
-                        className="btn btn-link btn-secondary btn-underline ml-3"
-                        onClick={() => removeAddress(adr.id, user?.id)}
-                      >
-                        Delete <i className="far fa-trash-alt"></i>
-                      </ALink>
-                    )}
-                  </div>
-                </div>
-              ))}
-              {!user && !!guestCheckout && addresses.length > 0 ? (
-                <></>
-              ) : (
-                <div className="d-flex justify-content-center">
-                  <button
-                    onClick={() => {
-                      setIsAddressFormVisible(true);
-                    }}
-                    className={`btn btn-primary `}
-                  >
-                    ADD NEW ADDRESS
-                  </button>
-                </div>
-              )}
-            </>
-          ) : (
-            <AddressForm
-              defaultAddress={defaultAddress}
-              onSubmit={(response) => {
-                setIsAddressFormVisible(false);
-                closeAllAddressModal();
-                onAddress(response);
-              }}
-              onAddress={onAddressChange}
-            />
-          )}
-        </div>
       </Modal>
     </div>
   );
@@ -410,6 +329,7 @@ function Addresses({
 function mapStateToProps(state) {
   return {
     user: state.user.data,
+    userAddress: state.user.userAddress,
     isAddressesModal: state.modal.allAddressModal,
   };
 }

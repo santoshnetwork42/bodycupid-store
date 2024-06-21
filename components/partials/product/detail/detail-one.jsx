@@ -11,6 +11,7 @@ import Quantity from "~/components/features/quantity";
 import { Bag, BigDot, Clock, Star } from "~/components/icons";
 import NextImage from "~/components/image";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
+import VariantCard from "~/components/partials/product/variant-card";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { systemActions } from "~/store/system";
@@ -23,9 +24,6 @@ import {
   getUpdatedCart,
   scrollWithOffset,
 } from "~/utils/helper";
-import { getProductInventory } from "~/utils/products";
-import ProductVariant from "../product-variant";
-import VariantCard from "../variant-card";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -306,29 +304,27 @@ function DetailOne(props) {
           {!!variantGroup && product?.variants?.items?.length > 0 && (
             <div className="product-form product-variations product-size mb-1 mt-3">
               <div className="product-form-group overflow-auto">
-                {variantGroup
-                  ?.sort((a, b) => (a.position > b.position ? 1 : -1))
-                  ?.map((v1, index) => {
-                    return (
-                      <div className="d-flex" key={v1.id}>
-                        {v1.variantOptions
-                          ?.sort((a, b) => (a?.position > b?.position ? 1 : -1))
-                          ?.map((v2) => {
-                            return (
-                              <>
-                                <VariantCard
-                                  key={v2.id}
-                                  variant={v2}
-                                  onChange={() => {
-                                    onVariantChange(v1.id, v2.id);
-                                  }}
-                                />
-                              </>
-                            );
-                          })}
-                      </div>
-                    );
-                  })}
+                {variantGroup?.map((v1, index) => {
+                  return (
+                    <div className="d-flex" key={v1.id}>
+                      {v1.variantOptions
+                        ?.sort((a, b) => (a?.position > b?.position ? 1 : -1))
+                        ?.map((v2) => {
+                          return (
+                            <>
+                              <VariantCard
+                                key={v2.id}
+                                variant={v2}
+                                onChange={() => {
+                                  onVariantChange(v1.id, v2.id);
+                                }}
+                              />
+                            </>
+                          );
+                        })}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}

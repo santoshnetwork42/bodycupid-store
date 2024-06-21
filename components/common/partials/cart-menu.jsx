@@ -1,11 +1,17 @@
-import { useCartItems, useCartTotal, useInventory } from "@wow-star/utils";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { connect } from "react-redux";
+import {
+  useCartItems,
+  useCartTotal,
+  useFeaturedCoupons,
+  useInventory,
+} from "@wow-star/utils";
 import { Logger } from "aws-amplify";
+import { useRouter } from "next/router";
+import { useEffect, useMemo } from "react";
+import { connect } from "react-redux";
 
 import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 import CartTotal from "~/components/common/partials/cart-totals";
+import { ProgressBar } from "~/components/common/progress-bar";
 import ALink from "~/components/features/custom-link";
 import { Bag, Cart, Cross } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
@@ -72,6 +78,41 @@ function CartMenu(props) {
     }
   }, [asPath]);
 
+  //passed true for getting cart item number only
+  const { filteredFeaturedCoupons: featuredCoupons = [] } =
+    useFeaturedCoupons(true);
+
+  const bxayCoupon = useMemo(() => {
+    return featuredCoupons.find(
+      ({ coupon }) =>
+        coupon && coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
+    );
+  }, [featuredCoupons]);
+
+  const showProgressBar = useMemo(() => {
+    return (
+      cartList?.some((cart) => cart?.collections?.includes("bundle-offer")) &&
+      bxayCoupon &&
+      (!appliedCoupon || appliedCoupon.code === bxayCoupon.coupon.code)
+    );
+  }, [bxayCoupon, appliedCoupon, cartList]);
+
+  const { current, max, progress, progressMessage } = useMemo(() => {
+    if (showProgressBar) {
+      const cartItemsToAdd =
+        typeof bxayCoupon?.message === "number" ? bxayCoupon?.message : 0;
+      const max = bxayCoupon?.coupon?.buyXQuantity;
+      const current = max - cartItemsToAdd;
+      const progress = (current / max) * 100;
+      const progressMessage = bxayCoupon?.allowed
+        ? `🥳 Congrats, 'Buy ${bxayCoupon.coupon.buyXQuantity} @ ₹${bxayCoupon.coupon.getYAmount} Coupon is applied!'`
+        : `Select ${cartItemsToAdd} More Products to Avail Offer! 🎁`;
+
+      return { current, max, progress, progressMessage };
+    }
+    return { current: 0, max: 0, progress: 0 };
+  }, [showProgressBar, bxayCoupon]);
+
   return (
     <div className=" side-bar  d-flex align-items-center p-unset mr-0 mr-lg-2">
       <ALink
@@ -117,8 +158,20 @@ function CartMenu(props) {
             {cartItems.length > 0 ? (
               <>
                 <div className=" ">
-                  <CouponDiscountBar />
-                  <div className="shop-table cart-table lh-default sidebar-padding mt-4">
+                  {showProgressBar ? (
+                    <div className="cart-progress-container">
+                      <ProgressBar
+                        current={current}
+                        max={max}
+                        progress={progress}
+                        progressMessage={progressMessage}
+                      />
+                    </div>
+                  ) : (
+                    <CouponDiscountBar />
+                  )}
+
+                  <div className="shop-table cart-table lh-default sidebar-padding">
                     <div key={appliedCoupon?.id}>
                       {cartItems.map((item) => (
                         <CartProduct
@@ -134,7 +187,7 @@ function CartMenu(props) {
 
                 <aside
                   id="cart-details"
-                  className="text-primary sticky-sidebar-wrapper pb-6 sidebar-padding"
+                  className="text-primary sticky-sidebar-wrapper pb-6"
                 >
                   <div
                     className="sticky-sidebar"

@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
-import Script from "next/script";
-import { connect } from "react-redux";
 import { useUpdateUserCoupon } from "@wow-star/utils";
+import Script from "next/script";
+import { useCallback, useEffect, useState } from "react";
+import { connect } from "react-redux";
 
+import { STORE_ID, WISEPOPS_KEY } from "~/config";
 import { alertToaster } from "~/utils/popupHelper";
-import { WISEPOPS_KEY } from "~/config";
 
 function Wisepops({ user }) {
   const [isBeforeFormSubmitListenerAdded, setIsBeforeFormSubmitListenerAdded] =
@@ -12,7 +12,7 @@ function Wisepops({ user }) {
   const [isAfterFormSubmitListenerAdded, setIsAfterFormSubmitListenerAdded] =
     useState(false);
 
-  const [, updateCoupon] = useUpdateUserCoupon();
+  const [, updateUserCoupon] = useUpdateUserCoupon();
 
   const beforeFormSubmitHandler = useCallback((event) => {
     event.detail.target.querySelector("button").setCustomValidity("");
@@ -22,7 +22,7 @@ function Wisepops({ user }) {
     if (
       event.detail.target.elements["coupon"].value !== "BETTER LUCK NEXT TIME"
     ) {
-      updateCoupon(event.detail.target.elements["coupon"].value);
+      updateUserCoupon(event.detail.target.elements["coupon"].value, STORE_ID);
       alertToaster("Your coupon has been availed", "success");
     }
   };

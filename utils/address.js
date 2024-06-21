@@ -1,6 +1,6 @@
 import { API, graphqlOperation } from "aws-amplify";
 
-import { PHONE_REGEX } from "~/constant";
+import { PHONE_REGEX, EMAIl_REGEX } from "~/constant";
 import { getZipCode } from "~/graphql/api";
 import { addPhonePrefix, removePhonePrefix } from "./helper";
 import { alertToaster } from "./popupHelper";
@@ -53,7 +53,7 @@ export const isValidAddress = (address) => {
     address: streetAddress,
   } = address || {};
 
-  if (!firstName  || !streetAddress || !city || !pinCode) {
+  if (!firstName || !streetAddress || !city || !pinCode) {
     return false;
   }
   return true;
@@ -63,6 +63,7 @@ export const validateAddress = async (address, paymentType = "ALL") => {
   const {
     firstName,
     lastName,
+    email,
     city,
     phone,
     pinCode,
@@ -74,6 +75,9 @@ export const validateAddress = async (address, paymentType = "ALL") => {
 
   if (!phone || !PHONE_REGEX.test(removePhonePrefix(phone))) {
     error.phone = "Please enter valid phone number";
+  }
+  if (email?.trim() && !EMAIl_REGEX.test(email?.trim())) {
+    error.email = "Please enter valid email";
   }
 
   if (!isValidPinCode) {
@@ -89,9 +93,9 @@ export const validateAddress = async (address, paymentType = "ALL") => {
   if (!firstName) {
     error.firstname = "Please enter firstname";
   }
-  // if (!lastName) {
-  //   error.lastname = "Please enter lastname";
-  // }
+  if (!lastName) {
+    error.lastname = "Please enter lastname";
+  }
   if (!streetAddress) {
     error.address = "Please enter address";
   }

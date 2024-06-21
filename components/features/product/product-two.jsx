@@ -48,11 +48,17 @@ function ProductTwo(props) {
     discount,
   } = productsNew || {};
 
-  const totalCartItems =
-    getCartCount(cartList) + productsNew?.minimumOrderQuantity || 1;
+  const bundleOfferCartList = cartList?.filter((cart) =>
+    cart?.collections?.includes("bundle-offer")
+  );
+
+  const totalBundleOfferCartItems =
+    getCartCount(bundleOfferCartList) + productsNew?.minimumOrderQuantity || 1;
 
   const showCartModal =
-    totalCartItems > 0 && totalCartItems % 8 !== 0 ? false : true;
+    totalBundleOfferCartItems > 0 && totalBundleOfferCartItems % 8 !== 0
+      ? false
+      : true;
 
   const showQuickviewHandler = () => {
     openQuickview(slug);
@@ -95,8 +101,7 @@ function ProductTwo(props) {
     });
     if (tagSlug === "bundle-offer") {
       showCartModal && setCartVisibility(true);
-    }
-    // else setCartVisibility(true);
+    } else setCartVisibility(true);
 
     logger.verbose("Added product to cart");
     logger.debug("Added product to cart:", product);
@@ -142,6 +147,12 @@ function ProductTwo(props) {
     backgroundColor: productTopLabelColor,
   };
 
+  const lgImages = useMemo(() => {
+    const images = [...productsNew.images.items];
+    images.sort((a, b) => a.position - b.position);
+    return images;
+  }, [product]);
+
   return (
     <div className={`product text-left ${adClass} product-card`}>
       {/* <figure className="product-media"> */}
@@ -158,6 +169,35 @@ function ProductTwo(props) {
           />
         </ALink>
       )}
+      {/* <EmblaCarousel
+        options={{
+          loop: false,
+          align: "center",
+        }}
+        controlsAbsolute
+      >
+        {!!lgImages.length &&
+          lgImages?.map((image, index) => (
+            <div
+              key={image.imageKey}
+              style={{
+                flex: "0 0 100%",
+              }}
+            >
+              <ALink href={`/products/${slug}`}>
+                <Image
+                  src={image.imageKey}
+                  alt={title}
+                  height={280}
+                  width={280}
+                  quality={50}
+                  objectFit="cover"
+                  priority={!!priority}
+                />
+              </ALink>
+            </div>
+          ))}
+      </EmblaCarousel> */}
 
       <div className="product-label-group">
         {discount > 0 && (
@@ -196,11 +236,11 @@ function ProductTwo(props) {
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </div> */}
             {/* <div className="product-coupon">{selectedLabel?.label?.trim()}</div> */}
-            {!!product?.benefits && (
+            {/* {!!product?.benefits && (
               <div className="product-card-benefits">
                 {product?.benefits.join(" | ")}
               </div>
-            )}
+            )} */}
 
             <div className="ratings-container mb-0">
               {!!totalRatings && totalRatings > 0 && (

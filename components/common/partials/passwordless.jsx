@@ -1,31 +1,30 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { connect, useStore } from "react-redux";
-import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
-import { Auth, API } from "aws-amplify";
-import { useRouter } from "next/router";
-import { Logger } from "aws-amplify";
+import { API, Auth, Logger } from "aws-amplify";
 import delay from "delay";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
+import { connect, useStore } from "react-redux";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { toast } from "react-toastify";
 
-import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
-import getRandomString from "~/utils/getRandomString";
-import { errorHandler } from "~/utils/errorHandler";
-import { alertToaster } from "~/utils/popupHelper";
-
-import { modalActions } from "~/store/modal";
-import { userActions } from "~/store/user";
-
+import BottomDrawer from "~/components/common/bottomDrawer";
 import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
-
+import AlertPopup from "~/components/features/product/common/alert-popup";
+import { STORE_ID } from "~/config";
 import {
   ensureUserAndDispatchOTP,
   getUser,
   verifyCustomOTP,
 } from "~/graphql/api";
 import { eventActions } from "~/store/events";
-import useWindowDimensions from "~/utils/getWindowDimension";
+import { modalActions } from "~/store/modal";
+import { userActions } from "~/store/user";
+import { errorHandler } from "~/utils/errorHandler";
 import fetchData from "~/utils/fetchData";
-import { STORE_ID } from "~/config";
+import getRandomString from "~/utils/getRandomString";
+import useWindowDimensions from "~/utils/getWindowDimension";
+import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
+import { alertToaster } from "~/utils/popupHelper";
 
 const logger = new Logger("Login-without-password");
 
@@ -36,7 +35,6 @@ function Passwordless({
   forceOpen,
   redirect,
   setUser,
-  login,
   OtpRequested,
   setCustomUser,
   customSignup,
@@ -45,7 +43,6 @@ function Passwordless({
   const forceCustomSignup = !!(customSignup || customSignupProp);
 
   const router = useRouter();
-  const { query } = router;
   const { isSmallSize: isMobile } = useWindowDimensions();
 
   const [state, setState] = useState({
@@ -177,6 +174,13 @@ function Passwordless({
             setOtpError(true);
           }
         }
+        toast(
+          <AlertPopup message={"Logged In Successfully"} status="success" />,
+          {
+            position: "top-center",
+            autoClose: 2000,
+          }
+        );
       } catch (error) {
         logger.error(error);
         errorHandler(error);
@@ -327,7 +331,138 @@ function Passwordless({
     });
   };
 
-  return (
+  return isMobile ? (
+    <div>
+      {(forceOpen || isOpen) && (
+        <BottomDrawer
+          title={!confirmSignUp ? "Sign In" : "OTP Verification"}
+          isOpen={forceOpen || isOpen}
+          onClose={closeModal}
+          maxHeight={40}
+          showOverlay
+        >
+          {/* Pass any content as children */}
+          <div className="page-content pb-2 bg-white">
+            <div className="container p-0">
+              <div className="">
+                <div className="form-box">
+                  <div className="tab tab-nav-simple tab-nav-boxed form-tab">
+                    <Tabs
+                      selectedTabClassName="active"
+                      selectedTabPanelClassName="active"
+                    >
+                      <p className="mb-0">
+                        {confirmSignUp ? "" : "Mobile Number*"}
+                      </p>
+
+                      <div className="mt-2">
+                        {!confirmSignUp && (
+                          <form onSubmit={handleSignIn}>
+                            <div className="form-group mb-3">
+                              <div className="input-tel">
+                                <div className="prefix">+91</div>
+                                <input
+                                  type="tel"
+                                  className="form-control mobile-number-input mb-0"
+                                  id="singin-phone-2"
+                                  name="singin-phone"
+                                  placeholder="Phone number"
+                                  required
+                                  maxLength={10}
+                                  value={removePhonePrefix(state.phone)}
+                                  onChange={(e) => {
+                                    setState({
+                                      ...state,
+                                      phone: (e.target.value || "")
+                                        ?.replaceAll(/[^0-9]+/g, "")
+                                        ?.trim(),
+                                    });
+                                  }}
+                                />
+                              </div>
+                            </div>
+
+                            <button
+                              className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
+                              type="submit"
+                              disabled={loading}
+                              onClick={handleEvent}
+                            >
+                              Get OTP
+                              {loading && <div className="spin-loader ml-2" />}
+                            </button>
+                          </form>
+                        )}
+
+                        {confirmSignUp && (
+                          <form onSubmit={handleConfirmSignUp}>
+                            <div className="form-group mb-1">
+                              <label
+                                htmlFor="confirm-code-2"
+                                className="number-otp-label"
+                              >
+                                Enter 6-Digit OTP sent to +91{state.phone}
+                              </label>
+                            </div>
+                            <div className="d-flex justify-content-between gap-4 otp-container mb-3">
+                              {state.confirmationCode.map((ele, index) => (
+                                <input
+                                  key={index}
+                                  id={`otp${index + 1}`}
+                                  name={`otp${index + 1}`}
+                                  type="number"
+                                  autoComplete="one-time-code"
+                                  className="border-regular drawer-otp-input"
+                                  value={ele}
+                                  maxLength={1}
+                                  onChange={(e) => {
+                                    handleChange(e.target, index);
+                                  }}
+                                  onFocus={(e) => e.target.select()}
+                                  onKeyUp={(e) => inputFocus(e, index)}
+                                  onPaste={handlePaste}
+                                />
+                              ))}
+                            </div>
+                            {otpError && (
+                              <div className="overflow-hidden mb-4">
+                                <div className="alert alert-danger alert-summary alert-light alert-message alert-inline m-0">
+                                  OTP invalid, please try again.
+                                </div>
+                              </div>
+                            )}
+                            <button
+                            className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
+                            type="submit"
+                            disabled={loading}
+                          >
+                            Confirm
+                            {loading && <div className="spin-loader ml-2" />}
+                          </button>
+                            {!seconds ? (
+                              <ALink href="#" onClick={handleSignIn}>
+                                <p className="resend-label mt-2">
+                                  Didn't get the code? Resend OTP
+                                </p>
+                              </ALink>
+                            ) : (
+                              <p className="not-receive-otp-label mt-2 mb-0">
+                                Didn't receive it? Resend in {seconds}
+                              </p>
+                            )}
+                          </form>
+                        )}
+                      </div>
+                    </Tabs>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </BottomDrawer>
+      )}
+    </div>
+  ) : (
     <Modal
       isOpen={forceOpen || isOpen}
       isCloseIcon={!forceOpen}
@@ -349,9 +484,7 @@ function Passwordless({
                     <TabList className="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5 flex-no-wrap">
                       <Tab className="nav-item">
                         <span className="nav-link border-no lh-1 ls-default">
-                          {confirmSignUp
-                            ? "OTP Verification"
-                            : "Enter Mobile Number"}
+                          {confirmSignUp ? "OTP Verification" : "Sign In"}
                         </span>
                       </Tab>
                     </TabList>
@@ -361,6 +494,7 @@ function Passwordless({
                         {!confirmSignUp && (
                           <form onSubmit={handleSignIn}>
                             <div className="form-group mb-3">
+                              <p className="mb-2">Mobile Number*</p>
                               <div className="input-tel">
                                 <div className="prefix">+91</div>
                                 <input
@@ -368,7 +502,7 @@ function Passwordless({
                                   className="form-control prevent-zoom"
                                   id="singin-phone-2"
                                   name="singin-phone"
-                                  placeholder="Phone number *"
+                                  placeholder="Phone number"
                                   required
                                   maxLength={10}
                                   value={removePhonePrefix(state.phone)}

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
 import { useRouter } from "next/router";
@@ -50,6 +50,7 @@ function CartTotal({
   });
 
   const guestCheckout = useGuestCheckout();
+  const avgDeliveryTimeRef = useRef(null);
 
   const {
     ready: isInventoryCheckReady,
@@ -91,15 +92,21 @@ function CartTotal({
     inventoryMapping,
   ]);
 
+  const onDetailClick = () => {
+    if (avgDeliveryTimeRef.current) {
+      avgDeliveryTimeRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <div className="bg-white border-none">
-      <h3 className="summary-title summary-title2 text-left font-weight-bold pt-2">
+    <div className="border-none cart-total-container">
+      <h3 className="summary-title summary-title2 text-left font-weight-bold pt-2 bg-white">
         Payment Summary
       </h3>
       <div
         className={`${appliedCoupon ? "table-margin-applied" : "table-margin"}`}
       >
-        <div className="summary summary2">
+        <div className="summary summary2 bg-white">
           <table className="shipping">
             <tbody>
               <tr className="summary-subtotal">
@@ -214,7 +221,11 @@ function CartTotal({
             </tbody>
           </table>
         </div>
-        <div className={"mt-3 mb-3"}>
+        <div
+          className={"mt-3 pt-1 pb-1 mb-3 avg-delivery-container"}
+          id="avg-delivery-time"
+          ref={avgDeliveryTimeRef}
+        >
           <p className="m-0 font-weight-bold">
             Average delivery time: <span>3-5 days</span>
           </p>
@@ -223,6 +234,20 @@ function CartTotal({
 
       <div id="sidebar-footer" className="sidebar-footer p-0 box-shadow-coupon">
         <Coupon isSmall />
+        <div>
+          {!!totalAmountSaved && (
+            <div className="summary-saving-lable-container m-0 text-center border-top">
+              <p
+                className={`saving-lable background-alice ${
+                  isSmallSize ? "label-size" : ""
+                }`}
+              >
+                🎊 Congrats!
+                <span> You saved {`₹${toDecimal(totalAmountSaved)} `}</span>
+              </p>
+            </div>
+          )}
+        </div>
         <div className="cart-sticky-checkout">
           <div className="d-flex">
             <div className="flex-45">
@@ -231,14 +256,12 @@ function CartTotal({
                 ₹{toDecimal(prepaidGrandTotal)}
               </div>
               {!!totalAmountSaved && (
-                <div className="summary-saving-lable-container m-0 p-0">
-                  <p
-                    className={`saving-lable ${
-                      isSmallSize ? "label-size" : ""
-                    }`}
-                  >
-                    You saved
-                    <span> {`₹${toDecimal(totalAmountSaved)} `}</span>
+                <div
+                  className="summary-saving-lable-container m-0 p-0"
+                  onClick={onDetailClick}
+                >
+                  <p className={"m-0 font-size-12"}>
+                    <strong>View details</strong>
                   </p>
                 </div>
               )}
