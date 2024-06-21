@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
-import Script from "next/script";
-import { connect } from "react-redux";
 import { useUpdateUserCoupon } from "@wow-star/utils";
+import Script from "next/script";
+import { useCallback, useEffect, useState } from "react";
+import { connect } from "react-redux";
 
-import { alertToaster } from "~/utils/popupHelper";
 import { STORE_ID, WISEPOPS_KEY } from "~/config";
+import { alertToaster } from "~/utils/popupHelper";
 
 function Wisepops({ user }) {
   const [isBeforeFormSubmitListenerAdded, setIsBeforeFormSubmitListenerAdded] =
@@ -12,7 +12,7 @@ function Wisepops({ user }) {
   const [isAfterFormSubmitListenerAdded, setIsAfterFormSubmitListenerAdded] =
     useState(false);
 
-  const [updateUserCoupon] = useUpdateUserCoupon();
+  const [, updateUserCoupon] = useUpdateUserCoupon();
 
   const beforeFormSubmitHandler = useCallback((event) => {
     event.detail.target.querySelector("button").setCustomValidity("");
