@@ -51,7 +51,7 @@ function StickyFooter(props) {
     const current = max - cartItemsToAdd;
     const progress = (current / max) * 100;
     const progressMessage = bxayCoupon?.allowed
-      ? `🥳 Congrats, 'Buy ${bxayCoupon.coupon.buyXQuantity} @ ₹${bxayCoupon.coupon.getYAmount} Coupon is applied!`
+      ? `🥳 Congrats, 'Buy ${bxayCoupon.coupon.buyXQuantity} @ ₹${bxayCoupon.coupon.getYAmount} Coupon is applied!'`
       : `Select ${cartItemsToAdd} More Products to Avail Offer! 🎁`;
 
     const buttonText = bxayCoupon?.allowed
