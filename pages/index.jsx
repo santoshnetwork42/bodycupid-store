@@ -6,7 +6,6 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 import NextHead from "~/components/common/next-head";
 import IntroSection from "~/components/partials/home/intro-section";
 import ProductCollection from "~/components/partials/home/product-collection";
-import Fomo from "~/components/common/fomo";
 
 const CategorySection = dynamic(() =>
   import("~/components/partials/home/category-section")
@@ -39,7 +38,7 @@ function HomePage({
   return (
     <main className="main home searchBar">
       <NextHead {...pageMeta} />
-      {/* <Fomo /> */}
+
       <h1 className="d-none">{name} - Homepage</h1>
       <div className="page-content page-content-wrapper">
         <div className="intro-section">

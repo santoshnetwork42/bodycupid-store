@@ -23,8 +23,6 @@ import fetchData from "~/utils/fetchData";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import handleRedirect from "~/utils/handleRedirect";
 import { getSource } from "~/utils/helper";
-import Fomo from "~/components/common/fomo";
-import { useFomoProducts } from "@wow-star/utils";
 
 const logger = new Logger("All collections");
 
@@ -61,7 +59,6 @@ function CollectionPage(props) {
   return (
     <main className="main searchBar">
       <NextHead {...pageMeta} />
-      {/* <Fomo /> */}
 
       <h1 className="d-none">
         {name} - {data?.name}

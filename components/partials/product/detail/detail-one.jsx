@@ -24,7 +24,6 @@ import {
   scrollWithOffset,
 } from "~/utils/helper";
 import VariantCard from "../variant-card";
-import Fomo from "~/components/common/fomo";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -194,7 +193,6 @@ function DetailOne(props) {
         <ProductBreadcrumbs {...product} />
       </div>
 
-      {/* <Fomo /> */}
       <h2 className="detail-product-name text-uppercase">{product.title}</h2>
 
       {/* {!!product?.tags && (
