@@ -16,16 +16,16 @@ import Scripts from "~/components/scripts";
 import { AWS_CLIENT_ID, STORE_ID, STORE_PREFIX } from "~/config";
 import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
 import { getStore, getUser } from "~/graphql/api";
-import "~/public/sass/style.scss";
-import { rootActions } from "~/store";
+import { rootActions, wrapper } from "~/store";
 import { eventActions } from "~/store/events";
 import { systemActions } from "~/store/system";
 import { userActions } from "~/store/user";
 import ABProvider from "~/utils/contexts/ab";
+import { FomoProvider } from "~/utils/contexts/fomoContext";
 import NavbarProvider from "~/utils/contexts/navbar";
 import { errorHandler } from "~/utils/errorHandler";
-import { wrapper } from "../store/index.js";
-import { FomoProvider } from "~/utils/contexts/fomoContext.js";
+
+import "~/public/sass/style.scss";
 
 Amplify.configure({
   ...awsconfig,

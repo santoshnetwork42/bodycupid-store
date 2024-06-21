@@ -1,5 +1,5 @@
-import ALink from "../features/custom-link";
-import { ProgressBar } from "./progress-bar";
+import { ProgressBar } from "~/components/common/progress-bar";
+import ALink from "~/components/features/custom-link";
 
 export const ShowProgressBar = ({
   current,

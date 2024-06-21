@@ -1,24 +1,27 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
-import { connect } from "react-redux";
-import { API } from "aws-amplify";
 import {
-  useFeaturedCoupons,
   getCouponDiscount,
   useBestCoupon,
+  useFeaturedCoupons,
 } from "@wow-star/utils";
+import { API, Logger } from "aws-amplify";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import Modal from "react-modal";
+import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
+import {
+  CloseIcon,
+  CouponTag,
+  LeftAngle,
+  RightAngle,
+} from "~/components/icons";
+import Image from "~/components/image";
+import { STORE_ID } from "~/config";
 import { applyCoupon as applyCouponMutation } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
-import { CloseIcon, RightAngle, CouponTag } from "~/components/icons";
-import { Logger } from "aws-amplify";
-import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
-import Modal from "react-modal";
-import Image from "~/components/image";
-import { STORE_ID } from "~/config";
 
 Modal.setAppElement("#__next");
 
@@ -31,7 +34,6 @@ function Coupon(props) {
     applyCoupon,
     removeCoupon,
     appliedCoupon,
-    addToCart,
     removeFromCart,
     layout = "cart",
   } = props;

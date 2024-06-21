@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import Reveal from "react-awesome-reveal";
 
 import ALink from "~/components/features/custom-link";
-import EmblaCarousel from "~/components/features/react-embla";
 import ProductTwo from "~/components/features/product/product-two";
-import { productSlider, productSliderLarge } from "~/utils/data/carousel";
+import EmblaCarousel from "~/components/features/react-embla";
 import { fadeIn } from "~/utils/data/keyframes";
 
 function ProductCollection({

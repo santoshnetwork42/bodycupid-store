@@ -11,6 +11,7 @@ import Quantity from "~/components/features/quantity";
 import { Bag, BigDot, Clock, Star } from "~/components/icons";
 import NextImage from "~/components/image";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
+import VariantCard from "~/components/partials/product/variant-card";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { systemActions } from "~/store/system";
@@ -23,8 +24,6 @@ import {
   getUpdatedCart,
   scrollWithOffset,
 } from "~/utils/helper";
-import VariantCard from "../variant-card";
-import Fomo from "~/components/common/fomo";
 
 function DetailOne(props) {
   const router = useRouter();

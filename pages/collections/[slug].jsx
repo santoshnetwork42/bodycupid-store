@@ -1,7 +1,10 @@
-import { Logger } from "aws-amplify";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 
+import CategoryHeader from "~/components/common/category-header";
+import NextHead from "~/components/common/next-head";
+import Image from "~/components/image";
+import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import { STORE_ID } from "~/config";
 import {
   findProducts,
@@ -12,21 +15,11 @@ import {
   getSubCategoriesByCategoryID,
   searchCollectionTypes,
 } from "~/graphql/api";
-
-import CategoryHeader from "~/components/common/category-header";
-import NextHead from "~/components/common/next-head";
-import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
-
-import Image from "~/components/image";
 import { eventActions } from "~/store/events";
 import fetchData from "~/utils/fetchData";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import handleRedirect from "~/utils/handleRedirect";
 import { getSource } from "~/utils/helper";
-import Fomo from "~/components/common/fomo";
-import { useFomoProducts } from "@wow-star/utils";
-
-const logger = new Logger("All collections");
 
 function CollectionPage(props) {
   const {

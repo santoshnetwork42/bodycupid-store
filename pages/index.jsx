@@ -1,12 +1,9 @@
-import React from "react";
 import dynamic from "next/dynamic";
-
-import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 import NextHead from "~/components/common/next-head";
 import IntroSection from "~/components/partials/home/intro-section";
 import ProductCollection from "~/components/partials/home/product-collection";
-import Fomo from "~/components/common/fomo";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 const CategorySection = dynamic(() =>
   import("~/components/partials/home/category-section")

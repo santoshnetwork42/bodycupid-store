@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
-import ALink from "~/components/features/custom-link";
-import { toDecimal } from "~/utils";
+import { useMemo } from "react";
+
 import Image from "~/components/image";
+import { toDecimal } from "~/utils";
 
 const VariantCard = (props) => {
   const { variant, onChange } = props;
@@ -13,7 +13,8 @@ const VariantCard = (props) => {
     }
     return 0;
   }, [listingPrice, price]);
-  return price ? (
+
+  return !!price ? (
     <div
       key={variant.id}
       className={`variant-card-wrapper ${variant.selected ? "selected" : ""} ${

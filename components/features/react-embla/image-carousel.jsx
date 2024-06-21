@@ -1,8 +1,11 @@
-import { useState, useEffect, useCallback, memo } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { memo, useCallback, useEffect, useState } from "react";
+import {
+  DotButton,
+  useDotButton,
+} from "~/components/features/react-embla/dot-button";
 import Image from "~/components/image";
 import useWindowDimensions from "~/utils/getWindowDimension";
-import { DotButton, useDotButton } from "./dot-button";
 
 const ImageCarousel = (props) => {
   const { options, images } = props;

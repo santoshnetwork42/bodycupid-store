@@ -1,7 +1,11 @@
-import { useCallback } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
-import { DotButton, useDotButton } from "./dot-button";
+import { useCallback } from "react";
+
+import {
+  DotButton,
+  useDotButton,
+} from "~/components/features/react-embla/dot-button";
 
 const EmblaCarousel = (props) => {
   const {

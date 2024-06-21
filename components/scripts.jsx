@@ -2,11 +2,11 @@ import { Analytics } from "@vercel/analytics/react";
 import { useEffect } from "react";
 import GTM from "react-gtm-module";
 
+import LimeChat from "~/components/scripts/limechat";
 import Wisepops from "~/components/scripts/wisepops.jsx";
-import { GTM_ID, WISEPOPS_KEY, LIMECHAT_ENABLED } from "~/config";
+import { GTM_ID, LIMECHAT_ENABLED, WISEPOPS_KEY } from "~/config";
 import { useIsInteractive } from "~/utils/contexts/navbar";
 import Affise from "./scripts/Affise/Affise";
-import LimeChat from "~/components/scripts/limechat";
 
 export default function Scripts() {
   const isInteractive = useIsInteractive();

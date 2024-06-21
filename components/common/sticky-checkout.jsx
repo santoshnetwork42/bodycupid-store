@@ -2,11 +2,12 @@ import { useCartTotal, useFeaturedCoupons } from "@wow-star/utils";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 import { connect } from "react-redux";
+
+import { ShowProgressBar } from "~/components/common/sticky-progress-bar";
 import ALink from "~/components/features/custom-link";
 import { modalActions } from "~/store/modal";
 import { toDecimal } from "~/utils";
 import { useNavBarState } from "~/utils/contexts/navbar";
-import { ShowProgressBar } from "./sticky-progress-bar";
 
 function StickyFooter(props) {
   const { cartList, showStickyCheckout, setCartVisibility, appliedCoupon } =

@@ -1,34 +1,30 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { connect, useStore } from "react-redux";
-import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
-import { Auth, API } from "aws-amplify";
-import { useRouter } from "next/router";
-import { Logger } from "aws-amplify";
+import { API, Auth, Logger } from "aws-amplify";
 import delay from "delay";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
+import { connect, useStore } from "react-redux";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { toast } from "react-toastify";
 
-import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
-import getRandomString from "~/utils/getRandomString";
-import { errorHandler } from "~/utils/errorHandler";
-import { alertToaster } from "~/utils/popupHelper";
-
-import { modalActions } from "~/store/modal";
-import { userActions } from "~/store/user";
-
+import BottomDrawer from "~/components/common/bottomDrawer";
 import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
-
+import AlertPopup from "~/components/features/product/common/alert-popup";
+import { STORE_ID } from "~/config";
 import {
   ensureUserAndDispatchOTP,
   getUser,
   verifyCustomOTP,
 } from "~/graphql/api";
 import { eventActions } from "~/store/events";
-import useWindowDimensions from "~/utils/getWindowDimension";
+import { modalActions } from "~/store/modal";
+import { userActions } from "~/store/user";
+import { errorHandler } from "~/utils/errorHandler";
 import fetchData from "~/utils/fetchData";
-import { STORE_ID } from "~/config";
-import BottomDrawer from "~/components/common/bottomDrawer";
-import AlertPopup from "~/components/features/product/common/alert-popup";
-import { toast } from "react-toastify";
+import getRandomString from "~/utils/getRandomString";
+import useWindowDimensions from "~/utils/getWindowDimension";
+import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
+import { alertToaster } from "~/utils/popupHelper";
 
 const logger = new Logger("Login-without-password");
 
@@ -39,7 +35,6 @@ function Passwordless({
   forceOpen,
   redirect,
   setUser,
-  login,
   OtpRequested,
   setCustomUser,
   customSignup,
@@ -48,7 +43,6 @@ function Passwordless({
   const forceCustomSignup = !!(customSignup || customSignupProp);
 
   const router = useRouter();
-  const { query } = router;
   const { isSmallSize: isMobile } = useWindowDimensions();
 
   const [state, setState] = useState({
@@ -63,7 +57,6 @@ function Passwordless({
   const [seconds, setSeconds] = useState(null);
   const [loading, setLoading] = useState(false);
   const [otpError, setOtpError] = useState(false);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -334,14 +327,6 @@ function Passwordless({
 
   const handleEvent = () => {
     OtpRequested();
-  };
-
-  const handleOpenDrawer = () => {
-    setIsDrawerOpen(true);
-  };
-
-  const handleCloseDrawer = () => {
-    setIsDrawerOpen(false);
   };
 
   return isMobile ? (

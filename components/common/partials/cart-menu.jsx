@@ -4,13 +4,14 @@ import {
   useFeaturedCoupons,
   useInventory,
 } from "@wow-star/utils";
+import { Logger } from "aws-amplify";
 import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
 import { connect } from "react-redux";
-import { Logger } from "aws-amplify";
 
 import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 import CartTotal from "~/components/common/partials/cart-totals";
+import { ProgressBar } from "~/components/common/progress-bar";
 import ALink from "~/components/features/custom-link";
 import { Bag, Cart, Cross } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
@@ -19,7 +20,6 @@ import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
 import { getTotalPrice, toDecimal } from "~/utils";
 import { useNavBarState } from "~/utils/contexts/navbar";
-import { ProgressBar } from "../progress-bar";
 
 const logger = new Logger("Cart");
 
