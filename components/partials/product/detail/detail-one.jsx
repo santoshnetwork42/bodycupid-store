@@ -193,7 +193,6 @@ function DetailOne(props) {
         <ProductBreadcrumbs {...product} />
       </div>
 
-      {/* <Fomo /> */}
       <h2 className="detail-product-name text-uppercase">{product.title}</h2>
 
       {/* {!!product?.tags && (
