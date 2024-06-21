@@ -14,6 +14,7 @@ export const actionTypes = {
   CREATE_CART: "CREATE_CART",
   VALIDATE_CART: "VALIDATE_CART",
   UPDATE_CART_ID: "UPDATE_CART_ID",
+  STORE_COUPON: "STORE_COUPON",
 };
 const initialState = {
   data: [],
@@ -111,6 +112,9 @@ function cartReducer(state = initialState, action) {
     case actionTypes.APPLY_COUPONS:
       return { ...state, coupon: action.payload.coupon };
 
+    case actionTypes.STORE_COUPON:
+      return { ...state, storedCouponCode: action.payload };
+
     case actionTypes.REMOVE_COUPON:
       return { ...state, coupon: null };
 
@@ -155,6 +159,10 @@ export const cartActions = {
   applyCoupon: (coupon) => ({
     type: actionTypes.APPLY_COUPONS,
     payload: { coupon },
+  }),
+  storeCoupon: (payload) => ({
+    type: actionTypes.STORE_COUPON,
+    payload,
   }),
   validateCart: (payload) => ({
     type: actionTypes.VALIDATE_CART,

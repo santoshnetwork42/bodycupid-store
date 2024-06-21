@@ -8,6 +8,7 @@ export default function Quantity({
   qty = 1,
   minimumOrderQuantity,
   maximumOrderQuantity,
+  totalItemQty,
   ...props
 }) {
   const {
@@ -47,13 +48,20 @@ export default function Quantity({
 
   function plusQuantity() {
     if (!product.isInventoryEnabled || quantity < props.max) {
-      if (quantity === maximumOrderQuantity) {
+      if (quantity < maximumOrderQuantity) {
+        if (totalItemQty && totalItemQty >= maximumOrderQuantity) {
+          toast(<AlertPopup message={maxOrderCaution} status="info" />, {
+            position: "bottom-center",
+            autoClose: 2000,
+          });
+        } else {
+          setQuantity(parseInt(quantity) + 1);
+        }
+      } else {
         toast(<AlertPopup message={maxOrderCaution} status="info" />, {
           position: "bottom-center",
           autoClose: 2000,
         });
-      } else {
-        setQuantity(parseInt(quantity) + 1);
       }
     }
   }

@@ -184,6 +184,12 @@ export const getStaticProps = async (context) => {
       relatedProductsFilter = {
         id: { ne: id },
       };
+
+      //remove slob product collection
+      relatedProductsFilter.collections = {
+        ne: "slob",
+      };
+
       if (subCategoryId) {
         relatedProductsFilter.subCategoryId = { eq: subCategoryId };
       } else {

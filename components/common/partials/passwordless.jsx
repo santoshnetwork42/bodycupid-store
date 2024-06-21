@@ -326,7 +326,9 @@ function Passwordless({
   };
 
   const handleEvent = () => {
-    OtpRequested();
+    OtpRequested({
+      phone: state.phone,
+    });
   };
 
   return isMobile ? (
