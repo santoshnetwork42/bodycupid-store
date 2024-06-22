@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 import Tag from "~/components/common/tag";
 import ALink from "~/components/features/custom-link";
-import Checkmark from "~/components/icons";
+import Checkmark, { LoyaltyTag } from "~/components/icons";
 import NextImage from "~/components/image";
 import { STORE_ID } from "~/config";
 import { getOrder, validateTransaction } from "~/graphql/api";
@@ -363,6 +363,15 @@ function Order({
               </tbody>
             </table>
           </div>
+          {!!order?.cashbackEarned && order?.cashbackEarned > 0 && (
+            <div className="pb-0 d-flex align-items-center loyalty-text loyalty-padding">
+              <LoyaltyTag />
+              <p className="mb-0 pl-1">
+                You have earned ₹{order?.cashbackEarned} cashback with this
+                order
+              </p>
+            </div>
+          )}
           <div className="d-lg-flex justify-content-between ">
             <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
               <ALink

@@ -8,7 +8,7 @@ import { eventActions } from "~/store/events";
 import { toDecimal } from "~/utils";
 import { alertToaster } from "~/utils/popupHelper";
 import { modalActions } from "~/store/modal";
-import { useGuestCheckout } from "~/utils/contexts/navbar";
+import { useGuestCheckout, useNavBarState } from "~/utils/contexts/navbar";
 import Coupon from "~/components/features/coupon";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { PREPAID_ENABLED } from "~/constant";
@@ -31,6 +31,7 @@ function CartTotal({
   const router = useRouter();
   const { isSmallSize } = useWindowDimensions();
   const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
+  const { isRewardApplied } = useNavBarState();
 
   const {
     totalItems,
@@ -42,11 +43,13 @@ function CartTotal({
     prepaidDiscount,
     prepaidDiscountPercent,
     prepaidGrandTotal,
+    usableRewards,
     totalAmountSaved,
     codCharges,
     appliedCODCharges,
   } = useCartTotal({
     paymentType: prepaidEnabled ? "PREPAID" : "COD",
+    isRewardApplied,
   });
 
   const guestCheckout = useGuestCheckout();
@@ -201,6 +204,20 @@ function CartTotal({
                     </p>
                   </td>
                 </tr>
+              )}
+              {!!usableRewards && isRewardApplied && (
+                <>
+                  <tr className="summary-subtotal">
+                    <td className="d-flex align-items-center no-wrap">
+                      <h4 className="summary-subtitle lh-1 ">Rewards</h4>
+                    </td>
+                    <td>
+                      <p className="summary-subtotal-price discount-price-color">
+                        -{`₹${toDecimal(usableRewards)}`}
+                      </p>
+                    </td>
+                  </tr>
+                </>
               )}
             </tbody>
           </table>

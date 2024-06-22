@@ -22,6 +22,7 @@ import PaymentLoader from "~/components/common/partials/payment-loader";
 import PaymentMethods from "~/components/features/payment-radio";
 import {
   DownAngle,
+  LoyaltyTag,
   RightAngle,
   ShoppingCart,
   UpAngle,
@@ -127,6 +128,10 @@ function Checkout(props) {
     prepaidDiscountPercent,
     usableRewards,
     totalAmount,
+    codCashbackRewardsOnOrder,
+    prepaidCashbackRewardsOnOrder,
+    amountNeededToAvailCodCashback,
+    amountNeededToAvailPrepaidCashback,
   } = useCartTotal({
     paymentType: payMethod,
     isRewardApplied,
@@ -169,7 +174,31 @@ function Checkout(props) {
   const placeOrder = async (e) => {
     try {
       e.preventDefault();
+
+      const variables = {
+        paymentMethod: payMethod,
+        address: shippingAddress,
+        metadata,
+        appliedRewardPoints: isRewardApplied ? usableRewards : 0,
+        totalAmount: totalAmount,
+        shoppingCartId,
+        source: "WEB",
+        totalCashbackEarned:
+          payMethod === "COD"
+            ? codCashbackRewardsOnOrder
+            : prepaidCashbackRewardsOnOrder,
+      };
+
+      if (isRewardApplied && !!usableRewards) {
+        variables.appliedRewardPoints = usableRewards ? usableRewards : null;
+      }
+
       const isAffiseTrackingValid = checkAffiseValidity();
+      if (isAffiseTrackingValid) {
+        variables.isAffiseTrackingValid = isAffiseTrackingValid
+          ? isAffiseTrackingValid
+          : null;
+      }
       if (!guestCheckout && !customUser && (!user || !user.isActive)) {
         emptyCart();
         router.replace("/pages/order-failed");
@@ -181,22 +210,10 @@ function Checkout(props) {
         { success, code, formError, order, payment, transaction },
         rzpEnabled,
       ] = await Promise.all([
-        placeOrderV1({
-          paymentMethod: payMethod,
-          address: shippingAddress,
-          metadata,
-          appliedRewardPoints: null,
-          totalAmount: totalAmount,
-          shoppingCartId,
-          source: "WEB",
-          isAffiseTrackingValid,
-        }),
+        placeOrderV1(variables),
         loadScript(RAZORPAY_SCRIPT),
       ]);
 
-      if (isRewardApplied && !!usableRewards) {
-        variables.appliedRewardPoints = usableRewards ? usableRewards : null;
-      }
       if (!success) {
         alertToaster("Something went wrong. Try Again!");
         if (code === "INVALID_ADDRESS") {
@@ -357,6 +374,53 @@ function Checkout(props) {
                             ₹{toDecimal(grandTotal, 0)}
                           </p>
                         </div>
+                        {!!(
+                          (codCashbackRewardsOnOrder && payMethod === "COD") ||
+                          (prepaidCashbackRewardsOnOrder &&
+                            payMethod === "PREPAID")
+                        ) && (
+                          <div className="bg-white border-regular d-flex pl-3 mb-2 align-items-center">
+                            <LoyaltyTag />
+                            <p className="mb-0 pl-1 pb-1 pt-1">
+                              You will earn ₹
+                              {payMethod === "COD"
+                                ? codCashbackRewardsOnOrder
+                                : prepaidCashbackRewardsOnOrder}{" "}
+                              Cashback on this order!
+                            </p>
+                          </div>
+                        )}
+                        {!!(
+                          (payMethod === "COD" &&
+                            amountNeededToAvailCodCashback.amount -
+                              codGrandTotal >
+                              0 &&
+                            amountNeededToAvailCodCashback.isEnabled &&
+                            !codCashbackRewardsOnOrder) ||
+                          (payMethod === "PREPAID" &&
+                            amountNeededToAvailPrepaidCashback.amount -
+                              prepaidGrandTotal >
+                              0 &&
+                            amountNeededToAvailPrepaidCashback.isEnabled &&
+                            !prepaidCashbackRewardsOnOrder)
+                        ) && (
+                          <div className="bg-white border-regular d-flex pl-3 mb-2 align-items-center">
+                            <LoyaltyTag />
+                            <p className="mb-0 pl-1 pt-1 pb-1">
+                              Add items worth ₹
+                              {payMethod === "COD"
+                                ? toDecimal(
+                                    amountNeededToAvailCodCashback.amount -
+                                      codGrandTotal
+                                  )
+                                : toDecimal(
+                                    amountNeededToAvailPrepaidCashback.amount -
+                                      prepaidGrandTotal
+                                  )}{" "}
+                              more to earn cashback
+                            </p>
+                          </div>
+                        )}
                       </div>
 
                       <Collapse in={isCollapse}>
@@ -563,6 +627,20 @@ function Checkout(props) {
                                   </tr>
                                 )}
 
+                                {isRewardApplied && !!usableRewards && (
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        Rewards
+                                      </h4>
+                                    </td>
+                                    <td>
+                                      <p className="summary-subtotal-price discount-price-color">
+                                        - {`₹${toDecimal(usableRewards)}`}
+                                      </p>
+                                    </td>
+                                  </tr>
+                                )}
                                 <tr className="summary-subtotal">
                                   <td>
                                     <h4 className="summary-subtitle">

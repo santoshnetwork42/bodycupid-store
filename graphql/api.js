@@ -1049,6 +1049,32 @@ export const getProductById = /* GraphQL */ `
   }
 `;
 
+export const getLoyalty = /* GraphQL */ `
+  query GetLoyalty($input: GetLoyaltyInput!) {
+    getLoyalty(input: $input) {
+      totalAllotted
+      totalUsable
+      totalUsed
+      totalExpired
+      transactions {
+        id
+        amount
+        userId
+        expiresAt
+        expirePeriodInDays
+        event
+        ruleId
+        status
+        transactionState
+        createdAt
+        updatedAt
+        metadata
+        reason
+      }
+    }
+  }
+`;
+
 // export const getRecommendedProductById = /* GraphQL */ `
 //   query GetProduct(
 //     $id: ID!

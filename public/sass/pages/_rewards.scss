@@ -1,0 +1,176 @@
+.loyalty {
+  .wow-cash {
+    background: linear-gradient(258deg, #d89979 3.32%, #e5cfaf 48.97%);
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 16px;
+    gap: 24px;
+    color: #000 !important;
+
+    .wow-cash-title {
+      width: 100%;
+      justify-content: center;
+      color: #2c2b45;
+      line-height: normal;
+      flex-grow: 1;
+      position: relative;
+    }
+
+    .backImg {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+
+    .wow-cash-balance {
+      color: #000;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 100%; /* 14px */
+      text-transform: capitalize;
+      display: flex;
+      gap: 8px;
+    }
+    .rupee-color {
+      color: #000;
+    }
+  }
+}
+
+.loyalty-transaction {
+  border: 1px solid #e8e8f3;
+  border-radius: 8px;
+  display: flex;
+  // rgba(40, 40, 40, 0.08)
+}
+
+.pending-transaction {
+  border: 1px solid #e8e8f3;
+  border-radius: 8px;
+  display: flex;
+  background-color: rgba(40, 40, 40, 0.08);
+}
+.line-height-normal {
+  line-height: normal;
+}
+
+.expiry-label {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 400;
+  color: #282828;
+  position: relative;
+  .tip {
+    position: absolute;
+    width: 160px;
+    top: -64px;
+    left: -145px;
+    background: black;
+    color: white;
+    padding: 10px;
+    line-height: normal;
+    border-radius: 5px;
+    display: none;
+  }
+}
+.expiry-label.wrap {
+  background: #f1f1f1;
+}
+.expiry-label.expired {
+  background: #e1e1e1;
+}
+.expiry-label:hover {
+  .tip {
+    display: block;
+  }
+}
+
+.balance-tooltip {
+  position: relative;
+  // display: inline;
+  padding-top: 1px;
+
+  .tip {
+    position: absolute;
+    width: 160px;
+    top: 16px;
+    background: black;
+    color: white;
+    padding: 10px;
+    line-height: normal;
+    border-radius: 5px;
+    display: none;
+  }
+}
+
+.balance-tooltip:hover {
+  .tip {
+    display: block;
+  }
+}
+.d-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.grow-1 {
+  flex-grow: 1;
+}
+
+.text-transform-capital {
+  text-transform: capitalize;
+}
+
+@for $i from 0 through 100 {
+  .font-weight-#{$i} {
+    font-weight: #{$i * 100};
+  }
+
+  .font-size-#{$i} {
+    font-size: #{$i}px;
+  }
+
+  .line-height-#{$i} {
+    line-height: #{$i}px;
+  }
+
+  .lock-margin-#{$i} {
+    margin-top: #{$i}px;
+  }
+}
+.wowCashCart {
+  border-radius: 8px;
+  border: 1px solid #e8e8f3;
+  margin: 18px 18px 18px 18px;
+  background: #fff;
+}
+.wowCashCheckbox {
+  margin: 0px;
+  width: 16px;
+  height: 16px;
+  -webkit-appearance: checkbox;
+  accent-color: black;
+}
+
+.wowCashCheckbox::before {
+  content: "\2713"; /* Unicode character for checkmark */
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white; /* Color of the checkmark */
+  font-size: 14px; /* Adjust the font size as needed */
+  visibility: hidden; /* Hide by default */
+}
+
+.wowCashCheckbox:checked::before {
+  visibility: visible; /* Show the checkmark when checked */
+}
+
+.border-seperator-line {
+  border-bottom: 1px solid #e8e8f3;
+}
