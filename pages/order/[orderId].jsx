@@ -320,6 +320,16 @@ function Order({
                     ₹{toDecimal(getOrderTotal(order?.products?.items))}
                   </td>
                 </tr>
+                {!!order?.appliedRewardPoints && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">Rewards</h4>
+                    </td>
+                    <td className="summary-subtotal-price">
+                      -₹{toDecimal(order?.appliedRewardPoints)}
+                    </td>
+                  </tr>
+                )}
                 {!!order?.totalDiscount && (
                   <tr className="summary-subtotal">
                     <td>
