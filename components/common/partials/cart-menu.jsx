@@ -91,6 +91,7 @@ function CartMenu(props) {
 
   const showProgressBar = useMemo(() => {
     return (
+      router?.query?.slug === "bundle-offer" &&
       cartList?.some((cart) => cart?.collections?.includes("bundle-offer")) &&
       bxayCoupon &&
       (!appliedCoupon || appliedCoupon.code === bxayCoupon.coupon.code)
