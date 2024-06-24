@@ -49,7 +49,7 @@ function ProductTwo(props) {
   } = productsNew || {};
 
   const bundleOfferCartList = cartList?.filter((cart) =>
-    cart?.collections?.includes("bundle-offer")
+    cart?.collections?.includes("fragrance-bundle-offer")
   );
 
   const totalBundleOfferCartItems =
@@ -99,7 +99,7 @@ function ProductTwo(props) {
       section,
       qty: productsNew?.minimumOrderQuantity || 1,
     });
-    if (tagSlug === "bundle-offer") {
+    if (tagSlug === "fragrance-bundle-offer") {
       showCartModal && setCartVisibility(true);
     } else setCartVisibility(true);
 
@@ -122,7 +122,9 @@ function ProductTwo(props) {
         const recordKey = getRecordKey(product);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
-        tagSlug === "bundle-offer" && showCartModal && setCartVisibility(true);
+        tagSlug === "fragrance-bundle-offer" &&
+          showCartModal &&
+          setCartVisibility(true);
         logger.verbose("Updated product quantity in cart");
         logger.debug(
           "Updated product quantity in cart:",

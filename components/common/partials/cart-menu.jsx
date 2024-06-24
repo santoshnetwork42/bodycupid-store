@@ -91,8 +91,10 @@ function CartMenu(props) {
 
   const showProgressBar = useMemo(() => {
     return (
-      router?.query?.slug === "bundle-offer" &&
-      cartList?.some((cart) => cart?.collections?.includes("bundle-offer")) &&
+      router?.query?.slug === "fragrance-bundle-offer" &&
+      cartList?.some((cart) =>
+        cart?.collections?.includes("fragrance-bundle-offer")
+      ) &&
       bxayCoupon &&
       (!appliedCoupon || appliedCoupon.code === bxayCoupon.coupon.code)
     );
