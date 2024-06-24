@@ -42,6 +42,7 @@ const App = ({ Component, pageProps }) => {
 
   const { query } = router;
   const { navbar, footer, store: wowStore, pageMeta } = pageProps;
+  const blogPage = router.pathname.includes("/blog");
 
   const navbarProps = {
     ...navbar,
@@ -215,7 +216,11 @@ const App = ({ Component, pageProps }) => {
           <ABProvider>
             <FomoProvider>
               <NavbarProvider>
-                <Layout navbar={navbarProps} footer={footerProps}>
+                <Layout
+                  hideHeader={blogPage}
+                  navbar={navbarProps}
+                  footer={footerProps}
+                >
                   <Scripts />
                   <Component {...pageProps} />
                 </Layout>

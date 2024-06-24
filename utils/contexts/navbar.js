@@ -68,6 +68,11 @@ export const useIsInteractive = () => {
   return !!isInteractive;
 };
 
+export const useSource = () => {
+  const { source } = useContext(NavbarContext) || {};
+  return source;
+};
+
 export const useGuestCheckout = () => {
   const guestCheck = useConfiguration(GUEST_CHECKOUT, false);
   const guestCookie = Cookie.get(`${STORE_PREFIX}_guest`);

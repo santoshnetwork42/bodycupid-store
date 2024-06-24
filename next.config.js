@@ -38,6 +38,21 @@ const nextConfig = withBundleAnalyzer({
   async redirects() {
     return [
       {
+        source: "/blog/robots.txt",
+        destination: "/robots.txt",
+        permanent: true,
+      },
+      {
+        source: "/blog/tag/:slug/page/:page",
+        destination: "/blog/tag/:slug",
+        permanent: true,
+      },
+      {
+        source: "/blog/category/:slug/page/:page",
+        destination: "/blog/category/:slug",
+        permanent: true,
+      },
+      {
         source: "/product/:slug",
         destination: "/products/:slug",
         permanent: true,
@@ -92,6 +107,14 @@ const nextConfig = withBundleAnalyzer({
         hostname: process.env.NEXT_PUBLIC_MEDIA_URL,
         // port: '',
         pathname: "/public/**",
+      },
+      {
+        protocol: "https",
+        hostname: process.env.NEXT_PUBLIC_WORDPRESS_MEDIA_URL,
+      },
+      {
+        protocol: "https",
+        hostname: process.env.NEXT_PUBLIC_WORDPRESS_AVATAR_URL,
       },
     ],
     minimumCacheTTL: 60 * 60 * 24 * 30,

@@ -54,6 +54,7 @@ function Layout({
   children,
   navbar,
   footer,
+  hideHeader,
   closeQuickview,
   closeLogin,
   closePasswordless,
@@ -125,10 +126,14 @@ function Layout({
         /> */}
       </Head>
       <div className="page-wrapper">
-        {isInteractive && <Timer displayTimer={navbar.showTimer} />}
-        {isInteractive && <Announcement showTopRunner={navbar.showTopRunner} />}
+        {!hideHeader && isInteractive && (
+          <Timer displayTimer={navbar.showTimer} />
+        )}
+        {!hideHeader && isInteractive && (
+          <Announcement showTopRunner={navbar.showTopRunner} />
+        )}
 
-        <Header navbar={navbar} />
+        {!hideHeader && <Header navbar={navbar} />}
 
         {children}
 
@@ -136,8 +141,7 @@ function Layout({
         <Footer footer={footer} />
       </div>
 
-      <MobileMenu />
-
+      {!hideHeader && <MobileMenu />}
       <ToastContainer
         autoClose={3000}
         duration={300}

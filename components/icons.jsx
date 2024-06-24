@@ -1475,3 +1475,173 @@ export const Eye = ({ size = defaultIconSize, color = defaultIconColor }) => {
     </svg>
   );
 };
+
+export const FacebookHeaderIcon = ({ color = "#4d4d4d" }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      x="0px"
+      y="0px"
+      width="24"
+      height="24"
+      viewBox="0,0,256,256"
+    >
+      <g
+        fill={color}
+        fillRule="nonzero"
+        stroke="none"
+        strokeWidth="1"
+        strokeLinecap="butt"
+        strokeLinejoin="miter"
+        strokeMiterlimit="10"
+        strokeDasharray=""
+        strokeDashoffset="0"
+        fontFamily="none"
+        fontWeight="none"
+        fontSize="none"
+        textAnchor="none"
+        style={{ mixBlendMode: "normal" }}
+      >
+        <g transform="scale(10.66667,10.66667)">
+          <path d="M12,2c-5.523,0 -10,4.477 -10,10c0,5.013 3.693,9.153 8.505,9.876v-7.226h-2.474v-2.629h2.474v-1.749c0,-2.896 1.411,-4.167 3.818,-4.167c1.153,0 1.762,0.085 2.051,0.124v2.294h-1.642c-1.022,0 -1.379,0.969 -1.379,2.061v1.437h2.995l-0.406,2.629h-2.588v7.247c4.881,-0.661 8.646,-4.835 8.646,-9.897c0,-5.523 -4.477,-10 -10,-10z"></path>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+export const InstagramHeaderIcon = ({ color = "#4d4d4d" }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      x="0px"
+      y="0px"
+      width="24"
+      height="24"
+      viewBox="0,0,256,256"
+    >
+      <g
+        fill={color}
+        fillRule="nonzero"
+        stroke="none"
+        strokeWidth="1"
+        strokeLinecap="butt"
+        strokeLinejoin="miter"
+        strokeMiterlimit="10"
+        strokeDasharray=""
+        strokeDashoffset="0"
+        fontFamily="none"
+        fontWeight="none"
+        fontSize="none"
+        textAnchor="none"
+        style={{ mixBlendMode: "normal" }}
+      >
+        <g transform="scale(10.66667,10.66667)">
+          <path d="M8,3c-2.761,0 -5,2.239 -5,5v8c0,2.761 2.239,5 5,5h8c2.761,0 5,-2.239 5,-5v-8c0,-2.761 -2.239,-5 -5,-5zM18,5c0.552,0 1,0.448 1,1c0,0.552 -0.448,1 -1,1c-0.552,0 -1,-0.448 -1,-1c0,-0.552 0.448,-1 1,-1zM12,7c2.761,0 5,2.239 5,5c0,2.761 -2.239,5 -5,5c-2.761,0 -5,-2.239 -5,-5c0,-2.761 2.239,-5 5,-5zM12,9c-1.65685,0 -3,1.34315 -3,3c0,1.65685 1.34315,3 3,3c1.65685,0 3,-1.34315 3,-3c0,-1.65685 -1.34315,-3 -3,-3z"></path>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+export const PinterestHeaderIcon = ({ color = "#4d4d4d" }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      x="0px"
+      y="0px"
+      width="24"
+      height="24"
+      viewBox="0,0,256,256"
+    >
+      <g
+        fill={color}
+        fillRule="nonzero"
+        stroke="none"
+        strokeWidth="1"
+        strokeLinecap="butt"
+        strokeLinejoin="miter"
+        strokeMiterlimit="10"
+        strokeDasharray=""
+        strokeDashoffset="0"
+        fontFamily="none"
+        fontWeight="none"
+        fontSize="none"
+        textAnchor="none"
+        style={{ mixBlendMode: "normal" }}
+      >
+        <g transform="scale(10.66667,10.66667)">
+          <path d="M12,2c-5.523,0 -10,4.477 -10,10c0,4.237 2.636,7.855 6.356,9.312c-0.087,-0.791 -0.167,-2.005 0.035,-2.868c0.182,-0.78 1.172,-4.971 1.172,-4.971c0,0 -0.299,-0.599 -0.299,-1.484c0,-1.391 0.806,-2.428 1.809,-2.428c0.853,0 1.265,0.641 1.265,1.408c0,0.858 -0.546,2.141 -0.828,3.329c-0.236,0.996 0.499,1.807 1.481,1.807c1.777,0 3.143,-1.874 3.143,-4.579c0,-2.394 -1.72,-4.068 -4.177,-4.068c-2.845,0 -4.515,2.134 -4.515,4.34c0,0.859 0.331,1.781 0.744,2.282c0.082,0.099 0.093,0.186 0.069,0.287c-0.076,0.316 -0.244,0.995 -0.277,1.134c-0.043,0.183 -0.145,0.222 -0.334,0.133c-1.249,-0.582 -2.03,-2.408 -2.03,-3.874c0,-3.154 2.292,-6.052 6.608,-6.052c3.469,0 6.165,2.472 6.165,5.776c0,3.447 -2.173,6.22 -5.189,6.22c-1.013,0 -1.966,-0.527 -2.292,-1.148c0,0 -0.502,1.909 -0.623,2.378c-0.226,0.868 -0.835,1.958 -1.243,2.622c0.935,0.287 1.929,0.444 2.96,0.444c5.522,0 10,-4.478 10,-10c0,-5.522 -4.477,-10 -10,-10z"></path>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+export const YoutubeHeaderIcon = ({ color = "#4d4d4d" }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      x="0px"
+      y="0px"
+      width="24"
+      height="24"
+      viewBox="0,0,256,256"
+    >
+      <g
+        fill={color}
+        fillRule="nonzero"
+        stroke="none"
+        strokeWidth="1"
+        strokeLinecap="butt"
+        strokeLinejoin="miter"
+        strokeMiterlimit="10"
+        strokeDasharray=""
+        strokeDashoffset="0"
+        fontFamily="none"
+        fontWeight="none"
+        fontSize="none"
+        textAnchor="none"
+        style={{ mixBlendMode: "normal" }}
+      >
+        <g transform="scale(10.66667,10.66667)">
+          <path d="M21.582,6.186c-0.23,-0.86 -0.908,-1.538 -1.768,-1.768c-1.56,-0.418 -7.814,-0.418 -7.814,-0.418c0,0 -6.254,0 -7.814,0.418c-0.86,0.23 -1.538,0.908 -1.768,1.768c-0.418,1.56 -0.418,5.814 -0.418,5.814c0,0 0,4.254 0.418,5.814c0.23,0.86 0.908,1.538 1.768,1.768c1.56,0.418 7.814,0.418 7.814,0.418c0,0 6.254,0 7.814,-0.418c0.861,-0.23 1.538,-0.908 1.768,-1.768c0.418,-1.56 0.418,-5.814 0.418,-5.814c0,0 0,-4.254 -0.418,-5.814zM10,15.464v-6.928l6,3.464z"></path>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+export const TwitterHeaderIcon = ({ color = "#4d4d4d" }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      x="0px"
+      y="0px"
+      width="24"
+      height="24"
+      viewBox="0,0,256,256"
+    >
+      <g
+        fill={color}
+        fillRule="nonzero"
+        stroke="none"
+        strokeWidth="1"
+        strokeLinecap="butt"
+        strokeLinejoin="miter"
+        strokeMiterlimit="10"
+        strokeDasharray=""
+        strokeDashoffset="0"
+        fontFamily="none"
+        fontWeight="none"
+        fontSize="none"
+        textAnchor="none"
+        style={{ mixBlendMode: "normal" }}
+      >
+        <g transform="scale(10.66667,10.66667)">
+          <path d="M22,3.999c-0.78,0.463 -2.345,1.094 -3.265,1.276c-0.027,0.007 -0.049,0.016 -0.075,0.023c-0.813,-0.802 -1.927,-1.299 -3.16,-1.299c-2.485,0 -4.5,2.015 -4.5,4.5c0,0.131 -0.011,0.372 0,0.5c-3.353,0 -5.905,-1.756 -7.735,-4c-0.199,0.5 -0.286,1.29 -0.286,2.032c0,1.401 1.095,2.777 2.8,3.63c-0.314,0.081 -0.66,0.139 -1.02,0.139c-0.581,0 -1.196,-0.153 -1.759,-0.617c0,0.017 0,0.033 0,0.051c0,1.958 2.078,3.291 3.926,3.662c-0.375,0.221 -1.131,0.243 -1.5,0.243c-0.26,0 -1.18,-0.119 -1.426,-0.165c0.514,1.605 2.368,2.507 4.135,2.539c-1.382,1.084 -2.341,1.486 -5.171,1.486h-0.964c1.788,1.146 4.065,2.001 6.347,2.001c7.43,0 11.653,-5.663 11.653,-11.001c0,-0.086 -0.002,-0.266 -0.005,-0.447c0,-0.018 0.005,-0.035 0.005,-0.053c0,-0.027 -0.008,-0.053 -0.008,-0.08c-0.003,-0.136 -0.006,-0.263 -0.009,-0.329c0.79,-0.57 1.475,-1.281 2.017,-2.091c-0.725,0.322 -1.503,0.538 -2.32,0.636c0.834,-0.5 2.019,-1.692 2.32,-2.636z"></path>
+        </g>
+      </g>
+    </svg>
+  );
+};

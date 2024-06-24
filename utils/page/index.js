@@ -1,9 +1,15 @@
-import { GOOGLE_VERIFICATION_TAG, STORE_ID } from "~/config";
+import {
+  GOOGLE_VERIFICATION_TAG,
+  STORE_ID,
+  WORDPRESS_AUTH,
+  WORDPRESS_URL,
+} from "~/config";
 import {
   findProducts,
   getCollectionType,
   getHomePageCategories,
   getStoreBanners,
+  getFeaturedBlogs,
 } from "~/graphql/api";
 import fetchData from "~/utils/fetchData";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
@@ -60,6 +66,7 @@ export const getStaticProps = async () => {
     { searchProducts: searchFeaturedProducts },
     { searchCollectionTypes: featuredCollectionItem },
     { searchProductCategories: productSubCategoriesItem },
+    blogRes,
   ] = await Promise.all([
     getSearchProducts({ collections: { eq: "best-seller" } }, 8),
     fetchData(getStoreBanners, { id: STORE_ID, deviceType: "WEB" }),
@@ -67,7 +74,17 @@ export const getStaticProps = async () => {
     getSearchProducts({ collections: { eq: "featured" } }, 8),
     getCollectionBySlug("featured"),
     getProductSubCategory(8),
+    fetch(WORDPRESS_URL, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: WORDPRESS_AUTH,
+      },
+      method: "POST",
+      body: JSON.stringify({ query: getFeaturedBlogs }),
+    }),
   ]);
+
+  const blogData = await blogRes.json();
 
   const { items: bestSellerItems } = searchBestSellerProducts;
   const [bestSellerCollection] = bestSellerCollectionItem?.items;
@@ -98,6 +115,7 @@ export const getStaticProps = async () => {
         bestSellerCollection?.defaultSorting
       ),
       featuredCollection,
+      featuredblogs: blogData?.data?.posts?.edges || [],
     },
     revalidate: 1800,
   };

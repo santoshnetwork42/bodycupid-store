@@ -3,7 +3,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function NextImage({ loader = "custom", ...props }) {
   if (!props.src) return <></>;
-  if (loader === "local") return <Image {...props} />;
+  if (loader === "local" || loader === "wp") return <Image {...props} />;
   return (
     <Image
       {...props}

@@ -45,6 +45,7 @@ export const actionTypes = {
   OTP_REQUESTED: "OTP_REQUESTED",
   PRODUCT_SEARCHED: "PRODUCT_SEARCHED",
   TILE_CLICKED: "TILE_CLICKED",
+  BLOG_CLICK: "BLOG_CLICK",
   LOG_OUT: "LOG_OUT",
   TOP_NAVBAR_CLICKED: "TOP_NAVBAR_CLICKED",
   REMOVED_FROM_CART: "REMOVED_FROM_CART",
@@ -115,6 +116,10 @@ export const eventActions = {
   }),
   tileClicked: (payload) => ({
     type: actionTypes.TILE_CLICKED,
+    payload,
+  }),
+  blogClicked: (payload) => ({
+    type: actionTypes.BLOG_CLICK,
     payload,
   }),
   topNavbarClicked: (payload) => ({
@@ -839,6 +844,21 @@ export function* eventsSaga() {
     trackEvent("Tile Clicked", {
       ...e.payload,
     });
+  });
+
+  yield takeEvery(actionTypes.BLOG_CLICK, function* saga(e) {
+    // const userData = yield select((state) => state.user.data);
+    // const user = userMapper(userData);
+    // const analyticsMeta = analyticsMetaDataMapper();
+    // trackClickStream({
+    //   event: "blogs_clicked",
+    //   eventID: uuid(),
+    //   userId: user?.id || "",
+    //   user: user || {},
+    //   ...e.payload,
+    //   source: eventSource,
+    //   ...analyticsMeta,
+    // });
   });
 
   yield takeEvery(actionTypes.TOP_NAVBAR_CLICKED, function* saga(e) {

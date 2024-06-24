@@ -1049,6 +1049,221 @@ export const getProductById = /* GraphQL */ `
   }
 `;
 
+export const getLoyalty = /* GraphQL */ `
+  query GetLoyalty($input: GetLoyaltyInput!) {
+    getLoyalty(input: $input) {
+      totalAllotted
+      totalUsable
+      totalUsed
+      totalExpired
+      transactions {
+        id
+        amount
+        userId
+        expiresAt
+        expirePeriodInDays
+        event
+        ruleId
+        status
+        transactionState
+        createdAt
+        updatedAt
+        metadata
+        reason
+      }
+    }
+  }
+`;
+
+export const getFeaturedBlogs = /* GraphQL */ `
+  query FeatueredBlogs {
+    posts(first: 3, where: { tagSlugIn: "english", status: PUBLISH }) {
+      edges {
+        node {
+          date
+          id
+          databaseId
+          slug
+          status
+          title
+          uri
+          excerpt
+          toPing
+          link
+          featuredImage {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const getBlogs = /* GraphQL */ `
+  query GetBlogs(
+    $category: String
+    $tag: [String]
+    $first: Int
+    $last: Int
+    $after: String
+    $before: String
+  ) {
+    posts(
+      where: { categoryName: $category, tagSlugIn: $tag, status: PUBLISH }
+      first: $first
+      last: $last
+      after: $after
+      before: $before
+    ) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          id
+          databaseId
+          slug
+          title
+          uri
+          readingTime
+          excerpt
+          link
+          date
+          featuredImage {
+            node {
+              mediaItemUrl
+            }
+          }
+          author {
+            node {
+              name
+              avatar {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const getBlog = /* GraphQL */ `
+  query GetBlogBySlug($id: ID!, $idType: PostIdType!) {
+    post(id: $id, idType: $idType) {
+      id
+      databaseId
+      slug
+      title
+      uri
+      excerpt
+      readingTime
+      link
+      date
+      seo {
+        metaDesc
+      }
+      featuredImage {
+        node {
+          mediaItemUrl
+        }
+      }
+      categories {
+        nodes {
+          name
+          slug
+        }
+      }
+      tags {
+        nodes {
+          name
+          slug
+        }
+      }
+      content
+      author {
+        node {
+          name
+          description
+          avatar {
+            url
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const getCategories = /* GraphQL */ `
+  query GetCategories {
+    categories {
+      edges {
+        node {
+          id
+          databaseId
+          slug
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const getCategory = /* GraphQL */ `
+  query GetCategory($id: ID!) {
+    category(id: $id, idType: SLUG) {
+      id
+      databaseId
+      slug
+      name
+    }
+  }
+`;
+
+export const getTopMenu = /* GraphQL */ `
+  query GetMenu {
+    menu(id: "dGVybTo1Mw==", idType: ID) {
+      id
+      menuItems {
+        nodes {
+          id
+          label
+          path
+        }
+      }
+    }
+  }
+`;
+
+export const getTags = /* GraphQL */ `
+  query GetTags {
+    tags {
+      edges {
+        node {
+          id
+          slug
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const getTag = `
+query GetTag($id: ID!) {
+  tag(id: $id, idType: SLUG) {
+    id
+    slug
+    name
+  }
+}
+`;
 // export const getRecommendedProductById = /* GraphQL */ `
 //   query GetProduct(
 //     $id: ID!

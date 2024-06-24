@@ -74,6 +74,11 @@ function Footer({ footer, store }) {
                     </ALink>
                   </li>
                   <li>
+                    <ALink prefetch={false} href="/blog">
+                      Blogs
+                    </ALink>
+                  </li>
+                  <li>
                     <ALink
                       prefetch={false}
                       href="https://bodycupid.clickpost.in/"

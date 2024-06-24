@@ -11,6 +11,9 @@ const CategorySection = dynamic(() =>
 const BrandSection = dynamic(() =>
   import("~/components/partials/home/brand-section")
 );
+const ExploreBlogSection = dynamic(() =>
+  import("~/components/partials/home/explore-blog-section")
+);
 const ReviewSection = dynamic(() =>
   import("~/components/partials/home/review-section")
 );
@@ -27,6 +30,7 @@ function HomePage({
   store,
   pageMeta,
   bestSellerDefaultSorting,
+  featuredblogs,
   featuredCollection,
   productSubCategories,
 }) {
@@ -68,6 +72,7 @@ function HomePage({
 
         <CategorySection categories={productSubCategories} />
         <ReviewSection />
+        <ExploreBlogSection blogs={featuredblogs} />
         <BrandSection
           brands={[
             "/images/brands/1.png",
