@@ -65,7 +65,7 @@ function IntroSection({ banners = [], bannerClicked, homeViewed }) {
                   priority={false}
                   quality={95}
                   width={575}
-                  height={320}
+                  height={330}
                   objectFit="cover"
                 />
               </ALink>
