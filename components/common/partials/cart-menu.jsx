@@ -91,16 +91,16 @@ function CartMenu(props) {
 
   const showProgressBar = useMemo(() => {
     return (
-      router?.query?.slug === "fragrance-bundle-offer" &&
+      router?.query?.slug === "bundle-offer" &&
       cartList?.some((cart) =>
-        cart?.collections?.includes("fragrance-bundle-offer")
+        cart?.collections?.includes("bundle-offer")
       ) &&
       bxayCoupon &&
       (!appliedCoupon || appliedCoupon.code === bxayCoupon.coupon.code)
     );
   }, [bxayCoupon, appliedCoupon, cartList]);
 
-  
+
   const { current, max, progress, progressMessage } = useMemo(() => {
     if (showProgressBar) {
       const cartItemsToAdd =
@@ -120,7 +120,7 @@ function CartMenu(props) {
   const getCollectionWiseNudgeMsg = () => {
     const slug = router?.query?.slug;
 
-    if (slug === "fragrance-bundle-offer") {
+    if (slug === "bundle-offer") {
       return "Add more items to unlock 'Buy 8 @ ₹1999 Offer'";
     } else if (slug === "special-deal") {
       return "Add more items to unlock 'Buy 1 get 3 Offer'";

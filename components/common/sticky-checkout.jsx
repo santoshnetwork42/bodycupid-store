@@ -26,9 +26,9 @@ function StickyFooter(props) {
 
   const isBundleOffer = useMemo(() => {
     return !!(
-      router?.query?.slug === "fragrance-bundle-offer" &&
+      router?.query?.slug === "bundle-offer" &&
       cartList?.some((cart) =>
-        cart?.collections?.includes("fragrance-bundle-offer")
+        cart?.collections?.includes("bundle-offer")
       )
     );
   }, [cartList, router?.query?.slug]);
