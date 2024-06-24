@@ -114,6 +114,18 @@ function CartMenu(props) {
     return { current: 0, max: 0, progress: 0 };
   }, [showProgressBar, bxayCoupon]);
 
+  const getCollectionWiseNudgeMsg = () => {
+    const slug = router?.query?.slug;
+
+    if (slug === "fragrance-bundle-offer") {
+      return "Add more items to unlock 'Buy 8 @ ₹1999 Offer'";
+    } else if (slug === "special-deal") {
+      return "Add more items to unlock 'Buy 1 get 3 Offer'";
+    }
+
+    return "";
+  };
+
   return (
     <div className=" side-bar  d-flex align-items-center p-unset mr-0 mr-lg-2">
       <ALink
@@ -169,7 +181,9 @@ function CartMenu(props) {
                       />
                     </div>
                   ) : (
-                    <CouponDiscountBar />
+                    <CouponDiscountBar
+                      collectionWiseNudgeMsg={getCollectionWiseNudgeMsg()}
+                    />
                   )}
 
                   <div className="shop-table cart-table lh-default sidebar-padding">
