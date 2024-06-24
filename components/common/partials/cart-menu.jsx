@@ -100,6 +100,7 @@ function CartMenu(props) {
     );
   }, [bxayCoupon, appliedCoupon, cartList]);
 
+  
   const { current, max, progress, progressMessage } = useMemo(() => {
     if (showProgressBar) {
       const cartItemsToAdd =
