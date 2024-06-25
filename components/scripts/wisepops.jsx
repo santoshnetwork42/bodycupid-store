@@ -1,6 +1,7 @@
 import { useUpdateUserCoupon } from "@wow-star/utils";
+import { useRouter } from "next/router";
 import Script from "next/script";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 
 import { STORE_ID, WISEPOPS_KEY } from "~/config";
@@ -11,6 +12,22 @@ function Wisepops({ user }) {
     useState(false);
   const [isAfterFormSubmitListenerAdded, setIsAfterFormSubmitListenerAdded] =
     useState(false);
+
+  const router = useRouter();
+
+  const isBlogPage = router.asPath.includes("blog");
+
+  useEffect(() => {
+    const wootBubbleHolder =
+      document && document.querySelector("#wisepops-root");
+    if (wootBubbleHolder) {
+      if (!isBlogPage) {
+        wootBubbleHolder.classList.remove("woot--bubble-holder-hidden");
+      } else {
+        wootBubbleHolder.classList.add("woot--bubble-holder-hidden");
+      }
+    }
+  }, [router.asPath]);
 
   const [, updateUserCoupon] = useUpdateUserCoupon();
 
@@ -65,11 +82,13 @@ function Wisepops({ user }) {
 
   return (
     <>
-      <Script
-        data-cfasync="false"
-        src={`https://wisepops.net/loader.js?v=2&h=${WISEPOPS_KEY}`}
-        strategy="afterInteractive"
-      />
+      {!isBlogPage && (
+        <Script
+          data-cfasync="false"
+          src={`https://wisepops.net/loader.js?v=2&h=${WISEPOPS_KEY}`}
+          strategy="afterInteractive"
+        />
+      )}
     </>
   );
 }
