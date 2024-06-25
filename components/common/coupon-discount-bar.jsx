@@ -18,7 +18,11 @@ const CouponBanner = ({ message, animate }) => (
   </div>
 );
 
-const couponDiscountBar = ({ cartList, appliedCoupon }) => {
+const couponDiscountBar = ({
+  cartList,
+  appliedCoupon,
+  collectionWiseNudgeMsg,
+}) => {
   const { filteredFeaturedCoupons: featuredCoupons = [] } =
     useFeaturedCoupons();
   const [freeProduct = {}] = useFreeProducts({
@@ -37,40 +41,44 @@ const couponDiscountBar = ({ cartList, appliedCoupon }) => {
 
   const hasCartItems = cartList?.length > 0;
 
-  if (hasCartItems) {
-    if (
-      bxgyCoupon &&
-      (!appliedCoupon || appliedCoupon.code === bxgyCoupon.coupon.code)
-    ) {
-      const couponText = bxgyCoupon?.allowed
-        ? `Congrats, your free product is added to cart!`
-        : `Add more items to unlock 'Buy ${bxgyCoupon.coupon.buyXQuantity} get ${bxgyCoupon.coupon.getYQuantity} Offer'`;
-      return (
-        <CouponBanner message={couponText} animate={!!bxgyCoupon.allowed} />
-      );
-    } else if (
-      bxayCoupon &&
-      (!appliedCoupon || appliedCoupon.code === bxayCoupon.coupon.code)
-    ) {
-      const couponText = bxayCoupon?.allowed
-        ? `Congrats, 'Buy ${bxayCoupon.coupon.buyXQuantity} @ ₹${bxayCoupon.coupon.getYAmount} Offer' can be availed!`
-        : `Add more items to unlock 'Buy ${bxayCoupon.coupon.buyXQuantity} @ ₹${bxayCoupon.coupon.getYAmount} Offer'`;
-      return (
-        <CouponBanner message={couponText} animate={!!bxayCoupon.allowed} />
-      );
-    } else if (freeProduct?.allowed) {
-      return (
-        <CouponBanner
-          message={
-            <>
-              <GiftBox />A surprise is added to your cart!
-            </>
-          }
-          animate
-        />
-      );
-    }
+  if (collectionWiseNudgeMsg) {
+    return <CouponBanner message={collectionWiseNudgeMsg} animate={true} />;
   }
+
+  // if (hasCartItems) {
+  //   if (
+  //     bxgyCoupon &&
+  //     (!appliedCoupon || appliedCoupon.code === bxgyCoupon.coupon.code)
+  //   ) {
+  //     const couponText = bxgyCoupon?.allowed
+  //       ? `Congrats, your free product is added to cart!`
+  //       : `Add more items to unlock 'Buy ${bxgyCoupon.coupon.buyXQuantity} get ${bxgyCoupon.coupon.getYQuantity} Offer'`;
+  //     return (
+  //       <CouponBanner message={couponText} animate={!!bxgyCoupon.allowed} />
+  //     );
+  //   } else if (
+  //     bxayCoupon &&
+  //     (!appliedCoupon || appliedCoupon.code === bxayCoupon.coupon.code)
+  //   ) {
+  //     const couponText = bxayCoupon?.allowed
+  //       ? `Congrats, 'Buy ${bxayCoupon.coupon.buyXQuantity} @ ₹${bxayCoupon.coupon.getYAmount} Offer' can be availed!`
+  //       : `Add more items to unlock 'Buy ${bxayCoupon.coupon.buyXQuantity} @ ₹${bxayCoupon.coupon.getYAmount} Offer'`;
+  //     return (
+  //       <CouponBanner message={couponText} animate={!!bxayCoupon.allowed} />
+  //     );
+  //   } else if (freeProduct?.allowed) {
+  //     return (
+  //       <CouponBanner
+  //         message={
+  //           <>
+  //             <GiftBox />A surprise is added to your cart!
+  //           </>
+  //         }
+  //         animate
+  //       />
+  //     );
+  //   }
+  // }
 
   return <></>;
 };

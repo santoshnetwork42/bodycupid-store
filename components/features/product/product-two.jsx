@@ -122,7 +122,9 @@ function ProductTwo(props) {
         const recordKey = getRecordKey(product);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
-        tagSlug === "bundle-offer" && showCartModal && setCartVisibility(true);
+        tagSlug === "bundle-offer" &&
+          showCartModal &&
+          setCartVisibility(true);
         logger.verbose("Updated product quantity in cart");
         logger.debug(
           "Updated product quantity in cart:",
