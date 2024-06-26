@@ -20,10 +20,9 @@ export default function BlogPage({
 
   async function fetchMore(loadMore = false, after = "") {
     try {
-      const blogRes = await fetch(WORDPRESS_URL, {
+      const blogRes = await fetch("/api/blogs", {
         headers: {
           "Content-Type": "application/json",
-          Authorization: WORDPRESS_AUTH,
         },
         method: "POST",
         body: JSON.stringify({
