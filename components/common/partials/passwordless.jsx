@@ -378,6 +378,7 @@ function Passwordless({
                                         ?.trim(),
                                     });
                                   }}
+                                  pattern={"^\\d{10}$"}
                                 />
                               </div>
                             </div>
@@ -432,13 +433,13 @@ function Passwordless({
                               </div>
                             )}
                             <button
-                            className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
-                            type="submit"
-                            disabled={loading}
-                          >
-                            Confirm
-                            {loading && <div className="spin-loader ml-2" />}
-                          </button>
+                              className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
+                              type="submit"
+                              disabled={loading}
+                            >
+                              Confirm
+                              {loading && <div className="spin-loader ml-2" />}
+                            </button>
                             {!seconds ? (
                               <ALink href="#" onClick={handleSignIn}>
                                 <p className="resend-label mt-2">
@@ -514,6 +515,7 @@ function Passwordless({
                                         ?.trim(),
                                     });
                                   }}
+                                  pattern={"^\\d{10}$"}
                                 />
                               </div>
                             </div>

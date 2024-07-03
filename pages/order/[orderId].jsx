@@ -151,12 +151,12 @@ function Order({
             <ALink
               className="order-image"
               href={
-                "/collections/fragrance-bundle-offer?utm_source=thank_you_page"
+                "/collections/bundle-offer?utm_source=thank_you_page"
               }
             >
               <NextImage
                 src={"/images/banners/buy8@1999-category.jpg"}
-                alt={"collections-fragrance-bundle-offer"}
+                alt={"collections-bundle-offer"}
                 loader="local"
                 width={1400}
                 height={400}
@@ -400,7 +400,7 @@ function Order({
             <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
               <ALink
                 className="btn btn-icon-left btn-dark mr-2 btn-back btn-rounded btn-md"
-                href="/collections/fragrance-bundle-offer?utm_source=thank_you_page"
+                href="/collections/bundle-offer?utm_source=thank_you_page"
               >
                 Return to shop
               </ALink>
