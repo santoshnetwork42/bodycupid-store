@@ -16,6 +16,7 @@ import {
 import { getBlog, getBlogs, getStore, getTopMenu } from "~/graphql/api";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import fetchData from "~/utils/fetchData";
+import { isLanguagePresent } from "~/utils/data/languages";
 
 export default function BlogDetailsPage({ blog, featuredBlogs, menuItems }) {
   const replaceLinks = (content) => {
@@ -40,7 +41,10 @@ export default function BlogDetailsPage({ blog, featuredBlogs, menuItems }) {
   };
 
   return (
-    <main className="main" style={{ background: "#fff" }}>
+    <main
+      className="main blog-font-size-convention"
+      style={{ background: "#fff" }}
+    >
       <BlogHeader menuItems={menuItems} />
       <div
         className="page-content with-sidebar pb-10 pt-5"
@@ -72,13 +76,16 @@ export default function BlogDetailsPage({ blog, featuredBlogs, menuItems }) {
                   ))}
                 </p>
 
-                <h2 className="mb-3" style={{ color: "black" }}>
+                <h1
+                  className="mb-3"
+                  style={{ color: "black", fontSize: "35px" }}
+                >
                   {blog.title}
-                </h2>
+                </h1>
 
                 <div className="post-meta mb-4">
                   <ALink href="#" className="post-author">
-                    {blog.author.node.name}
+                    {blog?.author.node.name}
                   </ALink>{" "}
                   |{" "}
                   <ALink href="#" className="post-date">
@@ -214,7 +221,33 @@ export const getStaticProps = async ({ params }) => {
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
+    id: blog.link + "#Article" + blog?.id,
+    url: blog.link,
+    mainEntityOfPage: blog.link,
+    inLanguage:
+      blog?.tags?.nodes?.find((i) => isLanguagePresent(i.name))?.name ??
+      "en-US",
+    description: blog?.seo?.metaDesc,
     headline: blog?.title,
+    articleBody: blog?.content?.replace(/<\/?[^>]+(>|$)/g, ""),
+    speakable: {
+      "@type": "SpeakableSpecification",
+      xpath: [
+        "/html/head/title",
+        "/html/head/meta[@name='description']/@content",
+      ],
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Body Cupid Pvt Ltd",
+      url: "https://www.buywow.in/blog",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.buywow.in/_next/image?url=%2Fimages%2Fwow-logo.webp&w=256&q=75",
+        width: "265",
+        height: "60",
+      },
+    },
     image: blog?.featuredImage.node.mediaItemUrl
       ? [blog?.featuredImage?.node?.mediaItemUrl]
       : [],
@@ -223,8 +256,8 @@ export const getStaticProps = async ({ params }) => {
     author: [
       {
         "@type": "Person",
-        name: blog.author?.node?.name,
-        url: blog.author?.node?.avatar?.url || "",
+        name: blog?.author?.node?.name,
+        url: blog?.author?.node?.avatar?.url || "",
       },
     ],
   };
@@ -333,9 +366,9 @@ export const getStaticProps = async ({ params }) => {
           getPublicImageURL("/images/wow-logo.webp"),
         canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${blog.slug}`,
         type: "article",
-        authorName: blog.author?.node?.name,
+        authorName: blog?.author?.node?.name,
         twitterLabels: ["Written by", "Est. reading time"],
-        twitterDatas: [blog.author?.node?.name, `${blog.readingTime} minutes`],
+        twitterDatas: [blog?.author?.node?.name, `${blog.readingTime} minutes`],
         articleJsonLd,
         breadcrumbListJsonLd,
       },
