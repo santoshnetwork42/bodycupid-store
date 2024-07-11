@@ -103,7 +103,7 @@ const App = ({ Component, pageProps }) => {
     }
   }, [store, destroySession]);
 
-  const setStore = useCallback(async () => {
+  const setStore = async () => {
     try {
       const state = store.getState();
       if (wowStore) {
@@ -120,7 +120,7 @@ const App = ({ Component, pageProps }) => {
     } catch (error) {
       errorHandler(error);
     }
-  }, [store, wowStore]);
+  };
 
   const setMetaData = useCallback(() => {
     const cookieMeta = Cookie.get(`${STORE_PREFIX}_metadata`);
@@ -180,7 +180,6 @@ const App = ({ Component, pageProps }) => {
   }, [setStore, setUser]);
 
   useEffect(() => {
-    const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
     const hubListenerCancelToken = Hub.listen("auth", async (authEvent) => {
       const {
         payload: { event, data },
@@ -189,7 +188,7 @@ const App = ({ Component, pageProps }) => {
         logger.info("Signing out");
         destroySession();
         store.dispatch(eventActions.auth("logout"));
-      } else if (loggedInEvents.includes(event)) {
+      } else {
         initSession();
       }
     });
