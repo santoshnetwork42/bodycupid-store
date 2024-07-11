@@ -70,10 +70,11 @@ const App = ({ Component, pageProps }) => {
     }
   };
 
-  const setUser = useCallback(async () => {
+  const setUser = async () => {
     try {
-      const state = store.getState();
-      if (!state.user.data) {
+      const lsuser = localStorage.getItem(`${STORE_PREFIX}-user`);
+      const parsedUser = lsuser ? JSON.parse(lsuser).data : null;
+      if (!parsedUser || parsedUser === "null") {
         const user = await Auth.currentAuthenticatedUser().catch(() => null);
         if (user?.attributes?.sub) {
           const {
@@ -84,26 +85,54 @@ const App = ({ Component, pageProps }) => {
           });
 
           store.dispatch(userActions.setUser(getUserResponse));
-          // await Analytics.updateEndpoint({
-          //   userId: getUserResponse.id,
-          //   userAttributes: {
-          //     username: [getUserResponse.id],
-          //     email: [getUserResponse.email || null],
-          //     phone: [getUserResponse.phone || null],
-          //     firstName: [getUserResponse.firstName || null],
-          //     lastName: [getUserResponse.lastName || null],
-          //   },
-          // }).catch(() => null);
+        }
+      } else {
+        const user = await Auth.currentAuthenticatedUser().catch(() => null);
+        if (!user) {
+          destroySession();
         }
       }
     } catch (error) {
+      destroySession();
       logger.error(error);
       errorHandler(error);
-      destroySession();
     }
-  }, [store, destroySession]);
+  };
 
-  const setStore = useCallback(async () => {
+  // const setUser = useCallback(async () => {
+  //   try {
+  //     const state = store.getState();
+  //     if (!state.user.data) {
+  //       const user = await Auth.currentAuthenticatedUser().catch(() => null);
+  //       if (user?.attributes?.sub) {
+  //         const {
+  //           data: { getUser: getUserResponse },
+  //         } = await API.graphql({
+  //           query: getUser,
+  //           authMode: "AMAZON_COGNITO_USER_POOLS",
+  //         });
+
+  //         store.dispatch(userActions.setUser(getUserResponse));
+  //         // await Analytics.updateEndpoint({
+  //         //   userId: getUserResponse.id,
+  //         //   userAttributes: {
+  //         //     username: [getUserResponse.id],
+  //         //     email: [getUserResponse.email || null],
+  //         //     phone: [getUserResponse.phone || null],
+  //         //     firstName: [getUserResponse.firstName || null],
+  //         //     lastName: [getUserResponse.lastName || null],
+  //         //   },
+  //         // }).catch(() => null);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     logger.error(error);
+  //     errorHandler(error);
+  //     destroySession();
+  //   }
+  // }, [store, destroySession]);
+
+  const setStore = async () => {
     try {
       const state = store.getState();
       if (wowStore) {
@@ -120,7 +149,7 @@ const App = ({ Component, pageProps }) => {
     } catch (error) {
       errorHandler(error);
     }
-  }, [store, wowStore]);
+  };
 
   const setMetaData = useCallback(() => {
     const cookieMeta = Cookie.get(`${STORE_PREFIX}_metadata`);
@@ -174,22 +203,21 @@ const App = ({ Component, pageProps }) => {
     }
   }, []);
 
-  const initSession = useCallback(async () => {
+  const initSession = async () => {
     setStore();
     setUser();
-  }, [setStore, setUser]);
+  };
 
   useEffect(() => {
-    const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
     const hubListenerCancelToken = Hub.listen("auth", async (authEvent) => {
       const {
         payload: { event, data },
       } = authEvent;
-      if (event === "signOut") {
+      if (event === "signedOut") {
         logger.info("Signing out");
         destroySession();
         store.dispatch(eventActions.auth("logout"));
-      } else if (loggedInEvents.includes(event)) {
+      } else {
         initSession();
       }
     });
