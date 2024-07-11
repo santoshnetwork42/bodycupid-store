@@ -4,7 +4,7 @@ import {
   useFeaturedCoupons,
 } from "@wow-star/utils";
 import { API, Logger } from "aws-amplify";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Modal from "react-modal";
 import { connect } from "react-redux";
 
@@ -71,30 +71,8 @@ function Coupon(props) {
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
-
+  const previousCartList = useRef(cartList);
   const bestCouponCode = useBestCoupon();
-
-  useEffect(() => {
-    if (storedCouponCode) {
-      if (
-        (!appliedCoupon || appliedCoupon?.autoApplied) &&
-        appliedCoupon?.code !== storedCouponCode
-      ) {
-        applyCouponCode(storedCouponCode, true);
-      }
-    } else if (bestCouponCode) {
-      if (
-        (!appliedCoupon || appliedCoupon?.autoApplied) &&
-        appliedCoupon?.code !== bestCouponCode
-      ) {
-        applyCouponCode(bestCouponCode, true);
-      }
-    } else {
-      if (appliedCoupon?.autoApplied) {
-        removeCoupon();
-      }
-    }
-  }, [bestCouponCode, cartList]);
 
   const applyCouponCode = useCallback(
     async (couponCode, autoApplied = false) => {
@@ -144,6 +122,32 @@ function Coupon(props) {
     },
     [user, cartList]
   );
+
+  useEffect(() => {
+    if (cartList && previousCartList.current !== cartList) {
+      previousCartList.current = cartList;
+
+      if (storedCouponCode) {
+        if (
+          (!appliedCoupon || appliedCoupon?.autoApplied) &&
+          appliedCoupon?.code !== storedCouponCode
+        ) {
+          applyCouponCode(storedCouponCode, true);
+        }
+      } else if (bestCouponCode) {
+        if (
+          (!appliedCoupon || appliedCoupon?.autoApplied) &&
+          appliedCoupon?.code !== bestCouponCode
+        ) {
+          applyCouponCode(bestCouponCode, true);
+        }
+      } else {
+        if (appliedCoupon?.autoApplied) {
+          removeCoupon();
+        }
+      }
+    }
+  }, [bestCouponCode, cartList]);
 
   const onCouponRemove = (e) => {
     e.stopPropagation();
