@@ -7,6 +7,7 @@ import { useCallback, useEffect } from "react";
 import "react-owl-carousel2/lib/styles.css";
 import { Provider, useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { v4 as uuidv4 } from "uuid";
 
 import awsconfig from "~/aws-exports";
 import Header from "~/components/common/header";
@@ -59,10 +60,15 @@ const App = ({ Component, pageProps }) => {
     hideChatbot: !!Component.hideChatbot,
   };
 
-  const destroySession = useCallback(() => {
-    store.__persistor.purge();
-    store.dispatch(rootActions.destroySession());
-  }, [store]);
+  const destroySession = async () => {
+    try {
+      store.__persistor.purge();
+      store.dispatch(rootActions.destroySession());
+      localStorage.removeItem(`${STORE_PREFIX}-user`);
+    } catch (error) {
+      logger.error(error);
+    }
+  };
 
   const setUser = useCallback(async () => {
     try {
@@ -143,6 +149,14 @@ const App = ({ Component, pageProps }) => {
 
     if (JSON.stringify(metadata) !== cookieMeta) {
       Cookie.set(`${STORE_PREFIX}_metadata`, JSON.stringify(metadata));
+    }
+
+    if (!Cookie.get(`${STORE_PREFIX}_session_id`)) {
+      const sessionId = uuidv4();
+      Cookie.set(`${STORE_PREFIX}_session_id`, sessionId, {
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: "strict",
+      });
     }
     store.dispatch(systemActions.setMeta(metadata));
   }, [store, query]);
