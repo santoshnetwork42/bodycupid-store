@@ -65,9 +65,9 @@ function PostNine(props) {
             | {post.author.node.name} | {post.readingTime} min read
           </div>
 
-          <h4 className="post-title" style={{ color: "black" }}>
+          <h6 className="post-title" style={{ color: "black" }}>
             <ALink href={`/blog/${post.slug}`}>{post.title}</ALink>
-          </h4>
+          </h6>
 
           <div
             className="post-content"

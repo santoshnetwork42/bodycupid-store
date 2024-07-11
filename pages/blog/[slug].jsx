@@ -240,10 +240,10 @@ export const getStaticProps = async ({ params }) => {
     publisher: {
       "@type": "Organization",
       name: "Body Cupid Pvt Ltd",
-      url: "https://www.buywow.in/blog",
+      url: "https://www.bodycupid.com/blog",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.buywow.in/_next/image?url=%2Fimages%2Fwow-logo.webp&w=256&q=75",
+        url: "https://www.bodycupid.com/_next/image?url=%2Fimages%2Flogo.png&w=256&q=100",
         width: "265",
         height: "60",
       },
