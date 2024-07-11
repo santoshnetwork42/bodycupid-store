@@ -185,7 +185,7 @@ const App = ({ Component, pageProps }) => {
       const {
         payload: { event, data },
       } = authEvent;
-      if (event === "signOut") {
+      if (event === "signedOut") {
         logger.info("Signing out");
         destroySession();
         store.dispatch(eventActions.auth("logout"));
