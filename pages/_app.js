@@ -203,10 +203,10 @@ const App = ({ Component, pageProps }) => {
     }
   }, []);
 
-  const initSession = useCallback(async () => {
+  const initSession = async () => {
     setStore();
     setUser();
-  }, [setStore, setUser]);
+  };
 
   useEffect(() => {
     const hubListenerCancelToken = Hub.listen("auth", async (authEvent) => {
