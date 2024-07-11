@@ -7,6 +7,7 @@ import { useCallback, useEffect } from "react";
 import "react-owl-carousel2/lib/styles.css";
 import { Provider, useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { v4 as uuidv4 } from "uuid";
 
 import awsconfig from "~/aws-exports";
 import Header from "~/components/common/header";
@@ -63,17 +64,16 @@ const App = ({ Component, pageProps }) => {
     try {
       store.__persistor.purge();
       store.dispatch(rootActions.destroySession());
-      await Auth.signOut();
       localStorage.removeItem(`${STORE_PREFIX}-user`);
     } catch (error) {
       logger.error(error);
     }
   };
+
   const setUser = async () => {
     try {
       const lsuser = localStorage.getItem(`${STORE_PREFIX}-user`);
       const parsedUser = lsuser ? JSON.parse(lsuser).data : null;
-
       if (!parsedUser || parsedUser === "null") {
         const user = await Auth.currentAuthenticatedUser().catch(() => null);
 
@@ -99,7 +99,40 @@ const App = ({ Component, pageProps }) => {
     }
   };
 
-  const setStore = useCallback(async () => {
+  // const setUser = useCallback(async () => {
+  //   try {
+  //     const state = store.getState();
+  //     if (!state.user.data) {
+  //       const user = await Auth.currentAuthenticatedUser().catch(() => null);
+  //       if (user?.attributes?.sub) {
+  //         const {
+  //           data: { getUser: getUserResponse },
+  //         } = await API.graphql({
+  //           query: getUser,
+  //           authMode: "AMAZON_COGNITO_USER_POOLS",
+  //         });
+
+  //         store.dispatch(userActions.setUser(getUserResponse));
+  //         // await Analytics.updateEndpoint({
+  //         //   userId: getUserResponse.id,
+  //         //   userAttributes: {
+  //         //     username: [getUserResponse.id],
+  //         //     email: [getUserResponse.email || null],
+  //         //     phone: [getUserResponse.phone || null],
+  //         //     firstName: [getUserResponse.firstName || null],
+  //         //     lastName: [getUserResponse.lastName || null],
+  //         //   },
+  //         // }).catch(() => null);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     logger.error(error);
+  //     errorHandler(error);
+  //     destroySession();
+  //   }
+  // }, [store, destroySession]);
+
+  const setStore = async () => {
     try {
       const state = store.getState();
       if (wowStore) {
@@ -116,7 +149,7 @@ const App = ({ Component, pageProps }) => {
     } catch (error) {
       errorHandler(error);
     }
-  }, [store, wowStore]);
+  };
 
   const setMetaData = useCallback(() => {
     const cookieMeta = Cookie.get(`${STORE_PREFIX}_metadata`);
@@ -146,6 +179,14 @@ const App = ({ Component, pageProps }) => {
     if (JSON.stringify(metadata) !== cookieMeta) {
       Cookie.set(`${STORE_PREFIX}_metadata`, JSON.stringify(metadata));
     }
+
+    if (!Cookie.get(`${STORE_PREFIX}_session_id`)) {
+      const sessionId = uuidv4();
+      Cookie.set(`${STORE_PREFIX}_session_id`, sessionId, {
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: "strict",
+      });
+    }
     store.dispatch(systemActions.setMeta(metadata));
   }, [store, query]);
 
@@ -162,16 +203,22 @@ const App = ({ Component, pageProps }) => {
     }
   }, []);
 
+  const initSession = async () => {
+    setStore();
+    setUser();
+  };
+
   useEffect(() => {
     const hubListenerCancelToken = Hub.listen("auth", async (authEvent) => {
-      const { event } = authEvent.payload;
+      const {
+        payload: { event, data },
+      } = authEvent;
       if (event === "signedOut") {
         logger.info("Signing out");
         destroySession();
         store.dispatch(eventActions.auth("logout"));
       } else {
-        setStore();
-        setUser();
+        initSession();
       }
     });
 
