@@ -70,7 +70,7 @@ function CartTotal({
       return false;
     }
 
-    startCheckout();
+    // startCheckout();
 
     if (user || guestCheckout || customUser) {
       router.push("/pages/checkout");
