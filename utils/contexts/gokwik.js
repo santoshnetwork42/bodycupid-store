@@ -257,7 +257,7 @@ function GoKwikProvider({
     });
 
     gokwikSdk.on("user-login-successful", async (event) => {
-      logger.log("user-login-successful>>>", event);
+      console.log("user-login-successful>>>", event);
       await startCheckout("GOKWIK");
       // await manageUserAuthEvent(event.phone_no, event.user_token);
     });
