@@ -38,6 +38,7 @@ function CartTotal({
   const { isRewardApplied } = useNavBarState();
   const gokwikEnabled = useConfiguration(GOKWIK_ENABLED, false);
   console.log("gokwikEnabled", gokwikEnabled);
+
   const {
     totalItems,
     totalListingPrice,

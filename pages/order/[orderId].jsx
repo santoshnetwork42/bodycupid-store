@@ -222,7 +222,7 @@ function Order({
                     <h4 className="summary-subtitle">Payment method:</h4>
                   </td>
                   <td className="summary-subtotal-price">
-                    {order?.paymentType === "ONLINE"
+                    {order?.paymentType === "PREPAID"
                       ? "Online"
                       : "Cash on delivery"}
                   </td>
