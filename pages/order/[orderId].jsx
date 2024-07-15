@@ -222,9 +222,9 @@ function Order({
                     <h4 className="summary-subtitle">Payment method:</h4>
                   </td>
                   <td className="summary-subtotal-price">
-                    {order?.paymentType === "COD"
-                      ? "Cash on delivery"
-                      : "Online"}
+                    {order?.paymentType === "ONLINE"
+                      ? "Online"
+                      : "Cash on delivery"}
                   </td>
                 </tr>
                 <tr className="summary-subtotal">
@@ -386,6 +386,34 @@ function Order({
                     </p>
                   </td>
                 </tr>
+
+                {order?.paymentType === "PPCOD" && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">Paid Amount:</h4>
+                    </td>
+                    <td className="summary-subtotal-price">
+                      ₹{toDecimal(order?.totalPrepaidAmount)}
+                    </td>
+                  </tr>
+                )}
+
+                {order?.paymentType === "PPCOD" && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">To Pay:</h4>
+                    </td>
+                    <td className="summary-total-price pr-2">
+                      ₹
+                      {toDecimal(
+                        order?.totalAmount -
+                          order?.appliedRewardPoints +
+                          order?.totalCashbackRefunded -
+                          order?.totalPrepaidAmount
+                      )}
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
