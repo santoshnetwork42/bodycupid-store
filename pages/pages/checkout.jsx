@@ -29,7 +29,14 @@ import {
 } from "~/components/icons";
 import NextImage from "~/components/image";
 import { RAZORPAY_KEY, RAZORPAY_SCRIPT } from "~/config";
-import { COD_ENABLED, MAX_COD_AMOUNT, PREPAID_ENABLED } from "~/constant";
+import {
+  COD_ENABLED,
+  MAX_COD_AMOUNT,
+  MAX_PREPAID_DISCOUNT,
+  PPCOD_AMOUNT,
+  PPCOD_ENABLED,
+  PREPAID_ENABLED,
+} from "~/constant";
 import { cartActions } from "~/store/cart";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
@@ -72,6 +79,8 @@ function Checkout(props) {
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
   const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
   const codEnabled = useConfiguration(COD_ENABLED, true);
+  const ppcodEnabled = useConfiguration(PPCOD_ENABLED, false);
+  const ppcodAmount = useConfiguration(PPCOD_AMOUNT, 0);
 
   const { isRewardApplied } = useNavBarState();
 
@@ -108,6 +117,7 @@ function Checkout(props) {
   useEffect(() => {
     setFormError(null);
   }, [shippingAddress]);
+
   useEffect(() => {
     startCheckout();
     logger.verbose("Checkout component initialized");
@@ -746,7 +756,11 @@ function Checkout(props) {
                                   ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
                                   : isMaxCODDisabled
                                   ? `COD payment is not allowed for orders above ₹${maxCOD}.`
-                                  : `Pay using Cash on Delivery.`
+                                  : ppcodEnabled && ppcodAmount
+                                  ? `Pay ₹${toDecimal(
+                                      ppcodAmount
+                                    )} now and remaining on delivery.`
+                                  : "Pay using Cash on Delivery."
                               }
                               disabled={codCouponDisabled || isMaxCODDisabled}
                               onClick={() => {

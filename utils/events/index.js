@@ -9,7 +9,12 @@ import {
 } from "~/utils/products";
 import { getCouponDiscount } from "../coupons";
 import { getPublicImageURL } from "../getPublicImageUrl";
-export const itemMapper = (product, coupon, user) => {
+export const itemMapper = (
+  product,
+  coupon,
+  user,
+  checkoutSource = "BUYWOW"
+) => {
   let {
     variantId,
     id,
@@ -24,7 +29,7 @@ export const itemMapper = (product, coupon, user) => {
   } = product;
 
   let contentType = "product_group";
-  const source = getSource();
+  const source = checkoutSource === "GOKWIK" ? "GoKwik" : getSource();
 
   if (!variantId) {
     variantId = getFirstVariant(product)?.id;
@@ -142,7 +147,12 @@ export const itemMapper = (product, coupon, user) => {
   };
 };
 
-export const orderMapper = (products, coupon, user) => {
+export const orderMapper = (
+  products,
+  coupon,
+  user,
+  checkoutSource = "BUYWOW"
+) => {
   const defaultAttribute = {
     content_ids: [],
     content_category: [],
@@ -161,7 +171,7 @@ export const orderMapper = (products, coupon, user) => {
         value: valueNew,
         pixel: pixelNew,
         vercel: vercelNew,
-      } = itemMapper(product, coupon);
+      } = itemMapper(product, coupon, null, checkoutSource);
 
       return {
         value: value + valueNew,
@@ -208,10 +218,10 @@ export const userMapper = (userData, address) => {
     city,
     state,
     country,
-    pinCode,
+    pinCode = address?.pincode,
     phone: aP,
-    firstName: aF,
-    lastName: aL,
+    firstName: aF = address?.first_name,
+    lastName: aL = address?.last_name,
     email: aE,
   } = address || {};
 
@@ -247,11 +257,12 @@ export const moEngagedOrderMapper = (
   coupon,
   paymentMethod,
   order,
-  isFirstTimeUser
+  isFirstTimeUser,
+  checkoutSource = "BUYWOW"
 ) => {
   const { discount: couponTotal } = getCouponDiscount(coupon, products) || {};
   let currentURL = window.location.href.split("/").slice(0, 3).join("/");
-  const source = getSource();
+  const source = checkoutSource === "GOKWIK" ? "GoKwik" : getSource();
   const basicAttributes = {
     Currency: "INR",
     "Total Items": products?.length,
@@ -281,7 +292,12 @@ export const moEngagedOrderMapper = (
       },
       product
     ) => {
-      const { value: valueNew, mrpValue } = itemMapper(product, coupon);
+      const { value: valueNew, mrpValue } = itemMapper(
+        product,
+        coupon,
+        null,
+        checkoutSource
+      );
       const { thumbImage } = getProductMeta(product);
       const url = getPublicImageURL(thumbImage?.imageKey);
       totalDiscount = totalDiscount + mrpValue - valueNew;
@@ -362,12 +378,14 @@ export const moEngagedOrderMapper = (
 export const moEngageItemPurchasedMapper = (
   products,
   coupon,
+  paymentMethod,
   order,
-  isFirstTimeUser
+  isFirstTimeUser,
+  checkoutSource = "BUYWOW"
 ) => {
   const { discount: couponTotal } = getCouponDiscount(coupon, products) || {};
   let currentURL = window.location.href.split("/").slice(0, 3).join("/");
-  const source = getSource();
+  const source = checkoutSource === "GOKWIK" ? "GoKwik" : getSource();
 
   const basicAttributes = {
     Currency: "INR",
@@ -377,7 +395,12 @@ export const moEngageItemPurchasedMapper = (
     "First Time User": isFirstTimeUser,
   };
   const events = products.map((product) => {
-    const { value: valueNew, mrpValue } = itemMapper(product, coupon);
+    const { value: valueNew, mrpValue } = itemMapper(
+      product,
+      coupon,
+      null,
+      checkoutSource
+    );
     const { thumbImage } = getProductMeta(product);
     const url = getPublicImageURL(thumbImage?.imageKey);
     const totalDiscount = mrpValue - valueNew;
@@ -405,16 +428,21 @@ export const moEngageItemPurchasedMapper = (
       ...eventAttributes,
       "Order ID": order?.code,
       "Order Date": null,
-      "Payment Mode": null,
-      "Payment Status": null,
+      "Payment Mode": paymentMethod,
+      "Payment Status": paymentMethod === "COD" ? "Unpaid" : "Paid",
     };
   });
 
   return events;
 };
 
-export const addressMapper = (address, totalPrice) => {
+export const addressMapper = (
+  address,
+  totalPrice,
+  checkoutSource = "BUYWOW"
+) => {
   if (address) {
+    const source = checkoutSource === "GOKWIK" ? "GoKwik" : getSource();
     const { city, country, email, name, state, pinCode, phone } = address;
     const phoneNo = removePhonePrefix(phone);
     const [firstName, lastName] = name.split(" ");
@@ -430,6 +458,7 @@ export const addressMapper = (address, totalPrice) => {
       "Mobile Number": phoneNo,
       Pincode: pinCode,
       State: state,
+      Source: source,
     };
 
     return {

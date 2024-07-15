@@ -20,3 +20,8 @@ export const LIMECHAT_ENABLED =
 export const LIMECHAT_WEBSITE_TOKEN =
   process.env.NEXT_PUBLIC_LIMECHAT_WEBSITE_TOKEN;
 export const LIMECHAT_BASE_URL = process.env.NEXT_PUBLIC_LIMECHAT_BASE_URL;
+export const GOKWIK_MID = process.env.NEXT_PUBLIC_GOKWIK_MID;
+export const GOKWIK_SCRIPT = process.env.NEXT_PUBLIC_GOKWIK_SCRIPT;
+export const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+export const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
+export const POSTHOG_FLAG = process.env.NEXT_PUBLIC_POSTHOG_FLAG;

@@ -1321,15 +1321,13 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
 export const createShoppingCart = /* GraphQL */ `
   mutation CreateShoppingCart($input: CreateShoppingCartInput!) {
     createShoppingCart(input: $input) {
-      id
-      storeId
-      userId
-      couponCodeId
-      createdAt
-      updatedAt
+      success
+      message
+      shoppingCartId
     }
   }
 `;
+
 export const updateShoppingCart = /* GraphQL */ `
   mutation UpdateShoppingCart($input: UpdateShoppingCartInput!) {
     updateShoppingCart(input: $input) {
