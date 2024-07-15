@@ -232,53 +232,43 @@ function Checkout(props) {
         setPaymentLoader(false);
       }
 
-      if (success) {
-        if (payMethod === "PREPAID") {
-          if (rzpEnabled && store && transaction && order) {
-            const options = {
-              key: RAZORPAY_KEY,
-              amount: transaction.amount,
-              currency: "INR",
-              name: store.name,
-              image: getPublicImageURL(store.imageUrl),
-              order_id: transaction.orderId,
-              handler: async function ({ razorpay_payment_id }) {
-                orderHelper.fetchTransactionStatus(
-                  order.id,
-                  razorpay_payment_id
-                );
-              },
-              prefill: {
-                name: shippingAddress.name,
-                email: shippingAddress.email,
-                contact: shippingAddress.phone,
-              },
-              notes: {
-                storeId: store.id,
-                orderId: order.id,
-                paymentId: payment.id,
-              },
-              theme: {
-                color: "#3399cc",
-              },
-              modal: {
-                ondismiss: function () {
-                  orderHelper.reset();
-                  razorpayMethod = null;
-                  setPaymentLoader(false);
-                },
-              },
-            };
+      if (success && rzpEnabled && store && transaction && order) {
+        const options = {
+          key: RAZORPAY_KEY,
+          amount: transaction.amount,
+          currency: "INR",
+          name: store.name,
+          image: getPublicImageURL(store.imageUrl),
+          order_id: transaction.orderId,
+          handler: async function ({ razorpay_payment_id }) {
+            orderHelper.fetchTransactionStatus(order.id, razorpay_payment_id);
+          },
+          prefill: {
+            name: shippingAddress.name,
+            email: shippingAddress.email,
+            contact: shippingAddress.phone,
+          },
+          notes: {
+            storeId: store.id,
+            orderId: order.id,
+            paymentId: payment.id,
+          },
+          theme: {
+            color: "#3399cc",
+          },
+          modal: {
+            ondismiss: function () {
+              orderHelper.reset();
+              razorpayMethod = null;
+              setPaymentLoader(false);
+            },
+          },
+        };
 
-            razorpayMethod = new Razorpay(options);
-            razorpayMethod.open();
-            addPaymentInfo();
-            logger.verbose("Razorpay initialization");
-          } else {
-            alertToaster("Something went wrong. Try Again!", "error");
-            logger.error("Something went wrong with Razorpay initialization");
-          }
-        }
+        razorpayMethod = new Razorpay(options);
+        razorpayMethod.open();
+        addPaymentInfo();
+        logger.verbose("Razorpay initialization");
       }
 
       return Promise.resolve();
