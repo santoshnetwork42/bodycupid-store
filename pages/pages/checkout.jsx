@@ -108,10 +108,10 @@ function Checkout(props) {
   useEffect(() => {
     setFormError(null);
   }, [shippingAddress]);
-  // useEffect(() => {
-  //   startCheckout();
-  //   logger.verbose("Checkout component initialized");
-  // }, []);
+  useEffect(() => {
+    startCheckout();
+    logger.verbose("Checkout component initialized");
+  }, []);
 
   const {
     totalListingPrice,
