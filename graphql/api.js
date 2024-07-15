@@ -603,6 +603,7 @@ export const getOrder = /* GraphQL */ `
         location
         area
       }
+      checkoutChannel
       appliedRewardPoints
       billingAddress {
         name

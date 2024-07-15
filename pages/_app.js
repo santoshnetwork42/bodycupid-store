@@ -185,7 +185,6 @@ const App = ({ Component, pageProps }) => {
       clickId: clickid || meta?.clickId || "",
     };
 
-    
     if (JSON.stringify(metadata) !== cookieMeta) {
       Cookie.set(`${STORE_PREFIX}_metadata`, JSON.stringify(metadata));
     }
@@ -274,7 +273,7 @@ const App = ({ Component, pageProps }) => {
     <>
       <SpeedInsights route={router.pathname} />
 
-      {!!pageMeta && <NextHead {...pageMeta} />}
+      <NextHead {...pageMeta} />
       <PostHogProvider client={posthog}>
         <Provider store={store}>
           <PersistGate

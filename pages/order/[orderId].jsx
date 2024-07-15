@@ -78,6 +78,24 @@ function Order({
     order?.paymentType === "PREPAID" &&
     paymentId;
 
+  const isStatusProcessing =
+    (order?.status === "PENDING" || order?.status === "TIMEDOUT") &&
+    order?.checkoutChannel === "GOKWIK";
+
+  useEffect(() => {
+    if (isStatusProcessing) {
+      if (counter < 3) {
+        if (timer) clearTimeout(timer);
+        const timerId = setTimeout(() => {
+          fetchOrder();
+          setTimer(null);
+        }, [2000]);
+        setTimer(timerId);
+        setCounter((count) => count + 1);
+      }
+    }
+  }, [order]);
+
   useEffect(() => {
     if (isPaymentProcessing) {
       alertToaster("Hold On! We're updating your payment status...", "info");
@@ -150,9 +168,7 @@ function Order({
           <div className="d-flex justify-content-center align-items-center mb-4">
             <ALink
               className="order-image"
-              href={
-                "/collections/bundle-offer?utm_source=thank_you_page"
-              }
+              href={"/collections/bundle-offer?utm_source=thank_you_page"}
             >
               <NextImage
                 src={"/images/banners/buy8@1999-category.jpg"}

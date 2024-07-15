@@ -136,31 +136,18 @@ function GoKwikProvider({
     console.log("isLoggedIn", isLoggedIn);
     if (!isLoggedIn) {
       try {
-        const cu = await Auth.signIn(
-          {
-            username: addPhonePrefix(phone),
-            options: {
-              authFlowType: "CUSTOM_WITHOUT_SRP",
-            },
-          },
-          null,
-          { checkout: "GOKWIK" }
+        const cu = await Auth.signIn(addPhonePrefix(phone), undefined, {
+          checkout: "GOKWIK",
+        });
+        const signInUserSession = await Auth.sendCustomChallengeAnswer(
+          cu,
+          token
         );
-        console.log("cu>>>>>", cu);
-        if (
-          cu?.nextStep?.signInStep === "CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE"
-        ) {
-          const { isSignedIn } = await Auth.confirmSignIn({
-            challengeResponse: token,
-          });
 
-          if (isSignedIn) {
-            const currentUser = await Auth.currentAuthenticatedUser().catch(
-              () => null
-            );
-            dispatchAuthEvent("login", { userId: currentUser.userId });
-            return Promise.resolve(null);
-          }
+        if (signInUserSession) {
+          const { sub } = signInUserSession.accessToken.payload;
+          dispatchAuthEvent("login", { userId: sub });
+          return Promise.resolve(null);
         }
       } catch (error) {
         logger.error("user-login-successful error", error);
@@ -253,13 +240,13 @@ function GoKwikProvider({
     gokwikSdk.on("checkout-initiation-failure", (checkout) => {
       logger.log("checkout-initiation-failure>>>", checkout);
       gokwikSdk.close();
-      router.push("/checkout");
+      router.push("/pages/checkout");
     });
 
     gokwikSdk.on("user-login-successful", async (event) => {
       console.log("user-login-successful>>>", event);
       await startCheckout("GOKWIK");
-      // await manageUserAuthEvent(event.phone_no, event.user_token);
+      await manageUserAuthEvent(event.phone_no, event.user_token);
     });
   }, []);
 
