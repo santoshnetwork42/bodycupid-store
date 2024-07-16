@@ -490,8 +490,19 @@
     padding: 1rem 1.5rem 1rem;
   }
 
-  .details-wrapper {
+  .product-card-details-wrapper{
     height: 10rem;
+  }
+  .product-card-details-wrapper-sm{
+    height: 12rem;
+  }
+
+  .details-wrapper-sm{
+    height: 14rem;
+    margin-bottom: 2rem;
+  }
+  .details-wrapper {
+    height: 12rem;
     margin-bottom: 2rem;
   }
 
@@ -581,6 +592,10 @@
     height: 5rem;
     margin-bottom: 5rem;
   }
+
+  .product-card-details-wrapper{
+    height: 4rem;
+  }
 }
 
 .product-card-title {
@@ -650,7 +665,14 @@
 }
 
 .product-title-min-height {
-  min-height: 6rem;
+  // min-height: 6rem;
+  max-height: 4rem;
+  overflow: hidden;
+
+}
+.product-title-min-height-sm {
+  max-height: 6rem;
+  overflow: hidden;
 }
 
 .plp-rating-font-size {

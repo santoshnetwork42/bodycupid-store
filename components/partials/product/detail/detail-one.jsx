@@ -267,7 +267,7 @@ function DetailOne(props) {
         >
           <Star size={14} color={"#FAB73B"} />
         </div>
-        <div className="d-flex gap-5 align-items-center">
+        <div className="d-flex gap-5 align-items-center"  onClick={onReviewClick}>
           <span className="rating text-black font-size-18 font-weight-semi-bold plp-rating-font-size">
             {rating}
           </span>
