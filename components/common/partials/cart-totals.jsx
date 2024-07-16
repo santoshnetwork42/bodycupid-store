@@ -78,7 +78,7 @@ function CartTotal({
       logger.error("Out of stock product found in cart");
       return false;
     }
-    console.log("GOKWIK_MID", GOKWIK_MID, lscart);
+
     const lscart = localStorage.getItem(`${STORE_PREFIX}-cartId`);
 
     const isGKCXEnabled = !!(

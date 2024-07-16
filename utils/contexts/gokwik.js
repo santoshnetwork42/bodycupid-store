@@ -194,8 +194,6 @@ function GoKwikProvider({
             logger.debug("Purchase event done");
             logger.debug("Redirecting to success page");
           }
-          logger.debug("Purchase event done");
-          logger.debug("Redirecting to success page");
         }
       } catch (e) {
         errorHandler(e);
