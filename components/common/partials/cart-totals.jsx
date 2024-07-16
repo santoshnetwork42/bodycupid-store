@@ -37,7 +37,6 @@ function CartTotal({
   const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
   const { isRewardApplied } = useNavBarState();
   const gokwikEnabled = useConfiguration(GOKWIK_ENABLED, false);
-  console.log("gokwikEnabled", gokwikEnabled);
 
   const {
     totalItems,
@@ -81,8 +80,14 @@ function CartTotal({
     }
     console.log("GOKWIK_MID", GOKWIK_MID, lscart);
     const lscart = localStorage.getItem(`${STORE_PREFIX}-cartId`);
-    const isGKCXEnabled = !!(GOKWIK_MID && lscart && gokwikEnabled);
-    console.log("isGKCXEnabled", isGKCXEnabled);
+
+    const isGKCXEnabled = !!(
+      GOKWIK_MID &&
+      variantPostHog === "gk_checkout" &&
+      lscart &&
+      gokwikEnabled
+    );
+
     // startCheckout();
 
     onProceedToCheckout(isGKCXEnabled ? "GOKWIK" : "BUYWOW");
