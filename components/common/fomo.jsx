@@ -9,6 +9,7 @@ const Fomo = () => {
 
   const currentProduct = products[currentProductIndex];
 
+  
   if (!currentProduct) {
     return null;
   }

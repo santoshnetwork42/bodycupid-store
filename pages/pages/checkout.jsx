@@ -22,13 +22,21 @@ import PaymentLoader from "~/components/common/partials/payment-loader";
 import PaymentMethods from "~/components/features/payment-radio";
 import {
   DownAngle,
+  LoyaltyTag,
   RightAngle,
   ShoppingCart,
   UpAngle,
 } from "~/components/icons";
 import NextImage from "~/components/image";
 import { RAZORPAY_KEY, RAZORPAY_SCRIPT } from "~/config";
-import { COD_ENABLED, MAX_COD_AMOUNT, PREPAID_ENABLED } from "~/constant";
+import {
+  COD_ENABLED,
+  MAX_COD_AMOUNT,
+  MAX_PREPAID_DISCOUNT,
+  PPCOD_AMOUNT,
+  PPCOD_ENABLED,
+  PREPAID_ENABLED,
+} from "~/constant";
 import { cartActions } from "~/store/cart";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
@@ -71,6 +79,8 @@ function Checkout(props) {
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
   const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
   const codEnabled = useConfiguration(COD_ENABLED, true);
+  const ppcodEnabled = useConfiguration(PPCOD_ENABLED, false);
+  const ppcodAmount = useConfiguration(PPCOD_AMOUNT, 0);
 
   const { isRewardApplied } = useNavBarState();
 
@@ -107,6 +117,7 @@ function Checkout(props) {
   useEffect(() => {
     setFormError(null);
   }, [shippingAddress]);
+
   useEffect(() => {
     startCheckout();
     logger.verbose("Checkout component initialized");
@@ -127,6 +138,10 @@ function Checkout(props) {
     prepaidDiscountPercent,
     usableRewards,
     totalAmount,
+    codCashbackRewardsOnOrder,
+    prepaidCashbackRewardsOnOrder,
+    amountNeededToAvailCodCashback,
+    amountNeededToAvailPrepaidCashback,
   } = useCartTotal({
     paymentType: payMethod,
     isRewardApplied,
@@ -169,7 +184,31 @@ function Checkout(props) {
   const placeOrder = async (e) => {
     try {
       e.preventDefault();
+
+      const variables = {
+        paymentMethod: payMethod,
+        address: shippingAddress,
+        metadata,
+        appliedRewardPoints: isRewardApplied ? usableRewards : 0,
+        totalAmount: totalAmount,
+        shoppingCartId,
+        source: "WEB",
+        totalCashbackEarned:
+          payMethod === "COD"
+            ? codCashbackRewardsOnOrder
+            : prepaidCashbackRewardsOnOrder,
+      };
+
+      if (isRewardApplied && !!usableRewards) {
+        variables.appliedRewardPoints = usableRewards ? usableRewards : null;
+      }
+
       const isAffiseTrackingValid = checkAffiseValidity();
+      if (isAffiseTrackingValid) {
+        variables.isAffiseTrackingValid = isAffiseTrackingValid
+          ? isAffiseTrackingValid
+          : null;
+      }
       if (!guestCheckout && !customUser && (!user || !user.isActive)) {
         emptyCart();
         router.replace("/pages/order-failed");
@@ -181,22 +220,10 @@ function Checkout(props) {
         { success, code, formError, order, payment, transaction },
         rzpEnabled,
       ] = await Promise.all([
-        placeOrderV1({
-          paymentMethod: payMethod,
-          address: shippingAddress,
-          metadata,
-          appliedRewardPoints: null,
-          totalAmount: totalAmount,
-          shoppingCartId,
-          source: "WEB",
-          isAffiseTrackingValid,
-        }),
+        placeOrderV1(variables),
         loadScript(RAZORPAY_SCRIPT),
       ]);
 
-      if (isRewardApplied && !!usableRewards) {
-        variables.appliedRewardPoints = usableRewards ? usableRewards : null;
-      }
       if (!success) {
         alertToaster("Something went wrong. Try Again!");
         if (code === "INVALID_ADDRESS") {
@@ -205,53 +232,43 @@ function Checkout(props) {
         setPaymentLoader(false);
       }
 
-      if (success) {
-        if (payMethod === "PREPAID") {
-          if (rzpEnabled && store && transaction && order) {
-            const options = {
-              key: RAZORPAY_KEY,
-              amount: transaction.amount,
-              currency: "INR",
-              name: store.name,
-              image: getPublicImageURL(store.imageUrl),
-              order_id: transaction.orderId,
-              handler: async function ({ razorpay_payment_id }) {
-                orderHelper.fetchTransactionStatus(
-                  order.id,
-                  razorpay_payment_id
-                );
-              },
-              prefill: {
-                name: shippingAddress.name,
-                email: shippingAddress.email,
-                contact: shippingAddress.phone,
-              },
-              notes: {
-                storeId: store.id,
-                orderId: order.id,
-                paymentId: payment.id,
-              },
-              theme: {
-                color: "#3399cc",
-              },
-              modal: {
-                ondismiss: function () {
-                  orderHelper.reset();
-                  razorpayMethod = null;
-                  setPaymentLoader(false);
-                },
-              },
-            };
+      if (success && rzpEnabled && store && transaction && order) {
+        const options = {
+          key: RAZORPAY_KEY,
+          amount: transaction.amount,
+          currency: "INR",
+          name: store.name,
+          image: getPublicImageURL(store.imageUrl),
+          order_id: transaction.orderId,
+          handler: async function ({ razorpay_payment_id }) {
+            orderHelper.fetchTransactionStatus(order.id, razorpay_payment_id);
+          },
+          prefill: {
+            name: shippingAddress.name,
+            email: shippingAddress.email,
+            contact: shippingAddress.phone,
+          },
+          notes: {
+            storeId: store.id,
+            orderId: order.id,
+            paymentId: payment.id,
+          },
+          theme: {
+            color: "#3399cc",
+          },
+          modal: {
+            ondismiss: function () {
+              orderHelper.reset();
+              razorpayMethod = null;
+              setPaymentLoader(false);
+            },
+          },
+        };
 
-            razorpayMethod = new Razorpay(options);
-            razorpayMethod.open();
-            addPaymentInfo();
-            logger.verbose("Razorpay initialization");
-          } else {
-            alertToaster("Something went wrong. Try Again!", "error");
-            logger.error("Something went wrong with Razorpay initialization");
-          }
-        }
+        razorpayMethod = new Razorpay(options);
+        razorpayMethod.open();
+        addPaymentInfo();
+        logger.verbose("Razorpay initialization");
       }
 
       return Promise.resolve();
@@ -357,6 +374,53 @@ function Checkout(props) {
                             ₹{toDecimal(grandTotal, 0)}
                           </p>
                         </div>
+                        {!!(
+                          (codCashbackRewardsOnOrder && payMethod === "COD") ||
+                          (prepaidCashbackRewardsOnOrder &&
+                            payMethod === "PREPAID")
+                        ) && (
+                          <div className="bg-white border-regular d-flex pl-3 mb-2 align-items-center">
+                            <LoyaltyTag />
+                            <p className="mb-0 pl-1 pb-1 pt-1">
+                              You will earn ₹
+                              {payMethod === "COD"
+                                ? codCashbackRewardsOnOrder
+                                : prepaidCashbackRewardsOnOrder}{" "}
+                              Cashback on this order!
+                            </p>
+                          </div>
+                        )}
+                        {!!(
+                          (payMethod === "COD" &&
+                            amountNeededToAvailCodCashback.amount -
+                              codGrandTotal >
+                              0 &&
+                            amountNeededToAvailCodCashback.isEnabled &&
+                            !codCashbackRewardsOnOrder) ||
+                          (payMethod === "PREPAID" &&
+                            amountNeededToAvailPrepaidCashback.amount -
+                              prepaidGrandTotal >
+                              0 &&
+                            amountNeededToAvailPrepaidCashback.isEnabled &&
+                            !prepaidCashbackRewardsOnOrder)
+                        ) && (
+                          <div className="bg-white border-regular d-flex pl-3 mb-2 align-items-center">
+                            <LoyaltyTag />
+                            <p className="mb-0 pl-1 pt-1 pb-1">
+                              Add items worth ₹
+                              {payMethod === "COD"
+                                ? toDecimal(
+                                    amountNeededToAvailCodCashback.amount -
+                                      codGrandTotal
+                                  )
+                                : toDecimal(
+                                    amountNeededToAvailPrepaidCashback.amount -
+                                      prepaidGrandTotal
+                                  )}{" "}
+                              more to earn cashback
+                            </p>
+                          </div>
+                        )}
                       </div>
 
                       <Collapse in={isCollapse}>
@@ -509,33 +573,36 @@ function Checkout(props) {
                                       </td>
                                     </tr>
                                   )}
-                                <tr className="summary-subtotal">
-                                  <td>
-                                    <h4 className="summary-subtitle">
-                                      Shipping
-                                      {payMethod === "PREPAID" && (
-                                        <p className="m-0">
-                                          For prepaid orders only
-                                        </p>
+                                {(!!shippingTotal ||
+                                  payMethod === "PREPAID") && (
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        Shipping
+                                        {payMethod === "PREPAID" && (
+                                          <p className="m-0">
+                                            For prepaid orders only
+                                          </p>
+                                        )}
+                                      </h4>
+                                    </td>
+                                    <td
+                                      className={`summary-subtotal-price pb-0 pt-0 ${
+                                        !shippingTotal && "discount-price-color"
+                                      }`}
+                                    >
+                                      {shippingTotal < 50 && (
+                                        <del className="summary-subtotal-listingprice mr-2">
+                                          ₹{toDecimal(50)}
+                                        </del>
                                       )}
-                                    </h4>
-                                  </td>
-                                  <td
-                                    className={`summary-subtotal-price pb-0 pt-0 ${
-                                      !shippingTotal && "discount-price-color"
-                                    }`}
-                                  >
-                                    {shippingTotal < 50 && (
-                                      <del className="summary-subtotal-listingprice mr-2">
-                                        ₹{toDecimal(50)}
-                                      </del>
-                                    )}
-                                    {!!shippingTotal
-                                      ? `₹${toDecimal(shippingTotal)}`
-                                      : "Free"}
-                                    &nbsp;
-                                  </td>
-                                </tr>
+                                      {!!shippingTotal
+                                        ? `₹${toDecimal(shippingTotal)}`
+                                        : "Free"}
+                                      &nbsp;
+                                    </td>
+                                  </tr>
+                                )}
 
                                 {!!codCharges && codCharges > 0 && (
                                   <tr className="summary-subtotal">
@@ -563,6 +630,20 @@ function Checkout(props) {
                                   </tr>
                                 )}
 
+                                {isRewardApplied && !!usableRewards && (
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        Rewards
+                                      </h4>
+                                    </td>
+                                    <td>
+                                      <p className="summary-subtotal-price discount-price-color">
+                                        - {`₹${toDecimal(usableRewards)}`}
+                                      </p>
+                                    </td>
+                                  </tr>
+                                )}
                                 <tr className="summary-subtotal">
                                   <td>
                                     <h4 className="summary-subtitle">
@@ -668,7 +749,11 @@ function Checkout(props) {
                                   ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
                                   : isMaxCODDisabled
                                   ? `COD payment is not allowed for orders above ₹${maxCOD}.`
-                                  : `Pay using Cash on Delivery.`
+                                  : ppcodEnabled && ppcodAmount
+                                  ? `Pay ₹${toDecimal(
+                                      ppcodAmount
+                                    )} now non refundable and remaining on delivery.`
+                                  : "Pay using Cash on Delivery."
                               }
                               disabled={codCouponDisabled || isMaxCODDisabled}
                               onClick={() => {

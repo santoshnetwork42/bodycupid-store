@@ -1,20 +1,28 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import { NavbarProvider as Navbar, useConfiguration } from "@wow-star/utils";
 import { API } from "aws-amplify";
 import Cookie from "js-cookie";
+import { createContext, useContext, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { NavbarProvider as Navbar, useConfiguration } from "@wow-star/utils";
 
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import { GUEST_CHECKOUT } from "~/constant";
+import { cartActions } from "~/store/cart";
 
 export const NavbarContext = createContext();
 
-function NavbarProvider({ children, cartList, appliedCoupon, user }) {
+function NavbarProvider({
+  children,
+  cartList,
+  appliedCoupon,
+  user,
+  applyRewardPoint,
+}) {
   const [isInteractive, setIsInteractive] = useState(false);
   const [isRewardApplied, setIsRewardApplied] = useState(false);
 
   const handleRewardApply = (state) => {
     setIsRewardApplied(state);
+    applyRewardPoint(state);
   };
 
   const apiResolve = (query, variables, authMode) =>
@@ -82,6 +90,9 @@ function mapStateToProps(state) {
     appliedCoupon: state.cart.coupon,
   };
 }
-const Component = connect(mapStateToProps)(NavbarProvider);
+
+const Component = connect(mapStateToProps, {
+  applyRewardPoint: cartActions.applyRewardPoint,
+})(NavbarProvider);
 
 export default Component;

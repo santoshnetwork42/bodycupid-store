@@ -1,17 +1,19 @@
-import React, { useCallback, useRef } from "react";
-import { connect } from "react-redux";
+import { useCartTotal, useConfiguration } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
 import { useRouter } from "next/router";
-import { useCartTotal, useConfiguration } from "@wow-star/utils";
+import { useFeatureFlagVariantKey } from "posthog-js/react";
+import { useCallback, useRef } from "react";
+import { connect } from "react-redux";
 
-import { eventActions } from "~/store/events";
-import { toDecimal } from "~/utils";
-import { alertToaster } from "~/utils/popupHelper";
-import { modalActions } from "~/store/modal";
-import { useGuestCheckout } from "~/utils/contexts/navbar";
 import Coupon from "~/components/features/coupon";
+import { GOKWIK_MID, POSTHOG_FLAG, STORE_PREFIX } from "~/config";
+import { GOKWIK_ENABLED, PREPAID_ENABLED } from "~/constant";
+import { eventActions } from "~/store/events";
+import { modalActions } from "~/store/modal";
+import { toDecimal } from "~/utils";
+import { useGuestCheckout, useNavBarState } from "~/utils/contexts/navbar";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
-import { PREPAID_ENABLED } from "~/constant";
+import { alertToaster } from "~/utils/popupHelper";
 
 const logger = new Logger("Cart");
 
@@ -27,10 +29,14 @@ function CartTotal({
   setCartVisibility,
   inventory,
   startCheckout,
+  shoppingCartId,
+  isShoppingCartIdLoading,
 }) {
   const router = useRouter();
   const { isSmallSize } = useWindowDimensions();
   const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
+  const { isRewardApplied } = useNavBarState();
+  const gokwikEnabled = useConfiguration(GOKWIK_ENABLED, false);
 
   const {
     totalItems,
@@ -42,14 +48,17 @@ function CartTotal({
     prepaidDiscount,
     prepaidDiscountPercent,
     prepaidGrandTotal,
+    usableRewards,
     totalAmountSaved,
     codCharges,
     appliedCODCharges,
   } = useCartTotal({
     paymentType: prepaidEnabled ? "PREPAID" : "COD",
+    isRewardApplied,
   });
 
   const guestCheckout = useGuestCheckout();
+  const variantPostHog = useFeatureFlagVariantKey(POSTHOG_FLAG);
   const avgDeliveryTimeRef = useRef(null);
 
   const {
@@ -59,9 +68,9 @@ function CartTotal({
     outOfStockItems,
   } = inventory || {};
 
-  const validateAndGoToCheckout = useCallback(() => {
+  const validateAndGoToCheckout = useCallback(async () => {
     setCartVisibility(false);
-    onProceedToCheckout();
+    // onProceedToCheckout();
 
     if (!isInventoryCheckSuccess) {
       recordOutOfStock(outOfStockItems, inventoryMapping);
@@ -70,7 +79,36 @@ function CartTotal({
       return false;
     }
 
+    const lscart = localStorage.getItem(`${STORE_PREFIX}-cartId`);
+
+    const isGKCXEnabled = !!(
+      GOKWIK_MID &&
+      variantPostHog === "gk_checkout" &&
+      lscart &&
+      gokwikEnabled
+    );
+
     // startCheckout();
+
+    onProceedToCheckout(isGKCXEnabled ? "GOKWIK" : "BUYWOW");
+
+    if (isGKCXEnabled) {
+      try {
+        gokwikSdk.initCheckout({
+          environment: "sandbox",
+          type: "merchantInfo",
+          mid: GOKWIK_MID,
+          merchantParams: {
+            merchantCheckoutId: lscart || shoppingCartId,
+            customerToken: user?.id || "",
+          },
+        });
+      } catch (e) {
+        await gokwikSdk.close();
+        errorHandler(e);
+      }
+      return true;
+    }
 
     if (user || guestCheckout || customUser) {
       router.push("/pages/checkout");
@@ -91,6 +129,11 @@ function CartTotal({
     outOfStockItems,
     inventoryMapping,
   ]);
+
+  const checkoutButtonDisabled =
+    GOKWIK_MID && variantPostHog === "gk_checkout"
+      ? !isInventoryCheckReady && isShoppingCartIdLoading
+      : !isInventoryCheckReady;
 
   const onDetailClick = () => {
     if (avgDeliveryTimeRef.current) {
@@ -202,6 +245,20 @@ function CartTotal({
                   </td>
                 </tr>
               )}
+              {!!usableRewards && isRewardApplied && (
+                <>
+                  <tr className="summary-subtotal">
+                    <td className="d-flex align-items-center no-wrap">
+                      <h4 className="summary-subtitle lh-1 ">Rewards</h4>
+                    </td>
+                    <td>
+                      <p className="summary-subtotal-price discount-price-color">
+                        -{`₹${toDecimal(usableRewards)}`}
+                      </p>
+                    </td>
+                  </tr>
+                </>
+              )}
             </tbody>
           </table>
           <table className="total">
@@ -269,9 +326,10 @@ function CartTotal({
             <button
               onClick={validateAndGoToCheckout}
               className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bolder flex-60`}
-              disabled={!isInventoryCheckReady}
+              disabled={checkoutButtonDisabled}
             >
               begin checkout
+              {checkoutButtonDisabled && <div className="spin-loader ml-2" />}
             </button>
           </div>
         </div>
@@ -289,9 +347,10 @@ function CartTotal({
               <button
                 onClick={validateAndGoToCheckout}
                 className="btn btn-dark btn-rounded font-weight-bold btn-checkout"
-                disabled={!isInventoryCheckReady}
+                disabled={checkoutButtonDisabled}
               >
                 begin checkout
+                {checkoutButtonDisabled && <div className="spin-loader ml-2" />}
               </button>
             </div>
           </div>

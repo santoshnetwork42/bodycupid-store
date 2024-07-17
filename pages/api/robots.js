@@ -15,6 +15,7 @@ export default async function Revalidate(req, res) {
       "Disallow: /account",
       "Disallow: /addresses",
       "Disallow: /account-details",
+      "Disallow: /rewards",
       "Disallow: /addresses",
       "Sitemap: https://www.bodycupid.com/sitemap.xml",
     ].join("\n");

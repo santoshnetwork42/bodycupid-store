@@ -14,12 +14,16 @@ export const actionTypes = {
   CREATE_CART: "CREATE_CART",
   VALIDATE_CART: "VALIDATE_CART",
   UPDATE_CART_ID: "UPDATE_CART_ID",
+  UPDATE_CART_ID_LOADING: "UPDATE_CART_ID_LOADING",
   STORE_COUPON: "STORE_COUPON",
+  APPLY_REWARD_POINT: "APPLY_REWARD_POINT",
 };
 const initialState = {
   data: [],
   coupon: null,
   cartId: null,
+  isRewardApplied: true,
+  isShoppingCartIdLoading: false,
 };
 
 function cartReducer(state = initialState, action) {
@@ -112,6 +116,9 @@ function cartReducer(state = initialState, action) {
     case actionTypes.APPLY_COUPONS:
       return { ...state, coupon: action.payload.coupon };
 
+    case actionTypes.APPLY_REWARD_POINT:
+      return { ...state, isRewardApplied: action.payload.isRewardApplied };
+
     case actionTypes.STORE_COUPON:
       return { ...state, storedCouponCode: action.payload };
 
@@ -136,6 +143,12 @@ function cartReducer(state = initialState, action) {
       return {
         ...state,
         cartId: action.payload,
+      };
+
+    case actionTypes.UPDATE_CART_ID_LOADING:
+      return {
+        ...state,
+        isShoppingCartIdLoading: action.payload,
       };
 
     default:
@@ -174,6 +187,10 @@ export const cartActions = {
   updateCartId: (cartId) => ({
     type: actionTypes.UPDATE_CART_ID,
     payload: { cartId },
+  }),
+  applyRewardPoint: (isRewardApplied) => ({
+    type: actionTypes.APPLY_REWARD_POINT,
+    payload: { isRewardApplied },
   }),
 };
 

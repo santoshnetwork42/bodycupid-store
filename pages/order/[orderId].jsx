@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 import Tag from "~/components/common/tag";
 import ALink from "~/components/features/custom-link";
-import Checkmark from "~/components/icons";
+import Checkmark, { LoyaltyTag } from "~/components/icons";
 import NextImage from "~/components/image";
 import { STORE_ID } from "~/config";
 import { getOrder, validateTransaction } from "~/graphql/api";
@@ -77,6 +77,24 @@ function Order({
     (order?.status === "PENDING" || order?.status === "TIMEDOUT") &&
     order?.paymentType === "PREPAID" &&
     paymentId;
+
+  const isStatusProcessing =
+    (order?.status === "PENDING" || order?.status === "TIMEDOUT") &&
+    order?.checkoutChannel === "GOKWIK";
+
+  useEffect(() => {
+    if (isStatusProcessing) {
+      if (counter < 3) {
+        if (timer) clearTimeout(timer);
+        const timerId = setTimeout(() => {
+          fetchOrder();
+          setTimer(null);
+        }, [2000]);
+        setTimer(timerId);
+        setCounter((count) => count + 1);
+      }
+    }
+  }, [order]);
 
   useEffect(() => {
     if (isPaymentProcessing) {
@@ -150,9 +168,7 @@ function Order({
           <div className="d-flex justify-content-center align-items-center mb-4">
             <ALink
               className="order-image"
-              href={
-                "/collections/bundle-offer?utm_source=thank_you_page"
-              }
+              href={"/collections/bundle-offer?utm_source=thank_you_page"}
             >
               <NextImage
                 src={"/images/banners/buy8@1999-category.jpg"}
@@ -206,9 +222,9 @@ function Order({
                     <h4 className="summary-subtitle">Payment method:</h4>
                   </td>
                   <td className="summary-subtotal-price">
-                    {order?.paymentType === "COD"
-                      ? "Cash on delivery"
-                      : "Online"}
+                    {order?.paymentType === "PREPAID"
+                      ? "Online"
+                      : "Cash on delivery"}
                   </td>
                 </tr>
                 <tr className="summary-subtotal">
@@ -320,6 +336,16 @@ function Order({
                     ₹{toDecimal(getOrderTotal(order?.products?.items))}
                   </td>
                 </tr>
+                {!!order?.appliedRewardPoints && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">Rewards</h4>
+                    </td>
+                    <td className="summary-subtotal-price">
+                      -₹{toDecimal(order?.appliedRewardPoints)}
+                    </td>
+                  </tr>
+                )}
                 {!!order?.totalDiscount && (
                   <tr className="summary-subtotal">
                     <td>
@@ -360,9 +386,46 @@ function Order({
                     </p>
                   </td>
                 </tr>
+
+                {order?.paymentType === "PPCOD" && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">Paid Amount:</h4>
+                    </td>
+                    <td className="summary-subtotal-price">
+                      ₹{toDecimal(order?.totalPrepaidAmount)}
+                    </td>
+                  </tr>
+                )}
+
+                {order?.paymentType === "PPCOD" && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">To Pay:</h4>
+                    </td>
+                    <td className="summary-total-price pr-2">
+                      ₹
+                      {toDecimal(
+                        order?.totalAmount -
+                          order?.appliedRewardPoints +
+                          order?.totalCashbackRefunded -
+                          order?.totalPrepaidAmount
+                      )}
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
+          {!!order?.cashbackEarned && order?.cashbackEarned > 0 && (
+            <div className="pb-0 d-flex align-items-center loyalty-text loyalty-padding">
+              <LoyaltyTag />
+              <p className="mb-0 pl-1">
+                You have earned ₹{order?.cashbackEarned} cashback with this
+                order
+              </p>
+            </div>
+          )}
           <div className="d-lg-flex justify-content-between ">
             <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
               <ALink

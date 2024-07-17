@@ -2,6 +2,7 @@ import { API, graphqlOperation } from "aws-amplify";
 
 import { PHONE_REGEX, EMAIl_REGEX } from "~/constant";
 import { getZipCode } from "~/graphql/api";
+import States from "~/lib/states.json";
 import { addPhonePrefix, removePhonePrefix } from "./helper";
 import { alertToaster } from "./popupHelper";
 
@@ -107,4 +108,19 @@ export const validateAddress = async (address, paymentType = "ALL") => {
   } else {
     return null;
   }
+};
+
+export const formatUserAddress = (address) => {
+  const state = States.find(
+    (s) => s.name.toLocaleLowerCase() === address?.state.toLocaleLowerCase()
+  )?.value;
+
+  return {
+    ...address,
+    name: address.first_name + " " + address.last_name,
+    pinCode: address.pincode,
+    country: "IN",
+    state,
+    phone: address.recipient_phone || address.phone,
+  };
 };

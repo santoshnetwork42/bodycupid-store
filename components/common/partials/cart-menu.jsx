@@ -3,6 +3,7 @@ import {
   useCartTotal,
   useFeaturedCoupons,
   useInventory,
+  useRuleEngine,
 } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
 import { useRouter } from "next/router";
@@ -13,7 +14,7 @@ import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 import CartTotal from "~/components/common/partials/cart-totals";
 import { ProgressBar } from "~/components/common/progress-bar";
 import ALink from "~/components/features/custom-link";
-import { Bag, Cart, Cross } from "~/components/icons";
+import { Bag, Cart, Cross, Ellipse, LoyaltyTag } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
 import { cartActions } from "~/store/cart";
 import { eventActions } from "~/store/events";
@@ -43,9 +44,17 @@ function CartMenu(props) {
   });
 
   const inventory = useInventory({ validateCart });
-  const { isRewardApplied } = useNavBarState();
+  const { isRewardApplied, handleRewardApply } = useNavBarState();
 
-  const { totalItems } = useCartTotal({
+  const {
+    totalItems,
+    totalRewardPointsOfUser,
+    prepaidCashbackRewardsOnOrder,
+    amountNeededToAvailPrepaidCashback,
+    usableRewards,
+    grandTotal,
+    showLoyalty,
+  } = useCartTotal({
     paymentType: "PREPAID",
     isRewardApplied: isRewardApplied,
   });
@@ -81,6 +90,8 @@ function CartMenu(props) {
   //passed true for getting cart item number only
   const { filteredFeaturedCoupons: featuredCoupons = [] } =
     useFeaturedCoupons(true);
+
+  const cartPageWowCashTooltip = useRuleEngine("CREDIT_PREPAID_ORDER");
 
   const bxayCoupon = useMemo(() => {
     return featuredCoupons.find(
@@ -201,6 +212,71 @@ function CartMenu(props) {
                       ))}
                     </div>
                   </div>
+                </div>
+                {!!showLoyalty && !!usableRewards && (
+                  <div className="d-flex-col wowCashCart justify-content-center">
+                    <div className="d-flex pl-4 pr-4  pt-3 pb-3  gap-9">
+                      <input
+                        type="checkbox"
+                        className="wowCashCheckbox"
+                        name="wowCash"
+                        checked={isRewardApplied}
+                        onChange={(e) => handleRewardApply(e.target.checked)}
+                      />
+                      <div className="d-flex-col grow-1 gap-5">
+                        <div className="font-size-14 line-height-14 d-flex gap-5 align-items-center">
+                          Use Rewards
+                          {!!cartPageWowCashTooltip?.description && (
+                            <div className="balance-tooltip">
+                              <Ellipse className="" size={14} color="none" />
+                              <div className="font-size-10 font-weight-5 tip vis">
+                                {cartPageWowCashTooltip?.description}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        <div className="font-size-10 font-weight-3 ">
+                          Available balance:
+                          <span className="font-size-11 font-weight-7">
+                            ₹{totalRewardPointsOfUser.toFixed(2)}
+                          </span>{" "}
+                        </div>
+                      </div>
+                      {!!usableRewards && (
+                        <div className="font-weight-6 font-size-14">
+                          ₹{usableRewards.toFixed(2)}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                <div className="pb-0 d-flex align-items-center summary2 loyalty-text">
+                  {!!prepaidCashbackRewardsOnOrder ? (
+                    <>
+                      <LoyaltyTag />
+                      <p className="mb-0 pl-1 pt-1 pb-1">
+                        You will earn ₹{prepaidCashbackRewardsOnOrder} cashback
+                        with this order
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      {!!amountNeededToAvailPrepaidCashback?.amount && (
+                        <>
+                          <LoyaltyTag />
+                          <p className="mb-0 pl-1">
+                            Add items worth ₹
+                            {(
+                              amountNeededToAvailPrepaidCashback.amount -
+                              grandTotal
+                            ).toFixed(2)}{" "}
+                            to earn rewards
+                          </p>
+                        </>
+                      )}
+                    </>
+                  )}
                 </div>
 
                 <aside

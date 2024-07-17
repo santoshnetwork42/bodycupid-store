@@ -603,6 +603,7 @@ export const getOrder = /* GraphQL */ `
         location
         area
       }
+      checkoutChannel
       appliedRewardPoints
       billingAddress {
         name
@@ -1049,6 +1050,32 @@ export const getProductById = /* GraphQL */ `
   }
 `;
 
+export const getLoyalty = /* GraphQL */ `
+  query GetLoyalty($input: GetLoyaltyInput!) {
+    getLoyalty(input: $input) {
+      totalAllotted
+      totalUsable
+      totalUsed
+      totalExpired
+      transactions {
+        id
+        amount
+        userId
+        expiresAt
+        expirePeriodInDays
+        event
+        ruleId
+        status
+        transactionState
+        createdAt
+        updatedAt
+        metadata
+        reason
+      }
+    }
+  }
+`;
+
 // export const getRecommendedProductById = /* GraphQL */ `
 //   query GetProduct(
 //     $id: ID!
@@ -1295,15 +1322,13 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
 export const createShoppingCart = /* GraphQL */ `
   mutation CreateShoppingCart($input: CreateShoppingCartInput!) {
     createShoppingCart(input: $input) {
-      id
-      storeId
-      userId
-      couponCodeId
-      createdAt
-      updatedAt
+      success
+      message
+      shoppingCartId
     }
   }
 `;
+
 export const updateShoppingCart = /* GraphQL */ `
   mutation UpdateShoppingCart($input: UpdateShoppingCartInput!) {
     updateShoppingCart(input: $input) {

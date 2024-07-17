@@ -21,6 +21,7 @@ import {
 import { modalActions } from "~/store/modal";
 import { rootActions } from "~/store";
 import { eventActions } from "~/store/events";
+import Wallet from "~/components/partials/account/wallet";
 
 const MOBILE_TABS = [
   {
@@ -41,12 +42,12 @@ const MOBILE_TABS = [
     href: "/pages/account-details",
     activeTab: 2,
   },
-  // {
-  //   tabName: "My rewards",
-  //   svg: <Discount size={16} />,
-  //   href: "/pages/rewards",
-  //   activeTab: 3,
-  // },
+  {
+    tabName: "My rewards",
+    svg: <Discount size={16} />,
+    href: "/pages/rewards",
+    activeTab: 3,
+  },
 ];
 
 function AccountsTabs({
@@ -156,7 +157,9 @@ function AccountsTabs({
               <TabPanel className="tab-pane account">
                 <AccountDetails />
               </TabPanel>
-              <TabPanel className="tab-pane"></TabPanel>
+              <TabPanel className="tab-pane">
+                <Wallet />
+              </TabPanel>
             </div>
           </Tabs>
         </div>
@@ -210,6 +213,7 @@ function AccountsTabs({
             </div>
           )}
           {pathname === "/pages/account-details" && <AccountDetails />}
+          {pathname === "/pages/rewards" && <Wallet />}
         </div>
       </div>
     </main>

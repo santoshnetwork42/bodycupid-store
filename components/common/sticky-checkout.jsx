@@ -19,7 +19,6 @@ function StickyFooter(props) {
     paymentType: "PREPAID",
     isRewardApplied: isRewardApplied,
   });
-
   //passed true for getting cart item number only
   const { filteredFeaturedCoupons: featuredCoupons = [] } =
     useFeaturedCoupons(true);
