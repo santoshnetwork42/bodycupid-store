@@ -752,7 +752,9 @@ function Checkout(props) {
                                   : ppcodEnabled && ppcodAmount
                                   ? `Pay ₹${toDecimal(
                                       ppcodAmount
-                                    )} now (non-refundable). balance on delivery.`
+                                    )} now (non-refundable). Rest ₹${
+                                      codGrandTotal - ppcodAmount
+                                    } on delivery.`
                                   : "Pay using Cash on Delivery."
                               }
                               disabled={codCouponDisabled || isMaxCODDisabled}
