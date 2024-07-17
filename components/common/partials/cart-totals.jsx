@@ -60,7 +60,7 @@ function CartTotal({
   const guestCheckout = useGuestCheckout();
   const variantPostHog = useFeatureFlagVariantKey(POSTHOG_FLAG);
   const avgDeliveryTimeRef = useRef(null);
-
+  console.log("variantPostHog", variantPostHog);
   const {
     ready: isInventoryCheckReady,
     success: isInventoryCheckSuccess,
