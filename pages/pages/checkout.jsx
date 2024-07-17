@@ -371,7 +371,7 @@ function Checkout(props) {
                             )}
                           </div>
                           <p className="m-0 checkout-summary-total font-weight-semi-bold">
-                            ₹{toDecimal(grandTotal, 0)}
+                            ₹{toDecimal(grandTotal)}
                           </p>
                         </div>
                         {!!(
@@ -655,7 +655,7 @@ function Checkout(props) {
                                   </td>
                                   <td>
                                     <p className="summary-total-price ls-s">
-                                      ₹{toDecimal(grandTotal, 0)}
+                                      ₹{toDecimal(grandTotal)}
                                     </p>
                                   </td>
                                 </tr>
