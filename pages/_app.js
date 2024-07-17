@@ -31,7 +31,7 @@ import { systemActions } from "~/store/system";
 import { userActions } from "~/store/user";
 import ABProvider from "~/utils/contexts/ab";
 import { FomoProvider } from "~/utils/contexts/fomoContext";
-import GoKwikProvider from "~/utils/contexts/gokwik";
+import GoKwikProvider from "~/utils/contexts/gokwikContext";
 import NavbarProvider from "~/utils/contexts/navbar";
 import { errorHandler } from "~/utils/errorHandler";
 

@@ -573,33 +573,36 @@ function Checkout(props) {
                                       </td>
                                     </tr>
                                   )}
-                                <tr className="summary-subtotal">
-                                  <td>
-                                    <h4 className="summary-subtitle">
-                                      Shipping
-                                      {payMethod === "PREPAID" && (
-                                        <p className="m-0">
-                                          For prepaid orders only
-                                        </p>
+                                {(!!shippingTotal ||
+                                  payMethod === "PREPAID") && (
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        Shipping
+                                        {payMethod === "PREPAID" && (
+                                          <p className="m-0">
+                                            For prepaid orders only
+                                          </p>
+                                        )}
+                                      </h4>
+                                    </td>
+                                    <td
+                                      className={`summary-subtotal-price pb-0 pt-0 ${
+                                        !shippingTotal && "discount-price-color"
+                                      }`}
+                                    >
+                                      {shippingTotal < 50 && (
+                                        <del className="summary-subtotal-listingprice mr-2">
+                                          ₹{toDecimal(50)}
+                                        </del>
                                       )}
-                                    </h4>
-                                  </td>
-                                  <td
-                                    className={`summary-subtotal-price pb-0 pt-0 ${
-                                      !shippingTotal && "discount-price-color"
-                                    }`}
-                                  >
-                                    {shippingTotal < 50 && (
-                                      <del className="summary-subtotal-listingprice mr-2">
-                                        ₹{toDecimal(50)}
-                                      </del>
-                                    )}
-                                    {!!shippingTotal
-                                      ? `₹${toDecimal(shippingTotal)}`
-                                      : "Free"}
-                                    &nbsp;
-                                  </td>
-                                </tr>
+                                      {!!shippingTotal
+                                        ? `₹${toDecimal(shippingTotal)}`
+                                        : "Free"}
+                                      &nbsp;
+                                    </td>
+                                  </tr>
+                                )}
 
                                 {!!codCharges && codCharges > 0 && (
                                   <tr className="summary-subtotal">
@@ -749,7 +752,7 @@ function Checkout(props) {
                                   : ppcodEnabled && ppcodAmount
                                   ? `Pay ₹${toDecimal(
                                       ppcodAmount
-                                    )} now and remaining on delivery.`
+                                    )} now non refundable and remaining on delivery.`
                                   : "Pay using Cash on Delivery."
                               }
                               disabled={codCouponDisabled || isMaxCODDisabled}
