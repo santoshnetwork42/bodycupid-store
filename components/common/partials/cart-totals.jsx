@@ -93,19 +93,22 @@ function CartTotal({
     onProceedToCheckout(isGKCXEnabled ? "GOKWIK" : "BUYWOW");
 
     if (isGKCXEnabled) {
-      try {
-        gokwikSdk.initCheckout({
-          environment: "sandbox",
-          type: "merchantInfo",
-          mid: GOKWIK_MID,
-          merchantParams: {
-            merchantCheckoutId: lscart || shoppingCartId,
-            customerToken: user?.id || "",
-          },
-        });
-      } catch (e) {
-        await gokwikSdk.close();
-        errorHandler(e);
+      const cartId = lscart || shoppingCartId;
+      if (cartId && cartId !== undefined) {
+        try {
+          gokwikSdk.initCheckout({
+            environment: "sandbox",
+            type: "merchantInfo",
+            mid: GOKWIK_MID,
+            merchantParams: {
+              merchantCheckoutId: cartId,
+              customerToken: user?.id || "",
+            },
+          });
+        } catch (e) {
+          await gokwikSdk.close();
+          errorHandler(e);
+        }
       }
       return true;
     }
