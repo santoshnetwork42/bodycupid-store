@@ -74,7 +74,7 @@ function ProductDefault(props) {
 
   return (
     <main className="main single-product">
-      <NextHead {...pageMeta} />
+      {/* <NextHead {...pageMeta} /> */}
 
       <h1 className="d-none">{product?.title}</h1>
 

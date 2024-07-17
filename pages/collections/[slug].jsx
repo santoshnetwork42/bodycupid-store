@@ -53,7 +53,7 @@ function CollectionPage(props) {
 
   return (
     <main className="main searchBar">
-      <NextHead {...pageMeta} />
+      {/* <NextHead {...pageMeta} /> */}
 
       <h1 className="d-none">
         {name} - {data?.name}
