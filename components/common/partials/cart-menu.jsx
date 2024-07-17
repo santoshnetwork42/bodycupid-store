@@ -103,14 +103,11 @@ function CartMenu(props) {
   const showProgressBar = useMemo(() => {
     return (
       router?.query?.slug === "bundle-offer" &&
-      cartList?.some((cart) =>
-        cart?.collections?.includes("bundle-offer")
-      ) &&
+      cartList?.some((cart) => cart?.collections?.includes("bundle-offer")) &&
       bxayCoupon &&
       (!appliedCoupon || appliedCoupon.code === bxayCoupon.coupon.code)
     );
   }, [bxayCoupon, appliedCoupon, cartList]);
-
 
   const { current, max, progress, progressMessage } = useMemo(() => {
     if (showProgressBar) {
@@ -135,6 +132,8 @@ function CartMenu(props) {
       return "Add more items to unlock 'Buy 8 @ ₹1999 Offer'";
     } else if (slug === "special-deal") {
       return "Add more items to unlock 'Buy 1 get 3 Offer'";
+    } else if (slug === "bundle-offer-buy5") {
+      return "Add more items to unlock 'Buy 5 @ ₹999 Offer'";
     }
 
     return "";
