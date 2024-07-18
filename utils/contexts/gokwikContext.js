@@ -56,7 +56,7 @@ function GoKwikProvider({
       logger.log("couponCode", couponCode);
       const response = await API.graphql({
         query: applyCouponMutation,
-        authMode: "apiKey",
+        authMode: "API_KEY",
         variables: {
           storeId: STORE_ID,
           code: couponCode,
@@ -123,7 +123,7 @@ function GoKwikProvider({
       const response = await API.graphql({
         query: getCouponRule,
         variables: { code, storeId: STORE_ID },
-        authMode: user ? "userPool" : "apiKey",
+        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
       });
       return response.data.getCouponRule;
     } catch (error) {
@@ -145,8 +145,10 @@ function GoKwikProvider({
         );
 
         if (signInUserSession) {
-          const { sub } = signInUserSession.accessToken.payload;
-          dispatchAuthEvent("login", { userId: sub });
+          const { sub = "" } = signInUserSession?.accessToken?.payload;
+          if (sub) {
+            dispatchAuthEvent("login", { userId: sub });
+          }
           return Promise.resolve(null);
         }
       } catch (error) {
