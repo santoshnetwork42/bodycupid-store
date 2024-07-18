@@ -28,7 +28,7 @@ export function* cartSaga() {
         yield put({ type: actionTypes.UPDATE_CART_ID_LOADING, payload: true });
         const { user, cart, system } = yield select();
         let { coupon, data: products, isRewardApplied } = cart;
-        const { data: userData } = user;
+        const { data: userData, isLoggedinViaGokwik } = user;
 
         const { id: couponCode, code } = coupon || {};
 
@@ -43,7 +43,8 @@ export function* cartSaga() {
           couponCodeId: couponCode || null,
           couponCode: code || "",
           storeId: STORE_ID,
-          isRewardApplied,
+          isRewardApplied:
+            userData && !isLoggedinViaGokwik ? isRewardApplied : false,
           data,
           metadata: { ...system.meta },
         };

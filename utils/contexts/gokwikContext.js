@@ -42,6 +42,7 @@ function GoKwikProvider({
   setCustomUser,
   dispatchAuthEvent,
   startCheckout,
+  setIsLoggedinViaGokwik,
 }) {
   const router = useRouter();
   const { isRewardApplied } = useNavBarState();
@@ -148,6 +149,7 @@ function GoKwikProvider({
           const { sub = "" } = signInUserSession?.accessToken?.payload;
           if (sub) {
             dispatchAuthEvent("login", { userId: sub });
+            setIsLoggedinViaGokwik(true);
           }
           return Promise.resolve(null);
         }
@@ -193,6 +195,7 @@ function GoKwikProvider({
                 orderDetails.payment_method.toUpperCase(),
               "GOKWIK"
             );
+            setIsLoggedinViaGokwik(false);
             logger.debug("Purchase event done");
             logger.debug("Redirecting to success page");
           }
@@ -272,6 +275,7 @@ const Component = connect(mapStateToProps, {
   addressAdded: eventActions.addressAdded,
   addPaymentInfo: eventActions.addPaymentInfo,
   setCustomUser: userActions.setCustomUser,
+  setIsLoggedinViaGokwik: userActions.setIsLoggedinViaGokwik,
   dispatchAuthEvent: eventActions.auth,
   startCheckout: eventActions.startCheckout,
 })(GoKwikProvider);
