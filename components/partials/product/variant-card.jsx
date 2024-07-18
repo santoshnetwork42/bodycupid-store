@@ -31,7 +31,7 @@ const VariantCard = (props) => {
       <div className="image-wrapper d-flex justify-content-center">
         <Image
           className="product-image"
-          src={variant.images?.items[0]?.imageKey}
+          src={variant?.thumbImage || variant.images?.items[0]?.imageKey}
           alt={variant.title}
           priority
           height={100}
