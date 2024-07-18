@@ -242,6 +242,7 @@ export const getQuickViewProduct = /* GraphQL */ `
             currency
             costPrice
             listingPrice
+            thumbImage
             createdAt
             updatedAt
             taxable
@@ -328,6 +329,7 @@ export const getProductBySlug = /* GraphQL */ `
         isFeedEnabled
         isSearchFeedEnabled
         isAtcEnabled
+        showOnlyVariantImages
         categoryId
         subCategoryId
         category {
@@ -398,6 +400,7 @@ export const getProductBySlug = /* GraphQL */ `
             position
             currency
             costPrice
+            thumbImage
             listingPrice
             createdAt
             updatedAt
@@ -896,6 +899,7 @@ export const findProducts = /* GraphQL */ `
         defaultPrice
         defaultInventory
         subCategoryId
+        showOnlyVariantImages
         variantGroups {
           variantGroupId
           variantGroupOptionIds
@@ -931,6 +935,7 @@ export const findProducts = /* GraphQL */ `
               variantGroupId
               variantGroupOptionId
             }
+            thumbImage
             images {
               items {
                 id
@@ -997,6 +1002,7 @@ export const getProductById = /* GraphQL */ `
       inventory
       blockedInventory
       continueSellingOutOfStock
+      showOnlyVariantImages
       rating
       totalRatings
       thumbImages
@@ -1030,6 +1036,7 @@ export const getProductById = /* GraphQL */ `
               isThumb
             }
           }
+          thumbImage
           inventory
           blockedInventory
         }
@@ -1764,6 +1771,7 @@ export const getLinkedProducts = /* GraphQL */ `
               currency
               costPrice
               listingPrice
+              thumbImage
               images {
                 items {
                   id
