@@ -29,8 +29,8 @@ export default function ProductVariant({ item, onSelect, selected }) {
       <div className="image-wrapper d-flex justify-content-center">
         <Image
           className="product-image"
-          src={item.images?.items[0]?.imageKey}
-          alt={item.title}
+          src={item?.thumbImage || item.images?.items[0]?.imageKey}
+          alt={item?.title}
           priority
           height={100}
           width={100}

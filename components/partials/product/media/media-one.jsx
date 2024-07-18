@@ -16,6 +16,20 @@ export default function MediaOne(props) {
   const [mediaRef, setMediaRef] = useState(null);
 
   const lgImages = useMemo(() => {
+    if (variantId && product?.showOnlyVariantImages) {
+      const images = [];
+        product.variants.items
+          .find((variant) => variant.id === variantId?.id)
+          ?.images.items.forEach((item) => {
+            images.push({
+              ...item,
+              variantId: variantId.id,
+              imageKey: item.imageKey,
+            });
+          });
+     return images;
+    }
+
     const images = [...product.images.items];
     images.sort((a, b) => a.position - b.position);
     if (product.variants.items.length > 0) {
@@ -30,7 +44,7 @@ export default function MediaOne(props) {
       });
     }
     return images;
-  }, [product]);
+  }, [product, variantId?.id]);
 
   useEffect(() => {
     setIndex(0);
