@@ -11,12 +11,14 @@ export const actionTypes = {
   UPDATE_USER_FIELDS: "UPDATE_USER_FIELD",
   SET_CUSTOM_USER: "SET_CUSTOM_USER",
   SET_USER_LOCAL_ADDRESS: "SET_USER_LOCAL_ADDRESS",
+  SET_LOGGED_IN_VIA: "SET_LOGGED_IN_VIA",
 };
 
 const initialState = {
   data: null,
   custom: null,
   userAddress: null,
+  isLoggedinViaGokwik: false,
 };
 
 function userReducer(state = initialState, action) {
@@ -37,6 +39,13 @@ function userReducer(state = initialState, action) {
       return { ...state, custom: action.payload.user };
     case actionTypes.SET_USER_LOCAL_ADDRESS:
       return { ...state, userAddress: action.payload.userAddress };
+
+    case actionTypes.SET_LOGGED_IN_VIA:
+      return {
+        ...state,
+        isLoggedinViaGokwik: action.payload.isLoggedinViaGokwik,
+      };
+
     default:
       return state;
   }
@@ -59,6 +68,10 @@ export const userActions = {
   setUserLocalAddress: (address) => ({
     type: actionTypes.SET_USER_LOCAL_ADDRESS,
     payload: { userAddress: { ...address } },
+  }),
+  setIsLoggedinViaGokwik: (gk) => ({
+    type: actionTypes.SET_LOGGED_IN_VIA,
+    payload: { isLoggedinViaGokwik: gk },
   }),
 };
 
