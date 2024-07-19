@@ -267,7 +267,10 @@ function DetailOne(props) {
         >
           <Star size={14} color={"#FAB73B"} />
         </div>
-        <div className="d-flex gap-5 align-items-center cursor-pointer"  onClick={onReviewClick}>
+        <div
+          className="d-flex gap-5 align-items-center cursor-pointer"
+          onClick={onReviewClick}
+        >
           <span className="rating text-black font-size-18 font-weight-semi-bold plp-rating-font-size">
             {rating}
           </span>
@@ -303,10 +306,10 @@ function DetailOne(props) {
 
           {!!variantGroup && product?.variants?.items?.length > 0 && (
             <div className="product-form product-variations product-size mb-1 mt-3">
-              <div className="product-form-group overflow-auto">
+              <div className="product-form-group">
                 {variantGroup?.map((v1, index) => {
                   return (
-                    <div className="d-flex" key={v1.id}>
+                    <div className="d-flex flex-wrap gap-y-10" key={v1.id}>
                       {v1.variantOptions
                         ?.sort((a, b) => (a?.position > b?.position ? 1 : -1))
                         ?.map((v2) => {

@@ -41,7 +41,7 @@ const VariantCard = (props) => {
       </div>
 
       <div className="product-detail">
-        <div className="product-title">
+        <div className="product-variant-title">
           <div>{variant.title || variant.label}</div>
         </div>
 

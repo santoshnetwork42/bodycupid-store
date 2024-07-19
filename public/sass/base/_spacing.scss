@@ -40,6 +40,12 @@
   .gap-#{$i} {
     gap: #{$i}px !important;
   }
+  .gap-x-#{$i} {
+    column-gap: #{$i}px !important;
+  }
+  .gap-y-#{$i} {
+    row-gap: #{$i}px !important;
+  }
 }
 
 .p-0 {
