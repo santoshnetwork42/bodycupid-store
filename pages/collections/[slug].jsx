@@ -231,7 +231,7 @@ export const getStaticProps = async (context) => {
   }).then((resp) =>
     resp?.searchCollectionTypes.items.find((item) => item.slug === slug)
   );
-  console.log("collection", collection);
+
   if (collection) {
     const {
       title,
