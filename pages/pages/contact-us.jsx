@@ -20,7 +20,7 @@ function ContactUs() {
               information, use our order tracking system.
             </div>
             <div className="btn-div">
-              <a href="https://track.buywow.in/">
+              <a href="https://track.bodycupid.com/">
                 <button className="btn mb-10">Track Now</button>
               </a>
             </div>
@@ -47,7 +47,7 @@ function ContactUs() {
                 </div>
                 {/* href="https://wa.link/xs6kb5" */}
                 <div className="mt-8">
-                  <a href="https://wa.link/xs6kb5">
+                  <a href="https://api.whatsapp.com/send?phone=918147657386&text=Hi">
                     <button className="btn">Chat With Us</button>
                   </a>
                 </div>
