@@ -154,13 +154,7 @@ function Checkout(props) {
 
   const afterOrderConfirm = async () => {
     if (isConfirmed && finalOrder) {
-      onPlaceOrder(
-        finalOrder,
-        [...cartList, ...freeProducts],
-        appliedCoupon,
-        shippingAddress,
-        payMethod
-      );
+      onPlaceOrder(finalOrder, appliedCoupon, shippingAddress, freeProducts);
 
       logger.debug("Purchase event done");
       logger.debug("Redirecting to success page");

@@ -169,35 +169,17 @@ function GoKwikProvider({
     gokwikSdk.on("order-complete", async (orderDetails) => {
       try {
         if (orderDetails.merchant_order_id) {
-          let orderResponse, coupon;
-          orderResponse = await fetchOrder(orderDetails.merchant_order_id);
+          const orderPromise = fetchOrder(orderDetails.merchant_order_id);
+          const couponPromise = orderDetails?.applied_discount
+            ? fetchCoupon(orderDetails.applied_discount.code)
+            : Promise.resolve(null);
+
+          const [orderResponse, coupon] = await Promise.all([
+            orderPromise,
+            couponPromise,
+          ]);
           if (orderResponse) {
-            const order = {
-              totalCashOnDeliveryCharges:
-                orderResponse?.totalCashOnDeliveryCharges,
-              totalShippingCharges: orderResponse?.totalShippingCharges,
-              totalDiscount: orderResponse?.totalDiscount,
-              totalAmount: orderResponse?.totalAmount,
-              code: orderResponse?.code,
-              status: orderResponse?.status,
-              id: orderResponse?.id,
-            };
-
-            if (orderDetails?.applied_discount)
-              coupon = await fetchCoupon(orderDetails?.applied_discount?.code);
-
-            placeOrder(
-              order,
-              orderResponse?.products?.items,
-              coupon,
-              orderDetails.shipping_address,
-              orderResponse?.paymentType ||
-                orderDetails.payment_method.toUpperCase(),
-              "GOKWIK"
-            );
-            setIsLoggedinViaGokwik(false);
-            logger.debug("Purchase event done");
-            logger.debug("Redirecting to success page");
+            placeOrder(orderResponse, coupon, orderDetails.shipping_address);
           }
         }
       } catch (e) {

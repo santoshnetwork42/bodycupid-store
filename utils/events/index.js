@@ -223,6 +223,7 @@ export const userMapper = (userData, address) => {
     firstName: aF = address?.first_name,
     lastName: aL = address?.last_name,
     email: aE,
+    userId = address?.userId,
   } = address || {};
 
   if (userData) {
@@ -245,10 +246,15 @@ export const userMapper = (userData, address) => {
   }
 
   return {
+    phone: addPhonePrefix(aP),
+    firstName: aF,
+    lastName: aL,
+    email: aE,
     city,
     state,
     country,
     pinCode,
+    id: userId,
   };
 };
 

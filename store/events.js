@@ -66,16 +66,9 @@ export const eventActions = {
     type: actionTypes.VIEW_ITEM,
     payload: { product },
   }),
-  placeOrder: (
-    order,
-    products,
-    coupon,
-    address,
-    paymentType,
-    checkoutSource
-  ) => ({
+  placeOrder: (order, coupon, address, freeProducts = []) => ({
     type: actionTypes.PLACE_ORDER,
-    payload: { order, products, coupon, address, paymentType, checkoutSource },
+    payload: { order, coupon, address, freeProducts },
   }),
   startCheckout: (source) => ({
     type: actionTypes.CHECKOUT_STARTED,
@@ -441,42 +434,35 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
     try {
-      const {
-        order,
-        products,
-        coupon,
-        address,
-        paymentType,
-        checkoutSource = "BUYWOW",
-      } = e.payload;
+      const { order, coupon, address, freeProducts = [] } = e.payload;
       const { id, totalShippingCharges, totalAmount, totalDiscount, code } =
         order;
       const productsData = yield select((state) => state.cart.data);
       const userData = yield select((state) => state.user.data);
-      const user = userMapper(userData, address);
+      const user = userMapper(userData, { ...address, userId: order?.userId });
       const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
       const { ga, pixel, vercel } = orderMapper(
-        productsData,
+        [...productsData, ...freeProducts],
         coupon,
         user,
-        checkoutSource
+        order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK"
       );
       const { orderCreated } = moEngagedOrderMapper(
-        productsData,
+        [...productsData, ...freeProducts],
         coupon,
-        paymentType,
+        order?.paymentType,
         order,
         isFirstTimeUser,
-        checkoutSource
+        order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK"
       );
 
       const itemPurchasedEvents = moEngageItemPurchasedMapper(
-        products,
+        [...productsData, ...freeProducts],
         coupon,
-        paymentType,
+        order?.paymentType,
         order,
         isFirstTimeUser,
-        checkoutSource
+        order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK"
       );
 
       const {
@@ -532,8 +518,8 @@ export function* eventsSaga() {
       }
 
       posthog.capture("Order Created", {
-        source: checkoutSource,
-        paymentType,
+        source: order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK",
+        paymentType: order?.paymentType,
       });
 
       // Analytics.record({
