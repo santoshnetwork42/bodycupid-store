@@ -1,52 +1,93 @@
 import React from "react";
-import Head from "next/head";
-import { connect } from "react-redux";
+import ALink from "~/components/features/custom-link";
 
-function ContactUs({ store }) {
+function ContactUs() {
   return (
-    <main className="main about-us">
-      <Head>
-        <title>{store?.name} | Contact Us</title>
-      </Head>
-
-      <h1 className="d-none">CONTACT - {store?.name}</h1>
-
+    <main className="main contact-us">
       <div className="page-content">
-        <div className="container">
-          <section className="mt-10 pt-3">
-            <h2 className="title title-center">CONTACT US</h2>
+        <div className="container pb-5">
+          <section className="">
+            <h2 className="title-extra-pages">Contact Us</h2>
           </section>
-          <section>
-            <h3 className="title title-center">Address</h3>
-            <p className="text-center"> Body Cupid Pvt Ltd.</p>
-            <p className="text-center">
-              4th Floor, Prestige Dotcom, Field Marshal Cariappa Road, Srinivas
-              Nagar, Shanthala Nagar, Ashok Nagar, Bengaluru – 560025,
-              Karnataka, India.
-            </p>
-          </section>
-
-          <section>
-            <h3 className="title title-center">Phone Number</h3>
-            <p className="text-center">
-              +91-9543000200 Working Hours - (10AM - 7PM IST Monday to Saturday)
-            </p>
-          </section>
-
-          <section>
-            <h3 className="title title-center">Email</h3>
-            <p className="text-center">support@bodycupid.com</p>
-          </section>
+          <div className="track-div">
+            <div className="mt-0">
+              <h4 className="title title-center track-section">
+                Track Your Order
+              </h4>
+            </div>
+            <div className="text-center mt-1 mb-5">
+              If you're eager to track your order and receive up-to-date
+              information, use our order tracking system.
+            </div>
+            <div className="btn-div">
+              <a href="https://track.buywow.in/">
+                <button className="btn mb-10">Track Now</button>
+              </a>
+            </div>
+          </div>
+          <div className="container">
+            <div className="contact-section mb-10">
+              <img
+                src="https://dms.mydukaan.io/original/jpeg/media/ea25387c-415b-4445-a1df-885f69dbd406.jpg"
+                alt="Chat-Image"
+                className="chat-img"
+                width={`50%`}
+              ></img>
+              <div className="">
+                <h4 className="div-chat">Get</h4>
+                <h4 className="div-section">
+                  Quick
+                  <br />
+                  Responses
+                </h4>
+                <h4 className="div-chat">to Your Queries</h4>
+                <div>
+                  For immediate assistance and real-time support, our chat
+                  feature is available.
+                </div>
+                {/* href="https://wa.link/xs6kb5" */}
+                <div className="mt-8">
+                  <a href="https://wa.link/xs6kb5">
+                    <button className="btn">Chat With Us</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-5 container">
+            <div className="contact-us-query">
+              <div className="first-section">
+                <div className="div-query">
+                  Not Interested in
+                  <span className="span-query">
+                    {/* style="color:#f27d1e;font-weight:bold" */}
+                    {` Chatting?`}
+                  </span>
+                </div>
+                <div className="div-query">Write to us</div>
+                <p>Our 70% of Customers Choose Chat for Quicker Resolutions!</p>
+                <div className="mt-8 mb-3">
+                  <ALink prefetch={false} href="/pages/query-us">
+                    <button className="btn">Send a Query</button>
+                  </ALink>
+                </div>
+              </div>
+              <div className="note-section">
+                <div className="heading">Note:</div>
+                <div className="mb-4 mt-4">
+                  Expected response time by agents are 24-48 hrs.
+                </div>
+                <div className="mt-1 mb-2">
+                  Agents are available between 10am to 7pm IST from Monday to
+                  Saturday.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    store: state.system.store,
-  };
-}
-
-export default connect(mapStateToProps)(ContactUs);
+export default ContactUs;
