@@ -2214,3 +2214,92 @@ export const verifyCustomOTP = /* GraphQL */ `
     }
   }
 `;
+
+export const getCouponRule = /* GraphQL */ `
+  query GetCouponRule($code: ID!, $storeId: ID!) {
+    getCouponRule(code: $code, storeId: $storeId) {
+      id
+      code
+      storeId
+      prefix
+      userId
+      name
+      description
+      couponType
+      deviceType
+      expirationDate
+      couponCodeCount
+      getYStoreProduct {
+        id
+        title
+        brand
+        vendor
+        collections
+        categoryId
+        subCategoryId
+        storeId
+        bulkActionId
+        isFeatured
+        productType
+        createdAt
+        slug
+        pageTitle
+        productDescription
+        longDescription
+        manufacturer
+        updatedAt
+        isPublished
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        benefits
+        weight
+        weightUnit
+        minimumOrderQuantity
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        totalOrders
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        googleCategory
+        hasVarient
+        hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
+      }
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
+      minOrderValue
+      maxDiscount
+      maxAllowedUsage
+      applicableCollections
+      applicableProducts
+      paymentMethod
+      isArchive
+      isFeatured
+      isBulkCoupon
+      autoApply
+      isAffiliated
+      createdAt
+      updatedAt
+    }
+  }
+`;
