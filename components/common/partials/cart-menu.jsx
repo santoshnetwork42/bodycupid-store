@@ -129,7 +129,7 @@ function CartMenu(props) {
     const slug = router?.query?.slug;
 
     if (slug === "bundle-offer") {
-      return "Add more items to unlock 'Buy 8 @ ₹1999 Offer'";
+      return "Add more items to unlock 'Buy 8 @ ₹999 Offer'";
     } else if (slug === "special-deal") {
       return "Add more items to unlock 'Buy 1 get 3 Offer'";
     } else if (slug === "bundle-offer-buy5") {

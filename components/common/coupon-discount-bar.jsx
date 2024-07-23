@@ -25,6 +25,7 @@ const couponDiscountBar = ({
 }) => {
   const { filteredFeaturedCoupons: featuredCoupons = [] } =
     useFeaturedCoupons();
+
   const [freeProduct = {}] = useFreeProducts({
     showNonApplicableFreeProducts: false,
   });
@@ -32,6 +33,10 @@ const couponDiscountBar = ({
   const bxgyCoupon = featuredCoupons.find(
     ({ coupon }) =>
       coupon && coupon.couponType === "BUY_X_GET_Y" && coupon.autoApply
+  );
+
+  const currentAppliedCoupon = featuredCoupons.find(
+    ({ coupon }) => coupon && coupon.code === appliedCoupon?.code
   );
 
   const bxayCoupon = featuredCoupons.find(
@@ -42,7 +47,18 @@ const couponDiscountBar = ({
   const hasCartItems = cartList?.length > 0;
 
   if (collectionWiseNudgeMsg) {
-    return <CouponBanner message={collectionWiseNudgeMsg} animate={true} />;
+    const couponText =
+      (currentAppliedCoupon &&
+        currentAppliedCoupon?.allowed &&
+        `Congrats, 'Buy ${currentAppliedCoupon?.coupon?.buyXQuantity} @ ₹${currentAppliedCoupon?.coupon?.getYAmount} Offer' can be availed!`) ||
+      "";
+
+    return (
+      <CouponBanner
+        message={couponText || collectionWiseNudgeMsg}
+        animate={true}
+      />
+    );
   }
 
   // if (hasCartItems) {
