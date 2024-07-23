@@ -35,7 +35,7 @@ function QueryUs() {
               Nagar, Shanthala Nagar, Ashok Nagar, Bengaluru - 560025,
               Karnataka, India.
             </p>
-            <p className="mb-5">Phone Number: +917996123484</p>
+            <p className="mb-5">Phone Number: +919543000200</p>
 
             <p>Working Hours- 10AM - 7PM IST (Monday to Saturday)</p>
           </section>
