@@ -35,10 +35,6 @@ const couponDiscountBar = ({
       coupon && coupon.couponType === "BUY_X_GET_Y" && coupon.autoApply
   );
 
-  const currentAppliedCoupon = featuredCoupons.find(
-    ({ coupon }) => coupon && coupon.code === appliedCoupon?.code
-  );
-
   const bxayCoupon = featuredCoupons.find(
     ({ coupon }) =>
       coupon && coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
@@ -46,19 +42,20 @@ const couponDiscountBar = ({
 
   const hasCartItems = cartList?.length > 0;
 
-  if (collectionWiseNudgeMsg) {
-    const couponText =
-      (currentAppliedCoupon &&
-        currentAppliedCoupon?.allowed &&
-        `Congrats, 'Buy ${currentAppliedCoupon?.coupon?.buyXQuantity} @ ₹${currentAppliedCoupon?.coupon?.getYAmount} Offer' can be availed!`) ||
-      "";
+  if (hasCartItems) {
+    if (collectionWiseNudgeMsg) {
+      const couponText =
+        (appliedCoupon &&
+          `Congrats, 'Buy ${appliedCoupon?.buyXQuantity} @ ₹${appliedCoupon?.getYAmount} Offer' can be availed!`) ||
+        "";
 
-    return (
-      <CouponBanner
-        message={couponText || collectionWiseNudgeMsg}
-        animate={true}
-      />
-    );
+      return (
+        <CouponBanner
+          message={couponText || collectionWiseNudgeMsg}
+          animate={true}
+        />
+      );
+    }
   }
 
   // if (hasCartItems) {
