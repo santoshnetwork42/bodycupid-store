@@ -46,6 +46,7 @@ const couponDiscountBar = ({
     if (collectionWiseNudgeMsg) {
       const couponText =
         (appliedCoupon &&
+          appliedCoupon?.getYAmount &&
           `Congrats, 'Buy ${appliedCoupon?.buyXQuantity} @ ₹${appliedCoupon?.getYAmount} Offer' can be availed!`) ||
         "";
 
