@@ -43,7 +43,7 @@ const MOBILE_TABS = [
     activeTab: 2,
   },
   {
-    tabName: "My rewards",
+    tabName: "Cupid Coins",
     svg: <Discount size={16} />,
     href: "/pages/rewards",
     activeTab: 3,

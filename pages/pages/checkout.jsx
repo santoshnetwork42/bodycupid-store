@@ -631,7 +631,7 @@ function Checkout(props) {
                                   <tr className="summary-subtotal">
                                     <td>
                                       <h4 className="summary-subtitle">
-                                        Rewards
+                                        Cupid Coins
                                       </h4>
                                     </td>
                                     <td>

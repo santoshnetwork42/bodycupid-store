@@ -273,7 +273,7 @@ const Wallet = (props) => {
             </ALink>
           </div>
           <div className="d-flex pt-6 wow-cash-title font-weight-8 font-size-20">
-            Rewards
+            Cupid Coins
             <div className="backImg">
               <WalletLogo size={100} color="none" />
               {/* <WowCashGradientLine color="none" /> */}

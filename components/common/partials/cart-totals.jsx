@@ -209,7 +209,7 @@ function CartTotal({
                 <>
                   <tr className="summary-subtotal">
                     <td className="d-flex align-items-center no-wrap">
-                      <h4 className="summary-subtitle lh-1 ">Rewards</h4>
+                      <h4 className="summary-subtitle lh-1 ">Cupid Coins</h4>
                     </td>
                     <td>
                       <p className="summary-subtotal-price discount-price-color">

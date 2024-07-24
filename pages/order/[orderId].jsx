@@ -150,9 +150,7 @@ function Order({
           <div className="d-flex justify-content-center align-items-center mb-4">
             <ALink
               className="order-image"
-              href={
-                "/collections/bundle-offer?utm_source=thank_you_page"
-              }
+              href={"/collections/bundle-offer?utm_source=thank_you_page"}
             >
               <NextImage
                 src={"/images/banners/buy8@1999-category.jpg"}
@@ -323,7 +321,7 @@ function Order({
                 {!!order?.appliedRewardPoints && (
                   <tr className="summary-subtotal">
                     <td>
-                      <h4 className="summary-subtitle">Rewards</h4>
+                      <h4 className="summary-subtitle">Cupid Coins</h4>
                     </td>
                     <td className="summary-subtotal-price">
                       -₹{toDecimal(order?.appliedRewardPoints)}
@@ -366,7 +364,12 @@ function Order({
                   </td>
                   <td>
                     <p className="summary-total-price pr-2">
-                      ₹{toDecimal(order?.totalAmount)}
+                      ₹
+                      {toDecimal(
+                        order?.totalAmount -
+                          order?.appliedRewardPoints +
+                          order?.totalCashbackRefunded
+                      )}
                     </p>
                   </td>
                 </tr>
