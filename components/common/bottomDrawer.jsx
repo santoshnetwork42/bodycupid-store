@@ -15,6 +15,7 @@ const BottomDrawer = ({
       {showOverlay && (
         <div className="drawer-overlay" onClick={onClose}></div> // Overlay div
       )}
+      
       <div className={`drawer ${isOpen ? "open" : ""}`}>
         <div
           className="drawer-content"
