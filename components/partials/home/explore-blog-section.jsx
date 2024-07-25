@@ -12,6 +12,7 @@ function ExploreBlogSection({ blogs, blogClicked }) {
   if (!blogs) return null;
   else if (blogs.length === 0) return null;
 
+  
   return (
     <div className="container pt-6 pb-6">
       <div className="d-flex justify-content-between mb-5">
