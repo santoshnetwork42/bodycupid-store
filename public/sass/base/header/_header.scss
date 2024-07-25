@@ -228,8 +228,7 @@
 }
 
 .header-top,
-.header-middle,
-.header-bottom {
+.header-middle {
   display: flex;
 }
 
@@ -404,6 +403,7 @@
     }
   }
 
+  .icon-box-icon,
   .icon-box-title {
     transition: color 0.3s;
   }
@@ -438,6 +438,7 @@
       font-size: 2.4rem;
       font-weight: 700;
     }
+    flex: none !important;
   }
 }
 
@@ -488,7 +489,7 @@
     }
   }
 
-   .search-box-container {
+  .search-box-container {
     flex: 1;
     align-items: center;
     display: flex;
@@ -1105,6 +1106,13 @@
   //     transform: translateX(0);
   //     animation: 6s linear 2s 1 show_msg_first, 12s linear 8s infinite show_msg;
   // }
+}
+
+@include mq(sm, max) {
+  .header-middle-blog {
+    padding-top: 3rem !important;
+    padding-bottom: 0rem !important;
+  }
 }
 
 @keyframes show_msg_first {

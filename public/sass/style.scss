@@ -72,6 +72,7 @@
 @import "components/widgets";
 @import "components/quantity";
 @import "components/embla";
+@import "components/blog";
 
 /* 6. header */
 @import "base/header/header";
@@ -101,5 +102,7 @@
 @import "pages/icons";
 @import "pages/faq";
 @import "pages/rewards";
+@import "pages/blog";
+@import "pages/single-blog";
 
 @import "demo/demo1_custom";

@@ -33,6 +33,85 @@
   background-color: $border-color;
 }
 
+.rowss:first-child {
+  .col-lg-6 {
+    width: 50%;
+    flex: none;
+  }
+
+  .col-lg-4 {
+    width: 33.3333%;
+    flex: none;
+    padding-right: 12px;
+    padding-left: 0px;
+  }
+}
+
+.lh-111 {
+  line-height: 1.8rem;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+}
+
+.rowss {
+  display: flex;
+  flex-wrap: wrap;
+
+  .col-6 {
+    width: 50%;
+    flex: none;
+    padding-right: 8px;
+    padding-left: 8px;
+    margin-top: 18px;
+
+    @media (max-width: 767px) {
+      padding-right: 4px;
+      padding-left: 4px;
+      margin-top: 8px;
+    }
+  }
+
+  .col-6.mobile-left {
+    @media (max-width: 767px) {
+      padding-left: 0;
+    }
+  }
+  .col-6.mobile-right {
+    @media (max-width: 767px) {
+      padding-right: 0;
+    }
+  }
+
+  .col-12 {
+    width: 100%;
+    flex: none;
+  }
+
+  @media (min-width: 992px) {
+    .col-lg-6 {
+      width: 50%;
+      flex: none;
+    }
+
+    .col-lg-4 {
+      width: 33.3333%;
+      flex: none;
+      padding-right: 12px;
+      padding-left: 12px;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .col-md-6 {
+      width: 50%;
+      flex: none;
+    }
+  }
+}
+
 .coupon-discount-bar {
   background-color: #17b31b;
   justify-content: center;

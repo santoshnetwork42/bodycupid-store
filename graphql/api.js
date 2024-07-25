@@ -1082,6 +1082,296 @@ export const getLoyalty = /* GraphQL */ `
   }
 `;
 
+//     posts(first: 3, where: { tagSlugIn: "english", status: PUBLISH }) {
+export const getFeaturedBlogs = /* GraphQL */ `
+  query FeatueredBlogs {
+    posts(first: 3) {
+      edges {
+        node {
+          date
+          id
+          databaseId
+          slug
+          status
+          title
+          uri
+          excerpt
+          toPing
+          link
+          featuredImage {
+            node {
+              mediaItemUrl
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const getAuthor = /* GraphQL */ `
+  query Author($id: ID!, $idType: UserNodeIdTypeEnum!) {
+    user(id: $id, idType: $idType) {
+      nicename
+      email
+      description
+      firstName
+      lastName
+      name
+      nickname
+      slug
+      username
+      url
+      uri
+      avatar {
+        url
+        height
+        width
+      }
+      seo {
+        social {
+          facebook
+          instagram
+          linkedIn
+          mySpace
+          pinterest
+          soundCloud
+          twitter
+          wikipedia
+          youTube
+        }
+        title
+        canonical
+      }
+    }
+  }
+`;
+export const getAuthors = /* GraphQL */ `
+  query GetAuthors {
+    users {
+      edges {
+        node {
+          slug
+          nicename
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const getBlogs = /* GraphQL */ `
+  query GetBlogs(
+    $category: String
+    $tag: [String]
+    $first: Int
+    $last: Int
+    $after: String
+    $before: String
+    $authorName: String
+  ) {
+    posts(
+      where: {
+        categoryName: $category
+        tagSlugIn: $tag
+        status: PUBLISH
+        authorName: $authorName
+      }
+      first: $first
+      last: $last
+      after: $after
+      before: $before
+    ) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          id
+          databaseId
+          slug
+          seo {
+            readingTime
+          }
+          title
+          uri
+          excerpt
+          link
+          date
+          featuredImage {
+            node {
+              mediaItemUrl
+            }
+          }
+          author {
+            node {
+              name
+              slug
+              avatar {
+                url
+                height
+                width
+              }
+              seo {
+                social {
+                  facebook
+                  instagram
+                  mySpace
+                  linkedIn
+                  pinterest
+                  soundCloud
+                  twitter
+                  wikipedia
+                  youTube
+                }
+              }
+              username
+              nicename
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const getBlog = /* GraphQL */ `
+  query GetBlogBySlug($id: ID!, $idType: PostIdType!) {
+    post(id: $id, idType: $idType) {
+      id
+      databaseId
+      slug
+      title
+      uri
+      excerpt
+      link
+      date
+      seo {
+        metaDesc
+        readingTime
+      }
+      featuredImage {
+        node {
+          mediaItemUrl
+        }
+      }
+      categories {
+        nodes {
+          name
+          slug
+        }
+      }
+      tags {
+        nodes {
+          name
+          slug
+          seo {
+            metaDesc
+          }
+        }
+      }
+      content
+      author {
+        node {
+          name
+          slug
+          description
+          avatar {
+            url
+            height
+            width
+          }
+          seo {
+            social {
+              facebook
+              instagram
+              mySpace
+              linkedIn
+              pinterest
+              soundCloud
+              twitter
+              wikipedia
+              youTube
+            }
+          }
+          username
+          nicename
+        }
+      }
+    }
+  }
+`;
+
+export const getCategories = /* GraphQL */ `
+  query GetCategories {
+    categories {
+      edges {
+        node {
+          id
+          databaseId
+          slug
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const getCategory = /* GraphQL */ `
+  query GetCategory($id: ID!) {
+    category(id: $id, idType: SLUG) {
+      id
+      databaseId
+      slug
+      name
+    }
+  }
+`;
+
+// id: "dGVybTo1Mw==", idType: ID
+// menu(id: "dGVybTo1Mw==", idType: ID)
+export const getTopMenu = /* GraphQL */ `
+  query GetMenu {
+    menu() {
+      id
+      menuItems {
+        nodes {
+          id
+          label
+          path
+        }
+      }
+    }
+  }
+`;
+
+export const getTags = /* GraphQL */ `
+  query GetTags {
+    tags {
+      edges {
+        node {
+          id
+          slug
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const getTag = `
+query GetTag($id: ID!) {
+  tag(id: $id, idType: SLUG) {
+    id
+    slug
+    name
+  }
+}
+`;
 // export const getRecommendedProductById = /* GraphQL */ `
 //   query GetProduct(
 //     $id: ID!

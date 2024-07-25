@@ -6,6 +6,7 @@ const getWindowDimensions = () => {
     width,
     height,
     isSmallSize: width < 500,
+    isDesktop: width >= 992,
   };
 };
 
@@ -22,11 +23,11 @@ export function useWindowDimensions() {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize)
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   return windowDimensions;
 }
 
-export default useWindowDimensions;;
+export default useWindowDimensions;

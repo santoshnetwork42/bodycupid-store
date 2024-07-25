@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@next/bundle-analyzer": "^13.4.2",
+    "@wordpress/block-library": "^7.14.4",
     "@sentry/nextjs": "^7.47.0",
     "@vercel/analytics": "^1.0.1",
     "@vercel/speed-insights": "^1.0.10",
@@ -40,6 +41,7 @@
     "react-owl-carousel2": "^0.3.0",
     "react-redux": "^7.2.5",
     "react-slide-toggle": "^0.3.5",
+    "react-sticky-box": "^1.0.2",
     "react-tabs": "^3.2.2",
     "react-toastify": "^8.0.3",
     "react-use": "^17.4.0",

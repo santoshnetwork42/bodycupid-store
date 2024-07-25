@@ -457,6 +457,9 @@ button {
     line-height: inherit;
   }
 }
+.woot--bubble-holder-hidden {
+  visibility: hidden !important;
+}
 
 // d-loading
 .d-loading {
