@@ -248,7 +248,7 @@ export const getStaticProps = async ({ params }) => {
         height: "60",
       },
     },
-    image: blog?.featuredImage.node.mediaItemUrl
+    image: blog?.featuredImage?.node?.mediaItemUrl
       ? [blog?.featuredImage?.node?.mediaItemUrl]
       : [],
     datePublished: blog?.date,
@@ -319,7 +319,7 @@ export const getStaticProps = async ({ params }) => {
 
   const menuData = await menuRes.json();
 
-  let menuItems = menuData.data.menu.menuItems.nodes;
+  let menuItems = menuData?.data?.menu?.menuItems?.nodes || [];
 
   for (let i = 0; i < menuItems.length; i++) {
     if (menuItems[i].path.includes("/category/")) {

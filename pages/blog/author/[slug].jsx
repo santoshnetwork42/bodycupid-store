@@ -6,12 +6,19 @@ import BlogBreadcrumbs from "~/components/common/partials/blog-breadcrumbs";
 import Loader from "~/components/common/partials/loader";
 import BlogSidebar from "~/components/common/partials/post/blog-sidebar";
 import PostThree from "~/components/features/post/post-three";
+import {
+  Facebook,
+  House,
+  Instagram,
+  LinkedIn,
+  Twitter,
+} from "~/components/icons";
 import { WORDPRESS_AUTH, WORDPRESS_URL } from "~/config";
-import { getBlogs, getTag, getTags, getTopMenu } from "~/graphql/api";
+import { getAuthor, getAuthors, getBlogs, getTopMenu } from "~/graphql/api";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function BlogTagsPage({
-  tag,
+  author,
   featuredBlogs,
   fetchedBlogs,
   fetchedBlogsPageInfo,
@@ -29,16 +36,16 @@ export default function BlogTagsPage({
         method: "POST",
         body: JSON.stringify({
           query: getBlogs,
-          variables: { first: 9, after, tag: tag.slug ? [tag.slug] : [] },
+          variables: { first: 9, after, author: author?.slug },
         }),
       });
 
       const blogData = await blogRes.json();
 
-      if (blogData.data && blogData.data.posts.edges) {
+      if (blogData?.data && blogData?.data?.posts?.edges) {
         if (loadMore) {
-          setBlogs([...blogs, ...blogData.data.posts.edges]);
-          setPageInfo(blogData.data.posts.pageInfo);
+          setBlogs([...blogs, ...blogData?.data?.posts?.edges]);
+          setPageInfo(blogData?.data?.posts?.pageInfo);
         }
       }
     } catch (err) {}
@@ -48,8 +55,6 @@ export default function BlogTagsPage({
     setBlogs(fetchedBlogs);
     setPageInfo(fetchedBlogsPageInfo);
   }, [fetchedBlogs, fetchedBlogsPageInfo]);
-
-  let blog;
 
   return (
     <main className="main blog" style={{ background: "#fff" }}>
@@ -63,15 +68,21 @@ export default function BlogTagsPage({
             {/* Content */}
             <div className="col-lg-9 skeleton-body">
               <div className="mb-4">
-                <BlogBreadcrumbs link={{ name: tag.name, slug: tag.slug }} />
+                <BlogBreadcrumbs
+                  link={{ name: author.name, slug: `/author/${author.slug}` }}
+                />
               </div>
-
+              <h4 class="archive-heading">
+                Author: <span>{author?.name}</span>{" "}
+              </h4>
               <div
                 style={{
                   color: "black",
                   display: "grid",
                   gridTemplateColumns: "auto 1fr",
                   gap: "3rem",
+                  borderBottom: " 1px solid #e8e8e8",
+                  paddingBottom: "42px",
                 }}
               >
                 <div
@@ -93,22 +104,70 @@ export default function BlogTagsPage({
                 </div>
 
                 <div>
-                  <h4 className="author-name mb-2">
-                    {blog?.author?.node?.name}
-                  </h4>
-                  <p className="author-bio">
-                    {blog?.author?.node?.description}
-                  </p>
+                  <div className="d-flex">
+                    <h5 className="author-name mt-2 grow-1">{author.name}</h5>
+                    <ul class="d-flex gap-x-4 list-style-none pr-2">
+                      <li className="pl-2">
+                        <a
+                          href="https://www.bodycupid.com/blog"
+                          class=""
+                          title="Website"
+                        >
+                          <House size={15}>Website</House>
+                        </a>
+                      </li>
+                      {author?.seo?.social?.facebook && (
+                        <li className="pl-2">
+                          <a
+                            href={`${author?.seo?.social?.facebook}`}
+                            class=""
+                            title="facebook"
+                          >
+                            <Facebook size={15}>Facebook</Facebook>
+                          </a>
+                        </li>
+                      )}
+                      {author?.seo?.social?.instagram && (
+                        <li className="pl-2">
+                          <a
+                            href={`${author?.seo?.social?.instagram}`}
+                            class=""
+                            title="instagram"
+                          >
+                            <Instagram size={15}>Instagram</Instagram>
+                          </a>
+                        </li>
+                      )}
+
+                      {author?.seo?.social?.linkedIn && (
+                        <li className="pl-2">
+                          <a
+                            href={`${author?.seo?.social?.linkedIn}`}
+                            class=""
+                            title="LinkedIn"
+                          >
+                            <LinkedIn size={15}>LinkedIn</LinkedIn>
+                          </a>
+                        </li>
+                      )}
+
+                      {author?.seo?.social?.twitter && (
+                        <li className="pl-2">
+                          <a
+                            href={`${author?.seo?.social?.twitter}`}
+                            class=""
+                            title="twitter"
+                          >
+                            <Twitter size={15}>Twitter</Twitter>
+                          </a>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                  <p className="author-bio">{author.description}</p>
                 </div>
               </div>
-              <hr
-                style={{
-                  marginTop: "4rem",
-                  marginBottom: "4rem",
-                  border: "none",
-                  borderTop: "2px solid #e5e5e5",
-                }}
-              />
+
               <InfiniteScroll
                 dataLength={blogs.length || 0}
                 next={() => fetchMore(true, pageInfo?.endCursor)}
@@ -120,6 +179,7 @@ export default function BlogTagsPage({
                 }
                 style={{
                   overflow: "visible",
+                  marginTop: "32px",
                 }}
               >
                 <div className="posts">
@@ -153,27 +213,24 @@ export default function BlogTagsPage({
 }
 
 export const getStaticProps = async ({ params }) => {
-  const tagRes = await fetch(WORDPRESS_URL, {
+  const authorName = params?.slug || "";
+
+  const authorRes = await fetch(WORDPRESS_URL, {
     headers: {
       "Content-Type": "application/json",
       Authorization: WORDPRESS_AUTH,
     },
     method: "POST",
     body: JSON.stringify({
-      query: getTag,
+      query: getAuthor,
       variables: {
         id: params.slug,
+        idType: "SLUG",
       },
     }),
   });
 
-  const tagData = await tagRes.json();
-
-  if (!tagData.data.tag) {
-    return {
-      notFound: true,
-    };
-  }
+  const authorData = await authorRes.json();
 
   const blogRes = await fetch(WORDPRESS_URL, {
     headers: {
@@ -185,7 +242,7 @@ export const getStaticProps = async ({ params }) => {
       query: getBlogs,
       variables: {
         first: 10,
-        tag: tagData.data.tag.slug ? [tagData.data.tag.slug] : [],
+        author: authorName,
       },
     }),
   });
@@ -209,7 +266,7 @@ export const getStaticProps = async ({ params }) => {
 
   const featuredBlogData = await featuredBlogRes.json();
 
-  const featuredBlogs = await featuredBlogData.data.posts.edges;
+  const featuredBlogs = await featuredBlogData?.data?.posts?.edges;
 
   const menuRes = await fetch(WORDPRESS_URL, {
     headers: {
@@ -224,9 +281,9 @@ export const getStaticProps = async ({ params }) => {
 
   const menuData = await menuRes.json();
 
-  let menuItems = menuData.data.menu.menuItems.nodes;
+  let menuItems = menuData?.data?.menu?.menuItems?.nodes || [];
 
-  for (let i = 0; i < menuItems.length; i++) {
+  for (let i = 0; i < menuItems?.length; i++) {
     if (menuItems[i].path.includes("/category/")) {
       const categorySlug = menuItems[i].path.split("/").pop();
 
@@ -255,16 +312,16 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       featuredBlogs,
-      tag: tagData.data.tag,
-      fetchedBlogs: blogData.data.posts.edges,
-      fetchedBlogsPageInfo: blogData.data.posts.pageInfo,
+      author: authorData?.data?.user,
+      fetchedBlogs: blogData?.data?.posts?.edges,
+      fetchedBlogsPageInfo: blogData?.data?.posts?.pageInfo,
       menuItems,
       pageMeta: {
         siteName: "Wow Skin Science",
-        title: tagData.data.tag.name,
+        title: authorData?.data?.user?.name,
         description:
           "Discover the ultimate destination for expert skin & hair care tips, along with a curated selection of products for you. Explore our blog",
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/author/${tagData.data.tag.slug}`,
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/author/${authorData.data?.user?.slug}`,
         image: getPublicImageURL("/images/wow-logo.webp"),
       },
     },
@@ -273,23 +330,23 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-  const tagRes = await fetch(WORDPRESS_URL, {
+  const authorsRes = await fetch(WORDPRESS_URL, {
     headers: {
       "Content-Type": "application/json",
       Authorization: WORDPRESS_AUTH,
     },
     method: "POST",
     body: JSON.stringify({
-      query: getTags,
+      query: getAuthors,
     }),
   });
 
-  const tagData = await tagRes.json();
+  const authorsData = await authorsRes.json();
 
-  const tags = tagData.data.tags.edges;
+  const authors = authorsData?.data?.users?.edges;
 
-  const paths = tags.map((tag) => ({
-    params: { slug: tag.node.slug },
+  const paths = authors?.map((author) => ({
+    params: { slug: author?.node?.slug },
   }));
 
   return {

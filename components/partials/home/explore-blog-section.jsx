@@ -26,17 +26,17 @@ function ExploreBlogSection({ blogs, blogClicked }) {
           <EmblaCarousel options={{ loop: true }}>
             {blogs.map((blog) => (
               <ALink
-                key={`explore-blog-${blog.node.slug}`}
-                href={`/blog/${blog.node.slug}`}
+                key={`explore-blog-${blog?.node?.slug}`}
+                href={`/blog/${blog?.node?.slug}`}
                 style={{
                   flex: "0 0 100%",
                   padding: "0 0.5rem",
                 }}
                 onClick={() => {
                   blogClicked({
-                    item_name: blog.node.title,
-                    item_id: blog.node.id,
-                    item_slug: blog.node.slug,
+                    item_name: blog?.node?.title,
+                    item_id: blog?.node?.id,
+                    item_slug: blog?.node?.slug,
                     item_parent_category: "Explore Blogs",
                   });
                 }}
@@ -49,8 +49,8 @@ function ExploreBlogSection({ blogs, blogClicked }) {
                   }}
                 >
                   <Image
-                    src={blog.node.featuredImage.node.mediaItemUrl}
-                    alt={blog.node.title}
+                    src={blog?.node?.featuredImage?.node?.mediaItemUrl}
+                    alt={blog?.node?.title}
                     layout="fill"
                     quality={50}
                     objectFit="cover"
@@ -60,12 +60,12 @@ function ExploreBlogSection({ blogs, blogClicked }) {
                 </div>
 
                 <h5 className="mt-4 mb-2 font-weight-bolder">
-                  {blog.node.title}
+                  {blog?.node?.title}
                 </h5>
 
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: blog.node.excerpt,
+                    __html: blog?.node?.excerpt,
                   }}
                   className="lh-111"
                 />
@@ -75,15 +75,15 @@ function ExploreBlogSection({ blogs, blogClicked }) {
         ) : (
           <div className="rowss">
             {blogs.map((blog) => (
-              <React.Fragment key={"post-nine" + blog.node.slug}>
+              <React.Fragment key={"post-nine" + blog?.node?.slug}>
                 <ALink
-                  href={`/blog/${blog.node.slug}`}
+                  href={`/blog/${blog?.node?.slug}`}
                   className="col-lg-4"
                   onClick={() => {
                     blogClicked({
-                      item_name: blog.node.title,
-                      item_id: blog.node.id,
-                      item_slug: blog.node.slug,
+                      item_name: blog?.node?.title,
+                      item_id: blog?.node?.id,
+                      item_slug: blog?.node?.slug,
                       item_parent_category: "Explore Blogs",
                     });
                   }}
@@ -97,8 +97,8 @@ function ExploreBlogSection({ blogs, blogClicked }) {
                     priority={false}
                   >
                     <Image
-                      src={blog.node.featuredImage.node.mediaItemUrl}
-                      alt={blog.node.title}
+                      src={blog?.node?.featuredImage?.node?.mediaItemUrl}
+                      alt={blog?.node?.title}
                       layout="fill"
                       quality={75}
                       objectFit="cover"
@@ -124,7 +124,7 @@ function ExploreBlogSection({ blogs, blogClicked }) {
 
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: blog.node.excerpt,
+                        __html: blog?.node?.excerpt,
                       }}
                       className="lh-111"
                     />

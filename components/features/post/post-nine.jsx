@@ -62,7 +62,7 @@ function PostNine(props) {
               day: "2-digit",
               timeZone: "UTC",
             })}{" "}
-            | {post.author.node.name} | {post.readingTime} min read
+            | {post.author.node.name} | {post?.seo?.readingTime} min read
           </div>
 
           <h6 className="post-title" style={{ color: "black" }}>

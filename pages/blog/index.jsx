@@ -12,7 +12,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 export default function BlogPage({
   fetchedBlogs,
   fetchedBlogsPageInfo,
-  menuItems,
+  menuItems = [],
   featuredBlogs,
 }) {
   const [blogs, setBlogs] = useState(fetchedBlogs);
@@ -33,7 +33,7 @@ export default function BlogPage({
 
       const blogData = await blogRes.json();
 
-      if (blogData.data && blogData.data.posts.edges) {
+      if (blogData?.data && blogData?.data?.posts?.edges) {
         if (loadMore) {
           setBlogs([...blogs, ...blogData.data.posts.edges]);
           setPageInfo(blogData.data.posts.pageInfo);
@@ -107,7 +107,7 @@ export async function getStaticProps() {
       query: getBlogs,
       variables: {
         first: 49,
-        tag: ["english"],
+        // tag: ["english"],
       },
     }),
   });
@@ -144,9 +144,9 @@ export async function getStaticProps() {
 
   const menuData = await menuRes.json();
 
-  let menuItems = menuData.data.menu.menuItems.nodes;
+  let menuItems = menuData?.data?.menu?.menuItems?.nodes || [];
 
-  for (let i = 0; i < menuItems.length; i++) {
+  for (let i = 0; i < menuItems?.length; i++) {
     if (menuItems[i].path.includes("/category/")) {
       const categorySlug = menuItems[i].path.split("/").pop();
 
@@ -174,10 +174,10 @@ export async function getStaticProps() {
 
   return {
     props: {
-      fetchedBlogs: blogData.data.posts.edges,
-      fetchedBlogsPageInfo: blogData.data.posts.pageInfo,
+      fetchedBlogs: blogData?.data?.posts?.edges,
+      fetchedBlogsPageInfo: blogData?.data?.posts?.pageInfo,
       menuItems,
-      featuredBlogs: featuredBlogData.data.posts.edges,
+      featuredBlogs: featuredBlogData?.data?.posts?.edges,
       pageMeta: {
         siteName: "Wow Skin Science",
         title:
@@ -186,7 +186,8 @@ export async function getStaticProps() {
           "Discover the ultimate destination for expert skin & hair care tips, along with a curated selection of products for you. Explore our blog",
         canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
         image:
-          (blogData.data.posts.edges?.length && blogData.data.posts.edges[0]) ??
+          (blogData?.data?.posts?.edges?.length &&
+            blogData?.data?.posts?.edges?.[0]) ??
           getPublicImageURL("/images/wow-logo.webp"),
       },
     },

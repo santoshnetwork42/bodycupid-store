@@ -44,10 +44,10 @@ export default function BlogCategoryPage({
 
       const blogData = await blogRes.json();
 
-      if (blogData.data && blogData.data.posts.edges) {
+      if (blogData?.data && blogData?.data?.posts?.edges) {
         if (loadMore) {
           setBlogs([...blogs, ...blogData.data.posts.edges]);
-          setPageInfo(blogData.data.posts.pageInfo);
+          setPageInfo(blogData?.data?.posts?.pageInfo);
         }
       }
     } catch (err) {}
@@ -152,7 +152,7 @@ export const getStaticProps = async ({ params }) => {
       query: getBlogs,
       variables: {
         first: 9,
-        category: categoryData.data.category.slug,
+        category: categoryData?.data?.category?.slug,
       },
     }),
   });
@@ -176,7 +176,7 @@ export const getStaticProps = async ({ params }) => {
 
   const featuredBlogData = await featuredBlogRes.json();
 
-  const featuredBlogs = await featuredBlogData.data.posts.edges;
+  const featuredBlogs = await featuredBlogData?.data?.posts?.edges;
 
   const menuRes = await fetch(WORDPRESS_URL, {
     headers: {
@@ -191,9 +191,9 @@ export const getStaticProps = async ({ params }) => {
 
   const menuData = await menuRes.json();
 
-  let menuItems = menuData.data.menu.menuItems.nodes;
+  let menuItems = menuData?.data?.menu?.menuItems?.nodes || [];
 
-  for (let i = 0; i < menuItems.length; i++) {
+  for (let i = 0; i < menuItems?.length; i++) {
     if (menuItems[i].path.includes("/category/")) {
       const categorySlug = menuItems[i].path.split("/").pop();
 
@@ -215,23 +215,23 @@ export const getStaticProps = async ({ params }) => {
 
       const categoryBlogData = await categoryBlogRes.json();
 
-      menuItems[i].categoryBlogs = categoryBlogData.data.posts.edges;
+      menuItems[i].categoryBlogs = categoryBlogData?.data?.posts?.edges;
     }
   }
 
   return {
     props: {
       featuredBlogs,
-      fetchedBlogs: blogData.data.posts.edges,
-      fetchedBlogsPageInfo: blogData.data.posts.pageInfo,
-      category: categoryData.data.category,
+      fetchedBlogs: blogData?.data?.posts?.edges,
+      fetchedBlogsPageInfo: blogData?.data?.posts?.pageInfo,
+      category: categoryData?.data?.category,
       menuItems,
       pageMeta: {
         siteName: "Wow Skin Science",
-        title: categoryData.data.category.name,
+        title: categoryData?.data?.category?.name,
         description:
           "Discover the ultimate destination for expert skin & hair care tips, along with a curated selection of products for you. Explore our blog",
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/category/${categoryData.data.category.slug}`,
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/category/${categoryData?.data?.category?.slug}`,
 
         image: getPublicImageURL("/images/wow-logo.webp"),
       },
@@ -254,10 +254,10 @@ export const getStaticPaths = async () => {
 
   const categoryData = await categoryRes.json();
 
-  const categories = categoryData.data.categories.edges;
+  const categories = categoryData?.data?.categories?.edges;
 
   const paths = categories.map((category) => ({
-    params: { slug: category.node.slug },
+    params: { slug: category?.node?.slug },
   }));
 
   return {

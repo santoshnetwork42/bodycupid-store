@@ -109,12 +109,16 @@ const nextConfig = withBundleAnalyzer({
         pathname: "/public/**",
       },
       {
-        protocol: "https",
+        protocol: "http",
         hostname: process.env.NEXT_PUBLIC_WORDPRESS_MEDIA_URL,
       },
       {
         protocol: "https",
-        hostname: process.env.NEXT_PUBLIC_WORDPRESS_AVATAR_URL,
+        hostname: process.env.NEXT_PUBLIC_WORDPRESS_AVATAR_URL_1,
+      },
+      {
+        protocol: "http",
+        hostname: process.env.NEXT_PUBLIC_WORDPRESS_AVATAR_URL_2,
       },
     ],
     minimumCacheTTL: 60 * 60 * 24 * 30,

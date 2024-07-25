@@ -60,8 +60,8 @@ function BlogHeader({ menuItems }) {
             <nav className="main-nav">
               <ul className="menu">
                 {menuItems
-                  .filter((m) => m.path !== "/web-stories")
-                  .map((menu, index) => (
+                  ?.filter((m) => m.path !== "/web-stories")
+                  ?.map((menu, index) => (
                     <li
                       key={index}
                       className={`

@@ -1075,9 +1075,10 @@ export const getLoyalty = /* GraphQL */ `
   }
 `;
 
+//     posts(first: 3, where: { tagSlugIn: "english", status: PUBLISH }) {
 export const getFeaturedBlogs = /* GraphQL */ `
   query FeatueredBlogs {
-    posts(first: 3, where: { tagSlugIn: "english", status: PUBLISH }) {
+    posts(first: 3) {
       edges {
         node {
           date
@@ -1101,6 +1102,57 @@ export const getFeaturedBlogs = /* GraphQL */ `
   }
 `;
 
+export const getAuthor = /* GraphQL */ `
+  query Author($id: ID!, $idType: UserNodeIdTypeEnum!) {
+    user(id: $id, idType: $idType) {
+      nicename
+      email
+      description
+      firstName
+      lastName
+      name
+      nickname
+      slug
+      username
+      url
+      uri
+      avatar {
+        url
+        height
+        width
+      }
+      seo {
+        social {
+          facebook
+          instagram
+          linkedIn
+          mySpace
+          pinterest
+          soundCloud
+          twitter
+          wikipedia
+          youTube
+        }
+        title
+        canonical
+      }
+    }
+  }
+`;
+export const getAuthors = /* GraphQL */ `
+  query GetAuthors {
+    users {
+      edges {
+        node {
+          slug
+          nicename
+          name
+        }
+      }
+    }
+  }
+`;
+
 export const getBlogs = /* GraphQL */ `
   query GetBlogs(
     $category: String
@@ -1109,9 +1161,15 @@ export const getBlogs = /* GraphQL */ `
     $last: Int
     $after: String
     $before: String
+    $authorName: String
   ) {
     posts(
-      where: { categoryName: $category, tagSlugIn: $tag, status: PUBLISH }
+      where: {
+        categoryName: $category
+        tagSlugIn: $tag
+        status: PUBLISH
+        authorName: $authorName
+      }
       first: $first
       last: $last
       after: $after
@@ -1129,9 +1187,11 @@ export const getBlogs = /* GraphQL */ `
           id
           databaseId
           slug
+          seo {
+            readingTime
+          }
           title
           uri
-          readingTime
           excerpt
           link
           date
@@ -1143,9 +1203,27 @@ export const getBlogs = /* GraphQL */ `
           author {
             node {
               name
+              slug
               avatar {
                 url
+                height
+                width
               }
+              seo {
+                social {
+                  facebook
+                  instagram
+                  mySpace
+                  linkedIn
+                  pinterest
+                  soundCloud
+                  twitter
+                  wikipedia
+                  youTube
+                }
+              }
+              username
+              nicename
             }
           }
         }
@@ -1163,11 +1241,11 @@ export const getBlog = /* GraphQL */ `
       title
       uri
       excerpt
-      readingTime
       link
       date
       seo {
         metaDesc
+        readingTime
       }
       featuredImage {
         node {
@@ -1184,16 +1262,37 @@ export const getBlog = /* GraphQL */ `
         nodes {
           name
           slug
+          seo {
+            metaDesc
+          }
         }
       }
       content
       author {
         node {
           name
+          slug
           description
           avatar {
             url
+            height
+            width
           }
+          seo {
+            social {
+              facebook
+              instagram
+              mySpace
+              linkedIn
+              pinterest
+              soundCloud
+              twitter
+              wikipedia
+              youTube
+            }
+          }
+          username
+          nicename
         }
       }
     }
@@ -1226,9 +1325,11 @@ export const getCategory = /* GraphQL */ `
   }
 `;
 
+// id: "dGVybTo1Mw==", idType: ID
+// menu(id: "dGVybTo1Mw==", idType: ID)
 export const getTopMenu = /* GraphQL */ `
   query GetMenu {
-    menu(id: "dGVybTo1Mw==", idType: ID) {
+    menu() {
       id
       menuItems {
         nodes {

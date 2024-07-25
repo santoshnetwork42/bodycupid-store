@@ -35,10 +35,10 @@ export default function BlogTagsPage({
 
       const blogData = await blogRes.json();
 
-      if (blogData.data && blogData.data.posts.edges) {
+      if (blogData?.data && blogData?.data?.posts?.edges) {
         if (loadMore) {
-          setBlogs([...blogs, ...blogData.data.posts.edges]);
-          setPageInfo(blogData.data.posts.pageInfo);
+          setBlogs([...blogs, ...blogData?.data?.posts?.edges]);
+          setPageInfo(blogData?.data?.posts?.pageInfo);
         }
       }
     } catch (err) {}
@@ -179,9 +179,9 @@ export const getStaticProps = async ({ params }) => {
 
   const menuData = await menuRes.json();
 
-  let menuItems = menuData.data.menu.menuItems.nodes;
+  let menuItems = menuData?.data?.menu?.menuItems?.nodes || [];
 
-  for (let i = 0; i < menuItems.length; i++) {
+  for (let i = 0; i < menuItems?.length; i++) {
     if (menuItems[i].path.includes("/category/")) {
       const categorySlug = menuItems[i].path.split("/").pop();
 
@@ -211,8 +211,8 @@ export const getStaticProps = async ({ params }) => {
     props: {
       featuredBlogs,
       tag: tagData.data.tag,
-      fetchedBlogs: blogData.data.posts.edges,
-      fetchedBlogsPageInfo: blogData.data.posts.pageInfo,
+      fetchedBlogs: blogData?.data?.posts?.edges,
+      fetchedBlogsPageInfo: blogData?.data?.posts?.pageInfo,
       menuItems,
       pageMeta: {
         siteName: "Wow Skin Science",
