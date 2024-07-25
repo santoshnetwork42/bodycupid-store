@@ -36,7 +36,7 @@ function PostNine(props) {
               priority={!!priority}
               className="border-2"
               onError={(e) => {
-                e.target.src = "/images/wow-logo.webp";
+                e.target.src = "/images/logo.webp";
               }}
               style={{ backgroundColor: "#DEE6E8" }}
               loader="wp"

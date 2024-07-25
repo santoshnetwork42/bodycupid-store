@@ -119,7 +119,7 @@ export default function BlogDetailsPage({ blog, featuredBlogs, menuItems }) {
                       backgroundColor: "#DEE6E8",
                     }}
                     onError={(e) => {
-                      e.target.src = "/images/wow-logo.webp";
+                      e.target.src = "/images/logo.png";
                     }}
                     loader="wp"
                   />
@@ -358,12 +358,12 @@ export const getStaticProps = async ({ params }) => {
       featuredBlogs,
       menuItems,
       pageMeta: {
-        siteName: "Wow Skin Science",
+        siteName: "Body Cupid",
         title: blog.title,
         description: blog?.seo?.metaDesc,
         image:
           blog?.featuredImage?.node?.mediaItemUrl ??
-          getPublicImageURL("/images/wow-logo.webp"),
+          getPublicImageURL("/images/logo.png"),
         canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${blog.slug}`,
         type: "article",
         authorName: blog?.author?.node?.name,

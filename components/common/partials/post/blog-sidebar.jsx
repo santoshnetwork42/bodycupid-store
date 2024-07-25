@@ -62,7 +62,7 @@ function BlogSidebar({ featuredBlogs, tags, singleBlog }) {
                 itemscope=""
                 itemtype="http://schema.org/Organization"
               >
-                <link itemprop="url" href="https://blog.buywow.in/" />
+                <link itemprop="url" href="https://blog.bodycupid.com/" />
                 <li class="service-wrap">
                   <a
                     href="https://www.facebook.com/bodycupid/"

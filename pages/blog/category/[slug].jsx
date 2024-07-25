@@ -227,13 +227,13 @@ export const getStaticProps = async ({ params }) => {
       category: categoryData?.data?.category,
       menuItems,
       pageMeta: {
-        siteName: "Wow Skin Science",
+        siteName: "Body Cupid",
         title: categoryData?.data?.category?.name,
         description:
           "Discover the ultimate destination for expert skin & hair care tips, along with a curated selection of products for you. Explore our blog",
         canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/category/${categoryData?.data?.category?.slug}`,
 
-        image: getPublicImageURL("/images/wow-logo.webp"),
+        image: getPublicImageURL("/images/logo.png"),
       },
     },
     revalidate: 60 * 60 * 24,

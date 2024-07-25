@@ -179,7 +179,7 @@ export async function getStaticProps() {
       menuItems,
       featuredBlogs: featuredBlogData?.data?.posts?.edges,
       pageMeta: {
-        siteName: "Wow Skin Science",
+        siteName: "Body Cupid",
         title:
           "Best blogs for skin & hair care tips, products for all skin & hair Type",
         description:
@@ -188,7 +188,7 @@ export async function getStaticProps() {
         image:
           (blogData?.data?.posts?.edges?.length &&
             blogData?.data?.posts?.edges?.[0]) ??
-          getPublicImageURL("/images/wow-logo.webp"),
+          getPublicImageURL("/images/logo.png"),
       },
     },
     revalidate: 60 * 60 * 24,

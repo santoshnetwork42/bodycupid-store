@@ -17,7 +17,7 @@ function PostTwo(props) {
               objectFit="cover"
               style={{ backgroundColor: "#DEE6E8" }}
               onError={(e) => {
-                e.target.src = "/images/wow-logo.webp";
+                e.target.src = "/images/logo.png";
               }}
               loader="wp"
               priority={priority}

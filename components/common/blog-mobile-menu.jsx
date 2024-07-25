@@ -58,7 +58,7 @@ function BlogMobileMenu({ store, menuItems }) {
           <div className="pt-0 pb-0 d-flex align-items-center">
             <ALink href="/" className="logo-footer">
               <Image
-                src="/images/wow-logo.webp"
+                src="/images/logo.png"
                 loading="eager"
                 alt="logo"
                 height={60}

@@ -92,15 +92,15 @@ export default function BlogTagsPage({
                     height: "84px",
                   }}
                 >
-                  {/* <Image
+                  <Image
                     layout="fill"
                     objectFit="cover"
-                    src={getPublicImageURL("/images/wow-logo.webp")}
+                    src={getPublicImageURL("/images/logo.png")}
                     loader="local"
                     className="rounded-circle"
                     alt={blog?.author?.node?.name || "d"}
                     style={{ borderRadius: "50%" }}
-                  /> */}
+                  />
                 </div>
 
                 <div>
@@ -317,12 +317,12 @@ export const getStaticProps = async ({ params }) => {
       fetchedBlogsPageInfo: blogData?.data?.posts?.pageInfo,
       menuItems,
       pageMeta: {
-        siteName: "Wow Skin Science",
+        siteName: "Body Cupid",
         title: authorData?.data?.user?.name,
         description:
           "Discover the ultimate destination for expert skin & hair care tips, along with a curated selection of products for you. Explore our blog",
         canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/author/${authorData.data?.user?.slug}`,
-        image: getPublicImageURL("/images/wow-logo.webp"),
+        image: getPublicImageURL("/images/logo.png"),
       },
     },
     revalidate: 60 * 60 * 24,
