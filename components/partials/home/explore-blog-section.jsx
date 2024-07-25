@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 
 function ExploreBlogSection({ blogs, blogClicked }) {
   const { isSmallSize: isMobile } = useWindowDimensions();
+
   if (!blogs) return null;
   else if (blogs.length === 0) return null;
 
