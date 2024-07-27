@@ -47,7 +47,7 @@ const couponDiscountBar = ({
       const couponText =
         (appliedCoupon &&
           appliedCoupon?.getYAmount &&
-          `Congrats, 'Buy ${appliedCoupon?.buyXQuantity} @ ₹${appliedCoupon?.getYAmount} Offer' can be availed!`) ||
+          `Congrats, 'Buy ${appliedCoupon?.buyXQuantity} @ ₹${appliedCoupon?.getYAmount} Offer' can be applied!`) ||
         "";
 
       return (
