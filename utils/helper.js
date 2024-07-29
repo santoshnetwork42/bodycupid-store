@@ -188,11 +188,11 @@ export function initializeMoengageAndAddInfo({
   const Moengage = window?.Moengage;
   if (Moengage) {
     const mobile = phone?.split("+91")[1];
-    Moengage.add_first_name(firstName);
-    Moengage.add_last_name(lastName);
-    Moengage.add_email(email);
-    Moengage.add_mobile(mobile);
-    Moengage.add_unique_user_id(mobile);
+    if (firstName) Moengage.add_first_name(firstName);
+    if (lastName) Moengage.add_last_name(lastName);
+    if (email) Moengage.add_email(email);
+    if (mobile) Moengage.add_mobile(mobile);
+    if (mobile) Moengage.add_unique_user_id(mobile);
   }
 }
 

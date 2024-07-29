@@ -23,7 +23,7 @@ function AllCollection(props) {
 
   return (
     <main className="main">
-      <NextHead {...pageMeta} />
+      {/* <NextHead {...pageMeta} /> */}
       <h1 className="d-none">{name} - All Products</h1>
       <div className="page-content pb-3">
         <div className="container">

@@ -512,6 +512,7 @@ export const applyCoupon = /* GraphQL */ `
       getYPercentage
       getYQuantity
       getYProduct
+      applyOnAllVariants
       getYStoreProduct {
         id
         title
@@ -606,6 +607,7 @@ export const getOrder = /* GraphQL */ `
         location
         area
       }
+      checkoutChannel
       appliedRewardPoints
       billingAddress {
         name
@@ -1618,15 +1620,13 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
 export const createShoppingCart = /* GraphQL */ `
   mutation CreateShoppingCart($input: CreateShoppingCartInput!) {
     createShoppingCart(input: $input) {
-      id
-      storeId
-      userId
-      couponCodeId
-      createdAt
-      updatedAt
+      success
+      message
+      shoppingCartId
     }
   }
 `;
+
 export const updateShoppingCart = /* GraphQL */ `
   mutation UpdateShoppingCart($input: UpdateShoppingCartInput!) {
     updateShoppingCart(input: $input) {
@@ -2502,6 +2502,95 @@ export const verifyCustomOTP = /* GraphQL */ `
   query VerifyCustomOTP($storeId: ID!, $phone: AWSPhone!, $otp: String!) {
     verifyCustomOTP(storeId: $storeId, phone: $phone, otp: $otp) {
       isVerified
+    }
+  }
+`;
+
+export const getCouponRule = /* GraphQL */ `
+  query GetCouponRule($code: ID!, $storeId: ID!) {
+    getCouponRule(code: $code, storeId: $storeId) {
+      id
+      code
+      storeId
+      prefix
+      userId
+      name
+      description
+      couponType
+      deviceType
+      expirationDate
+      couponCodeCount
+      getYStoreProduct {
+        id
+        title
+        brand
+        vendor
+        collections
+        categoryId
+        subCategoryId
+        storeId
+        bulkActionId
+        isFeatured
+        productType
+        createdAt
+        slug
+        pageTitle
+        productDescription
+        longDescription
+        manufacturer
+        updatedAt
+        isPublished
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        benefits
+        weight
+        weightUnit
+        minimumOrderQuantity
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        totalOrders
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        googleCategory
+        hasVarient
+        hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
+      }
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
+      minOrderValue
+      maxDiscount
+      maxAllowedUsage
+      applicableCollections
+      applicableProducts
+      paymentMethod
+      isArchive
+      isFeatured
+      isBulkCoupon
+      autoApply
+      isAffiliated
+      createdAt
+      updatedAt
     }
   }
 `;

@@ -22,7 +22,7 @@ function AllProduct(props) {
 
   return (
     <main className="main">
-      <NextHead {...pageMeta} />
+      {/* <NextHead {...pageMeta} /> */}
 
       <h1 className="d-none">{name} - All Products</h1>
 

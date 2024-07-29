@@ -53,7 +53,7 @@ function CollectionPage(props) {
 
   return (
     <main className="main searchBar">
-      <NextHead {...pageMeta} />
+      {/* <NextHead {...pageMeta} /> */}
 
       <h1 className="d-none">
         {name} - {data?.name}
@@ -141,86 +141,86 @@ export const getStaticProps = async (context) => {
   const { webUrl, name } = getStore;
 
   // Category By Slug
-  const [category] = await fetchData(getBasicCategory, {
-    slug,
-    filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
-  }).then((resp) => resp.byslugProductCategory.items);
+  // const [category] = await fetchData(getBasicCategory, {
+  //   slug,
+  //   filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
+  // }).then((resp) => resp.byslugProductCategory.items);
 
-  if (category) {
-    // filter.categoryId = { eq: category.id };
-    const {
-      title,
-      description,
-      imageUrl,
-      name: categoryName,
-      metadata,
-    } = category;
+  // if (category) {
+  //   // filter.categoryId = { eq: category.id };
+  //   const {
+  //     title,
+  //     description,
+  //     imageUrl,
+  //     name: categoryName,
+  //     metadata,
+  //   } = category;
 
-    // Get Product By Category
-    const getProducts = fetchData(findProducts, {
-      filter: {
-        status: { eq: "ENABLED" },
-        storeId: { eq: STORE_ID },
-        and: [
-          {
-            or: [
-              {
-                categoryId: { eq: category.id },
-              },
-              {
-                subCategoryId: { eq: category.id },
-              },
-            ],
-          },
-        ],
-      },
-      sort: [{ field: "position", direction: "asc" }],
-      variantFilter: { status: { eq: "ENABLED" } },
-      imageLimit: 1,
-    });
+  //   // Get Product By Category
+  //   const getProducts = fetchData(findProducts, {
+  //     filter: {
+  //       status: { eq: "ENABLED" },
+  //       storeId: { eq: STORE_ID },
+  //       and: [
+  //         {
+  //           or: [
+  //             {
+  //               categoryId: { eq: category.id },
+  //             },
+  //             {
+  //               subCategoryId: { eq: category.id },
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //     sort: [{ field: "position", direction: "asc" }],
+  //     variantFilter: { status: { eq: "ENABLED" } },
+  //     imageLimit: 1,
+  //   });
 
-    // Get Product Sub-Category By Category ID
-    const getSubCategoriesByCategory = fetchData(getSubCategoriesByCategoryID, {
-      filter: {
-        storeId: { eq: STORE_ID },
-        categoryID: { eq: category.id },
-        isArchive: { eq: false },
-      },
-    });
+  //   // Get Product Sub-Category By Category ID
+  //   const getSubCategoriesByCategory = fetchData(getSubCategoriesByCategoryID, {
+  //     filter: {
+  //       storeId: { eq: STORE_ID },
+  //       categoryID: { eq: category.id },
+  //       isArchive: { eq: false },
+  //     },
+  //   });
 
-    const [{ searchProducts }, { searchProductCategories }] = await Promise.all(
-      [getProducts, getSubCategoriesByCategory]
-    );
+  //   const [{ searchProducts }, { searchProductCategories }] = await Promise.all(
+  //     [getProducts, getSubCategoriesByCategory]
+  //   );
 
-    const filterItems = [
-      { name: "All", path: `/collections/${category.slug}` },
-      ...searchProductCategories.items.map((sub) => ({
-        ...sub,
-        path: `/collections/${sub.slug}`,
-      })),
-    ];
+  //   const filterItems = [
+  //     { name: "All", path: `/collections/${category.slug}` },
+  //     ...searchProductCategories.items.map((sub) => ({
+  //       ...sub,
+  //       path: `/collections/${sub.slug}`,
+  //     })),
+  //   ];
 
-    return {
-      props: {
-        slug,
-        data: category,
-        pageType: "CATEGORY",
-        sectionId: category.id,
-        products: searchProducts,
-        filterItems,
-        pageFilter: filter,
-        pageMeta: {
-          siteName: name,
-          title: metadata?.title || title || categoryName,
-          description: metadata?.description || description,
-          canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
-          image: getPublicImageURL(metadata?.image || imageUrl),
-          noIndex: metadata?.noIndex || false,
-        },
-      },
-      revalidate: 1800,
-    };
-  }
+  //   return {
+  //     props: {
+  //       slug,
+  //       data: category,
+  //       pageType: "CATEGORY",
+  //       sectionId: category.id,
+  //       products: searchProducts,
+  //       filterItems,
+  //       pageFilter: filter,
+  //       pageMeta: {
+  //         siteName: name,
+  //         title: metadata?.title || title || categoryName,
+  //         description: metadata?.description || description,
+  //         canonical: metadata?.canonical || `${webUrl}/collections/${slug}`,
+  //         image: getPublicImageURL(metadata?.image || imageUrl),
+  //         noIndex: metadata?.noIndex || false,
+  //       },
+  //     },
+  //     revalidate: 1800,
+  //   };
+  // }
 
   const collection = await fetchData(searchCollectionTypes, {
     filter: {

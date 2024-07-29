@@ -3,6 +3,7 @@ import { API } from "aws-amplify";
 import { persistReducer } from "redux-persist";
 import { v4 as uuid } from "uuid";
 import vercelAnalytics from "@vercel/analytics";
+import posthog from "posthog-js";
 
 import storage from "~/utils/storage";
 import { actionTypes as cartActions } from "~/store/cart";
@@ -66,13 +67,23 @@ export const eventActions = {
     type: actionTypes.VIEW_ITEM,
     payload: { product },
   }),
-  placeOrder: (order, products, coupon, address, paymentType) => ({
+  placeOrder: (order, coupon, address, freeProducts = []) => ({
     type: actionTypes.PLACE_ORDER,
-    payload: { order, products, coupon, address, paymentType },
+    payload: { order, coupon, address, freeProducts },
   }),
-  startCheckout: () => ({ type: actionTypes.CHECKOUT_STARTED }),
+  startCheckout: (source) => ({
+    type: actionTypes.CHECKOUT_STARTED,
+    payload: {
+      source: source || "BUYWOW",
+    },
+  }),
   viewCart: () => ({ type: actionTypes.VIEW_CART }),
-  proceedToCheckout: () => ({ type: actionTypes.PROCEED_TO_CHECKOUT }),
+  proceedToCheckout: (source) => ({
+    type: actionTypes.PROCEED_TO_CHECKOUT,
+    payload: {
+      source: source || "BUYWOW",
+    },
+  }),
   auth: (action, moe) => ({
     type: actionTypes.AUTH,
     payload: {
@@ -83,13 +94,13 @@ export const eventActions = {
     },
   }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
-  addressAdded: (address, totalPrice) => ({
+  addressAdded: (address, totalPrice, checkoutSource = "BUYWOW") => ({
     type: actionTypes.ADDRESS_ADDED,
-    payload: { address, totalPrice },
+    payload: { address, totalPrice, checkoutSource },
   }),
-  addressSelected: (address, totalPrice) => ({
+  addressSelected: (address, totalPrice, checkoutSource = "BUYWOW") => ({
     type: actionTypes.ADDRESS_SELECTED,
-    payload: { address, totalPrice },
+    payload: { address, totalPrice, checkoutSource },
   }),
   categoryViewed: (payload) => ({
     type: actionTypes.CATEGORY_VIEWED,
@@ -99,8 +110,9 @@ export const eventActions = {
     type: actionTypes.LOG_OUT,
     payload,
   }),
-  addPaymentInfo: () => ({
+  addPaymentInfo: (checkoutSource = "BUYWOW") => ({
     type: actionTypes.ADD_PAYMENT_INFO,
+    payload: { checkoutSource },
   }),
   bannerClicked: (payload) => ({
     type: actionTypes.BANNER_CLICKED,
@@ -226,9 +238,6 @@ export function* eventsSaga() {
         const { phone } = e.payload;
         const mobile = phone?.split("+91")[1];
         initializeMoengageAndAddInfo({
-          firstName: null,
-          lastName: null,
-          email: null,
           phone,
         });
 
@@ -240,9 +249,7 @@ export function* eventsSaga() {
           URL: window.location.href,
           Source: eventSource,
         });
-      }
-
-      if (action === "login") {
+      } else if (action === "login") {
         if (userId) {
           const {
             data: { getUser: getUserResponse },
@@ -296,8 +303,9 @@ export function* eventsSaga() {
     }
   });
 
-  yield takeEvery(actionTypes.PROCEED_TO_CHECKOUT, function* saga() {
+  yield takeEvery(actionTypes.PROCEED_TO_CHECKOUT, function* saga(e) {
     try {
+      const { source } = e.payload || {};
       const userData = yield select((state) => state.user.data);
       if (window && window.dataLayer) {
         window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
@@ -307,6 +315,11 @@ export function* eventsSaga() {
           login: userData ? 1 : 0,
         });
       }
+
+      posthog.capture("Checkout Started", {
+        source,
+      });
+
       // Analytics.record({
       //   name: "proceed_to_checkout",
       //   login: userData ? "1" : "0",
@@ -426,35 +439,51 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
     try {
-      const { order, products, coupon, address, paymentType } = e.payload;
+      const { order, coupon, address, freeProducts = [] } = e.payload;
       const { id, totalShippingCharges, totalAmount, totalDiscount, code } =
         order;
-
+      const productsData = yield select((state) => state.cart.data);
       const userData = yield select((state) => state.user.data);
-      const user = userMapper(userData, address);
+      const user = userMapper(userData, { ...address, userId: order?.userId });
       const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
-      const { ga, pixel, vercel } = orderMapper(products, coupon, user);
-      const { orderCreated } = moEngagedOrderMapper(
-        products,
+      const { ga, pixel, vercel } = orderMapper(
+        [...productsData, ...freeProducts],
         coupon,
-        paymentType,
+        user,
+        order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK"
+      );
+      const { orderCreated } = moEngagedOrderMapper(
+        [...productsData, ...freeProducts],
+        coupon,
+        order?.paymentType,
         order,
-        isFirstTimeUser
+        isFirstTimeUser,
+        order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK"
       );
 
       const itemPurchasedEvents = moEngageItemPurchasedMapper(
-        products,
+        [...productsData, ...freeProducts],
         coupon,
-        paymentType,
+        order?.paymentType,
         order,
-        isFirstTimeUser
+        isFirstTimeUser,
+        order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK"
       );
 
-      const { firstName, lastName, email, phone, city, pinCode } = address;
-
-      initializeMoengageAndAddInfo({
+      const {
+        first_name,
+        last_name,
         firstName,
         lastName,
+        email,
+        phone,
+        city,
+        pinCode,
+      } = address;
+
+      initializeMoengageAndAddInfo({
+        firstName: first_name || firstName,
+        lastName: last_name || lastName,
         email,
         phone,
       });
@@ -492,6 +521,11 @@ export function* eventsSaga() {
           },
         });
       }
+
+      posthog.capture("Order Created", {
+        source: order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK",
+        paymentType: order?.paymentType,
+      });
 
       // Analytics.record({
       //   name: "purchase",
@@ -618,13 +652,15 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.APPLY_COUPONS, function* saga(e) {
+    const { coupon } = e.payload;
+    const checkoutSource = coupon.checkoutSource || "BUYWOW";
     try {
       const {
         cart: { data, coupon },
       } = yield select();
       const userData = yield select((state) => state.user.data);
       const user = userMapper(userData);
-      const { pixel } = orderMapper(data, coupon, user);
+      const { pixel } = orderMapper(data, coupon, user, checkoutSource);
 
       if (window && window.dataLayer) {
         window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
@@ -765,7 +801,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.ADDRESS_ADDED, function* saga(e) {
     try {
-      const { address, totalPrice } = e.payload;
+      const { address, totalPrice, checkoutSource = "BUYWOW" } = e.payload;
 
       const { name, email, phone } = address;
       initializeMoengageAndAddInfo({
@@ -774,7 +810,11 @@ export function* eventsSaga() {
         email,
         phone,
       });
-      const { addressAdded } = addressMapper(address, totalPrice);
+      const { addressAdded } = addressMapper(
+        address,
+        totalPrice,
+        checkoutSource
+      );
 
       trackEvent("Address Added", addressAdded);
     } catch (e) {
@@ -784,9 +824,13 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.ADDRESS_SELECTED, function* saga(e) {
     try {
-      const { address, totalPrice } = e.payload;
+      const { address, totalPrice, checkoutSource = "BUYWOW" } = e.payload;
       if (address) {
-        const { addressSelected } = addressMapper(address, totalPrice);
+        const { addressSelected } = addressMapper(
+          address,
+          totalPrice,
+          checkoutSource
+        );
 
         const { name, email, phone } = address;
         initializeMoengageAndAddInfo({
@@ -805,9 +849,10 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.ADD_PAYMENT_INFO, function* saga(e) {
     try {
+      const { checkoutSource = "BUYWOW" } = e.payload;
       trackEvent("Add Payment Info", {
         URL: window.location.href,
-        Source: eventSource,
+        Source: checkoutSource === "GOKWIK" ? "Gokwik" : eventSource,
       });
     } catch (e) {
       errorHandler(e);

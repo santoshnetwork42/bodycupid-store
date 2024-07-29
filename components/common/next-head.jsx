@@ -1,5 +1,5 @@
-import React from "react";
 import Head from "next/head";
+import { GOKWIK_SCRIPT } from "~/config";
 
 function NextHead({
   siteName,
@@ -40,6 +40,8 @@ function NextHead({
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       {!!image && <meta property="twitter:image" content={image} />}
+
+      {!!GOKWIK_SCRIPT && <script defer src={GOKWIK_SCRIPT} />}
     </Head>
   );
 }

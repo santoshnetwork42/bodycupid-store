@@ -25,6 +25,7 @@ const couponDiscountBar = ({
 }) => {
   const { filteredFeaturedCoupons: featuredCoupons = [] } =
     useFeaturedCoupons();
+
   const [freeProduct = {}] = useFreeProducts({
     showNonApplicableFreeProducts: false,
   });
@@ -41,8 +42,21 @@ const couponDiscountBar = ({
 
   const hasCartItems = cartList?.length > 0;
 
-  if (collectionWiseNudgeMsg) {
-    return <CouponBanner message={collectionWiseNudgeMsg} animate={true} />;
+  if (hasCartItems) {
+    if (collectionWiseNudgeMsg) {
+      const couponText =
+        (appliedCoupon &&
+          appliedCoupon?.getYAmount &&
+          `Congrats, 'Buy ${appliedCoupon?.buyXQuantity} @ ₹${appliedCoupon?.getYAmount} Offer' can be applied!`) ||
+        "";
+
+      return (
+        <CouponBanner
+          message={couponText || collectionWiseNudgeMsg}
+          animate={true}
+        />
+      );
+    }
   }
 
   // if (hasCartItems) {

@@ -124,7 +124,7 @@ function Coupon(props) {
   );
 
   useEffect(() => {
-    if (cartList && previousCartList.current !== cartList) {
+    if (cartList || previousCartList.current !== cartList) {
       previousCartList.current = cartList;
 
       if (storedCouponCode) {

@@ -29,7 +29,14 @@ import {
 } from "~/components/icons";
 import NextImage from "~/components/image";
 import { RAZORPAY_KEY, RAZORPAY_SCRIPT } from "~/config";
-import { COD_ENABLED, MAX_COD_AMOUNT, PREPAID_ENABLED } from "~/constant";
+import {
+  COD_ENABLED,
+  MAX_COD_AMOUNT,
+  MAX_PREPAID_DISCOUNT,
+  PPCOD_AMOUNT,
+  PPCOD_ENABLED,
+  PREPAID_ENABLED,
+} from "~/constant";
 import { cartActions } from "~/store/cart";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
@@ -72,6 +79,8 @@ function Checkout(props) {
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
   const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
   const codEnabled = useConfiguration(COD_ENABLED, true);
+  const ppcodEnabled = useConfiguration(PPCOD_ENABLED, false);
+  const ppcodAmount = useConfiguration(PPCOD_AMOUNT, 0);
 
   const { isRewardApplied } = useNavBarState();
 
@@ -108,6 +117,7 @@ function Checkout(props) {
   useEffect(() => {
     setFormError(null);
   }, [shippingAddress]);
+
   useEffect(() => {
     startCheckout();
     logger.verbose("Checkout component initialized");
@@ -144,13 +154,7 @@ function Checkout(props) {
 
   const afterOrderConfirm = async () => {
     if (isConfirmed && finalOrder) {
-      onPlaceOrder(
-        finalOrder,
-        [...cartList, ...freeProducts],
-        appliedCoupon,
-        shippingAddress,
-        payMethod
-      );
+      onPlaceOrder(finalOrder, appliedCoupon, shippingAddress, freeProducts);
 
       logger.debug("Purchase event done");
       logger.debug("Redirecting to success page");
@@ -222,53 +226,43 @@ function Checkout(props) {
         setPaymentLoader(false);
       }
 
-      if (success) {
-        if (payMethod === "PREPAID") {
-          if (rzpEnabled && store && transaction && order) {
-            const options = {
-              key: RAZORPAY_KEY,
-              amount: transaction.amount,
-              currency: "INR",
-              name: store.name,
-              image: getPublicImageURL(store.imageUrl),
-              order_id: transaction.orderId,
-              handler: async function ({ razorpay_payment_id }) {
-                orderHelper.fetchTransactionStatus(
-                  order.id,
-                  razorpay_payment_id
-                );
-              },
-              prefill: {
-                name: shippingAddress.name,
-                email: shippingAddress.email,
-                contact: shippingAddress.phone,
-              },
-              notes: {
-                storeId: store.id,
-                orderId: order.id,
-                paymentId: payment.id,
-              },
-              theme: {
-                color: "#3399cc",
-              },
-              modal: {
-                ondismiss: function () {
-                  orderHelper.reset();
-                  razorpayMethod = null;
-                  setPaymentLoader(false);
-                },
-              },
-            };
+      if (success && rzpEnabled && store && transaction && order) {
+        const options = {
+          key: RAZORPAY_KEY,
+          amount: transaction.amount,
+          currency: "INR",
+          name: store.name,
+          image: getPublicImageURL(store.imageUrl),
+          order_id: transaction.orderId,
+          handler: async function ({ razorpay_payment_id }) {
+            orderHelper.fetchTransactionStatus(order.id, razorpay_payment_id);
+          },
+          prefill: {
+            name: shippingAddress.name,
+            email: shippingAddress.email,
+            contact: shippingAddress.phone,
+          },
+          notes: {
+            storeId: store.id,
+            orderId: order.id,
+            paymentId: payment.id,
+          },
+          theme: {
+            color: "#3399cc",
+          },
+          modal: {
+            ondismiss: function () {
+              orderHelper.reset();
+              razorpayMethod = null;
+              setPaymentLoader(false);
+            },
+          },
+        };
 
-            razorpayMethod = new Razorpay(options);
-            razorpayMethod.open();
-            addPaymentInfo();
-            logger.verbose("Razorpay initialization");
-          } else {
-            alertToaster("Something went wrong. Try Again!", "error");
-            logger.error("Something went wrong with Razorpay initialization");
-          }
-        }
+        razorpayMethod = new Razorpay(options);
+        razorpayMethod.open();
+        addPaymentInfo();
+        logger.verbose("Razorpay initialization");
       }
 
       return Promise.resolve();
@@ -371,7 +365,7 @@ function Checkout(props) {
                             )}
                           </div>
                           <p className="m-0 checkout-summary-total font-weight-semi-bold">
-                            ₹{toDecimal(grandTotal, 0)}
+                            ₹{toDecimal(grandTotal)}
                           </p>
                         </div>
                         {!!(
@@ -573,33 +567,36 @@ function Checkout(props) {
                                       </td>
                                     </tr>
                                   )}
-                                <tr className="summary-subtotal">
-                                  <td>
-                                    <h4 className="summary-subtitle">
-                                      Shipping
-                                      {payMethod === "PREPAID" && (
-                                        <p className="m-0">
-                                          For prepaid orders only
-                                        </p>
+                                {(!!shippingTotal ||
+                                  payMethod === "PREPAID") && (
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        Shipping
+                                        {payMethod === "PREPAID" && (
+                                          <p className="m-0">
+                                            For prepaid orders only
+                                          </p>
+                                        )}
+                                      </h4>
+                                    </td>
+                                    <td
+                                      className={`summary-subtotal-price pb-0 pt-0 ${
+                                        !shippingTotal && "discount-price-color"
+                                      }`}
+                                    >
+                                      {shippingTotal < 50 && (
+                                        <del className="summary-subtotal-listingprice mr-2">
+                                          ₹{toDecimal(50)}
+                                        </del>
                                       )}
-                                    </h4>
-                                  </td>
-                                  <td
-                                    className={`summary-subtotal-price pb-0 pt-0 ${
-                                      !shippingTotal && "discount-price-color"
-                                    }`}
-                                  >
-                                    {shippingTotal < 50 && (
-                                      <del className="summary-subtotal-listingprice mr-2">
-                                        ₹{toDecimal(50)}
-                                      </del>
-                                    )}
-                                    {!!shippingTotal
-                                      ? `₹${toDecimal(shippingTotal)}`
-                                      : "Free"}
-                                    &nbsp;
-                                  </td>
-                                </tr>
+                                      {!!shippingTotal
+                                        ? `₹${toDecimal(shippingTotal)}`
+                                        : "Free"}
+                                      &nbsp;
+                                    </td>
+                                  </tr>
+                                )}
 
                                 {!!codCharges && codCharges > 0 && (
                                   <tr className="summary-subtotal">
@@ -652,7 +649,7 @@ function Checkout(props) {
                                   </td>
                                   <td>
                                     <p className="summary-total-price ls-s">
-                                      ₹{toDecimal(grandTotal, 0)}
+                                      ₹{toDecimal(grandTotal)}
                                     </p>
                                   </td>
                                 </tr>
@@ -746,7 +743,13 @@ function Checkout(props) {
                                   ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
                                   : isMaxCODDisabled
                                   ? `COD payment is not allowed for orders above ₹${maxCOD}.`
-                                  : `Pay using Cash on Delivery.`
+                                  : ppcodEnabled && ppcodAmount
+                                  ? `Pay ₹${toDecimal(
+                                      ppcodAmount
+                                    )} now (non-refundable). Rest ₹${
+                                      codGrandTotal - ppcodAmount
+                                    } on delivery.`
+                                  : "Pay using Cash on Delivery."
                               }
                               disabled={codCouponDisabled || isMaxCODDisabled}
                               onClick={() => {

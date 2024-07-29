@@ -6,14 +6,16 @@ import { connect } from "react-redux";
 import { ShowProgressBar } from "~/components/common/sticky-progress-bar";
 import ALink from "~/components/features/custom-link";
 import { modalActions } from "~/store/modal";
-import { toDecimal } from "~/utils";
+import { getCartCount, toDecimal } from "~/utils";
 import { useNavBarState } from "~/utils/contexts/navbar";
+import CouponDiscountBar from "./coupon-discount-bar";
 
 function StickyFooter(props) {
   const { cartList, showStickyCheckout, setCartVisibility, appliedCoupon } =
     props;
   const { isRewardApplied } = useNavBarState();
   const router = useRouter();
+  const { slug } = router?.query || {};
 
   const { totalPrice, totalItems } = useCartTotal({
     paymentType: "PREPAID",
@@ -25,12 +27,10 @@ function StickyFooter(props) {
 
   const isBundleOffer = useMemo(() => {
     return !!(
-      router?.query?.slug === "bundle-offer" &&
-      cartList?.some((cart) =>
-        cart?.collections?.includes("bundle-offer")
-      )
+      slug === "bundle-offer" &&
+      cartList?.some((cart) => cart?.collections?.includes("bundle-offer"))
     );
-  }, [cartList, router?.query?.slug]);
+  }, [cartList, slug]);
 
   const bxayCoupon = useMemo(() => {
     return featuredCoupons.find(
@@ -68,22 +68,54 @@ function StickyFooter(props) {
       setCartVisibility,
     });
   }
-  return (
-    <div className="stick-bottom-button">
-      <div className="lh-default text-primary">
-        <span>{totalItems > 1 ? `${totalItems} Items` : `1 Item`}</span>
-        <p className="summary-total-price text-left ls-s">
-          ₹ {toDecimal(totalPrice)}
-        </p>
-      </div>
 
-      <ALink
-        href="#"
-        onClick={() => setCartVisibility(true)}
-        className="btn btn-dark btn-rounded btn-checkout"
-      >
-        Go To Cart
-      </ALink>
+  const totalCartItems = getCartCount(cartList);
+  const hasDiscountSlug =
+    slug === "bundle-offer-buy5" ||
+    slug === "special-deal" ||
+    slug === "bundle-offer-makeup";
+  const hasSpecialOffer = cartList?.some(
+    (cart) =>
+      cart?.collections?.includes("bundle-offer-buy5") ||
+      cart?.collections?.includes("special-deal")
+  );
+  const showDiscount = totalCartItems > 0 && hasDiscountSlug && hasSpecialOffer;
+
+  const getCollectionWiseNudgeMsg = () => {
+    if (slug === "special-deal") {
+      return "Add more items to unlock 'Buy 1 get 3 Offer'";
+    } else if (slug === "bundle-offer-buy5") {
+      return "Add more items to unlock 'Buy 5 @ ₹999 Offer'";
+    } else if (slug === "bundle-offer-makeup") {
+      return "Add more items to unlock 'Buy 3 @ ₹699 Offer'";
+    }
+
+    return "";
+  };
+
+  return (
+    <div className="sticky-container">
+      {showDiscount && (
+        <CouponDiscountBar
+          collectionWiseNudgeMsg={getCollectionWiseNudgeMsg()}
+        />
+      )}
+      <div className="stick-bottom-button">
+        <div className="lh-default text-primary">
+          <span>{totalItems > 1 ? `${totalItems} Items` : `1 Item`}</span>
+          <p className="summary-total-price text-left ls-s">
+            ₹ {toDecimal(totalPrice)}
+          </p>
+        </div>
+
+        <ALink
+          href="#"
+          onClick={() => setCartVisibility(true)}
+          className="btn btn-dark btn-rounded btn-checkout"
+        >
+          Go To Cart
+        </ALink>
+      </div>
     </div>
   );
 }

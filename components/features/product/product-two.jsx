@@ -1,6 +1,6 @@
 import { useProduct, useProductVariantGroups } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { connect } from "react-redux";
 import Image from "~/components/image";
 
@@ -12,6 +12,7 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { getCartCount, toDecimal } from "~/utils";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
+import useWindowDimensions from "~/utils/getWindowDimension";
 
 const logger = new Logger("Product-details");
 
@@ -33,6 +34,7 @@ function ProductTwo(props) {
 
   const [selectedVariant] = useProductVariantGroups(product);
   const productsNew = useProduct(product, selectedVariant?.id);
+  const { isSmallSize: isMobile } = useWindowDimensions();
 
   const {
     title,
@@ -47,6 +49,7 @@ function ProductTwo(props) {
     thumbImage,
     discount,
   } = productsNew || {};
+  const previousCartList = useRef(cartList);
 
   const bundleOfferCartList = cartList?.filter((cart) =>
     cart?.collections?.includes("bundle-offer")
@@ -92,6 +95,24 @@ function ProductTwo(props) {
       ? "#17B31B"
       : selectedLabel?.labelColor?.trim() || "#17B31B";
 
+  const showCartVisibility = ({ showEveryTime = false }) => {
+    if (cartList && previousCartList.current !== cartList) {
+      previousCartList.current = cartList;
+
+      const totalCartItems =
+        getCartCount(cartList) + productsNew?.minimumOrderQuantity || 1;
+
+      if (tagSlug === "bundle-offer-buy5") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 5 !== 0 ? false : true;
+
+        showCartModal && setCartVisibility(true);
+      } else {
+        showEveryTime && setCartVisibility(true);
+      }
+    }
+  };
+
   const addToCartHandler = (e) => {
     e?.preventDefault();
     addToCart({
@@ -101,7 +122,7 @@ function ProductTwo(props) {
     });
     if (tagSlug === "bundle-offer") {
       showCartModal && setCartVisibility(true);
-    } else setCartVisibility(true);
+    } else showCartVisibility({ showEveryTime: true });
 
     logger.verbose("Added product to cart");
     logger.debug("Added product to cart:", product);
@@ -122,9 +143,9 @@ function ProductTwo(props) {
         const recordKey = getRecordKey(product);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
-        tagSlug === "bundle-offer" &&
-          showCartModal &&
-          setCartVisibility(true);
+        if (tagSlug === "bundle-offer") {
+          showCartModal && setCartVisibility(true);
+        } else showCartVisibility({ showEveryTime: false });
         logger.verbose("Updated product quantity in cart");
         logger.debug(
           "Updated product quantity in cart:",
@@ -230,32 +251,49 @@ function ProductTwo(props) {
 
       <div className="product-details card">
         <ALink href={`/products/${slug}`}>
-          <div className="details-wrapper">
-            <h3 className="product-name product-title-min-height text-uppercase product-card-title p-0 font-weight-semi-bold">
-              {title}
-            </h3>
-            {/* <div className="product-tags lh-default">
+          <div
+            className={`${isMobile ? "details-wrapper-sm" : "details-wrapper"}`}
+          >
+            <div
+              className={`${
+                isMobile
+                  ? "product-card-details-wrapper-sm"
+                  : "product-card-details-wrapper"
+              }`}
+            >
+              <h3
+                className={`product-name product-title-min-height text-uppercase product-card-title p-0 font-weight-semi-bold ${
+                  isMobile
+                    ? "product-title-min-height-sm"
+                    : "product-title-min-height"
+                }`}
+              >
+                {title}
+              </h3>
+              {/* product-title-min-height */}
+              {/* <div className="product-tags lh-default">
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </div> */}
-            {/* <div className="product-coupon">{selectedLabel?.label?.trim()}</div> */}
-            {/* {!!product?.benefits && (
-              <div className="product-card-benefits">
-                {product?.benefits.join(" | ")}
-              </div>
-            )} */}
-
-            <div className="ratings-container mb-0">
-              {!!totalRatings && totalRatings > 0 && (
-                <>
-                  <div className="ratings-full d-flex rating-product-list mr-1">
-                    <Star size={18} color={"#FAB73B"} />
-                  </div>
-                  <span className="rating text-black font-weight-bold">
-                    {rating}
-                  </span>
-                  ({totalRatings} reviews)
-                </>
+              {/* <div className="product-coupon">{selectedLabel?.label?.trim()}</div> */}
+              {!!product?.benefits?.length && (
+                <div className="product-card-benefits">
+                  {product?.benefits.join(" | ")}
+                </div>
               )}
+
+              <div className="ratings-container mb-0">
+                {!!totalRatings && totalRatings > 0 && (
+                  <>
+                    <div className="ratings-full d-flex rating-product-list mr-1">
+                      <Star size={18} color={"#FAB73B"} />
+                    </div>
+                    <span className="rating text-black font-weight-bold">
+                      {rating}
+                    </span>
+                    ({totalRatings} reviews)
+                  </>
+                )}
+              </div>
             </div>
             <div className="product-price product-sm mt-2 mb-2 lh-1">
               <ins className="new-price ">₹{toDecimal(price || 0)}</ins>

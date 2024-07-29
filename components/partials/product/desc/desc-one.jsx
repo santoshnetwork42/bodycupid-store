@@ -1,4 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
+import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";
@@ -68,6 +69,8 @@ const getManufacturerInformation = (product) => [
 function DescOne(props) {
   const { product, user, openPasswordlessModal } = props;
   const { id, totalRatings, longDescription, additionalInfo, rating } = product;
+  const router = useRouter();
+  const { query } = router;
 
   const { isSmallSize: isMobile } = useWindowDimensions();
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
@@ -216,6 +219,13 @@ function DescOne(props) {
       });
     }
   };
+
+  useEffect(() => {
+    if (query.reviews) {
+      getProductReviews();
+      getStarAnalytics();
+    }
+  }, [query.reviews]);
 
   const totalRating = useMemo(() => {
     if (total) {
@@ -386,7 +396,7 @@ function DescOne(props) {
             </div>
           )}
           {!reviewLoading && (
-            <div className="product-tab-reviews">
+            <div className="product-tab-reviews" id="product-tab-reviews">
               <div className="reply">
                 <div className="title-wrapper text-left">
                   {(!!reviews.length || !!userReview) && (
