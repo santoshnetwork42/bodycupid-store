@@ -2178,6 +2178,7 @@ export const searchCollectionTypes = /* GraphQL */ `
         priority
         imageUrl
         defaultSorting
+        showOutOfStockProducts
         isArchive
         bannerUrl
         metadata {
@@ -2385,6 +2386,7 @@ export const getCollectionType = /* GraphQL */ `
         isArchive
         imageUrl
         name
+        showOutOfStockProducts
       }
     }
   }
