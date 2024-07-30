@@ -239,7 +239,7 @@ export const getStaticProps = async (context) => {
       imageUrl,
       name: collectionName,
       metadata,
-      showOutOfStockProducts = false,
+      showOutOfStockProducts = true,
     } = collection;
 
     const otherCollections = await fetchData(searchCollectionTypes, {
