@@ -16,6 +16,8 @@ import { ProgressBar } from "~/components/common/progress-bar";
 import ALink from "~/components/features/custom-link";
 import { Bag, Cart, Cross, Ellipse, LoyaltyTag } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
+import LimitedTimeProduct from "~/components/partials/cart/limited-time-product";
+import LimitedTimeProductDeal from "~/components/partials/cart/limited-time-product-deal";
 import { cartActions } from "~/store/cart";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
@@ -65,6 +67,14 @@ function CartMenu(props) {
     viewCart();
     logger.verbose("View Cart");
   }, []);
+
+  const validLtoProduct =
+    !!cartItems?.length &&
+    (cartItems.find((i) => i.ltoProduct) || cartItems.find((i) => i.ltoDeal));
+
+  const outOfStock =
+    validLtoProduct?.qty >
+    ((inventoryMapping || {})[validLtoProduct?.recordKey] || 99);
 
   useEffect(() => {
     if (isCartOpen) {
@@ -211,6 +221,20 @@ function CartMenu(props) {
                           inventory={(inventoryMapping || {})[item.recordKey]}
                         />
                       ))}
+                      <div className="pt-2">
+                        {!!validLtoProduct?.ltoDeal && !outOfStock && (
+                          <LimitedTimeProductDeal
+                            parentRecordKey={validLtoProduct?.recordKey}
+                            product={validLtoProduct?.ltoDeal}
+                            addedAt={validLtoProduct?.addedAt}
+                          />
+                        )}
+                        {!!validLtoProduct?.ltoProduct && !outOfStock && (
+                          <LimitedTimeProduct
+                            product={validLtoProduct?.ltoProduct}
+                          />
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

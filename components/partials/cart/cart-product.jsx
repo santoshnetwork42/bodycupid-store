@@ -7,8 +7,8 @@ import { Delete, Free } from "~/components/icons";
 
 import { useProductVariantGroups } from "@wow-star/utils";
 import NextImage from "~/components/image";
-import LimitedTimeProduct from "~/components/partials/cart/limited-time-product";
-import LimitedTimeProductDeal from "~/components/partials/cart/limited-time-product-deal";
+// import LimitedTimeProduct from "~/components/partials/cart/limited-time-product";
+// import LimitedTimeProductDeal from "~/components/partials/cart/limited-time-product-deal";
 import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import useWindowDimensions from "~/utils/getWindowDimension";
@@ -459,20 +459,20 @@ function CartProduct({
           )}
         </div>
 
-        {(!cartItemType || cartItemType === "CART") && (
+        {/* {(!cartItemType || cartItemType === "CART") && (
           <>
-            {/* {!!ltoDeal && !outOfStock && (
+            {!!ltoDeal && !outOfStock && (
               <LimitedTimeProductDeal
                 parentRecordKey={recordKey}
                 product={ltoDeal}
                 addedAt={item.addedAt}
               />
-            )} */}
+            )}
             {!!ltoProduct && !outOfStock && (
               <LimitedTimeProduct product={ltoProduct} />
             )}
           </>
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -29,3 +29,5 @@ export const GOKWIK_SCRIPT = process.env.NEXT_PUBLIC_GOKWIK_SCRIPT;
 export const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 export const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 export const POSTHOG_FLAG = process.env.NEXT_PUBLIC_POSTHOG_FLAG;
+export const VERCEL_AB_FLAG = process.env.NEXT_PUBLIC_AB_FLAG;
+export const AB_THRESHOLD = process.env.NEXT_PUBLIC_AB_THRESHOLD;
