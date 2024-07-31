@@ -65,9 +65,16 @@ export const eventActions = {
     type: actionTypes.VIEW_ITEM,
     payload: { product },
   }),
-  placeOrder: (order, coupon, address, freeProducts = []) => ({
+  placeOrder: (
+    order,
+    products,
+    coupon,
+    address,
+    paymentType,
+    checkoutSource
+  ) => ({
     type: actionTypes.PLACE_ORDER,
-    payload: { order, coupon, address, freeProducts },
+    payload: { order, products, coupon, address, paymentType, checkoutSource },
   }),
   startCheckout: (source) => ({
     type: actionTypes.CHECKOUT_STARTED,
