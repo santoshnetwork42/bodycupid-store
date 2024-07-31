@@ -1,10 +1,16 @@
+import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import awaitGlobal from "await-global";
-import { API, Amplify, Analytics, Auth, Hub, Logger } from "aws-amplify";
+import {
+  API,
+  Amplify,
+  Analytics as AnalyticsClass,
+  Auth,
+  Hub,
+  Logger,
+} from "aws-amplify";
 import Cookie from "js-cookie";
 import { useRouter } from "next/router";
-import posthog from "posthog-js";
-import { PostHogProvider } from "posthog-js/react";
 import { useCallback, useEffect } from "react";
 import "react-owl-carousel2/lib/styles.css";
 import { Provider, useStore } from "react-redux";
@@ -16,13 +22,7 @@ import Header from "~/components/common/header";
 import NextHead from "~/components/common/next-head";
 import Layout from "~/components/layout";
 import Scripts from "~/components/scripts";
-import {
-  AWS_CLIENT_ID,
-  POSTHOG_HOST,
-  POSTHOG_KEY,
-  STORE_ID,
-  STORE_PREFIX,
-} from "~/config";
+import { AWS_CLIENT_ID, STORE_ID, STORE_PREFIX } from "~/config";
 import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
 import { getStore, getUser } from "~/graphql/api";
 import { rootActions, wrapper } from "~/store";
@@ -42,7 +42,7 @@ Amplify.configure({
   ssr: true,
   aws_user_pools_web_client_id: AWS_CLIENT_ID,
 });
-Analytics.disable();
+AnalyticsClass.disable();
 
 const logger = new Logger("App");
 
@@ -245,17 +245,6 @@ const App = ({ Component, pageProps }) => {
     setGuestCheckout();
   }, []);
 
-  if (typeof window !== "undefined") {
-    // checks that we are client-side
-    posthog.init(POSTHOG_KEY, {
-      api_host: POSTHOG_HOST || "https://us.i.posthog.com",
-      person_profiles: "always",
-      loaded: (posthog) => {
-        if (process.env.NODE_ENV === "development") posthog.debug();
-      },
-    });
-  }
-
   useEffect(() => {
     awaitGlobal("FB")
       .then((fb) => {
@@ -274,27 +263,26 @@ const App = ({ Component, pageProps }) => {
       <SpeedInsights route={router.pathname} />
 
       <NextHead {...pageMeta} />
-      <PostHogProvider client={posthog}>
-        <Provider store={store}>
-          <PersistGate
-            persistor={store.__persistor}
-            loading={<Header navbar={{ hideCart: true, hideMainMenu: true }} />}
-          >
-            <ABProvider>
-              <FomoProvider>
-                <NavbarProvider>
-                  <GoKwikProvider>
-                    <Layout navbar={navbarProps} footer={footerProps}>
-                      <Scripts />
-                      <Component {...pageProps} />
-                    </Layout>
-                  </GoKwikProvider>
-                </NavbarProvider>
-              </FomoProvider>
-            </ABProvider>
-          </PersistGate>
-        </Provider>
-      </PostHogProvider>
+      <Provider store={store}>
+        <PersistGate
+          persistor={store.__persistor}
+          loading={<Header navbar={{ hideCart: true, hideMainMenu: true }} />}
+        >
+          <ABProvider>
+            <FomoProvider>
+              <NavbarProvider>
+                <GoKwikProvider>
+                  <Layout navbar={navbarProps} footer={footerProps}>
+                    <Scripts />
+                    <Component {...pageProps} />
+                    <Analytics />
+                  </Layout>
+                </GoKwikProvider>
+              </NavbarProvider>
+            </FomoProvider>
+          </ABProvider>
+        </PersistGate>
+      </Provider>
     </>
   );
 };

@@ -1,12 +1,13 @@
-import { takeEvery, select, call } from "redux-saga/effects";
+import { track } from "@vercel/analytics";
 import { API } from "aws-amplify";
 import { persistReducer } from "redux-persist";
+import { call, select, takeEvery } from "redux-saga/effects";
 import { v4 as uuid } from "uuid";
-import vercelAnalytics from "@vercel/analytics";
-import posthog from "posthog-js";
 
-import storage from "~/utils/storage";
+import { STORE_PREFIX } from "~/config";
+import { getUser } from "~/graphql/api";
 import { actionTypes as cartActions } from "~/store/cart";
+import { errorHandler } from "~/utils/errorHandler";
 import {
   addressMapper,
   itemMapper,
@@ -15,15 +16,13 @@ import {
   orderMapper,
   userMapper,
 } from "~/utils/events";
-import { STORE_PREFIX } from "~/config";
 import {
   getRecordKey,
   getSource,
   initializeMoengageAndAddInfo,
   trackEvent,
 } from "~/utils/helper";
-import { getUser } from "~/graphql/api";
-import { errorHandler } from "~/utils/errorHandler";
+import storage from "~/utils/storage";
 
 export const actionTypes = {
   VIEW_ITEM: "VIEW_ITEM",
@@ -187,7 +186,7 @@ export function* eventsSaga() {
               });
             }
             // Analytics.record({ name: "out_of_stock", attributes: payload });
-            vercelAnalytics.track("out_of_stock", payload);
+            // vercelAnalytics.track("out_of_stock", payload);
           }
         });
       }
@@ -208,7 +207,7 @@ export function* eventsSaga() {
         });
       }
       // Analytics.record({ name: "search", attributes: { search_term: term } });
-      vercelAnalytics.track("search", { searchTerm: term });
+      // vercelAnalytics.track("search", { searchTerm: term });
     } catch (e) {
       errorHandler(e);
     }
@@ -292,7 +291,7 @@ export function* eventsSaga() {
         window.dataLayer.push({ event: action, eventID: uuid() });
       }
       // Analytics.record({ name: action });
-      vercelAnalytics.track(action);
+      // vercelAnalytics.track(action);
     } catch (e) {
       errorHandler(e);
     }
@@ -311,15 +310,19 @@ export function* eventsSaga() {
         });
       }
 
-      posthog.capture("Checkout Started", {
+      track("proceed_to_checkout", {
+        login: userData ? 1 : 0,
         source,
       });
+
+      // posthog.capture("Checkout Started", {
+      //   source,
+      // });
 
       // Analytics.record({
       //   name: "proceed_to_checkout",
       //   login: userData ? "1" : "0",
       // });
-      vercelAnalytics.track("proceed_to_checkout", { login: userData ? 1 : 0 });
     } catch (e) {
       errorHandler(e);
     }
@@ -357,7 +360,7 @@ export function* eventsSaga() {
         });
       }
       // Analytics.record({ name: eventName, pinpoint, metrics: { value } });
-      vercelAnalytics.track(eventName, vercel);
+      // vercelAnalytics.track(eventName, vercel);
     } catch (e) {
       errorHandler(e);
     }
@@ -393,7 +396,7 @@ export function* eventsSaga() {
       //   pinpoint,
       //   metrics: { value },
       // });
-      vercelAnalytics.track("remove_from_cart", vercel);
+      // vercelAnalytics.track("remove_from_cart", vercel);
     } catch (e) {
       errorHandler(e);
     }
@@ -426,7 +429,7 @@ export function* eventsSaga() {
         });
       }
       // Analytics.record({ name: "view_item", pinpoint, metrics: { value } });
-      vercelAnalytics.track("view_item", vercel);
+      // vercelAnalytics.track("view_item", vercel);
     } catch (e) {
       errorHandler(e);
     }
@@ -434,35 +437,49 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
     try {
-      const { order, coupon, address, freeProducts = [] } = e.payload;
+      const {
+        order,
+        products,
+        coupon,
+        address,
+        paymentType,
+        checkoutSource = "BUYWOW",
+      } = e.payload;
       const { id, totalShippingCharges, totalAmount, totalDiscount, code } =
         order;
-      const productsData = yield select((state) => state.cart.data);
+
+      const productsLocal = yield select((state) => state.cart.data);
+
+      const productsData =
+        checkoutSource === "BUYWOW"
+          ? [...products, ...productsLocal]
+          : [...products];
+
       const userData = yield select((state) => state.user.data);
       const user = userMapper(userData, { ...address, userId: order?.userId });
       const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
       const { ga, pixel, vercel } = orderMapper(
-        [...productsData, ...freeProducts],
+        productsData,
         coupon,
         user,
-        order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK"
+        checkoutSource
       );
       const { orderCreated } = moEngagedOrderMapper(
-        [...productsData, ...freeProducts],
+        productsData,
         coupon,
         order?.paymentType,
         order,
         isFirstTimeUser,
-        order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK"
+        checkoutSource
       );
 
       const itemPurchasedEvents = moEngageItemPurchasedMapper(
-        [...productsData, ...freeProducts],
+        productsData,
         coupon,
         order?.paymentType,
         order,
         isFirstTimeUser,
-        order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK"
+        checkoutSource
       );
 
       const {
@@ -482,10 +499,12 @@ export function* eventsSaga() {
         email,
         phone,
       });
+
       trackEvent("Order Created", orderCreated);
       itemPurchasedEvents.forEach((itemPurchased) => {
         trackEvent("Item Purchased", itemPurchased);
       });
+
       if (window && window.dataLayer) {
         window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
         window.dataLayer.push({
@@ -517,10 +536,21 @@ export function* eventsSaga() {
         });
       }
 
-      posthog.capture("Order Created", {
-        source: order?.checkoutChannel === "CUSTOM" ? "BUYWOW" : "GOKWIK",
-        paymentType: order?.paymentType,
+      track("purchase", {
+        transaction_id: id,
+        value: totalAmount,
+        tax: 0,
+        discount: totalDiscount,
+        shipping: totalShippingCharges,
+        currency: "INR",
+        coupon: coupon?.code || "",
+        source: checkoutSource,
       });
+
+      // posthog.capture("Order Created", {
+      //   source: checkoutSource,
+      //   paymentType,
+      // });
 
       // Analytics.record({
       //   name: "purchase",
@@ -535,16 +565,6 @@ export function* eventsSaga() {
       //   },
       //   metrics: { value: totalAmount },
       // });
-
-      vercelAnalytics.track("purchase", {
-        transaction_id: id,
-        value: totalAmount,
-        tax: 0,
-        discount: totalDiscount,
-        shipping: totalShippingCharges,
-        currency: "INR",
-        coupon: coupon?.code || "",
-      });
 
       // pinpoint.forEach((attr) => {
       //   Analytics.record({
@@ -561,17 +581,17 @@ export function* eventsSaga() {
       //   });
       // });
 
-      vercel.forEach((attr) => {
-        vercelAnalytics.track("purchase_item", {
-          ...attr,
-          transaction_id: id,
-          value: totalAmount,
-          tax: 0,
-          shipping: totalShippingCharges,
-          currency: "INR",
-          coupon: coupon?.code || "",
-        });
-      });
+      // vercel.forEach((attr) => {
+      //   vercelAnalytics.track("purchase_item", {
+      //     ...attr,
+      //     transaction_id: id,
+      //     value: totalAmount,
+      //     tax: 0,
+      //     shipping: totalShippingCharges,
+      //     currency: "INR",
+      //     coupon: coupon?.code || "",
+      //   });
+      // });
     } catch (e) {
       errorHandler(e);
     }
@@ -616,10 +636,10 @@ export function* eventsSaga() {
       //   metrics: { value },
       // });
 
-      vercelAnalytics.track("begin_checkout", {
-        currency: "INR",
-        coupon: coupon?.code || "",
-      });
+      // vercelAnalytics.track("begin_checkout", {
+      //   currency: "INR",
+      //   coupon: coupon?.code || "",
+      // });
 
       // pinpoint.forEach((attr) => {
       //   Analytics.record({
@@ -707,10 +727,10 @@ export function* eventsSaga() {
       //   metrics: { value },
       // });
 
-      vercelAnalytics.track("view_cart", {
-        currency: "INR",
-        coupon: coupon?.code || "",
-      });
+      // vercelAnalytics.track("view_cart", {
+      //   currency: "INR",
+      //   coupon: coupon?.code || "",
+      // });
 
       // pinpoint.forEach((attr) => {
       //   Analytics.record({
@@ -766,10 +786,10 @@ export function* eventsSaga() {
       //   },
       // });
 
-      vercelAnalytics.track("view_item_list", {
-        item_list_id: id,
-        item_list_name: name,
-      });
+      // vercelAnalytics.track("view_item_list", {
+      //   item_list_id: id,
+      //   item_list_name: name,
+      // });
 
       // pinpoint.forEach((attr) => {
       //   Analytics.record({

@@ -1,12 +1,12 @@
 import { useCartTotal, useConfiguration } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
 import { useRouter } from "next/router";
-import { useFeatureFlagVariantKey } from "posthog-js/react";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
+import Cookies from "js-cookie";
 
 import Coupon from "~/components/features/coupon";
-import { GOKWIK_MID, POSTHOG_FLAG, STORE_PREFIX } from "~/config";
+import { GOKWIK_MID, STORE_PREFIX, VERCEL_AB_FLAG } from "~/config";
 import { GOKWIK_ENABLED, PREPAID_ENABLED } from "~/constant";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
@@ -58,8 +58,14 @@ function CartTotal({
   });
 
   const guestCheckout = useGuestCheckout();
-  const variantPostHog = useFeatureFlagVariantKey(POSTHOG_FLAG);
   const avgDeliveryTimeRef = useRef(null);
+
+  const [variantVercel, setVariant] = useState(null);
+
+  useEffect(() => {
+    const checkoutVariant = Cookies.get(`${STORE_PREFIX}_${VERCEL_AB_FLAG}`);
+    setVariant(checkoutVariant);
+  }, []);
 
   const {
     ready: isInventoryCheckReady,
@@ -83,7 +89,7 @@ function CartTotal({
 
     const isGKCXEnabled = !!(
       GOKWIK_MID &&
-      variantPostHog === "gk_checkout" &&
+      variantVercel === "gk_checkout" &&
       lscart &&
       gokwikEnabled
     );
@@ -134,7 +140,7 @@ function CartTotal({
   ]);
 
   const checkoutButtonDisabled =
-    GOKWIK_MID && variantPostHog === "gk_checkout"
+    GOKWIK_MID && variantVercel === "gk_checkout"
       ? !isInventoryCheckReady && isShoppingCartIdLoading
       : !isInventoryCheckReady;
 

@@ -607,7 +607,6 @@ export const getOrder = /* GraphQL */ `
         location
         area
       }
-      checkoutChannel
       appliedRewardPoints
       billingAddress {
         name
@@ -640,6 +639,8 @@ export const getOrder = /* GraphQL */ `
       priority
       orderDate
       status
+      source
+      checkoutChannel
       products {
         items {
           id
