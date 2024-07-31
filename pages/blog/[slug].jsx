@@ -17,6 +17,7 @@ import { getBlog, getBlogs, getStore, getTopMenu } from "~/graphql/api";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import fetchData from "~/utils/fetchData";
 import { isLanguagePresent } from "~/utils/data/languages";
+import handleRedirect from "~/utils/handleRedirect";
 
 export default function BlogDetailsPage({ blog, featuredBlogs, menuItems }) {
   const replaceLinks = (content) => {
@@ -218,6 +219,9 @@ export const getStaticProps = async ({ params }) => {
 
   const blog = await blogData.data.post;
 
+  if (!blog) {
+    return await handleRedirect(`/blog/${params?.slug}`, `/`);
+  }
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -345,10 +349,6 @@ export const getStaticProps = async ({ params }) => {
 
       menuItems[i].categoryBlogs = categoryBlogData.data.posts.edges;
     }
-  }
-
-  if (!blog) {
-    return { notFound: true };
   }
 
   return {
