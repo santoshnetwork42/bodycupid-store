@@ -96,7 +96,7 @@ function CartTotal({
 
     // startCheckout();
 
-    onProceedToCheckout(isGKCXEnabled ? "GOKWIK" : "BUYWOW");
+    onProceedToCheckout(isGKCXEnabled ? "GOKWIK" : "BODYCUPID");
 
     if (isGKCXEnabled) {
       const cartId = lscart || shoppingCartId;

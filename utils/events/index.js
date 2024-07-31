@@ -13,7 +13,7 @@ export const itemMapper = (
   product,
   coupon,
   user,
-  checkoutSource = "BUYWOW"
+  checkoutSource = "BODYCUPID"
 ) => {
   let {
     variantId,
@@ -151,7 +151,7 @@ export const orderMapper = (
   products,
   coupon,
   user,
-  checkoutSource = "BUYWOW"
+  checkoutSource = "BODYCUPID"
 ) => {
   const defaultAttribute = {
     content_ids: [],
@@ -264,7 +264,7 @@ export const moEngagedOrderMapper = (
   paymentMethod,
   order,
   isFirstTimeUser,
-  checkoutSource = "BUYWOW"
+  checkoutSource = "BODYCUPID"
 ) => {
   const { discount: couponTotal } = getCouponDiscount(coupon, products) || {};
   let currentURL = window.location.href.split("/").slice(0, 3).join("/");
@@ -387,7 +387,7 @@ export const moEngageItemPurchasedMapper = (
   paymentMethod,
   order,
   isFirstTimeUser,
-  checkoutSource = "BUYWOW"
+  checkoutSource = "BODYCUPID"
 ) => {
   const { discount: couponTotal } = getCouponDiscount(coupon, products) || {};
   let currentURL = window.location.href.split("/").slice(0, 3).join("/");
@@ -445,7 +445,7 @@ export const moEngageItemPurchasedMapper = (
 export const addressMapper = (
   address,
   totalPrice,
-  checkoutSource = "BUYWOW"
+  checkoutSource = "BODYCUPID"
 ) => {
   if (address) {
     const source = checkoutSource === "GOKWIK" ? "GoKwik" : getSource();

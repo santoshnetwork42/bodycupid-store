@@ -72,14 +72,14 @@ export const eventActions = {
   startCheckout: (source) => ({
     type: actionTypes.CHECKOUT_STARTED,
     payload: {
-      source: source || "BUYWOW",
+      source: source || "BODYCUPID",
     },
   }),
   viewCart: () => ({ type: actionTypes.VIEW_CART }),
   proceedToCheckout: (source) => ({
     type: actionTypes.PROCEED_TO_CHECKOUT,
     payload: {
-      source: source || "BUYWOW",
+      source: source || "BODYCUPID",
     },
   }),
   auth: (action, moe) => ({
@@ -92,11 +92,11 @@ export const eventActions = {
     },
   }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
-  addressAdded: (address, totalPrice, checkoutSource = "BUYWOW") => ({
+  addressAdded: (address, totalPrice, checkoutSource = "BODYCUPID") => ({
     type: actionTypes.ADDRESS_ADDED,
     payload: { address, totalPrice, checkoutSource },
   }),
-  addressSelected: (address, totalPrice, checkoutSource = "BUYWOW") => ({
+  addressSelected: (address, totalPrice, checkoutSource = "BODYCUPID") => ({
     type: actionTypes.ADDRESS_SELECTED,
     payload: { address, totalPrice, checkoutSource },
   }),
@@ -108,7 +108,7 @@ export const eventActions = {
     type: actionTypes.LOG_OUT,
     payload,
   }),
-  addPaymentInfo: (checkoutSource = "BUYWOW") => ({
+  addPaymentInfo: (checkoutSource = "BODYCUPID") => ({
     type: actionTypes.ADD_PAYMENT_INFO,
     payload: { checkoutSource },
   }),
@@ -443,7 +443,7 @@ export function* eventsSaga() {
         coupon,
         address,
         paymentType,
-        checkoutSource = "BUYWOW",
+        checkoutSource = "BODYCUPID",
       } = e.payload;
       const { id, totalShippingCharges, totalAmount, totalDiscount, code } =
         order;
@@ -451,7 +451,7 @@ export function* eventsSaga() {
       const productsLocal = yield select((state) => state.cart.data);
 
       const productsData =
-        checkoutSource === "BUYWOW"
+        checkoutSource === "BODYCUPID"
           ? [...products, ...productsLocal]
           : [...products];
 
@@ -668,7 +668,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.APPLY_COUPONS, function* saga(e) {
     const { coupon } = e.payload;
-    const checkoutSource = coupon.checkoutSource || "BUYWOW";
+    const checkoutSource = coupon.checkoutSource || "BODYCUPID";
     try {
       const {
         cart: { data, coupon },
@@ -816,7 +816,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.ADDRESS_ADDED, function* saga(e) {
     try {
-      const { address, totalPrice, checkoutSource = "BUYWOW" } = e.payload;
+      const { address, totalPrice, checkoutSource = "BODYCUPID" } = e.payload;
 
       const { name, email, phone } = address;
       initializeMoengageAndAddInfo({
@@ -839,7 +839,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.ADDRESS_SELECTED, function* saga(e) {
     try {
-      const { address, totalPrice, checkoutSource = "BUYWOW" } = e.payload;
+      const { address, totalPrice, checkoutSource = "BODYCUPID" } = e.payload;
       if (address) {
         const { addressSelected } = addressMapper(
           address,
@@ -864,7 +864,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.ADD_PAYMENT_INFO, function* saga(e) {
     try {
-      const { checkoutSource = "BUYWOW" } = e.payload;
+      const { checkoutSource = "BODYCUPID" } = e.payload;
       trackEvent("Add Payment Info", {
         URL: window.location.href,
         Source: checkoutSource === "GOKWIK" ? "Gokwik" : eventSource,
