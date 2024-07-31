@@ -215,7 +215,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.PRICE_MISMATCH, function* saga() {
     try {
-      vercelAnalytics.track("price_mismatch");
+      // vercelAnalytics.track("price_mismatch");
     } catch (e) {
       errorHandler(e);
     }
