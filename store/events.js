@@ -441,6 +441,7 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
+    console.log("first", e);
     try {
       const {
         order,
@@ -540,7 +541,7 @@ export function* eventsSaga() {
           },
         });
       }
-
+      console.log("second>>>>>");
       track("purchase", {
         transaction_id: id,
         value: totalAmount,
