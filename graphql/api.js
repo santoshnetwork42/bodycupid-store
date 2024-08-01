@@ -1889,6 +1889,7 @@ export const searchCollectionTypes = /* GraphQL */ `
         priority
         imageUrl
         defaultSorting
+        showOutOfStockProducts
         isArchive
         bannerUrl
         metadata {
@@ -2096,6 +2097,7 @@ export const getCollectionType = /* GraphQL */ `
         isArchive
         imageUrl
         name
+        showOutOfStockProducts
       }
     }
   }
@@ -2171,6 +2173,10 @@ export const searchCollectionTypesForSitemap = /* GraphQL */ `
         id
         slug
         updatedAt
+        metadata {
+          noIndex
+          canonical
+        }
       }
     }
   }
@@ -2187,6 +2193,10 @@ export const searchProductsForSitemap = /* GraphQL */ `
         id
         slug
         updatedAt
+        metadata {
+          noIndex
+          canonical
+        }
       }
     }
   }

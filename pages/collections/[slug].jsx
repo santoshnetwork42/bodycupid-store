@@ -239,6 +239,7 @@ export const getStaticProps = async (context) => {
       imageUrl,
       name: collectionName,
       metadata,
+      showOutOfStockProducts = true,
     } = collection;
 
     const otherCollections = await fetchData(searchCollectionTypes, {
@@ -292,6 +293,9 @@ export const getStaticProps = async (context) => {
 
     // Get Product By tag
     filter.collections = { eq: slug };
+    if (!showOutOfStockProducts) {
+      filter.defaultInventory = { gt: 0 };
+    }
     const { searchProducts } = await fetchData(findProducts, {
       filter,
       sort: sortBy,
