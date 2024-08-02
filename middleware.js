@@ -4,7 +4,7 @@ import { AB_THRESHOLD, STORE_PREFIX, VERCEL_AB_FLAG } from "./config";
 // make sure the middleware only runs when
 // the requested url starts with `/` all pages
 export const config = {
-  matcher: ["/"],
+  matcher: ["/:path*"],
 };
 
 const THRESHOLD = AB_THRESHOLD; // initial threshold for the new variant (100%)
@@ -15,7 +15,7 @@ export function middleware(req) {
   // if not found, randomly set a variant based on threshold
   const variant =
     req.cookies.get(COOKIE_NAME) ||
-    (Math.random() < THRESHOLD ? "gk_checkout" : "bw_checkout");
+    (Math.random() < THRESHOLD ? "bw_checkout" : "gk_checkout");
 
   const url = req.nextUrl.clone();
 

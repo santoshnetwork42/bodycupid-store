@@ -10,6 +10,7 @@ import { actionTypes as cartActions } from "~/store/cart";
 import { errorHandler } from "~/utils/errorHandler";
 import {
   addressMapper,
+  getFormattedDate,
   itemMapper,
   moEngagedOrderMapper,
   moEngageItemPurchasedMapper,
@@ -50,6 +51,7 @@ export const actionTypes = {
   REMOVED_FROM_CART: "REMOVED_FROM_CART",
   PRICE_MISMATCH: "PRICE_MISMATCH",
   APPLY_COUPONS: "APPLY_COUPONS",
+  CUSTOM_EVENT_VERCEL: "CUSTOM_EVENT_VERCEL",
 };
 
 const initialState = {
@@ -165,6 +167,10 @@ export const eventActions = {
       mismatchedPrices,
       mismatchedProductDetails,
     },
+  }),
+  customEventVercel: (title, data) => ({
+    type: actionTypes.CUSTOM_EVENT_VERCEL,
+    payload: { title, data },
   }),
 };
 
@@ -317,9 +323,10 @@ export function* eventsSaga() {
         });
       }
 
-      track("proceed_to_checkout", {
+      track("proceed_to_checkout_final", {
         login: userData ? 1 : 0,
         source,
+        date: getFormattedDate(),
       });
 
       // posthog.capture("Checkout Started", {
@@ -452,8 +459,14 @@ export function* eventsSaga() {
         paymentType,
         checkoutSource = "BODYCUPID",
       } = e.payload;
-      const { id, totalShippingCharges, totalAmount, totalDiscount, code } =
-        order;
+      const {
+        id,
+        totalShippingCharges,
+        totalAmount,
+        totalDiscount,
+        code,
+        orderDate,
+      } = order;
 
       const productsLocal = yield select((state) => state.cart.data);
 
@@ -543,15 +556,17 @@ export function* eventsSaga() {
         });
       }
 
-      track("purchase", {
+      track("purchase_final", {
         transaction_id: id,
         value: totalAmount,
         tax: 0,
+        code: code,
         discount: totalDiscount,
         shipping: totalShippingCharges,
         currency: "INR",
         coupon: coupon?.code || "",
         source: checkoutSource,
+        orderDate: orderDate || getFormattedDate(),
       });
 
       // posthog.capture("Order Created", {
@@ -953,6 +968,18 @@ export function* eventsSaga() {
       ...e.payload,
       Source: eventSource,
     });
+  });
+
+  yield takeEvery(actionTypes.CUSTOM_EVENT_VERCEL, function* saga(e) {
+    try {
+      const { title, data } = e.payload;
+      track(title, {
+        ...data,
+        date: getFormattedDate(),
+      });
+    } catch (e) {
+      errorHandler(e);
+    }
   });
 }
 

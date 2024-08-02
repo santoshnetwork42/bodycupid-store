@@ -14,6 +14,7 @@ import { toDecimal } from "~/utils";
 import { useGuestCheckout, useNavBarState } from "~/utils/contexts/navbar";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { alertToaster } from "~/utils/popupHelper";
+import { errorHandler } from "~/utils/errorHandler";
 
 const logger = new Logger("Cart");
 
@@ -31,6 +32,7 @@ function CartTotal({
   startCheckout,
   shoppingCartId,
   isShoppingCartIdLoading,
+  customEventVercel,
 }) {
   const router = useRouter();
   const { isSmallSize } = useWindowDimensions();
@@ -87,47 +89,60 @@ function CartTotal({
 
     const lscart = localStorage.getItem(`${STORE_PREFIX}-cartId`);
 
+    const cartId = lscart || shoppingCartId;
+
     const isGKCXEnabled = !!(
       GOKWIK_MID &&
       variantVercel === "gk_checkout" &&
-      lscart &&
+      cartId &&
       gokwikEnabled
     );
 
-    // startCheckout();
-
-    onProceedToCheckout(isGKCXEnabled ? "GOKWIK" : "BODYCUPID");
+    customEventVercel("checkout_variant_initiated", {
+      variant: variantVercel || "NOT_SET",
+      source: isGKCXEnabled ? `GOKWIK` : `BUYWOW`,
+      cartId: cartId || "NOT FOUND",
+    });
 
     if (isGKCXEnabled) {
-      const cartId = lscart || shoppingCartId;
-      if (cartId && cartId !== undefined) {
-        try {
-          gokwikSdk.initCheckout({
-            environment: "sandbox",
-            type: "merchantInfo",
-            mid: GOKWIK_MID,
-            merchantParams: {
-              merchantCheckoutId: cartId,
-              customerToken: user?.id || "",
-            },
+      try {
+        gokwikSdk.initCheckout({
+          environment: "sandbox",
+          type: "merchantInfo",
+          mid: GOKWIK_MID,
+          merchantParams: {
+            merchantCheckoutId: cartId,
+            customerToken: user?.id || "",
+          },
+        });
+
+        onProceedToCheckout("GOKWIK");
+        return Promise.resolve(true);
+      } catch (e) {
+        if (typeof e === "string" || e?.message) {
+          customEventVercel("gokwik_checkout_error", {
+            message: e?.message || e,
           });
-        } catch (e) {
-          await gokwikSdk.close();
-          errorHandler(e);
+        } else {
+          customEventVercel("gokwik_checkout_error", {
+            message: JSON.stringify(e),
+          });
         }
+        await gokwikSdk.close();
+        errorHandler(e);
       }
-      return true;
     }
 
+    onProceedToCheckout("BUYWOW");
     if (user || guestCheckout || customUser) {
       router.push("/pages/checkout");
       logger.verbose("Redirecting to checkout page");
-      return true;
+      return Promise.resolve(true);
     }
 
     openLogin(true, true);
     logger.verbose("Opening login modal");
-    return false;
+    return Promise.resolve(false);
   }, [
     user,
     guestCheckout,
@@ -379,6 +394,7 @@ function mapStateToProps(state) {
 }
 const Component = connect(mapStateToProps, {
   onProceedToCheckout: eventActions.proceedToCheckout,
+  customEventVercel: eventActions.customEventVercel,
   openLogin: modalActions.openPasswordlessModal,
   recordOutOfStock: eventActions.outOfStock,
   setCartVisibility: modalActions.setCartVisibility,
