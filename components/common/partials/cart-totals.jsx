@@ -1,20 +1,19 @@
 import { useCartTotal, useConfiguration } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import { connect } from "react-redux";
-import Cookies from "js-cookie";
 
 import Coupon from "~/components/features/coupon";
-import { GOKWIK_MID, STORE_PREFIX, VERCEL_AB_FLAG } from "~/config";
+import { GOKWIK_MID, STORE_PREFIX } from "~/config";
 import { GOKWIK_ENABLED, PREPAID_ENABLED } from "~/constant";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
 import { toDecimal } from "~/utils";
 import { useGuestCheckout, useNavBarState } from "~/utils/contexts/navbar";
+import { errorHandler } from "~/utils/errorHandler";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { alertToaster } from "~/utils/popupHelper";
-import { errorHandler } from "~/utils/errorHandler";
 
 const logger = new Logger("Cart");
 
@@ -32,7 +31,6 @@ function CartTotal({
   startCheckout,
   shoppingCartId,
   isShoppingCartIdLoading,
-  customEventVercel,
 }) {
   const router = useRouter();
   const { isSmallSize } = useWindowDimensions();
@@ -62,13 +60,6 @@ function CartTotal({
   const guestCheckout = useGuestCheckout();
   const avgDeliveryTimeRef = useRef(null);
 
-  const [variantVercel, setVariant] = useState(null);
-
-  useEffect(() => {
-    const checkoutVariant = Cookies.get(`${STORE_PREFIX}_${VERCEL_AB_FLAG}`);
-    setVariant(checkoutVariant);
-  }, []);
-
   const {
     ready: isInventoryCheckReady,
     success: isInventoryCheckSuccess,
@@ -91,18 +82,13 @@ function CartTotal({
 
     const cartId = lscart || shoppingCartId;
 
-    const isGKCXEnabled = !!(
-      GOKWIK_MID &&
-      variantVercel === "gk_checkout" &&
-      cartId &&
-      gokwikEnabled
-    );
+    const isGKCXEnabled = !!(GOKWIK_MID && cartId && gokwikEnabled);
 
-    customEventVercel("checkout_variant_initiated", {
-      variant: variantVercel || "NOT_SET",
-      source: isGKCXEnabled ? `GOKWIK` : `BUYWOW`,
-      cartId: cartId || "NOT FOUND",
-    });
+    // customEventVercel("checkout_variant_initiated", {
+    //   variant: variantVercel || "NOT_SET",
+    //   source: isGKCXEnabled ? `GOKWIK` : `BUYWOW`,
+    //   cartId: cartId || "NOT FOUND",
+    // });
 
     if (isGKCXEnabled) {
       try {
@@ -119,17 +105,9 @@ function CartTotal({
         onProceedToCheckout("GOKWIK");
         return Promise.resolve(true);
       } catch (e) {
-        if (typeof e === "string" || e?.message) {
-          customEventVercel("gokwik_checkout_error", {
-            message: e?.message || e,
-          });
-        } else {
-          customEventVercel("gokwik_checkout_error", {
-            message: JSON.stringify(e),
-          });
-        }
         await gokwikSdk.close();
         errorHandler(e);
+        router.push("/pages/checkout");
       }
     }
 
@@ -154,10 +132,9 @@ function CartTotal({
     inventoryMapping,
   ]);
 
-  const checkoutButtonDisabled =
-    GOKWIK_MID && variantVercel === "gk_checkout"
-      ? !isInventoryCheckReady && isShoppingCartIdLoading
-      : !isInventoryCheckReady;
+  const checkoutButtonDisabled = GOKWIK_MID
+    ? !isInventoryCheckReady && isShoppingCartIdLoading
+    : !isInventoryCheckReady;
 
   const onDetailClick = () => {
     if (avgDeliveryTimeRef.current) {
@@ -394,7 +371,6 @@ function mapStateToProps(state) {
 }
 const Component = connect(mapStateToProps, {
   onProceedToCheckout: eventActions.proceedToCheckout,
-  customEventVercel: eventActions.customEventVercel,
   openLogin: modalActions.openPasswordlessModal,
   recordOutOfStock: eventActions.outOfStock,
   setCartVisibility: modalActions.setCartVisibility,

@@ -1,4 +1,3 @@
-import { track } from "@vercel/analytics";
 import { API } from "aws-amplify";
 import { persistReducer } from "redux-persist";
 import { call, select, takeEvery } from "redux-saga/effects";
@@ -323,11 +322,11 @@ export function* eventsSaga() {
         });
       }
 
-      track("proceed_to_checkout_final", {
-        login: userData ? 1 : 0,
-        source,
-        date: getFormattedDate(),
-      });
+      // track("proceed_to_checkout_final", {
+      //   login: userData ? 1 : 0,
+      //   source,
+      //   date: getFormattedDate(),
+      // });
 
       // posthog.capture("Checkout Started", {
       //   source,
@@ -556,18 +555,18 @@ export function* eventsSaga() {
         });
       }
 
-      track("purchase_final", {
-        transaction_id: id,
-        value: totalAmount,
-        tax: 0,
-        code: code,
-        discount: totalDiscount,
-        shipping: totalShippingCharges,
-        currency: "INR",
-        coupon: coupon?.code || "",
-        source: checkoutSource,
-        orderDate: orderDate || getFormattedDate(),
-      });
+      // track("purchase_final", {
+      //   transaction_id: id,
+      //   value: totalAmount,
+      //   tax: 0,
+      //   code: code,
+      //   discount: totalDiscount,
+      //   shipping: totalShippingCharges,
+      //   currency: "INR",
+      //   coupon: coupon?.code || "",
+      //   source: checkoutSource,
+      //   orderDate: orderDate || getFormattedDate(),
+      // });
 
       // posthog.capture("Order Created", {
       //   source: checkoutSource,
@@ -973,10 +972,10 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.CUSTOM_EVENT_VERCEL, function* saga(e) {
     try {
       const { title, data } = e.payload;
-      track(title, {
-        ...data,
-        date: getFormattedDate(),
-      });
+      // track(title, {
+      //   ...data,
+      //   date: getFormattedDate(),
+      // });
     } catch (e) {
       errorHandler(e);
     }
