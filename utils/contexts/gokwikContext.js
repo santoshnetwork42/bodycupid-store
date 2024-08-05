@@ -213,6 +213,7 @@ function GoKwikProvider({
                 orderDetails.payment_method.toUpperCase(),
               "GOKWIK"
             );
+
             setRewardPoints();
             setIsLoggedinViaGokwik(false);
             logger.debug("Purchase event done");
