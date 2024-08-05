@@ -54,9 +54,11 @@ const Wallet = (props) => {
     const eventTitles = {
       CREDIT_PREPAID_ORDER: "Cashback added",
       CREDIT_COD_ORDER: "Cashback added",
+      CREDIT_PPCOD_ORDER: "Cashback added",
       CREDIT_USER_SIGNUP: "Cashback added",
       DEBIT_PREPAID_ORDER: "Cashback debited",
       DEBIT_COD_ORDER: "Cashback debited",
+      DEBIT_PPCOD_ORDER: "Cashback debited",
       DEBIT_EXPIRED: "Cashback expired",
       DEBIT_BY_ADMIN: "Cashback debited",
       CREDIT_BY_ADMIN: "Promotional cashback",
@@ -83,9 +85,11 @@ const Wallet = (props) => {
     const eventTitles = {
       CREDIT_PREPAID_ORDER: "Cashback for Order",
       CREDIT_COD_ORDER: "Cashback for Order",
+      CREDIT_PPCOD_ORDER: "Cashback for Order",
       CREDIT_USER_SIGNUP: "Joining Bonus",
       DEBIT_PREPAID_ORDER: "Used against Order",
       DEBIT_COD_ORDER: "Used against Order",
+      DEBIT_PPCOD_ORDER: "Used against Order",
       DEBIT_BY_ADMIN: reason || "",
       CREDIT_BY_ADMIN: reason || "",
       CREDIT_ORDER_REFUNDED: "Refunded against Order",
