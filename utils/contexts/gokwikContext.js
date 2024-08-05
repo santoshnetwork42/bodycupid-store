@@ -2,6 +2,7 @@ import {
   getCouponDiscount,
   useCartTotal,
   useConfiguration,
+  useNavbar,
 } from "@wow-star/utils";
 import { API, Auth } from "aws-amplify";
 import { Logger } from "aws-amplify";
@@ -46,12 +47,28 @@ function GoKwikProvider({
 }) {
   const router = useRouter();
   const { isRewardApplied } = useNavBarState();
+  const { userWithRewardPoints, setUserWithRewardPoints } = useNavbar();
   const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
   const { totalPrice } = useCartTotal({
     isRewardApplied: isRewardApplied,
     paymentType: prepaidEnabled ? "PREPAID" : "COD",
   });
 
+  const setRewardPoints = useCallback(async () => {
+    logger.log("set reward points of user");
+    try {
+      if (isRewardApplied)
+        setUserWithRewardPoints({
+          ...userWithRewardPoints,
+          totalRewards: Math.max(
+            userWithRewardPoints?.totalRewards - usableRewards,
+            0
+          ),
+        });
+    } catch (e) {
+      logger.log("Error while upadating user points ");
+    }
+  }, [userWithRewardPoints, setUserWithRewardPoints]);
   const applyCouponCode = useCallback(
     async (couponCode, autoApplied = false) => {
       logger.log("couponCode", couponCode);
@@ -196,6 +213,7 @@ function GoKwikProvider({
                 orderDetails.payment_method.toUpperCase(),
               "GOKWIK"
             );
+            setRewardPoints();
             setIsLoggedinViaGokwik(false);
             logger.debug("Purchase event done");
             logger.debug("Redirecting to success page");

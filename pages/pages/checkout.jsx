@@ -73,7 +73,6 @@ function Checkout(props) {
   } = props;
 
   const { name } = store || {};
-  const { isReady } = useNavbar();
 
   const guestCheckout = useGuestCheckout();
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
@@ -95,6 +94,8 @@ function Checkout(props) {
 
   const router = useRouter();
   const [payMethod, setFirst] = useState(prepaidEnabled ? "PREPAID" : "COD");
+  const { isReady, userWithRewardPoints, setUserWithRewardPoints } =
+    useNavbar();
   const [shippingAddress, setAddress] = useState(null);
   const [formError, setFormError] = useState(null);
   const [isValidAddress, setIsValidAddress] = useState(false);
@@ -162,6 +163,15 @@ function Checkout(props) {
         payMethod,
         "BODYCUPID"
       );
+
+      if (isRewardApplied)
+        setUserWithRewardPoints({
+          ...userWithRewardPoints,
+          totalRewards: Math.max(
+            userWithRewardPoints?.totalRewards - usableRewards,
+            0
+          ),
+        });
       logger.debug("Purchase event done");
       logger.debug("Redirecting to success page");
 
