@@ -18,7 +18,7 @@ function NavbarProvider({
   applyRewardPoint,
 }) {
   const [isInteractive, setIsInteractive] = useState(false);
-  const [isRewardApplied, setIsRewardApplied] = useState(false);
+  const [isRewardApplied, setIsRewardApplied] = useState(true);
 
   const handleRewardApply = (state) => {
     setIsRewardApplied(state);
