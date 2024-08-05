@@ -2463,6 +2463,10 @@ export const searchCollectionTypesForSitemap = /* GraphQL */ `
         id
         slug
         updatedAt
+        metadata {
+          noIndex
+          canonical
+        }
       }
     }
   }
@@ -2479,6 +2483,10 @@ export const searchProductsForSitemap = /* GraphQL */ `
         id
         slug
         updatedAt
+        metadata {
+          noIndex
+          canonical
+        }
       }
     }
   }

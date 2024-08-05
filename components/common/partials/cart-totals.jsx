@@ -1,17 +1,17 @@
 import { useCartTotal, useConfiguration } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import { connect } from "react-redux";
-import Cookies from "js-cookie";
 
 import Coupon from "~/components/features/coupon";
-import { GOKWIK_MID, STORE_PREFIX, VERCEL_AB_FLAG } from "~/config";
+import { GOKWIK_MID, STORE_PREFIX } from "~/config";
 import { GOKWIK_ENABLED, PREPAID_ENABLED } from "~/constant";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
 import { toDecimal } from "~/utils";
 import { useGuestCheckout, useNavBarState } from "~/utils/contexts/navbar";
+import { errorHandler } from "~/utils/errorHandler";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { alertToaster } from "~/utils/popupHelper";
 
@@ -60,13 +60,6 @@ function CartTotal({
   const guestCheckout = useGuestCheckout();
   const avgDeliveryTimeRef = useRef(null);
 
-  const [variantVercel, setVariant] = useState(null);
-
-  useEffect(() => {
-    const checkoutVariant = Cookies.get(`${STORE_PREFIX}_${VERCEL_AB_FLAG}`);
-    setVariant(checkoutVariant);
-  }, []);
-
   const {
     ready: isInventoryCheckReady,
     success: isInventoryCheckSuccess,
@@ -87,47 +80,47 @@ function CartTotal({
 
     const lscart = localStorage.getItem(`${STORE_PREFIX}-cartId`);
 
-    const isGKCXEnabled = !!(
-      GOKWIK_MID &&
-      variantVercel === "gk_checkout" &&
-      lscart &&
-      gokwikEnabled
-    );
+    const cartId = lscart || shoppingCartId;
 
-    // startCheckout();
+    const isGKCXEnabled = !!(GOKWIK_MID && cartId && gokwikEnabled);
 
-    onProceedToCheckout(isGKCXEnabled ? "GOKWIK" : "BODYCUPID");
+    // customEventVercel("checkout_variant_initiated", {
+    //   variant: variantVercel || "NOT_SET",
+    //   source: isGKCXEnabled ? `GOKWIK` : `BUYWOW`,
+    //   cartId: cartId || "NOT FOUND",
+    // });
 
     if (isGKCXEnabled) {
-      const cartId = lscart || shoppingCartId;
-      if (cartId && cartId !== undefined) {
-        try {
-          gokwikSdk.initCheckout({
-            environment: "sandbox",
-            type: "merchantInfo",
-            mid: GOKWIK_MID,
-            merchantParams: {
-              merchantCheckoutId: cartId,
-              customerToken: user?.id || "",
-            },
-          });
-        } catch (e) {
-          await gokwikSdk.close();
-          errorHandler(e);
-        }
+      try {
+        gokwikSdk.initCheckout({
+          environment: "sandbox",
+          type: "merchantInfo",
+          mid: GOKWIK_MID,
+          merchantParams: {
+            merchantCheckoutId: cartId,
+            customerToken: user?.id || "",
+          },
+        });
+
+        onProceedToCheckout("GOKWIK");
+        return Promise.resolve(true);
+      } catch (e) {
+        await gokwikSdk.close();
+        errorHandler(e);
+        router.push("/pages/checkout");
       }
-      return true;
     }
 
+    onProceedToCheckout("BUYWOW");
     if (user || guestCheckout || customUser) {
       router.push("/pages/checkout");
       logger.verbose("Redirecting to checkout page");
-      return true;
+      return Promise.resolve(true);
     }
 
     openLogin(true, true);
     logger.verbose("Opening login modal");
-    return false;
+    return Promise.resolve(false);
   }, [
     user,
     guestCheckout,
@@ -139,10 +132,9 @@ function CartTotal({
     inventoryMapping,
   ]);
 
-  const checkoutButtonDisabled =
-    GOKWIK_MID && variantVercel === "gk_checkout"
-      ? !isInventoryCheckReady && isShoppingCartIdLoading
-      : !isInventoryCheckReady;
+  const checkoutButtonDisabled = GOKWIK_MID
+    ? !isInventoryCheckReady && isShoppingCartIdLoading
+    : !isInventoryCheckReady;
 
   const onDetailClick = () => {
     if (avgDeliveryTimeRef.current) {

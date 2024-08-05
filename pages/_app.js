@@ -1,14 +1,6 @@
-import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import awaitGlobal from "await-global";
-import {
-  API,
-  Amplify,
-  Analytics as AnalyticsClass,
-  Auth,
-  Hub,
-  Logger,
-} from "aws-amplify";
+import { API, Amplify, Analytics, Auth, Hub, Logger } from "aws-amplify";
 import Cookie from "js-cookie";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
@@ -42,7 +34,7 @@ Amplify.configure({
   ssr: true,
   aws_user_pools_web_client_id: AWS_CLIENT_ID,
 });
-AnalyticsClass.disable();
+Analytics.disable();
 
 const logger = new Logger("App");
 
@@ -276,7 +268,6 @@ const App = ({ Component, pageProps }) => {
                   <Layout navbar={navbarProps} footer={footerProps}>
                     <Scripts />
                     <Component {...pageProps} />
-                    <Analytics />
                   </Layout>
                 </GoKwikProvider>
               </NavbarProvider>

@@ -1,4 +1,3 @@
-import { track } from "@vercel/analytics";
 import { API } from "aws-amplify";
 import { persistReducer } from "redux-persist";
 import { call, select, takeEvery } from "redux-saga/effects";
@@ -10,6 +9,7 @@ import { actionTypes as cartActions } from "~/store/cart";
 import { errorHandler } from "~/utils/errorHandler";
 import {
   addressMapper,
+  getFormattedDate,
   itemMapper,
   moEngagedOrderMapper,
   moEngageItemPurchasedMapper,
@@ -51,6 +51,7 @@ export const actionTypes = {
   REMOVED_FROM_CART: "REMOVED_FROM_CART",
   PRICE_MISMATCH: "PRICE_MISMATCH",
   APPLY_COUPONS: "APPLY_COUPONS",
+  CUSTOM_EVENT_VERCEL: "CUSTOM_EVENT_VERCEL",
 };
 
 const initialState = {
@@ -66,9 +67,16 @@ export const eventActions = {
     type: actionTypes.VIEW_ITEM,
     payload: { product },
   }),
-  placeOrder: (order, coupon, address, freeProducts = []) => ({
+  placeOrder: (
+    order,
+    products,
+    coupon,
+    address,
+    paymentType,
+    checkoutSource
+  ) => ({
     type: actionTypes.PLACE_ORDER,
-    payload: { order, coupon, address, freeProducts },
+    payload: { order, products, coupon, address, paymentType, checkoutSource },
   }),
   startCheckout: (source) => ({
     type: actionTypes.CHECKOUT_STARTED,
@@ -163,6 +171,10 @@ export const eventActions = {
       mismatchedPrices,
       mismatchedProductDetails,
     },
+  }),
+  customEventVercel: (title, data) => ({
+    type: actionTypes.CUSTOM_EVENT_VERCEL,
+    payload: { title, data },
   }),
 };
 
@@ -315,10 +327,11 @@ export function* eventsSaga() {
         });
       }
 
-      track("proceed_to_checkout", {
-        login: userData ? 1 : 0,
-        source,
-      });
+      // track("proceed_to_checkout_final", {
+      //   login: userData ? 1 : 0,
+      //   source,
+      //   date: getFormattedDate(),
+      // });
 
       // posthog.capture("Checkout Started", {
       //   source,
@@ -451,8 +464,14 @@ export function* eventsSaga() {
         paymentType,
         checkoutSource = "BODYCUPID",
       } = e.payload;
-      const { id, totalShippingCharges, totalAmount, totalDiscount, code } =
-        order;
+      const {
+        id,
+        totalShippingCharges,
+        totalAmount,
+        totalDiscount,
+        code,
+        orderDate,
+      } = order;
 
       const productsLocal = yield select((state) => state.cart.data);
 
@@ -541,17 +560,19 @@ export function* eventsSaga() {
           },
         });
       }
-      console.log("second>>>>>");
-      track("purchase", {
-        transaction_id: id,
-        value: totalAmount,
-        tax: 0,
-        discount: totalDiscount,
-        shipping: totalShippingCharges,
-        currency: "INR",
-        coupon: coupon?.code || "",
-        source: checkoutSource,
-      });
+
+      // track("purchase_final", {
+      //   transaction_id: id,
+      //   value: totalAmount,
+      //   tax: 0,
+      //   code: code,
+      //   discount: totalDiscount,
+      //   shipping: totalShippingCharges,
+      //   currency: "INR",
+      //   coupon: coupon?.code || "",
+      //   source: checkoutSource,
+      //   orderDate: orderDate || getFormattedDate(),
+      // });
 
       // posthog.capture("Order Created", {
       //   source: checkoutSource,
@@ -967,6 +988,18 @@ export function* eventsSaga() {
       ...e.payload,
       Source: eventSource,
     });
+  });
+
+  yield takeEvery(actionTypes.CUSTOM_EVENT_VERCEL, function* saga(e) {
+    try {
+      const { title, data } = e.payload;
+      // track(title, {
+      //   ...data,
+      //   date: getFormattedDate(),
+      // });
+    } catch (e) {
+      errorHandler(e);
+    }
   });
 }
 

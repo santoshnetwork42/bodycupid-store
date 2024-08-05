@@ -181,6 +181,7 @@ function GoKwikProvider({
               code: orderResponse?.code,
               status: orderResponse?.status,
               id: orderResponse?.id,
+              orderDate: orderResponse?.orderDate,
             };
 
             if (orderDetails?.applied_discount)

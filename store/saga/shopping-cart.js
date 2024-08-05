@@ -23,6 +23,7 @@ export function* cartSaga() {
       try {
         if (action === "EMPTY_CART") {
           localStorage.removeItem(`${STORE_PREFIX}-cartId`);
+          yield put({ type: actionTypes.UPDATE_CART_ID, payload: null });
           return;
         }
         yield put({ type: actionTypes.UPDATE_CART_ID_LOADING, payload: true });
@@ -49,10 +50,7 @@ export function* cartSaga() {
           metadata: { ...system.meta },
         };
 
-        if (
-          (!userData && cart.cartId) ||
-          (action.type === "SET_USER" && cart.cartId)
-        ) {
+        if (cart.cartId) {
           cartInput.shoppingCartId = cart.cartId;
         }
 

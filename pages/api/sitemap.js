@@ -22,8 +22,14 @@ export default async function Revalidate(req, res) {
       });
 
       const { items, nextToken: newToken } = response.searchProducts;
+
+      const filteredItems = items?.filter(
+        (product) =>
+          !product?.metadata?.noIndex && !product?.metadata?.canonical
+      );
+
       productSitemapEntries.push(
-        ...items.map((product) => ({
+        ...filteredItems.map((product) => ({
           loc: `${NEXT_PUBLIC_SITE_URL}/products/${product.slug}`,
           lastmod: product.updatedAt,
           changefreq: "weekly",
@@ -44,8 +50,13 @@ export default async function Revalidate(req, res) {
       });
 
       const { items, nextToken: newToken } = response.searchCollectionTypes;
+
+      const filteredItems = items?.filter(
+        (collection) =>
+          !collection?.metadata?.noIndex && !collection?.metadata?.canonical
+      );
       collSitemapEntries.push(
-        ...items.map((collection) => ({
+        ...filteredItems.map((collection) => ({
           loc: `${NEXT_PUBLIC_SITE_URL}/collections/${collection.slug}`,
           lastmod: collection.updatedAt,
           changefreq: "weekly",
