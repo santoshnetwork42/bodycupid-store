@@ -6,6 +6,7 @@ import { createShoppingCart, manageShoppingCart } from "~/graphql/api";
 import { actionTypes } from "~/store/cart";
 import { actionTypes as userActionTypes } from "~/store/user";
 import { errorHandler } from "~/utils/errorHandler";
+import { checkAffiseValidity } from "~/utils/helper";
 
 export function* cartSaga() {
   yield takeEvery(
@@ -40,6 +41,8 @@ export function* cartSaga() {
           source: cartItemSource || null,
         }));
 
+        const isAffiseTrackingValid = checkAffiseValidity();
+
         const cartInput = {
           couponCodeId: couponCode || null,
           couponCode: code || "",
@@ -47,7 +50,7 @@ export function* cartSaga() {
           isRewardApplied:
             userData && !isLoggedinViaGokwik ? isRewardApplied : false,
           data,
-          metadata: { ...system.meta },
+          metadata: { ...system.meta, isAffiseTrackingValid },
         };
 
         if (cart.cartId) {
