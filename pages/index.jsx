@@ -72,7 +72,7 @@ function HomePage({
 
         <CategorySection categories={productSubCategories} />
         <ReviewSection />
-        <ExploreBlogSection blogs={featuredblogs} />
+        {/* <ExploreBlogSection blogs={featuredblogs} /> */}
         <BrandSection
           brands={[
             "/images/brands/1.png",
