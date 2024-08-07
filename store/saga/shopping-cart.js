@@ -22,7 +22,7 @@ export function* cartSaga() {
     ],
     function* saga(action) {
       try {
-        if (action === "EMPTY_CART") {
+        if (action.type === "EMPTY_CART") {
           localStorage.removeItem(`${STORE_PREFIX}-cartId`);
           yield put({ type: actionTypes.UPDATE_CART_ID, payload: null });
           return;
@@ -69,7 +69,7 @@ export function* cartSaga() {
           ? response?.data?.manageShoppingCart?.shoppingCartId
           : response?.data?.createShoppingCart?.shoppingCartId;
 
-        localStorage.setItem(`${STORE_PREFIX}-cartId`, cartId);
+        if (cartId) localStorage.setItem(`${STORE_PREFIX}-cartId`, cartId);
 
         yield put({ type: actionTypes.UPDATE_CART_ID, payload: cartId });
         yield put({ type: actionTypes.UPDATE_CART_ID_LOADING, payload: false });
