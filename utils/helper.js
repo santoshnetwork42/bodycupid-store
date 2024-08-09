@@ -7,7 +7,6 @@ export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
   return number;
 };
-
 export const removeHtmlTags = (input) => {
   return input.replace(/<\/?[^>]+(>|$)/g, "");
 };
