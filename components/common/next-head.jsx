@@ -5,7 +5,7 @@ import { removeHtmlTags } from "~/utils/helper";
 function NextHead({
   siteName,
   title,
-  description,
+  description = "",
   image,
   canonical,
   googleVerificationTag,

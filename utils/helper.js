@@ -8,7 +8,7 @@ export const addPhonePrefix = (number) => {
   return number;
 };
 export const removeHtmlTags = (input) => {
-  return input.replace(/<\/?[^>]+(>|$)/g, "");
+  return input ? input?.replace(/<\/?[^>]+>/g, "") : input;
 };
 
 export const removePhonePrefix = (number) => {
