@@ -19,6 +19,7 @@ export function* cartSaga() {
       actionTypes.EMPTY_CART,
       userActionTypes.SET_USER,
       actionTypes.APPLY_REWARD_POINT,
+      userActionTypes.SET_LOGGED_IN_VIA,
     ],
     function* saga(action) {
       try {

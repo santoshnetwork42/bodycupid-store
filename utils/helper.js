@@ -274,7 +274,6 @@ export const checkAffiseValidity = () => {
   const ckSurvivalMinutes = 30 * 24 * 60;
   // Retrieve local storage data with a specific prefix
   const ckLocalData = getCKLocalData("bw_");
-  console.log("ckLocalData :", ckLocalData);
   if (
     ckLocalData.bw_timestamp &&
     ckLocalData.bw_clickid &&
