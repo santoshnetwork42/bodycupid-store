@@ -109,6 +109,7 @@ function Coupon(props) {
             closeModal();
           }, 3000);
 
+          setError(null);
           isSliderOpen && closeSlider();
           logger.info("Applied coupon:", response);
         } else {
