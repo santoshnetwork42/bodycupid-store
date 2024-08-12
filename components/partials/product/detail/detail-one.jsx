@@ -202,6 +202,10 @@ function DetailOne(props) {
         <ProductBreadcrumbs {...product} />
       </div>
 
+      {product?.collections?.includes("bundle-offer") && (
+        <div className="product-label label-pdp">BUY 6 @ 999</div>
+      )}
+
       <h2 className="detail-product-name text-uppercase">{product.title}</h2>
 
       {/* {!!product?.tags && (
