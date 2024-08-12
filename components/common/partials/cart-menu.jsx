@@ -106,7 +106,10 @@ function CartMenu(props) {
   const bxayCoupon = useMemo(() => {
     return featuredCoupons.find(
       ({ coupon }) =>
-        coupon && coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
+        coupon &&
+        coupon.couponType === "BUY_X_AT_Y" &&
+        coupon.autoApply &&
+        coupon.applicableCollections.includes(router?.query?.slug)
     );
   }, [featuredCoupons]);
 
@@ -139,7 +142,7 @@ function CartMenu(props) {
     const slug = router?.query?.slug;
 
     if (slug === "bundle-offer") {
-      return "Add more items to unlock 'Buy 8 @ ₹999 Offer'";
+      return "Add more items to unlock 'Buy 6 @ ₹999 Offer'";
     } else if (slug === "special-deal") {
       return "Add more items to unlock 'Buy 1 get 3 Offer'";
     } else if (slug === "bundle-offer-buy5") {

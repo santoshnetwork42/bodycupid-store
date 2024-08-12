@@ -35,7 +35,10 @@ function StickyFooter(props) {
   const bxayCoupon = useMemo(() => {
     return featuredCoupons.find(
       ({ coupon }) =>
-        coupon && coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
+        coupon &&
+        coupon.couponType === "BUY_X_AT_Y" &&
+        coupon.autoApply &&
+        coupon.applicableCollections.includes(router?.query?.slug)
     );
   }, [featuredCoupons]);
 
