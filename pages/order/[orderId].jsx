@@ -168,15 +168,17 @@ function Order({
           <div className="d-flex justify-content-center align-items-center mb-4">
             <ALink
               className="order-image"
-              href={"/collections/bundle-offer?utm_source=thank_you_page"}
+              href={
+                "/collections/combos-and-gifts?couponCode=RAKHI&utm_source=thank_you_page"
+              }
             >
               <NextImage
-                src={"/images/banners/buy8@1999-category.jpg"}
+                src={"/images/banners/raksha-bandhan.jpg"}
                 alt={"collections-bundle-offer"}
                 loader="local"
                 width={1400}
                 height={400}
-                objectFit="cover"
+                objectFit="contain"
                 priority
               />
             </ALink>
