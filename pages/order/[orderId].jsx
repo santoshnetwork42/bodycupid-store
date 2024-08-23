@@ -173,7 +173,7 @@ function Order({
               }
             >
               <NextImage
-                src={"/images/banners/raksha-bandhan.jpg"}
+                src={"/images/banners/perfume_banner.jpg"}
                 alt={"collections-bundle-offer"}
                 loader="local"
                 width={1400}
