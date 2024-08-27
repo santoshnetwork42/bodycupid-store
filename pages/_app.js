@@ -14,7 +14,7 @@ import Header from "~/components/common/header";
 import NextHead from "~/components/common/next-head";
 import Layout from "~/components/layout";
 import Scripts from "~/components/scripts";
-import { AWS_CLIENT_ID, STORE_ID, STORE_PREFIX } from "~/config";
+import { AWS_CLIENT_ID, STORE_ID, STORE_PREFIX, KWIKPASS_MID } from "~/config";
 import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
 import { getStore, getUser } from "~/graphql/api";
 import { rootActions, wrapper } from "~/store";
@@ -236,6 +236,26 @@ const App = ({ Component, pageProps }) => {
 
   useEffect(() => {
     setGuestCheckout();
+    if (typeof window !== "undefined") {
+      window.merchantInfo = {
+        environment: "sandbox",
+        mid: KWIKPASS_MID,
+        type: "merchantInfo",
+      };
+
+      const initializeSdkSafely = () => {
+        console.log("Trying to initialize SDK", window.merchantInfo);
+        if (window.merchantInfo && window.merchantInfo.mid) {
+          kpUpdateDOM();
+        } else {
+          console.error(
+            "SDK initialization failed due to missing merchantInfo."
+          );
+        }
+      };
+
+      document.addEventListener("DOMContentLoaded", initializeSdkSafely);
+    }
   }, []);
 
   useEffect(() => {

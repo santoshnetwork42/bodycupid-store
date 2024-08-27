@@ -42,6 +42,10 @@ function NextHead({
       {!!image && <meta property="twitter:image" content={image} />}
 
       {!!GOKWIK_SCRIPT && <script defer src={GOKWIK_SCRIPT} />}
+      <script
+        defer
+        src="https://sandbox.pdp.gokwik.co/kwikpass/plugin/build/kp-custom-merchant.js"
+      />
     </Head>
   );
 }
