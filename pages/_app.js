@@ -253,7 +253,6 @@ const App = ({ Component, pageProps }) => {
           );
         }
       };
-
       document.addEventListener("DOMContentLoaded", initializeSdkSafely);
     }
   }, []);
