@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { GOKWIK_SCRIPT } from "~/config";
+import { GOKWIK_SCRIPT, KWIKPASS_MID } from "~/config";
 
 function NextHead({
   siteName,
@@ -43,8 +43,15 @@ function NextHead({
 
       {!!GOKWIK_SCRIPT && <script defer src={GOKWIK_SCRIPT} />}
       <script
-        defer
-        src="https://sandbox.pdp.gokwik.co/kwikpass/plugin/build/kp-custom-merchant.js"
+        dangerouslySetInnerHTML={{
+          __html: `
+              window.merchantInfo = {
+                environment: "sandbox",
+                mid: '${KWIKPASS_MID}',
+                type: "merchantInfo"
+              };
+            `,
+        }}
       />
     </Head>
   );
