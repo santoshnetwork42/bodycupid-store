@@ -238,7 +238,7 @@ const App = ({ Component, pageProps }) => {
     setGuestCheckout();
     const script = document.createElement("script");
     script.src =
-      "https://sandbox.pdp.gokwik.co/kwikpass/plugin/build/kp-custom-merchant.js"; // replace with the actual SDK URL
+      "https://sandbox.pdp.gokwik.co/kwikpass/plugin/build/kp-custom-merchant.js";
     script.async = true;
 
     script.onload = () => {
