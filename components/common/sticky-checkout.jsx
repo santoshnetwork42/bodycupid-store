@@ -76,7 +76,8 @@ function StickyFooter(props) {
   const hasDiscountSlug =
     slug === "bundle-offer-buy5" ||
     slug === "special-deal" ||
-    slug === "bundle-offer-makeup";
+    slug === "bundle-offer-makeup" ||
+    slug === "bundle-offer";
   const hasSpecialOffer = cartList?.some(
     (cart) =>
       cart?.collections?.includes("bundle-offer-buy5") ||
@@ -91,6 +92,8 @@ function StickyFooter(props) {
       return "Add more items to unlock 'Buy 5 @ ₹999 Offer'";
     } else if (slug === "bundle-offer-makeup") {
       return "Add more items to unlock 'Buy 3 @ ₹699 Offer'";
+    } else if (slug === "bundle-offer") {
+      return "Add more items to unlock 'Buy 8 @ ₹999 Offer'";
     }
 
     return "";

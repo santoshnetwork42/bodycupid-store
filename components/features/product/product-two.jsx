@@ -59,7 +59,7 @@ function ProductTwo(props) {
     getCartCount(bundleOfferCartList) + productsNew?.minimumOrderQuantity || 1;
 
   const showCartModal =
-    totalBundleOfferCartItems > 0 && totalBundleOfferCartItems % 6 !== 0
+    totalBundleOfferCartItems > 0 && totalBundleOfferCartItems % 8 !== 0
       ? false
       : true;
 
