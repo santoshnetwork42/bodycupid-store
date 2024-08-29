@@ -201,7 +201,6 @@ function DetailOne(props) {
       <div className="mb-3 mt-3 d-sm-none">
         <ProductBreadcrumbs {...product} />
       </div>
-
       {/* {product?.collections?.includes("bundle-offer") && (
         <div className="product-label label-pdp">BUY 5 @ 999</div>
       )} */}
