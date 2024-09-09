@@ -94,7 +94,13 @@ function cartReducer(state = initialState, action) {
         return cartAcc;
       }, []);
 
-      return { ...state, data: cart };
+      const { allowed: allowedCoupon } = getCouponDiscount(state.coupon, cart);
+
+      return {
+        ...state,
+        data: cart,
+        coupon: allowedCoupon ? state.coupon : null,
+      };
 
     case actionTypes.UPDATE_CART:
       let products = action.payload.products || [];

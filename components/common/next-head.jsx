@@ -1,10 +1,11 @@
 import Head from "next/head";
 import { GOKWIK_SCRIPT, KWIKPASS_MID } from "~/config";
+import { removeHtmlTags } from "~/utils/helper";
 
 function NextHead({
   siteName,
   title,
-  description,
+  description = "",
   image,
   canonical,
   googleVerificationTag,
@@ -26,19 +27,26 @@ function NextHead({
       <link rel="canonical" href={canonical} />
       <title>{title}</title>
       <meta name="title" content={title} />
-      <meta name="description" content={description} />
+      <meta name="description" content={removeHtmlTags(description)} />
       <meta name="keywords" content={siteName} />
       {noIndex && <meta name="robots" content="noindex" />}
       <meta property="og:site_name" content={siteName} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} key="ogtitle" />
-      <meta property="og:description" content={description} key="ogdesc" />
+      <meta
+        property="og:description"
+        content={removeHtmlTags(description)}
+        key="ogdesc"
+      />
       <meta property="og:url" content={canonical} />
       {!!image && <meta property="og:image" content={image} />}
 
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:title" content={title} />
-      <meta property="twitter:description" content={description} />
+      <meta
+        property="twitter:description"
+        content={removeHtmlTags(description)}
+      />
       {!!image && <meta property="twitter:image" content={image} />}
 
       {!!GOKWIK_SCRIPT && <script defer src={GOKWIK_SCRIPT} />}

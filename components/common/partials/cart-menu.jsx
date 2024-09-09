@@ -106,7 +106,10 @@ function CartMenu(props) {
   const bxayCoupon = useMemo(() => {
     return featuredCoupons.find(
       ({ coupon }) =>
-        coupon && coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
+        coupon &&
+        coupon.couponType === "BUY_X_AT_Y" &&
+        coupon.autoApply &&
+        coupon.applicableCollections.includes(router?.query?.slug)
     );
   }, [featuredCoupons]);
 
@@ -146,6 +149,8 @@ function CartMenu(props) {
       return "Add more items to unlock 'Buy 5 @ ₹999 Offer'";
     } else if (slug === "bundle-offer-makeup") {
       return "Add more items to unlock 'Buy 3 @ ₹699 Offer'";
+    } else if (slug === "gpay3") {
+      return "Add more items to unlock 'Buy 6 @ ₹999 Offer'";
     }
 
     return "";

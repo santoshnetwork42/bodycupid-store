@@ -7,6 +7,9 @@ export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
   return number;
 };
+export const removeHtmlTags = (input) => {
+  return input ? input?.replace(/<\/?[^>]+>/g, "") : input;
+};
 
 export const removePhonePrefix = (number) => {
   if (number && number.includes("+91")) return number.split("+91")[1];
@@ -271,7 +274,6 @@ export const checkAffiseValidity = () => {
   const ckSurvivalMinutes = 30 * 24 * 60;
   // Retrieve local storage data with a specific prefix
   const ckLocalData = getCKLocalData("bw_");
-  console.log("ckLocalData :", ckLocalData);
   if (
     ckLocalData.bw_timestamp &&
     ckLocalData.bw_clickid &&

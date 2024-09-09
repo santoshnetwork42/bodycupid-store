@@ -330,6 +330,12 @@
     // @include print_css(product, label, bestseller);
   }
 
+  &.label-pdp {
+    width: max-content;
+    margin-bottom: 6px;
+    @include print_css(product, label, bestseller);
+  }
+
   &.label-sale {
     border-top-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
@@ -490,14 +496,14 @@
     padding: 1rem 1.5rem 1rem;
   }
 
-  .product-card-details-wrapper{
+  .product-card-details-wrapper {
     height: 10rem;
   }
-  .product-card-details-wrapper-sm{
+  .product-card-details-wrapper-sm {
     height: 12rem;
   }
 
-  .details-wrapper-sm{
+  .details-wrapper-sm {
     height: 14rem;
     margin-bottom: 2rem;
   }
@@ -593,7 +599,7 @@
     margin-bottom: 5rem;
   }
 
-  .product-card-details-wrapper{
+  .product-card-details-wrapper {
     height: 4rem;
   }
 }
@@ -668,7 +674,6 @@
   // min-height: 6rem;
   max-height: 4rem;
   overflow: hidden;
-
 }
 .product-title-min-height-sm {
   max-height: 6rem;

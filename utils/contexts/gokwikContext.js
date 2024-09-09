@@ -16,6 +16,7 @@ import {
   applyCoupon as applyCouponMutation,
   getCouponRule,
   getOrder,
+  getUserRewards,
 } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
 import { eventActions } from "~/store/events";
@@ -112,6 +113,10 @@ function GoKwikProvider({
     [user, cartList]
   );
 
+  const onGokwikClose = () => {
+    setIsLoggedinViaGokwik(false);
+  };
+
   const onCouponRemove = () => {
     cartList.forEach((item) => {
       if (item.cartItemSource === "COUPON") {
@@ -151,7 +156,6 @@ function GoKwikProvider({
 
   const manageUserAuthEvent = async (phone, token) => {
     const isLoggedIn = await Auth.currentAuthenticatedUser().catch(() => null);
-    console.log("isLoggedIn", isLoggedIn);
     if (!isLoggedIn) {
       try {
         const cu = await Auth.signIn(addPhonePrefix(phone), undefined, {
@@ -167,6 +171,16 @@ function GoKwikProvider({
           if (sub) {
             dispatchAuthEvent("login", { userId: sub });
             setIsLoggedinViaGokwik(true);
+            const {
+              data: { getUser: getUserResponse },
+            } = await API.graphql({
+              query: getUserRewards,
+              variables: { storeId: STORE_ID },
+              authMode: "AMAZON_COGNITO_USER_POOLS",
+            });
+            setUserWithRewardPoints({
+              ...getUserResponse,
+            });
           }
           return Promise.resolve(null);
         }
@@ -239,6 +253,10 @@ function GoKwikProvider({
     gokwikSdk.on("coupon-removed", (data) => {
       logger.log("coupon-removed>>>", data);
       if (data.coupon_code) onCouponRemove();
+    });
+
+    gokwikSdk.on("checkout-close", () => {
+      onGokwikClose();
     });
 
     gokwikSdk.on("address-add", (address) => {

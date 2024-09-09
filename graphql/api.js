@@ -1808,6 +1808,15 @@ export const getUser = /* GraphQL */ `
   }
 `;
 
+export const getUserRewards = /* GraphQL */ `
+  query GetUser($storeId: ID) {
+    getUser(storeId: $storeId) {
+      id
+      totalRewards
+    }
+  }
+`;
+
 export const updateUser = /* GraphQL */ `
   mutation UpdateUser($input: UpdateUserInput!) {
     updateUser(input: $input) {

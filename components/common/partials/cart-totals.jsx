@@ -78,7 +78,7 @@ function CartTotal({
       return false;
     }
 
-    const lscart = localStorage.getItem(`${STORE_PREFIX}-cartId`);
+    const lscart = localStorage.getItem(`${STORE_PREFIX}-cartId`) || "";
 
     const cartId = lscart || shoppingCartId;
 

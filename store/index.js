@@ -47,6 +47,7 @@ export const rootActions = {
   destroySession: () => ({ type: actionTypes.DESTROY_SESSION }),
 };
 
+
 export const makeStore = (context) => {
   const store = createStore(rootReducers, applyMiddleware(sagaMiddleware));
 

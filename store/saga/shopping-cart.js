@@ -6,6 +6,7 @@ import { createShoppingCart, manageShoppingCart } from "~/graphql/api";
 import { actionTypes } from "~/store/cart";
 import { actionTypes as userActionTypes } from "~/store/user";
 import { errorHandler } from "~/utils/errorHandler";
+import { checkAffiseValidity } from "~/utils/helper";
 
 export function* cartSaga() {
   yield takeEvery(
@@ -18,10 +19,11 @@ export function* cartSaga() {
       actionTypes.EMPTY_CART,
       userActionTypes.SET_USER,
       actionTypes.APPLY_REWARD_POINT,
+      userActionTypes.SET_LOGGED_IN_VIA,
     ],
     function* saga(action) {
       try {
-        if (action === "EMPTY_CART") {
+        if (action.type === "EMPTY_CART") {
           localStorage.removeItem(`${STORE_PREFIX}-cartId`);
           yield put({ type: actionTypes.UPDATE_CART_ID, payload: null });
           return;
@@ -40,6 +42,8 @@ export function* cartSaga() {
           source: cartItemSource || null,
         }));
 
+        const isAffiseTrackingValid = checkAffiseValidity();
+
         const cartInput = {
           couponCodeId: couponCode || null,
           couponCode: code || "",
@@ -47,7 +51,7 @@ export function* cartSaga() {
           isRewardApplied:
             userData && !isLoggedinViaGokwik ? isRewardApplied : false,
           data,
-          metadata: { ...system.meta },
+          metadata: { ...system.meta, isAffiseTrackingValid },
         };
 
         if (cart.cartId) {
@@ -66,7 +70,7 @@ export function* cartSaga() {
           ? response?.data?.manageShoppingCart?.shoppingCartId
           : response?.data?.createShoppingCart?.shoppingCartId;
 
-        localStorage.setItem(`${STORE_PREFIX}-cartId`, cartId);
+        if (cartId) localStorage.setItem(`${STORE_PREFIX}-cartId`, cartId);
 
         yield put({ type: actionTypes.UPDATE_CART_ID, payload: cartId });
         yield put({ type: actionTypes.UPDATE_CART_ID_LOADING, payload: false });
