@@ -25,6 +25,7 @@ export const WORDPRESS_MEDIA_URL = process.env.NEXT_PUBLIC_WORDPRESS_MEDIA_URL;
 export const WORDPRESS_IP = process.env.NEXT_PUBLIC_WORDPRESS_IP;
 export const WORDPRESS_AUTH = process.env.NEXT_PUBLIC_WORDPRESS_AUTH;
 export const GOKWIK_MID = process.env.NEXT_PUBLIC_GOKWIK_MID;
+export const KWIKPASS_MID = process.env.NEXT_PUBLIC_KWIKPASS_MID;
 export const GOKWIK_SCRIPT = process.env.NEXT_PUBLIC_GOKWIK_SCRIPT;
 export const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 export const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;

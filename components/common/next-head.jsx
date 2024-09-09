@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { GOKWIK_SCRIPT } from "~/config";
+import { GOKWIK_SCRIPT, KWIKPASS_MID } from "~/config";
 import { removeHtmlTags } from "~/utils/helper";
 
 function NextHead({
@@ -50,6 +50,17 @@ function NextHead({
       {!!image && <meta property="twitter:image" content={image} />}
 
       {!!GOKWIK_SCRIPT && <script defer src={GOKWIK_SCRIPT} />}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+              window.merchantInfo = {
+                environment: "sandbox",
+                mid: '${KWIKPASS_MID}',
+                type: "merchantInfo"
+              };
+            `,
+        }}
+      />
     </Head>
   );
 }
