@@ -54,7 +54,7 @@ function NextHead({
         dangerouslySetInnerHTML={{
           __html: `
               window.merchantInfo = {
-                environment: "sandbox",
+                environment: "production",
                 mid: '${KWIKPASS_MID}',
                 type: "merchantInfo"
               };
