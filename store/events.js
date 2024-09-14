@@ -17,6 +17,7 @@ import {
   userMapper,
 } from "~/utils/events";
 import {
+  dispatchKwikpassEvent,
   getRecordKey,
   getSource,
   initializeMoengageAndAddInfo,
@@ -40,6 +41,8 @@ export const actionTypes = {
   LOGIN: "LOGIN",
   REGISTER: "REGISTER",
   HOME_VIEWED: "HOME_VIEWED",
+  PRODUCT_VIEWED: "PRODUCT_VIEWED",
+  COLLECTION_VIEWED: "COLLECTION_VIEWED",
   ADD_PAYMENT_INFO: "ADD_PAYMENT_INFO",
   BANNER_CLICKED: "BANNER_CLICKED",
   OTP_REQUESTED: "OTP_REQUESTED",
@@ -147,6 +150,14 @@ export const eventActions = {
   }),
   homeViewed: () => ({
     type: actionTypes.HOME_VIEWED,
+  }),
+  productViewed: (payload) => ({
+    type: actionTypes.PRODUCT_VIEWED,
+    payload,
+  }),
+  collectionViewed: (payload) => ({
+    type: actionTypes.COLLECTION_VIEWED,
+    payload,
   }),
   viewList: (id, name, products) => ({
     type: actionTypes.VIEW_LIST_ITEM,
@@ -720,7 +731,7 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.VIEW_CART, function* saga(e) {
     try {
       const {
-        cart: { data, coupon },
+        cart: { data, coupon, cartId },
       } = yield select();
 
       const userData = yield select((state) => state.user.data);
@@ -745,6 +756,13 @@ export function* eventsSaga() {
         });
       }
 
+      if (cartId)
+        dispatchKwikpassEvent("page_view_kp", {
+          type: "cart",
+          data: {
+            cart_id: cartId,
+          },
+        });
       // Analytics.record({
       //   name: "view_cart",
       //   attributes: {
@@ -981,6 +999,56 @@ export function* eventsSaga() {
       URL: window.location.href,
       Source: eventSource,
     });
+    dispatchKwikpassEvent("page_view_kp", {
+      type: "home",
+      data: {
+        cart_id: "",
+      },
+    });
+  });
+
+  yield takeEvery(actionTypes.PRODUCT_VIEWED, function* ({ payload = {} }) {
+    try {
+      const {
+        cart: { cartId },
+      } = yield select();
+      const { productId, variantId, price, title, slug, imageUrl } = payload;
+      dispatchKwikpassEvent("page_view_kp", {
+        type: "product",
+        data: {
+          cart_id: cartId,
+          product_id: productId,
+          variant_id: variantId,
+          image_url: imageUrl,
+          name: title,
+          price: price,
+          handle: slug,
+        },
+      });
+    } catch (e) {
+      errorHandler(e);
+    }
+  });
+
+  yield takeEvery(actionTypes.COLLECTION_VIEWED, function* saga({ payload }) {
+    try {
+      const {
+        cart: { cartId },
+      } = yield select();
+      const { collectionId, title, slug, imageUrl } = payload;
+      dispatchKwikpassEvent("page_view_kp", {
+        type: "collection",
+        data: {
+          cart_id: cartId,
+          collection_id: collectionId,
+          name: title,
+          image_url: imageUrl,
+          handle: slug,
+        },
+      });
+    } catch (e) {
+      errorHandler(e);
+    }
   });
 
   yield takeEvery(actionTypes.LOG_OUT, function* saga(e) {

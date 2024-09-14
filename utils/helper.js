@@ -236,6 +236,11 @@ export function trackEvent(title, payload) {
   }
 }
 
+export function dispatchKwikpassEvent(eventType, payload) {
+  const event = new CustomEvent(eventType, { detail: payload });
+  window?.dispatchEvent(event);
+}
+
 export const orderStatusBadge = {
   CONFIRMED: {
     color: "#008000",

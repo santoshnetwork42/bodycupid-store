@@ -32,6 +32,7 @@ function CollectionPage(props) {
     pageMeta,
     categoryViewed,
     sortBy,
+    collectionViewed,
   } = props;
   const { name } = store || {};
   const source = getSource();
@@ -45,6 +46,13 @@ function CollectionPage(props) {
         Source: source,
       });
     }
+    const { slug, name, title, id, bannerUrl } = data;
+    collectionViewed({
+      collectionId: id,
+      title: title || name,
+      slug,
+      imageUrl: getPublicImageURL(bannerUrl),
+    });
   }, [data]);
 
   const imageUrl = data.hasOwnProperty("bannerUrl")
@@ -337,6 +345,7 @@ function mapStateToProps(state) {
 
 const Component = connect(mapStateToProps, {
   categoryViewed: eventActions.categoryViewed,
+  collectionViewed: eventActions.collectionViewed,
 })(CollectionPage);
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;

@@ -32,7 +32,8 @@ const RenderProductCollection = dynamic(() =>
 const logger = new Logger("Products");
 
 function ProductDefault(props) {
-  const { product, pageMeta, viewItem, relatedProducts, slug } = props;
+  const { product, pageMeta, viewItem, relatedProducts, slug, productViewed } =
+    props;
 
   const router = useRouter();
   const { query } = router;
@@ -85,6 +86,23 @@ function ProductDefault(props) {
       defaultVariantId: null,
     };
   }, [product?.slug]);
+
+  useEffect(() => {
+    const { id, price, title, slug, images } = product;
+
+    const imageUrl = getPublicImageURL(
+      selectedVariant?.images?.items?.[0]?.imageKey ||
+        images?.items?.[0]?.imageKey
+    );
+    productViewed({
+      productId: id,
+      slug,
+      title,
+      price,
+      variantId: selectedVariant?.id || "",
+      imageUrl,
+    });
+  }, [selectedVariant]);
 
   return (
     <main className="main single-product">
@@ -246,6 +264,7 @@ function mapStateToProps() {
 
 const Component = connect(mapStateToProps, {
   viewItem: eventActions.viewItem,
+  productViewed: eventActions.productViewed,
 })(ProductDefault);
 
 Component.showTopRunner = true;
