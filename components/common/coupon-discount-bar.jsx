@@ -39,7 +39,6 @@ const couponDiscountBar = ({
     ({ coupon }) =>
       coupon && coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
   );
-
   
   const hasCartItems = cartList?.length > 0;
 
