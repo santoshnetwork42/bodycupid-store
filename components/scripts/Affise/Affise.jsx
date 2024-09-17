@@ -61,7 +61,7 @@ function Affise() {
       };
       // Get the query parameters from the URL
       var ckSearchParams = getCKSearchParams();
-      // console.log(" ckSearchParams :", ckSearchParams);
+      // console.log(" ckSearchParams :", ckSearchParams); 
       // Store the query parameters in local storage
       storeCKInLocalStorage(ckSearchParams);
       // console.log("head script ended");
