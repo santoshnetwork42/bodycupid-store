@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
@@ -14,12 +14,29 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 import { Logger } from "aws-amplify";
 import { getDefaultSorting } from "~/utils";
+import { eventActions } from "~/store/events";
 
 const logger = new Logger("Ranges collection");
 
 function AllCollection(props) {
-  const { store, products, pageFilter, collections, pageMeta } = props;
+  const {
+    store,
+    products,
+    pageFilter,
+    collections,
+    pageMeta,
+    collectionViewed,
+  } = props;
   const { name } = store || {};
+
+  useEffect(() => {
+    collectionViewed({
+      collectionId: "",
+      title: "ranges",
+      slug: "ranges",
+      imageUrl: "",
+    });
+  }, []);
 
   return (
     <main className="main">
@@ -107,7 +124,9 @@ function mapStateToProps(state) {
   };
 }
 
-const Component = connect(mapStateToProps)(React.memo(AllCollection));
+const Component = connect(mapStateToProps, {
+  collectionViewed: eventActions.collectionViewed,
+})(React.memo(AllCollection));
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;
 Component.showTimer = true;

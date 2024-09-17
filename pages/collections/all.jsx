@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
@@ -13,12 +13,29 @@ import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 import { Logger } from "aws-amplify";
+import { eventActions } from "~/store/events";
 
 const logger = new Logger("All collections");
 
 function AllProduct(props) {
-  const { store, products, pageFilter, categories, pageMeta } = props;
+  const {
+    store,
+    products,
+    pageFilter,
+    categories,
+    pageMeta,
+    collectionViewed,
+  } = props;
   const { name } = store || {};
+
+  useEffect(() => {
+    collectionViewed({
+      collectionId: "",
+      title: "all",
+      slug: "all",
+      imageUrl: "",
+    });
+  }, []);
 
   return (
     <main className="main">
@@ -104,7 +121,9 @@ function mapStateToProps(state) {
   };
 }
 
-const Component = connect(mapStateToProps)(React.memo(AllProduct));
+const Component = connect(mapStateToProps, {
+  collectionViewed: eventActions.collectionViewed,
+})(React.memo(AllProduct));
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;
 Component.showTimer = true;

@@ -995,16 +995,20 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.HOME_VIEWED, function* () {
-    trackEvent("Home Viewed", {
-      URL: window.location.href,
-      Source: eventSource,
-    });
-    dispatchKwikpassEvent("page_view_kp", {
-      type: "home",
-      data: {
-        cart_id: "",
-      },
-    });
+    try {
+      trackEvent("Home Viewed", {
+        URL: window.location.href,
+        Source: eventSource,
+      });
+      dispatchKwikpassEvent("page_view_kp", {
+        type: "home",
+        data: {
+          cart_id: "",
+        },
+      });
+    } catch (e) {
+      errorHandler(e);
+    }
   });
 
   yield takeEvery(actionTypes.PRODUCT_VIEWED, function* ({ payload = {} }) {
