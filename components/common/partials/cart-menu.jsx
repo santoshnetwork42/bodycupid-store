@@ -114,12 +114,13 @@ function CartMenu(props) {
   }, [featuredCoupons]);
 
   const showProgressBar = useMemo(() => {
-    return (
-      router?.query?.slug === "bundle-offer" &&
-      cartList?.some((cart) => cart?.collections?.includes("bundle-offer")) &&
-      bxayCoupon &&
-      (!appliedCoupon || appliedCoupon.code === bxayCoupon.coupon.code)
-    );
+    return false; // for now
+    // return (
+    //   router?.query?.slug === "bundle-offer" &&
+    //   cartList?.some((cart) => cart?.collections?.includes("bundle-offer")) &&
+    //   bxayCoupon &&
+    //   (!appliedCoupon || appliedCoupon.code === bxayCoupon.coupon.code)
+    // );
   }, [bxayCoupon, appliedCoupon, cartList]);
 
   const { current, max, progress, progressMessage } = useMemo(() => {

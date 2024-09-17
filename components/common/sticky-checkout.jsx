@@ -26,10 +26,11 @@ function StickyFooter(props) {
     useFeaturedCoupons(true);
 
   const isBundleOffer = useMemo(() => {
-    return !!(
-      slug === "bundle-offer" &&
-      cartList?.some((cart) => cart?.collections?.includes("bundle-offer"))
-    );
+    return false; // for now
+    // return !!(
+    //   slug === "bundle-offer" &&
+    //   cartList?.some((cart) => cart?.collections?.includes("bundle-offer"))
+    // );
   }, [cartList, slug]);
 
   const bxayCoupon = useMemo(() => {
