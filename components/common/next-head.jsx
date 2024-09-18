@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { GOKWIK_SCRIPT, KWIKPASS_MID } from "~/config";
+import { GOKWIK_SCRIPT, KWIKPASS_MID, STORE_ENV } from "~/config";
 import { removeHtmlTags } from "~/utils/helper";
 
 function NextHead({
@@ -54,7 +54,9 @@ function NextHead({
         dangerouslySetInnerHTML={{
           __html: `
               window.merchantInfo = {
-                environment: "production",
+                environment: '${
+                  STORE_ENV === "production" ? "production" : "sandbox"
+                }',
                 mid: '${KWIKPASS_MID}',
                 type: "merchantInfo"
               };
