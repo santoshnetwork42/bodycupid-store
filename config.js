@@ -33,3 +33,4 @@ export const POSTHOG_FLAG = process.env.NEXT_PUBLIC_POSTHOG_FLAG;
 export const VERCEL_AB_FLAG = process.env.NEXT_PUBLIC_AB_FLAG;
 export const AB_THRESHOLD = process.env.NEXT_PUBLIC_AB_THRESHOLD;
 export const STORE_ENV = process.env.STORE_ENV;
+export const KWIKPASS_SCRIPT = process.env.NEXT_PUBLIC_KWIKPASS_SCRIPT;

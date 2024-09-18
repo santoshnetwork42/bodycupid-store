@@ -14,7 +14,12 @@ import Header from "~/components/common/header";
 import NextHead from "~/components/common/next-head";
 import Layout from "~/components/layout";
 import Scripts from "~/components/scripts";
-import { AWS_CLIENT_ID, STORE_ID, STORE_PREFIX } from "~/config";
+import {
+  AWS_CLIENT_ID,
+  KWIKPASS_SCRIPT,
+  STORE_ID,
+  STORE_PREFIX,
+} from "~/config";
 import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
 import { getStore, getUser } from "~/graphql/api";
 import { rootActions, wrapper } from "~/store";
@@ -237,8 +242,7 @@ const App = ({ Component, pageProps }) => {
   useEffect(() => {
     setGuestCheckout();
     const script = document.createElement("script");
-    script.src =
-      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-custom-merchant.js";
+    script.src = KWIKPASS_SCRIPT;
     script.async = true;
 
     script.onload = () => {
