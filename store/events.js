@@ -756,13 +756,10 @@ export function* eventsSaga() {
         });
       }
 
-      if (cartId)
-        dispatchKwikpassEvent("page_view_kp", {
-          type: "cart",
-          data: {
-            cart_id: cartId,
-          },
-        });
+      dispatchKwikpassEvent("page_view_kp", {
+        type: "cart",
+        data: !!cartId ? { cart_id: cartId } : {},
+      });
       // Analytics.record({
       //   name: "view_cart",
       //   attributes: {
@@ -996,15 +993,17 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.HOME_VIEWED, function* () {
     try {
+      const {
+        cart: { cartId },
+      } = yield select();
+
       trackEvent("Home Viewed", {
         URL: window.location.href,
         Source: eventSource,
       });
       dispatchKwikpassEvent("page_view_kp", {
         type: "home",
-        data: {
-          cart_id: "",
-        },
+        data: !!cartId ? { cart_id: cartId } : {},
       });
     } catch (e) {
       errorHandler(e);
@@ -1017,17 +1016,22 @@ export function* eventsSaga() {
         cart: { cartId },
       } = yield select();
       const { productId, variantId, price, title, slug, imageUrl } = payload;
+      let eventData = {
+        product_id: productId,
+        image_url: imageUrl,
+        name: title,
+        price: price,
+        handle: slug,
+      };
+      if (!!variantId) {
+        eventData.variant_id = variantId;
+      }
+      if (!!cartId) {
+        eventData.cart_id = cartId;
+      }
       dispatchKwikpassEvent("page_view_kp", {
         type: "product",
-        data: {
-          cart_id: cartId,
-          product_id: productId,
-          variant_id: variantId,
-          image_url: imageUrl,
-          name: title,
-          price: price,
-          handle: slug,
-        },
+        data: eventData,
       });
     } catch (e) {
       errorHandler(e);
@@ -1040,15 +1044,21 @@ export function* eventsSaga() {
         cart: { cartId },
       } = yield select();
       const { collectionId, title, slug, imageUrl } = payload;
+
+      let eventData = {
+        name: title,
+        image_url: imageUrl,
+        handle: slug,
+      };
+      if (!!collectionId) {
+        eventData.collection_id = collectionId;
+      }
+      if (!!cartId) {
+        eventData.cart_id = cartId;
+      }
       dispatchKwikpassEvent("page_view_kp", {
         type: "collection",
-        data: {
-          cart_id: cartId,
-          collection_id: collectionId,
-          name: title,
-          image_url: imageUrl,
-          handle: slug,
-        },
+        data: eventData,
       });
     } catch (e) {
       errorHandler(e);
