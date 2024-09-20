@@ -8,7 +8,7 @@ import Tag from "~/components/common/tag";
 import ALink from "~/components/features/custom-link";
 import Checkmark, { LoyaltyTag } from "~/components/icons";
 import NextImage from "~/components/image";
-import { STORE_ID } from "~/config";
+import { STORE_ID, SWOP_STORE_BANNER_URL } from "~/config";
 import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
 import { userActions } from "~/store/user";
@@ -169,30 +169,30 @@ function Order({
         <div className="container pt-7">
           <div className="d-flex justify-content-center align-items-center mb-4">
             <div id="promocode-element-container">
-              {/* <ALink className="order-image" href={"#"}> */}
-              {isMobile && (
-                <NextImage
-                  src={"/images/thankyou/swopStoreMobileBanner.jpg"}
-                  alt={"collections-bundle-offer"}
-                  loader="local"
-                  width={400}
-                  height={200}
-                  objectFit="contain"
-                  priority
-                />
-              )}
-              {!isMobile && (
-                <NextImage
-                  src={"/images/thankyou/swopStoreDesktopBanner.jpg"}
-                  alt={"collections-bundle-offer"}
-                  loader="local"
-                  width={1400}
-                  height={400}
-                  objectFit="contain"
-                  priority
-                />
-              )}
-              {/* </ALink> */}
+              <ALink className="order-image" href={SWOP_STORE_BANNER_URL}>
+                {isMobile && (
+                  <NextImage
+                    src={"/images/thankyou/swopStoreMobileBanner.jpg"}
+                    alt={"collections-bundle-offer"}
+                    loader="local"
+                    width={400}
+                    height={200}
+                    objectFit="contain"
+                    priority
+                  />
+                )}
+                {!isMobile && (
+                  <NextImage
+                    src={"/images/thankyou/swopStoreDesktopBanner.jpg"}
+                    alt={"collections-bundle-offer"}
+                    loader="local"
+                    width={1400}
+                    height={400}
+                    objectFit="contain"
+                    priority
+                  />
+                )}
+              </ALink>
             </div>
           </div>
           <div className="d-flex justify-content-between">
