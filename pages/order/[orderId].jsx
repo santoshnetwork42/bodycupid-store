@@ -15,6 +15,7 @@ import { userActions } from "~/store/user";
 import { formateDate, getOrderTotal, toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import fetchData from "~/utils/fetchData";
+import useWindowDimensions from "~/utils/getWindowDimension";
 import { alertToaster } from "~/utils/popupHelper";
 
 const logger = new Logger("Orders");
@@ -31,6 +32,7 @@ function Order({
   const { name } = store || {};
   const [timer, setTimer] = useState(null);
   const allStatus = ["CANCELLED", "DISPATCHED", "COURIER_RETURN", "DELIVERED"];
+  const { isSmallSize: isMobile } = useWindowDimensions();
 
   const router = useRouter();
 
@@ -166,22 +168,32 @@ function Order({
 
         <div className="container pt-7">
           <div className="d-flex justify-content-center align-items-center mb-4">
-            <ALink
-              className="order-image"
-              href={
-                "/collections/combos-and-gifts?couponCode=RAKHI&utm_source=thank_you_page"
-              }
-            >
-              <NextImage
-                src={"/images/banners/perfume_banner.jpg"}
-                alt={"collections-bundle-offer"}
-                loader="local"
-                width={1400}
-                height={400}
-                objectFit="contain"
-                priority
-              />
-            </ALink>
+            <div id="promocode-element-container">
+              {/* <ALink className="order-image" href={"#"}> */}
+              {isMobile && (
+                <NextImage
+                  src={"/images/thankyou/swopStoreMobileBanner.jpg"}
+                  alt={"collections-bundle-offer"}
+                  loader="local"
+                  width={400}
+                  height={200}
+                  objectFit="contain"
+                  priority
+                />
+              )}
+              {!isMobile && (
+                <NextImage
+                  src={"/images/thankyou/swopStoreDesktopBanner.jpg"}
+                  alt={"collections-bundle-offer"}
+                  loader="local"
+                  width={1400}
+                  height={400}
+                  objectFit="contain"
+                  priority
+                />
+              )}
+              {/* </ALink> */}
+            </div>
           </div>
           <div className="d-flex justify-content-between">
             <h2 className="title title-simple text-left mr-2 mt-1 font-weight-bold text-uppercase">
