@@ -53,7 +53,6 @@ function Affise() {
               localStorage.setItem("bw_" + key, params[key]);
             }
           }
-          
 
           // Store the current timestamp in local storage
           var currentTimestamp = Math.floor(Date.now() / 1000); // Convert milliseconds to seconds
