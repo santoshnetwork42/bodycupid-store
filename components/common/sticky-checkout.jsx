@@ -83,7 +83,8 @@ function StickyFooter(props) {
   const hasSpecialOffer = cartList?.some(
     (cart) =>
       cart?.collections?.includes("bundle-offer-buy5") ||
-      cart?.collections?.includes("special-deal")
+      cart?.collections?.includes("special-deal") ||
+      cart?.collections?.includes("bundle-offer")
   );
   const showDiscount = totalCartItems > 0 && hasDiscountSlug && hasSpecialOffer;
 
