@@ -115,7 +115,6 @@ function ProductTwo(props) {
       } else if (tagSlug === "deal-offer") {
         const showCartModal =
           totalCartItems > 0 && totalCartItems % 3 !== 0 ? false : true;
-
         showCartModal && setCartVisibility(true);
       } else {
         showEveryTime && setCartVisibility(true);
