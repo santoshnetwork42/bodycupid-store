@@ -80,12 +80,16 @@ function StickyFooter(props) {
     slug === "bundle-offer-makeup" ||
     slug === "gpay3" ||
     slug === "bundle-offer" ||
+    slug === "affiliate-4" ||
+    slug === "affiliate-6" ||
     slug === "deal-offer";
   const hasSpecialOffer = cartList?.some(
     (cart) =>
       cart?.collections?.includes("bundle-offer-buy5") ||
       cart?.collections?.includes("special-deal") ||
       cart?.collections?.includes("bundle-offer") ||
+      cart?.collections?.includes("affiliate-6") ||
+      cart?.collections?.includes("affiliate-4") ||
       cart?.collections?.includes("deal-offer")
   );
   const showDiscount = totalCartItems > 0 && hasDiscountSlug && hasSpecialOffer;
@@ -102,6 +106,10 @@ function StickyFooter(props) {
     } else if (slug === "deal-offer") {
       return "Add more items to unlock 'Buy 3 @ ₹599 Offer'";
     } else if (slug === "gpay3") {
+      return "Add more items to unlock 'Buy 6 @ ₹999 Offer'";
+    } else if (slug === "affiliate-4") {
+      return "Add more items to unlock 'Buy 4 @ ₹599 Offer'";
+    } else if (slug === "affiliate-6") {
       return "Add more items to unlock 'Buy 6 @ ₹999 Offer'";
     }
 
