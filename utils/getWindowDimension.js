@@ -8,7 +8,7 @@ const getWindowDimensions = () => {
     isSmallSize: width < 500,
     isDesktop: width >= 992,
   };
-};
+}; 
 
 export function useWindowDimensions() {
   const [windowDimensions, setWindowDimensions] = useState(
