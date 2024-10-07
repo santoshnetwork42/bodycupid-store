@@ -112,6 +112,16 @@ function ProductTwo(props) {
           totalCartItems > 0 && totalCartItems % 6 !== 0 ? false : true;
 
         showCartModal && setCartVisibility(true);
+      } else if (tagSlug === "gpay") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 8 !== 0 ? false : true;
+
+        showCartModal && setCartVisibility(true);
+      } else if (tagSlug === "gpay2") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 4 !== 0 ? false : true;
+
+        showCartModal && setCartVisibility(true);
       } else if (tagSlug === "deal-offer") {
         const showCartModal =
           totalCartItems > 0 && totalCartItems % 3 !== 0 ? false : true;
