@@ -77,6 +77,10 @@ function ProductTwo(props) {
     }
   });
 
+  const collectionTag = product?.collectionsList?.find(
+    (i) => i.slug === tagSlug
+  );
+
   const tag = useMemo(() => {
     if (PRODUCT_TAG_LIST.includes(tagSlug)) {
       return tagSlug.replace("-", " ").toUpperCase();
@@ -89,7 +93,8 @@ function ProductTwo(props) {
     return;
   }, [collections]);
 
-  const productTopLabel = selectedLabel?.label?.trim() || tag;
+  const productTopLabel =
+    collectionTag?.label?.trim() || selectedLabel?.label?.trim() || tag;
   const productTopLabelColor =
     selectedLabel?.labelColor?.trim() === "#000000"
       ? "#17B31B"
