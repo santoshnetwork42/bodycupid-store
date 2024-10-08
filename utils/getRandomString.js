@@ -7,5 +7,5 @@ const getRandomString = (bytes) => {
   window.crypto.getRandomValues(randomValues);
   return Array.from(randomValues).map(intToHex).join('');
 }
-
+ 
 export default getRandomString;
