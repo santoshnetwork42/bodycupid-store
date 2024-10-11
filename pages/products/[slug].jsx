@@ -104,10 +104,11 @@ function ProductDefault(props) {
         imageUrl,
       });
     }, 1000);
+
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [selectedVariant]);
+  }, [selectedVariant, slug]);
 
   return (
     <main className="main single-product">

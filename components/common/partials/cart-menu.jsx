@@ -64,14 +64,15 @@ function CartMenu(props) {
   const { inventoryMapping } = inventory;
 
   useEffect(() => {
+    if (!isCartOpen) return;
+    logger.verbose("View Cart");
     const timeoutId = setTimeout(() => {
       viewCart();
     }, 1000);
     return () => {
       clearTimeout(timeoutId);
     };
-    logger.verbose("View Cart");
-  }, []);
+  }, [isCartOpen]);
 
   const validLtoProduct =
     !!cartItems?.length &&
