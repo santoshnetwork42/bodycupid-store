@@ -94,14 +94,19 @@ function ProductDefault(props) {
       selectedVariant?.images?.items?.[0]?.imageKey ||
         images?.items?.[0]?.imageKey
     );
-    productViewed({
-      productId: id,
-      slug,
-      title,
-      price,
-      variantId: selectedVariant?.id || "",
-      imageUrl,
-    });
+    const timeoutId = setTimeout(() => {
+      productViewed({
+        productId: id,
+        slug,
+        title,
+        price,
+        variantId: selectedVariant?.id || "",
+        imageUrl,
+      });
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [selectedVariant]);
 
   return (

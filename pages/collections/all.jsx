@@ -29,12 +29,17 @@ function AllProduct(props) {
   const { name } = store || {};
 
   useEffect(() => {
-    collectionViewed({
-      collectionId: "",
-      title: "all",
-      slug: "all",
-      imageUrl: "",
-    });
+    const timeoutId = setTimeout(() => {
+      collectionViewed({
+        collectionId: "",
+        title: "all",
+        slug: "all",
+        imageUrl: "",
+      });
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   return (

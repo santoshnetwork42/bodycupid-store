@@ -47,12 +47,17 @@ function CollectionPage(props) {
       });
     }
     const { slug, name, title, id, bannerUrl } = data;
-    collectionViewed({
-      collectionId: id,
-      title: title || name,
-      slug,
-      imageUrl: getPublicImageURL(bannerUrl),
-    });
+    const timeoutId = setTimeout(() => {
+      collectionViewed({
+        collectionId: id,
+        title: title || name,
+        slug,
+        imageUrl: getPublicImageURL(bannerUrl),
+      });
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [data]);
 
   const imageUrl = data.hasOwnProperty("bannerUrl")
