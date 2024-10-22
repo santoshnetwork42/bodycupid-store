@@ -68,14 +68,14 @@ function ProductTwo(props) {
     logger.verbose("Opened quick view for product:", slug);
   };
 
-  let selectedLabel = product?.collectionsList?.length
-    ? product?.collectionsList?.find((col) => !!col.label)
-    : "";
-  product?.collectionsList?.map((item) => {
-    if (!!item?.label?.trim() && item?.priority > selectedLabel?.priority) {
-      selectedLabel = item;
-    }
-  });
+  // let selectedLabel = product?.collectionsList?.length
+  // ? product?.collectionsList?.find((col) => !!col.label)
+  // : "";
+  // product?.collectionsList?.map((item) => {
+  // if (!!item?.label?.trim() && item?.priority > selectedLabel?.priority) {
+  // selectedLabel = item;
+  // }
+  // });
 
   const collectionTag = product?.collectionsList?.find(
     (i) => i.slug === tagSlug
@@ -93,12 +93,11 @@ function ProductTwo(props) {
     return;
   }, [collections]);
 
-  const productTopLabel =
-    collectionTag?.label?.trim() || selectedLabel?.label?.trim() || tag;
+  const productTopLabel = collectionTag?.label?.trim() || tag;
   const productTopLabelColor =
-    selectedLabel?.labelColor?.trim() === "#000000"
+    collectionTag?.labelColor?.trim() === "#000000"
       ? "#17B31B"
-      : selectedLabel?.labelColor?.trim() || "#17B31B";
+      : collectionTag?.labelColor?.trim() || "#17B31B";
 
   const showCartVisibility = ({ showEveryTime = false }) => {
     if (cartList && previousCartList.current !== cartList) {
