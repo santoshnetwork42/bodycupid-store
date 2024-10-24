@@ -1,20 +1,21 @@
 export const getFirstVariant = (product, variantId) => {
-  if (product) {
-    const { variants = {} } = product;
-    const { items = [] } = variants;
+  if (!product || !product.variants || !Array.isArray(product.variants.items))
+    return null;
 
-    let variant;
-    if (variantId) {
-      variant = items.find((v) => v.id === variantId);
-    }
+  const { items = [] } = product?.variants;
 
-    if (!variant) {
-      [variant] = items;
-    }
-
-    return variant;
+  if (variantId) {
+    return items.find((v) => v.id === variantId) || null;
   }
-  return null;
+
+  return (
+    items
+      .slice()
+      .sort((a, b) => (a.position || 0) - (b.position || 0))
+      .find((v) => v.inventory > 0) ||
+    items[0] ||
+    null
+  );
 };
 
 export const getProductMeta = (product) => {
