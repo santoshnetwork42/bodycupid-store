@@ -31,7 +31,20 @@ export const getProductMeta = (product) => {
     sortedImages[0] || { imageKey: imageUrl };
   const [, secondaryImage] = sortedImages;
 
-  const [firstVariant] = items.sort((a, b) => a.position - b.position);
+  const variantsSortedByPosition = items.sort(
+    (a, b) => a.position - b.position
+  );
+
+  let firstVariant = variantsSortedByPosition[0];
+  if (variantsSortedByPosition) {
+    for (let index = 0; index < variantsSortedByPosition.length; index++) {
+      const element = variantsSortedByPosition[index];
+      if (element.inventory && element.inventory > 0) {
+        firstVariant = element;
+        break;
+      }
+    }
+  }
 
   let discount = !!(product.listingPrice && product.price)
     ? Math.round(
