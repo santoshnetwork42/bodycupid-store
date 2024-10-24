@@ -7,7 +7,7 @@ export const getFirstVariant = (product, variantId) => {
   if (variantId) {
     return items.find((v) => v.id === variantId) || null;
   }
-
+ 
   return (
     items
       .slice()
