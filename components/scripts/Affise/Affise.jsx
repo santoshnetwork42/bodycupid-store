@@ -53,8 +53,7 @@ function Affise() {
               localStorage.setItem("bw_" + key, params[key]);
             }
           }
-          
-          
+
           // Store the current timestamp in local storage
           var currentTimestamp = Math.floor(Date.now() / 1000); // Convert milliseconds to seconds
           localStorage.setItem("bw_timestamp", currentTimestamp);
@@ -62,7 +61,7 @@ function Affise() {
       };
       // Get the query parameters from the URL
       var ckSearchParams = getCKSearchParams();
-      // console.log(" ckSearchParams :", ckSearchParams); 
+      // console.log(" ckSearchParams :", ckSearchParams);
       // Store the query parameters in local storage
       storeCKInLocalStorage(ckSearchParams);
       // console.log("head script ended");

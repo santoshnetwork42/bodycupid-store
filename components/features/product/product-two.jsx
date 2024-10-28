@@ -59,7 +59,7 @@ function ProductTwo(props) {
     getCartCount(bundleOfferCartList) + productsNew?.minimumOrderQuantity || 1;
 
   const showCartModal =
-    totalBundleOfferCartItems > 0 && totalBundleOfferCartItems % 5 !== 0
+    totalBundleOfferCartItems > 0 && totalBundleOfferCartItems % 8 !== 0
       ? false
       : true;
 
@@ -68,14 +68,18 @@ function ProductTwo(props) {
     logger.verbose("Opened quick view for product:", slug);
   };
 
-  let selectedLabel = product?.collectionsList?.length
-    ? product?.collectionsList?.find((col) => !!col.label)
-    : "";
-  product?.collectionsList?.map((item) => {
-    if (!!item?.label?.trim() && item?.priority > selectedLabel?.priority) {
-      selectedLabel = item;
-    }
-  });
+  // let selectedLabel = product?.collectionsList?.length
+  // ? product?.collectionsList?.find((col) => !!col.label)
+  // : "";
+  // product?.collectionsList?.map((item) => {
+  // if (!!item?.label?.trim() && item?.priority > selectedLabel?.priority) {
+  // selectedLabel = item;
+  // }
+  // });
+
+  const collectionTag = product?.collectionsList?.find(
+    (i) => i.slug === tagSlug
+  );
 
   const tag = useMemo(() => {
     if (PRODUCT_TAG_LIST.includes(tagSlug)) {
@@ -89,11 +93,11 @@ function ProductTwo(props) {
     return;
   }, [collections]);
 
-  const productTopLabel = selectedLabel?.label?.trim() || tag;
+  const productTopLabel = collectionTag?.label?.trim() || tag;
   const productTopLabelColor =
-    selectedLabel?.labelColor?.trim() === "#000000"
+    collectionTag?.labelColor?.trim() === "#000000"
       ? "#17B31B"
-      : selectedLabel?.labelColor?.trim() || "#17B31B";
+      : collectionTag?.labelColor?.trim() || "#17B31B";
 
   const showCartVisibility = ({ showEveryTime = false }) => {
     if (cartList && previousCartList.current !== cartList) {
@@ -111,6 +115,28 @@ function ProductTwo(props) {
         const showCartModal =
           totalCartItems > 0 && totalCartItems % 6 !== 0 ? false : true;
 
+        showCartModal && setCartVisibility(true);
+      } else if (tagSlug === "gpay") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 8 !== 0 ? false : true;
+
+        showCartModal && setCartVisibility(true);
+      } else if (tagSlug === "gpay2") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 4 !== 0 ? false : true;
+
+        showCartModal && setCartVisibility(true);
+      } else if (tagSlug === "deal-offer") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 3 !== 0 ? false : true;
+        showCartModal && setCartVisibility(true);
+      } else if (tagSlug === "affiliate-4") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 4 !== 0 ? false : true;
+        showCartModal && setCartVisibility(true);
+      } else if (tagSlug === "affiliate-6") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 6 !== 0 ? false : true;
         showCartModal && setCartVisibility(true);
       } else {
         showEveryTime && setCartVisibility(true);

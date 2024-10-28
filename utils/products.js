@@ -1,20 +1,21 @@
 export const getFirstVariant = (product, variantId) => {
-  if (product) {
-    const { variants = {} } = product;
-    const { items = [] } = variants;
+  if (!product || !product.variants || !Array.isArray(product.variants.items))
+    return null;
 
-    let variant;
-    if (variantId) {
-      variant = items.find((v) => v.id === variantId);
-    }
+  const { items = [] } = product?.variants;
 
-    if (!variant) {
-      [variant] = items;
-    }
-
-    return variant;
+  if (variantId) {
+    return items.find((v) => v.id === variantId) || null;
   }
-  return null;
+ 
+  return (
+    items
+      .slice()
+      .sort((a, b) => (a.position || 0) - (b.position || 0))
+      .find((v) => v.inventory > 0) ||
+    items[0] ||
+    null
+  );
 };
 
 export const getProductMeta = (product) => {
@@ -31,7 +32,20 @@ export const getProductMeta = (product) => {
     sortedImages[0] || { imageKey: imageUrl };
   const [, secondaryImage] = sortedImages;
 
-  const [firstVariant] = items.sort((a, b) => a.position - b.position);
+  const variantsSortedByPosition = items.sort(
+    (a, b) => a.position - b.position
+  );
+
+  let firstVariant = variantsSortedByPosition[0];
+  if (variantsSortedByPosition) {
+    for (let index = 0; index < variantsSortedByPosition.length; index++) {
+      const element = variantsSortedByPosition[index];
+      if (element.inventory && element.inventory > 0) {
+        firstVariant = element;
+        break;
+      }
+    }
+  }
 
   let discount = !!(product.listingPrice && product.price)
     ? Math.round(

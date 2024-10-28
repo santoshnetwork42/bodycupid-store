@@ -10,7 +10,12 @@ import { getSource } from "~/utils/helper";
 
 function IntroSection({ banners = [], bannerClicked, homeViewed }) {
   useEffect(() => {
-    homeViewed();
+    const timeoutId = setTimeout(() => {
+      homeViewed();
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
   const source = getSource();
 

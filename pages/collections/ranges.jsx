@@ -30,12 +30,17 @@ function AllCollection(props) {
   const { name } = store || {};
 
   useEffect(() => {
-    collectionViewed({
-      collectionId: "",
-      title: "ranges",
-      slug: "ranges",
-      imageUrl: "",
-    });
+    const timeoutId = setTimeout(() => {
+      collectionViewed({
+        collectionId: "",
+        title: "ranges",
+        slug: "ranges",
+        imageUrl: "",
+      });
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   return (

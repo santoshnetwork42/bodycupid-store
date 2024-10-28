@@ -293,7 +293,7 @@ function CartProduct({
                         return (
                           <>
                             <div
-                              className="card-margin-bottom ml-2"
+                              className="card-margin-bottom mr-2"
                               key={v1.id}
                             >
                               <select
@@ -377,7 +377,7 @@ function CartProduct({
                           ?.variantGroupOptionId;
 
                       return (
-                        <div className="card-margin-bottom ml-2" key={v1.id}>
+                        <div className="card-margin-bottom" key={v1.id}>
                           <select
                             name={`${v1.id}`}
                             className="form-control-drop-down"

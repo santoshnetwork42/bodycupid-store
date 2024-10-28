@@ -64,9 +64,15 @@ function CartMenu(props) {
   const { inventoryMapping } = inventory;
 
   useEffect(() => {
-    viewCart();
+    if (!isCartOpen) return;
     logger.verbose("View Cart");
-  }, []);
+    const timeoutId = setTimeout(() => {
+      viewCart();
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isCartOpen]);
 
   const validLtoProduct =
     !!cartItems?.length &&
@@ -143,14 +149,24 @@ function CartMenu(props) {
     const slug = router?.query?.slug;
 
     if (slug === "bundle-offer") {
-      return "Add more items to unlock 'Buy 5 @ ₹999 Offer'";
+      return "Add more items to unlock 'Buy 8 @ ₹999 Offer'";
     } else if (slug === "special-deal") {
       return "Add more items to unlock 'Buy 1 get 3 Offer'";
     } else if (slug === "bundle-offer-buy5") {
       return "Add more items to unlock 'Buy 5 @ ₹999 Offer'";
     } else if (slug === "bundle-offer-makeup") {
       return "Add more items to unlock 'Buy 3 @ ₹699 Offer'";
+    } else if (slug === "deal-offer") {
+      return "Add more items to unlock 'Buy 3 @ ₹599 Offer'";
     } else if (slug === "gpay3") {
+      return "Add more items to unlock 'Buy 6 @ ₹999 Offer'";
+    } else if (slug === "gpay") {
+      return "Add more items to unlock 'Buy 8 @ ₹999 Offer'";
+    } else if (slug === "gpay2") {
+      return "Add more items to unlock 'Buy 4 @ ₹599 Offer'";
+    } else if (slug === "affiliate-4") {
+      return "Add more items to unlock 'Buy 4 @ ₹599 Offer'";
+    } else if (slug === "affiliate-6") {
       return "Add more items to unlock 'Buy 6 @ ₹999 Offer'";
     }
 

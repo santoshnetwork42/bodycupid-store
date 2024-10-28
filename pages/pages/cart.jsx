@@ -29,7 +29,12 @@ function Cart(props) {
   const { inventoryMapping } = inventory;
 
   useEffect(() => {
-    viewCart();
+    const timeoutId = setTimeout(() => {
+      viewCart();
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
     logger.verbose("View Cart");
   }, []);
 

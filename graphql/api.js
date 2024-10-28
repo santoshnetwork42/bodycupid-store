@@ -894,6 +894,7 @@ export const findProducts = /* GraphQL */ `
           label
           labelColor
           priority
+          slug
         }
         listingPrice
         tags
