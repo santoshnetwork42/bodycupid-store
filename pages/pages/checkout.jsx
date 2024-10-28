@@ -106,7 +106,7 @@ function Checkout(props) {
     { isConfirmed, order: finalOrder, loading },
     placeOrderV1,
     orderHelper,
-  ] = useOrders();
+  ] = useOrders({ orderVersion: "V2" });
 
   const freeProducts = useMemo(
     () => freeProductsResponse.map((f) => f.product),
