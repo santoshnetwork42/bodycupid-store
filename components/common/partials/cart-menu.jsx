@@ -147,13 +147,16 @@ function CartMenu(props) {
 
   const getCollectionWiseNudgeMsg = () => {
     const slug = router?.query?.slug;
-
     if (slug === "bundle-offer") {
       return "Add more items to unlock 'Buy 8 @ ₹999 Offer'";
     } else if (slug === "special-deal") {
       return "Add more items to unlock 'Buy 1 get 3 Offer'";
     } else if (slug === "bundle-offer-buy5") {
       return "Add more items to unlock 'Buy 5 @ ₹999 Offer'";
+    } else if (slug === "buy-4-699") {
+      return "Add more items to unlock 'Buy 4 @ ₹699 Offer'";
+    } else if (slug === "buy-6-at-899") {
+      return "Add more items to unlock 'Buy 6 @ ₹899 Offer'";
     } else if (slug === "bundle-offer-makeup") {
       return "Add more items to unlock 'Buy 3 @ ₹699 Offer'";
     } else if (slug === "deal-offer") {
