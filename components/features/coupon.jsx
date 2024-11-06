@@ -1,6 +1,7 @@
 import {
   getCouponDiscount,
   useBestCoupon,
+  useCoupons,
   useFeaturedCoupons,
 } from "@wow-star/utils";
 import { API, Logger } from "aws-amplify";
@@ -37,6 +38,7 @@ function Coupon(props) {
     removeFromCart,
     layout = "cart",
     storedCouponCode,
+    storedCouponExpiry,
   } = props;
 
   const [coupon, setCoupon] = useState("");
@@ -45,6 +47,7 @@ function Coupon(props) {
   const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
   const [isSliderOpen, setSliderOpen] = useState(false);
   const { isSmallSize } = useWindowDimensions();
+  const topCoupons = useCoupons();
 
   const openSlider = () => {
     setSliderOpen(true);
@@ -128,7 +131,15 @@ function Coupon(props) {
     if (cartList || previousCartList.current !== cartList) {
       previousCartList.current = cartList;
 
-      if (storedCouponCode) {
+      if (storedCouponCode && storedCouponExpiry) {
+        const currentTime = new Date().getTime();
+        if (currentTime > storedCouponExpiry) {
+          clearStoredCoupon();
+        }
+      }
+
+      const mappedTopCoupons = topCoupons?.map((coupon) => coupon.code);
+      if (storedCouponCode && mappedTopCoupons?.includes(storedCouponCode)) {
         if (
           (!appliedCoupon || appliedCoupon?.autoApplied) &&
           appliedCoupon?.code !== storedCouponCode
@@ -452,6 +463,7 @@ function mapStateToProps(state) {
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
     storedCouponCode: state.cart.storedCouponCode,
+    storedCouponExpiry: state.cart.storedCouponExpiry,
   };
 }
 
@@ -490,4 +502,5 @@ export default connect(mapStateToProps, {
   removeFromCart: cartActions.removeFromCart,
   applyCoupon: cartActions.applyCoupon,
   removeCoupon: cartActions.removeCoupon,
+  clearStoredCoupon: cartActions.clearStoredCoupon,
 })(Coupon);
