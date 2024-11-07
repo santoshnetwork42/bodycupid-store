@@ -129,8 +129,8 @@ function cartReducer(state = initialState, action) {
     case actionTypes.STORE_COUPON:
       return {
         ...state,
-        storedCouponCode: action.payload.storedCouponCode,
-        storedCouponExpiry: action.payload.storedCouponExpiry,
+        storedCouponCode: action.payload.couponCode,
+        storedCouponExpiry: action.payload.couponExpiry,
       };
 
     case actionTypes.CLEAR_STORED_COUPON:
