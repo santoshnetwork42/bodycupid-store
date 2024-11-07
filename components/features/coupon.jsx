@@ -39,6 +39,7 @@ function Coupon(props) {
     layout = "cart",
     storedCouponCode,
     storedCouponExpiry,
+    clearStoredCoupon,
   } = props;
 
   const [coupon, setCoupon] = useState("");
