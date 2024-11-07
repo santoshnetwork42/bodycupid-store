@@ -32,6 +32,7 @@ import { RAZORPAY_KEY, RAZORPAY_SCRIPT } from "~/config";
 import {
   COD_ENABLED,
   MAX_COD_AMOUNT,
+  MIN_COD_AMOUNT,
   MAX_PREPAID_DISCOUNT,
   PPCOD_AMOUNT,
   PPCOD_ENABLED,
@@ -76,6 +77,7 @@ function Checkout(props) {
 
   const guestCheckout = useGuestCheckout();
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
+  const minCOD = useConfiguration(MIN_COD_AMOUNT, -1);
   const prepaidEnabled = useConfiguration(PREPAID_ENABLED, true);
   const codEnabled = useConfiguration(COD_ENABLED, true);
   const ppcodEnabled = useConfiguration(PPCOD_ENABLED, false);
@@ -296,6 +298,7 @@ function Checkout(props) {
   }, [appliedCoupon]);
 
   const isMaxCODDisabled = maxCOD > -1 ? codGrandTotal > maxCOD : false;
+  const isMinCODDisabled = minCOD > -1 ? codGrandTotal < minCOD : false;
 
   return (
     <main className="main checkout">
@@ -757,6 +760,8 @@ function Checkout(props) {
                               description={
                                 codCouponDisabled
                                   ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
+                                  : isMinCODDisabled
+                                  ? `COD payment is not allowed for orders below ₹${minCOD}.`
                                   : isMaxCODDisabled
                                   ? `COD payment is not allowed for orders above ₹${maxCOD}.`
                                   : ppcodEnabled && ppcodAmount
@@ -767,10 +772,15 @@ function Checkout(props) {
                                     } on delivery.`
                                   : "Pay using Cash on Delivery."
                               }
-                              disabled={codCouponDisabled || isMaxCODDisabled}
+                              disabled={
+                                codCouponDisabled ||
+                                isMaxCODDisabled ||
+                                isMinCODDisabled
+                              }
                               onClick={() => {
                                 !codCouponDisabled &&
                                   !isMaxCODDisabled &&
+                                  !isMinCODDisabled &&
                                   setFirst("COD");
                               }}
                               amount={codGrandTotal}

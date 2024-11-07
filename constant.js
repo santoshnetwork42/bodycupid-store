@@ -23,6 +23,7 @@ export const GUEST_CHECKOUT_COOKIE_EXPIRY = 48;
 export const GEOCODING_API_URL =
   "https://maps.googleapis.com/maps/api/geocode/json";
 export const MAX_COD_AMOUNT = "MAX_COD_AMOUNT";
+export const MIN_COD_AMOUNT = "MIN_COD_AMOUNT";
 export const COD_ENABLED = "COD_ENABLED";
 export const PREPAID_ENABLED = "PREPAID_ENABLED";
 export const TIMER_TTILE = "TIMER_TTILE";
