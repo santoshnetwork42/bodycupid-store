@@ -513,6 +513,7 @@ export const applyCoupon = /* GraphQL */ `
       getYQuantity
       getYProduct
       applyOnAllVariants
+      ppcodCouponAmount
       getYStoreProduct {
         id
         title

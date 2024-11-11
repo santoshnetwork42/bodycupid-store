@@ -290,16 +290,21 @@ function Checkout(props) {
     }
   };
 
-  const { codCouponDisabled, onlineDisabled } = useMemo(() => {
-    return {
-      codCouponDisabled: appliedCoupon?.paymentMethod === "ONLINE",
-      onlineDisabled: appliedCoupon?.paymentMethod === "COD",
-    };
-  }, [appliedCoupon]);
+  const { codCouponDisabled, onlineDisabled, ppcodCouponEnabled } =
+    useMemo(() => {
+      return {
+        codCouponDisabled: appliedCoupon?.paymentMethod === "ONLINE",
+        onlineDisabled: appliedCoupon?.paymentMethod === "COD",
+        ppcodCouponEnabled: appliedCoupon?.ppcodCouponAmount > 0,
+      };
+    }, [appliedCoupon]);
 
   const isMaxCODDisabled = maxCOD > -1 ? codGrandTotal > maxCOD : false;
   const isMinCODDisabled = minCOD > -1 ? codGrandTotal < minCOD : false;
 
+  const ppcodAmountToTake = ppcodCouponEnabled
+    ? appliedCoupon?.ppcodCouponAmount
+    : ppcodAmount;
   return (
     <main className="main checkout">
       <Head>
@@ -764,12 +769,13 @@ function Checkout(props) {
                                   ? `COD payment is not allowed for orders below ₹${minCOD}.`
                                   : isMaxCODDisabled
                                   ? `COD payment is not allowed for orders above ₹${maxCOD}.`
-                                  : ppcodEnabled && ppcodAmount
+                                  : (ppcodEnabled && ppcodAmount) ||
+                                    ppcodCouponEnabled
                                   ? `Pay ₹${toDecimal(
-                                      ppcodAmount
-                                    )} now (non-refundable). Rest ₹${
-                                      codGrandTotal - ppcodAmount
-                                    } on delivery.`
+                                      ppcodAmountToTake
+                                    )} now (non-refundable). Rest ₹${toDecimal(
+                                      codGrandTotal - ppcodAmountToTake
+                                    )} on delivery.`
                                   : "Pay using Cash on Delivery."
                               }
                               disabled={
