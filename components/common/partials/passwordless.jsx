@@ -174,13 +174,15 @@ function Passwordless({
             setOtpError(true);
           }
         }
-        toast(
-          <AlertPopup message={"Logged In Successfully"} status="success" />,
-          {
-            position: "top-center",
-            autoClose: 2000,
-          }
-        );
+        if (!!otpError) {
+          toast(
+            <AlertPopup message={"Logged In Successfully"} status="success" />,
+            {
+              position: "top-center",
+              autoClose: 2000,
+            }
+          );
+        }
       } catch (error) {
         logger.error(error);
         errorHandler(error);
