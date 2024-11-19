@@ -686,7 +686,7 @@ function Checkout(props) {
                                     >
                                       <p className="m-0">
                                         Average delivery time:{" "}
-                                        <span>3-5 days</span>
+                                        <span>5-7 days</span>
                                       </p>
                                     </div>
                                     {!!totalSaved && (
