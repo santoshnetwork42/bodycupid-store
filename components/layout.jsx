@@ -65,7 +65,7 @@ function Layout({
 
   const couponCode = router?.query?.couponCode?.split("&")[0];
   if (couponCode) {
-    const expiryTime = new Date().getTime() + 2 * 60 * 1000;
+    const expiryTime = new Date().getTime() + 24 * 60 * 60 * 1000;
     storeCoupon({ couponCode, couponExpiry: expiryTime });
   }
 
