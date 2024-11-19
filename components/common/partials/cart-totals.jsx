@@ -285,7 +285,7 @@ function CartTotal({
           ref={avgDeliveryTimeRef}
         >
           <p className="m-0 font-weight-bold">
-            Average delivery time: <span>3-5 days</span>
+            Average delivery time: <span>5-7 days</span>
           </p>
         </div>
       </div>
