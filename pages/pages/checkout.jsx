@@ -799,7 +799,7 @@ function Checkout(props) {
                         <div className="overflow-hidden mb-4 ">
                           <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
                             <ul className="m-0">
-                              {Object.values(formErorr).map((val) => (
+                              {Object.values(formError)?.map((val) => (
                                 <li key={val}>{val}</li>
                               ))}
                             </ul>
