@@ -1,34 +1,47 @@
-// pages/_middleware.js
 import { NextResponse } from "next/server";
 import { VERCEL_CHECKOUT_AB_FLAG } from "~/config";
 
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next
+     * - static (static files)
+     * - images (image files)
+     * - favicon.ico (favicon file)
+     * - sitemap
+     * - api
+     */
+    "/((?!_next|static|images|sitemap|api|favicon.ico).*)",
+  ],
+};
+
+const THRESHOLD = 0.5; // initial threshold for the new variant (100%)
+
 export function middleware(req) {
-  // Early return for excluded paths
   if (
-    req.nextUrl.pathname.match(
-      /^\/(_next|static|images|sitemap|api|favicon\.ico)/
-    )
+    req.nextUrl.pathname.startsWith("/_next") ||
+    req.nextUrl.pathname.startsWith("/static") ||
+    req.nextUrl.pathname.startsWith("/images") ||
+    req.nextUrl.pathname.startsWith("/sitemap") ||
+    req.nextUrl.pathname.startsWith("/api") ||
+    req.nextUrl.pathname === "/favicon.ico"
   ) {
     return NextResponse.next();
   }
 
-  const THRESHOLD = 0.5;
-  const response = NextResponse.next();
+  // get the variant from the cookie
+  // if not found, randomly set a variant based on threshold
+  const variant = req.cookies.get(VERCEL_CHECKOUT_AB_FLAG);
+  const url = req.nextUrl.clone();
+  const res = NextResponse.rewrite(url);
 
-  // Check existing cookie
-  const currentCookie = req.cookies[VERCEL_CHECKOUT_AB_FLAG];
-
-  if (!currentCookie) {
-    const variant = Math.random() < THRESHOLD ? "gokwik-ab-bc" : "bw_checkout";
-
-    // Set cookie using headers
-    response.headers.set(
-      "Set-Cookie",
-      `${VERCEL_CHECKOUT_AB_FLAG}=${variant}; Path=/; Max-Age=${
-        60 * 60 * 24 * 7
-      }`
-    );
+  // set the variant in the cookie if not already set
+  if (!variant) {
+    const nextVariant =
+      Math.random() < THRESHOLD ? "gokwik-ab-bc" : "bw_checkout";
+    res.cookies.set(VERCEL_CHECKOUT_AB_FLAG, nextVariant);
   }
 
-  return response;
+  return res;
 }
