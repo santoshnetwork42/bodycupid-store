@@ -2,45 +2,36 @@ import { NextResponse } from "next/server";
 import { VERCEL_CHECKOUT_AB_FLAG } from "~/config";
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next
-     * - static (static files)
-     * - images (image files)
-     * - favicon.ico (favicon file)
-     * - sitemap
-     * - api
-     */
-    "/((?!_next|static|images|sitemap|api|favicon.ico).*)",
-  ],
+  matcher: ["/((?!_next|static|images|sitemap|api|favicon.ico).*)"],
 };
 
-const THRESHOLD = 0.5; // initial threshold for the new variant (100%)
-
-export function middleware(req) {
+export default function middleware(req) {
+  // Early return for excluded paths
+  const excludedPaths = ["/_next", "/static", "/images", "/sitemap", "/api"];
   if (
-    req.nextUrl.pathname.startsWith("/_next") ||
-    req.nextUrl.pathname.startsWith("/static") ||
-    req.nextUrl.pathname.startsWith("/images") ||
-    req.nextUrl.pathname.startsWith("/sitemap") ||
-    req.nextUrl.pathname.startsWith("/api") ||
+    excludedPaths.some((path) => req.nextUrl.pathname.startsWith(path)) ||
     req.nextUrl.pathname === "/favicon.ico"
   ) {
     return NextResponse.next();
   }
 
-  // get the variant from the cookie
-  // if not found, randomly set a variant based on threshold
-  const variant = req.cookies.get(VERCEL_CHECKOUT_AB_FLAG);
+  const THRESHOLD = 0.5;
+
+  // Get cookie in Next.js 12 way
+  const variant = req.cookies[VERCEL_CHECKOUT_AB_FLAG];
   const url = req.nextUrl.clone();
   const res = NextResponse.rewrite(url);
 
-  // set the variant in the cookie if not already set
+  // Set cookie if not exists
   if (!variant) {
     const nextVariant =
       Math.random() < THRESHOLD ? "gokwik-ab-bc" : "bw_checkout";
-    res.cookies.set(VERCEL_CHECKOUT_AB_FLAG, nextVariant);
+
+    // Next.js 12 cookie setting
+    res.cookie(VERCEL_CHECKOUT_AB_FLAG, nextVariant, {
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: "/",
+    });
   }
 
   return res;
