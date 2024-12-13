@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useCallback, useRef } from "react";
 import { connect } from "react-redux";
 
+import Cookies from "js-cookie";
 import Coupon from "~/components/features/coupon";
 import { GOKWIK_MID, STORE_PREFIX, VERCEL_CHECKOUT_AB_FLAG } from "~/config";
 import { GOKWIK_ENABLED, PREPAID_ENABLED } from "~/constant";
