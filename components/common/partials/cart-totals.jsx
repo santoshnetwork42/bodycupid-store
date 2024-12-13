@@ -5,7 +5,7 @@ import { useCallback, useRef } from "react";
 import { connect } from "react-redux";
 
 import Coupon from "~/components/features/coupon";
-import { GOKWIK_MID, STORE_PREFIX } from "~/config";
+import { GOKWIK_MID, STORE_PREFIX, VERCEL_CHECKOUT_AB_FLAG } from "~/config";
 import { GOKWIK_ENABLED, PREPAID_ENABLED } from "~/constant";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
@@ -68,6 +68,7 @@ function CartTotal({
   } = inventory || {};
 
   const validateAndGoToCheckout = useCallback(async () => {
+    const checkoutABVariant = Cookies.get(VERCEL_CHECKOUT_AB_FLAG);
     setCartVisibility(false);
     // onProceedToCheckout();
 
@@ -90,7 +91,7 @@ function CartTotal({
     //   cartId: cartId || "NOT FOUND",
     // });
 
-    if (isGKCXEnabled) {
+    if (isGKCXEnabled && checkoutABVariant === "gokwik-ab-bc") {
       try {
         gokwikSdk.initCheckout({
           environment: "sandbox",
