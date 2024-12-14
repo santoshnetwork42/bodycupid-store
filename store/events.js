@@ -338,11 +338,11 @@ export function* eventsSaga() {
         });
       }
 
-      // track("proceed_to_checkout_final", {
-      //   login: userData ? 1 : 0,
-      //   source,
-      //   date: getFormattedDate(),
-      // });
+      track("proceed_to_checkout_v2", {
+        login: userData ? 1 : 0,
+        source,
+        date: getFormattedDate(),
+      });
 
       // posthog.capture("Checkout Started", {
       //   source,
@@ -572,18 +572,19 @@ export function* eventsSaga() {
         });
       }
 
-      // track("purchase_final", {
-      //   transaction_id: id,
-      //   value: totalAmount,
-      //   tax: 0,
-      //   code: code,
-      //   discount: totalDiscount,
-      //   shipping: totalShippingCharges,
-      //   currency: "INR",
-      //   coupon: coupon?.code || "",
-      //   source: checkoutSource,
-      //   orderDate: orderDate || getFormattedDate(),
-      // });
+      track("purchase_final_v2", {
+        transaction_id: id,
+        value: totalAmount,
+        tax: 0,
+        code: code,
+        discount: totalDiscount,
+        shipping: totalShippingCharges,
+        currency: "INR",
+        coupon: coupon?.code || "",
+        source: checkoutSource,
+        orderDate: orderDate || getFormattedDate(),
+        date: getFormattedDate(),
+      });
 
       // posthog.capture("Order Created", {
       //   source: checkoutSource,
