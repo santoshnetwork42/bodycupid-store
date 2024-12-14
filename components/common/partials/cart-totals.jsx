@@ -71,7 +71,7 @@ function CartTotal({
   const validateAndGoToCheckout = useCallback(async () => {
     const checkoutABVariant = Cookies.get(VERCEL_CHECKOUT_AB_FLAG);
     setCartVisibility(false);
-    // onProceedToCheckout();
+    onProceedToCheckout();
 
     if (!isInventoryCheckSuccess) {
       recordOutOfStock(outOfStockItems, inventoryMapping);
