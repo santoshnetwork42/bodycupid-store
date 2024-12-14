@@ -339,7 +339,7 @@ export function* eventsSaga() {
         });
       }
 
-      track("proceed_to_checkout_v2", {
+      track("proceed_to_checkout_v3", {
         login: userData ? 1 : 0,
         source,
         date: getFormattedDate(),
@@ -573,7 +573,7 @@ export function* eventsSaga() {
         });
       }
 
-      track("purchase_final_v2", {
+      track("purchase_final_v3", {
         transaction_id: id,
         value: totalAmount,
         tax: 0,

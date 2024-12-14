@@ -113,7 +113,7 @@ function CartTotal({
       }
     }
 
-    onProceedToCheckout("BUYWOW");
+    onProceedToCheckout("BODYCUPID");
     if (user || guestCheckout || customUser) {
       router.push("/pages/checkout");
       logger.verbose("Redirecting to checkout page");
