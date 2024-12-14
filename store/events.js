@@ -24,6 +24,7 @@ import {
   trackEvent,
 } from "~/utils/helper";
 import storage from "~/utils/storage";
+import { track } from "@vercel/analytics";
 
 export const actionTypes = {
   VIEW_ITEM: "VIEW_ITEM",
