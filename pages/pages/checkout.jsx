@@ -754,7 +754,12 @@ function Checkout(props) {
                           )}
                           {codEnabled && (
                             <PaymentMethods
-                              title="Cash On Delivery"
+                              title={`${
+                                (ppcodEnabled && ppcodAmount) ||
+                                ppcodCouponEnabled
+                                  ? "Partial Cash On Delivery"
+                                  : "Cash On Delivery"
+                              }`}
                               tagVariant="danger"
                               showUpdateCoupon={codCouponDisabled}
                               tag={
@@ -906,4 +911,3 @@ Component.navbarConfig = {
 };
 
 export default Component;
- 
