@@ -3,9 +3,9 @@ import {
   searchCollectionTypesForSitemap,
 } from "~/graphql/api";
 import fetchData from "~/utils/fetchData";
-import { STORE_ID } from "~/config";
+import { STORE_ID, STORE_ENV } from "~/config";
 
-const { STORE_ENV, NEXT_PUBLIC_SITE_URL } = process.env;
+const { NEXT_PUBLIC_SITE_URL } = process.env;
 
 export default async function Revalidate(req, res) {
   try {
