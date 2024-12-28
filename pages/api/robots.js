@@ -1,4 +1,4 @@
-const { STORE_ENV } = process.env;
+import { STORE_ENV } from "~/config";
 
 export default async function Revalidate(req, res) {
   if (STORE_ENV !== "production") {
