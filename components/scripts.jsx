@@ -1,5 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import GTM from "react-gtm-module";
 
 import LimeChat from "~/components/scripts/limechat";
@@ -10,12 +10,18 @@ import Affise from "./scripts/Affise/Affise";
 
 export default function Scripts() {
   const isInteractive = useIsInteractive();
+  const [gtmInitialized, setGtmInitialized] = useState(false);
 
   useEffect(() => {
-    if (isInteractive) {
+    if (!gtmInitialized) {
       GTM.initialize({ gtmId: GTM_ID });
+      setGtmInitialized(true);
     }
-  }, [isInteractive]);
+  }, [gtmInitialized]);
+
+  if (!isInteractive) {
+    return null;
+  }
 
   return (
     <>
