@@ -45,7 +45,7 @@ import { toDecimal } from "~/utils";
 import { useGuestCheckout, useNavBarState } from "~/utils/contexts/navbar";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
-import { checkAffiseValidity } from "~/utils/helper";
+import { analyticsMetaDataMapper, checkAffiseValidity } from "~/utils/helper";
 import loadScript from "~/utils/loadScript";
 import { alertToaster } from "~/utils/popupHelper";
 import { productDiscountPercentage } from "~/utils/products";
@@ -197,10 +197,16 @@ function Checkout(props) {
     try {
       e.preventDefault();
 
+      const _systemMeta = analyticsMetaDataMapper() || {};
       const variables = {
         paymentMethod: payMethod,
         address: shippingAddress,
         metadata,
+        metadata: {
+          ...metadata,
+          systemMeta: JSON.stringify(_systemMeta),
+          checkoutUrl: window?.location?.href,
+        },
         appliedRewardPoints: isRewardApplied ? usableRewards : 0,
         totalAmount: totalAmount,
         shoppingCartId,

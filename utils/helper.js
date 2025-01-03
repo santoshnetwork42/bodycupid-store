@@ -2,6 +2,9 @@ import { getCartTotals } from "utils";
 import { alertToaster } from "./popupHelper";
 import { getFirstVariant } from "./products";
 import { moeEvent } from "./events";
+import { STORE_PREFIX } from "~/config";
+import Cookies from "js-cookie";
+import { os, name, version, product } from "platform";
 
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
@@ -343,3 +346,47 @@ export const sortingOptionsForCollection = Object.freeze({
   PRICE_LOW_TO_HIGH: "price-low",
   AVAILABILITY: "availability",
 });
+
+export const analyticsMetaDataMapper = () => {
+  // Collect device details
+  const deviceDetails = {
+    os: os.family || "Unknown",
+    browser: name || "Unknown",
+    browserVersion: version || "Unknown",
+    deviceType: product || "Desktop",
+    userAgent: navigator.userAgent || "Unknown",
+    screenWidth: window.screen.width || 0,
+    screenHeight: window.screen.height || 0,
+  };
+
+  // referrer information
+  const referrer = document.referrer || "";
+
+  // page information
+  const pageInfo = {
+    url: window.location.href || "",
+    path: window.location.pathname || "",
+    queryParams: window.location.search || "",
+  };
+
+  // UTM parameters
+  const urlParams = new URLSearchParams(window.location.search || "");
+  const utmParameters = {
+    utmSource: urlParams.get("utm_source"),
+    utmMedium: urlParams.get("utm_medium"),
+    utmCampaign: urlParams.get("utm_campaign"),
+    utmTerm: urlParams.get("utm_term"),
+    utmContent: urlParams.get("utm_content"),
+  };
+  const sessionId = Cookies.get(`${STORE_PREFIX}_session_id`);
+
+  const analyticsData = {
+    deviceDetails,
+    referrer,
+    pageInfo,
+    utmParameters,
+    sessionId,
+    timestamp: new Date().toISOString(),
+  };
+  return analyticsData;
+};

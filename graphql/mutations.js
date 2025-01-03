@@ -634,6 +634,9 @@ export const createOrder = /* GraphQL */ `
       referrer
       landingPage
       clickId
+      systemMeta
+      fbclid
+      checkoutUrl
       isAffiseTrackingValid
       confirmedViaWebhook
       dispatchedAt
@@ -2813,6 +2816,9 @@ export const updateOrder = /* GraphQL */ `
       referrer
       landingPage
       clickId
+      systemMeta
+      fbclid
+      checkoutUrl
       isAffiseTrackingValid
       confirmedViaWebhook
       dispatchedAt
