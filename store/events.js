@@ -546,7 +546,7 @@ export function* eventsSaga() {
         window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
         window.dataLayer.push({
           event: "purchase",
-          eventID: uuid(),
+          eventID: id,
           user,
           attribute: {
             ...pixel,
