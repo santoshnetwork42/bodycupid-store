@@ -3,7 +3,7 @@ import { persistReducer } from "redux-persist";
 import { STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
 
-const actionTypes = {
+export const actionTypes = {
   SET_STORE: "SET_STORE",
   REFRESH_SYSTEM: "REFRESH_SYSTEM",
   SET_META: "SET_META",

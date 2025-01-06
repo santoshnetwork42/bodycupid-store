@@ -5,6 +5,7 @@ import { STORE_ID, STORE_PREFIX } from "~/config";
 import { createShoppingCart, manageShoppingCart } from "~/graphql/api";
 import { actionTypes } from "~/store/cart";
 import { actionTypes as userActionTypes } from "~/store/user";
+import { actionTypes as systemActionTypes } from "~/store/system";
 import { errorHandler } from "~/utils/errorHandler";
 import { checkAffiseValidity } from "~/utils/helper";
 
@@ -24,7 +25,13 @@ export function* cartSaga() {
     function* saga(action) {
       try {
         if (action.type === "EMPTY_CART") {
+          const { system } = yield select();
           localStorage.removeItem(`${STORE_PREFIX}-cartId`);
+          yield put({
+            type: systemActionTypes.SET_META,
+            payload: { ...system?.meta, fbclid: "" },
+          });
+
           yield put({ type: actionTypes.UPDATE_CART_ID, payload: null });
           return;
         }

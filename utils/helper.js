@@ -5,6 +5,7 @@ import { moeEvent } from "./events";
 import { STORE_PREFIX } from "~/config";
 import Cookies from "js-cookie";
 import { os, name, version, product } from "platform";
+import { getClientIP } from "./getClientIP";
 
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
@@ -347,7 +348,7 @@ export const sortingOptionsForCollection = Object.freeze({
   AVAILABILITY: "availability",
 });
 
-export const analyticsMetaDataMapper = () => {
+export const analyticsMetaDataMapper = async () => {
   // Collect device details
   const deviceDetails = {
     os: os.family || "Unknown",
@@ -379,6 +380,8 @@ export const analyticsMetaDataMapper = () => {
     utmContent: urlParams.get("utm_content"),
   };
   const sessionId = Cookies.get(`${STORE_PREFIX}_session_id`);
+  const fbpId = Cookies.get("_fbp") || ""; // facebook (meta-pixel unique browserId)
+  const clientIP = await getClientIP();
 
   const analyticsData = {
     deviceDetails,
@@ -386,6 +389,8 @@ export const analyticsMetaDataMapper = () => {
     pageInfo,
     utmParameters,
     sessionId,
+    fbpId,
+    clientIP,
     timestamp: new Date().toISOString(),
   };
   return analyticsData;

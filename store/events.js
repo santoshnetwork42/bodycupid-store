@@ -466,7 +466,6 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
-    console.log("first", e);
     try {
       const {
         order,

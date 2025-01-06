@@ -95,6 +95,7 @@ function Checkout(props) {
   });
 
   const router = useRouter();
+  const [systemMetadata, setSystemMetadata] = useState("");
   const [payMethod, setFirst] = useState(prepaidEnabled ? "PREPAID" : "COD");
   const { isReady, userWithRewardPoints, setUserWithRewardPoints } =
     useNavbar();
@@ -122,7 +123,12 @@ function Checkout(props) {
   }, [shippingAddress]);
 
   useEffect(() => {
-    startCheckout();
+    const initializeCheckout = async () => {
+      startCheckout();
+      const _systemMetadata = await analyticsMetaDataMapper();
+      setSystemMetadata(_systemMetadata);
+    };
+    initializeCheckout();
     logger.verbose("Checkout component initialized");
   }, []);
 
@@ -197,14 +203,13 @@ function Checkout(props) {
     try {
       e.preventDefault();
 
-      const _systemMeta = analyticsMetaDataMapper() || {};
       const variables = {
         paymentMethod: payMethod,
         address: shippingAddress,
         metadata,
         metadata: {
           ...metadata,
-          systemMeta: JSON.stringify(_systemMeta),
+          systemMeta: JSON.stringify(systemMetadata),
           checkoutUrl: window?.location?.href,
         },
         appliedRewardPoints: isRewardApplied ? usableRewards : 0,

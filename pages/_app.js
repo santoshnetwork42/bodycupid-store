@@ -33,6 +33,7 @@ import NavbarProvider from "~/utils/contexts/navbar";
 import { errorHandler } from "~/utils/errorHandler";
 
 import "~/public/sass/style.scss";
+import Cookies from "js-cookie";
 
 Amplify.configure({
   ...awsconfig,
@@ -160,7 +161,7 @@ const App = ({ Component, pageProps }) => {
 
   const setMetaData = useCallback(() => {
     const state = store.getState();
-    const _fbclid = state?.system?.meta?.fbclid;
+    const _fbclid = state?.system?.meta?.fbclid || "";
     const cookieMeta = Cookie.get(`${STORE_PREFIX}_metadata`);
     const meta = cookieMeta ? JSON.parse(cookieMeta) : {};
     const {
@@ -184,7 +185,7 @@ const App = ({ Component, pageProps }) => {
       utmSource: source || meta?.utmSource || null,
       utmTerm: term || meta?.utmTerm || null,
       clickId: clickid || meta?.clickId || "",
-      fbclid: fbclid ? `fb.1.${new Date().getTime()}.${fbclid}` : _fbclid || "",
+      fbclid: fbclid ? Cookies.get("_fbc") : _fbclid || "",
       //version.subdomainIndex.creationTime.<fbclid>
       // version is always this prefix: fb
       // subdomainIndex is which domain the cookie is defined on ('com' = 0, 'example.com' = 1, 'www.example.com' = 2)
