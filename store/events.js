@@ -529,18 +529,6 @@ export function* eventsSaga() {
         pinCode,
       } = address;
 
-      initializeMoengageAndAddInfo({
-        firstName: first_name || firstName,
-        lastName: last_name || lastName,
-        email,
-        phone,
-      });
-
-      trackEvent("Order Created", orderCreated);
-      itemPurchasedEvents.forEach((itemPurchased) => {
-        trackEvent("Item Purchased", itemPurchased);
-      });
-
       if (window && window.dataLayer) {
         window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
         window.dataLayer.push({
@@ -571,6 +559,18 @@ export function* eventsSaga() {
           },
         });
       }
+
+      initializeMoengageAndAddInfo({
+        firstName: first_name || firstName,
+        lastName: last_name || lastName,
+        email,
+        phone,
+      });
+
+      trackEvent("Order Created", orderCreated);
+      itemPurchasedEvents.forEach((itemPurchased) => {
+        trackEvent("Item Purchased", itemPurchased);
+      });
 
       track("purchase_final_v3", {
         transaction_id: id,
