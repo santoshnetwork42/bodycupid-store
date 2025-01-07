@@ -248,10 +248,28 @@ function Checkout(props) {
       ]);
 
       if (!success) {
-        alertToaster("Something went wrong. Try Again!");
         if (code === "INVALID_ADDRESS") {
           setFormError(formError);
+          if (
+            formError?.pincode ===
+              "Online Delivery is not available at this pincocde" ||
+            formError?.pincode ===
+              "Cash on Delivery is not available at this pincocde"
+          ) {
+            alertToaster(
+              `  We're sorry! We currently don't deliver to this pincode. However,
+                  we're working hard to expand our service areas and hope to reach
+                  your location soon. Please try a different delivery address to
+                  proceed.`,
+              "info",
+              "top-center"
+            );
+            delete formError.pincode;
+            setPaymentLoader(false);
+            return Promise.resolve();
+          }
         }
+        alertToaster("Something went wrong. Try Again!");
         setPaymentLoader(false);
       }
 
@@ -811,17 +829,18 @@ function Checkout(props) {
                         </div>
                       </div>
 
-                      {!!formError && (
-                        <div className="overflow-hidden mb-4 ">
-                          <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
-                            <ul className="m-0">
-                              {Object.values(formError)?.map((val) => (
-                                <li key={val}>{val}</li>
-                              ))}
-                            </ul>
+                      {!!formError &&
+                        !!Object.keys(formError || {})?.length && (
+                          <div className="overflow-hidden mb-4">
+                            <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
+                              <ul className="m-0">
+                                {Object.values(formError)?.map((val) => (
+                                  <li key={val}>{val}</li>
+                                ))}
+                              </ul>
+                            </div>
                           </div>
-                        </div>
-                      )}
+                        )}
 
                       <div
                         className={`d-flex justify-content-center ${

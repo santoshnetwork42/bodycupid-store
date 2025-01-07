@@ -27,7 +27,11 @@ export const getProperAddress = (address) => {
   return tempAddress;
 };
 
-export const validateZipCode = async (pincode, paymentType) => {
+export const validateZipCode = async (
+  pincode,
+  paymentType,
+  showToastOnError = false
+) => {
   try {
     if (pincode) {
       const {
@@ -38,6 +42,15 @@ export const validateZipCode = async (pincode, paymentType) => {
         if (paymentType == "PREPAID") return response.prepaid;
         return response.cod;
       }
+      if (pincode?.length >= 6 && showToastOnError)
+        alertToaster(
+          `  We're sorry! We currently don't deliver to this pincode. However,
+              we're working hard to expand our service areas and hope to reach
+              your location soon. Please try a different delivery address to
+              proceed.`,
+          "info",
+          "top-center"
+        );
     }
   } catch (error) {
     alertToaster("Something went wrong", "error");
@@ -60,7 +73,11 @@ export const isValidAddress = (address) => {
   return true;
 };
 
-export const validateAddress = async (address, paymentType = "ALL") => {
+export const validateAddress = async (
+  address,
+  paymentType = "ALL",
+  showToastOnError
+) => {
   const {
     firstName,
     lastName,
@@ -72,7 +89,11 @@ export const validateAddress = async (address, paymentType = "ALL") => {
   } = address || {};
   const error = {};
 
-  const isValidPinCode = await validateZipCode(pinCode, paymentType);
+  const isValidPinCode = await validateZipCode(
+    pinCode,
+    paymentType,
+    showToastOnError
+  );
 
   if (!phone || !PHONE_REGEX.test(removePhonePrefix(phone))) {
     error.phone = "Please enter valid phone number";
@@ -82,12 +103,13 @@ export const validateAddress = async (address, paymentType = "ALL") => {
   }
 
   if (!isValidPinCode) {
-    if (!pinCode || paymentType === "ALL") {
+    if (!pinCode) {
       error.pincode = "Please enter valid pincode";
-    } else if (paymentType === "PREPAID") {
-      error.pincode = "Online Delivery is not available at this pincocde";
-    } else {
-      error.pincode = "Cash on Delivery is not available at this pincocde";
+    } else if (!!pinCode) {
+      error.pincode = `We're sorry! We currently don't deliver to this pincode.
+      However, we're working hard to expand our service areas and
+      hope to reach your location soon. Please try a different delivery
+      address to proceed.`;
     }
   }
 

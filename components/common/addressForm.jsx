@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSetState } from "react-use";
 import { API } from "aws-amplify";
 import { connect } from "react-redux";
@@ -32,6 +32,7 @@ const AddressForm = (props) => {
   } = props;
   const { firstName, lastName, email, phone } = user || customUser || {};
   const { isSmallSize: isMobile } = useWindowDimensions();
+  const errorRef = useRef(null);
 
   const [address, setAddress] = useSetState({
     firstName: userAddress?.firstName || firstName || "",
@@ -83,6 +84,15 @@ const AddressForm = (props) => {
   }, [address.pinCode]);
 
   useEffect(() => {
+    if (!!errors) {
+      errorRef?.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
+    }
+  }, [errors]);
+
+  useEffect(() => {
     if (defaultAddress?.name) {
       setAddress({
         ...defaultAddress,
@@ -96,7 +106,7 @@ const AddressForm = (props) => {
     async (e) => {
       e?.preventDefault();
       setLoading(true);
-      const err = await validateAddress(address, "ALL");
+      const err = await validateAddress(address, "ALL", noAddress);
       if (variant === "CHECKOUT") setIsValidAddress(!err);
 
       if (!err) {
@@ -290,6 +300,8 @@ const AddressForm = (props) => {
                 name="pincode"
                 placeholder="Your pincode"
                 required
+                maxLength={6}
+                minLength={6}
                 value={address.pinCode}
                 onChange={(e) => setAddress({ pinCode: e.target.value })}
                 onBlur={(e) => {
@@ -333,7 +345,7 @@ const AddressForm = (props) => {
           </div>
 
           {!!errors && (
-            <div className="overflow-hidden mb-4">
+            <div className="overflow-hidden mb-4" ref={errorRef}>
               <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
                 <ul className="m-0">
                   {Object.values(errors).map((val) => (
@@ -469,6 +481,8 @@ const AddressForm = (props) => {
               name="pincode"
               placeholder="Your pincode"
               required
+              maxLength={6}
+              minLength={6}
               value={address.pinCode}
               onChange={(e) => setAddress({ pinCode: e.target.value })}
               onBlur={(e) => {
