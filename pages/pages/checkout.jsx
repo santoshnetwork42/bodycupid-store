@@ -262,7 +262,8 @@ function Checkout(props) {
                   your location soon. Please try a different delivery address to
                   proceed.`,
               "info",
-              "top-center"
+              "top-center",
+              1000
             );
             delete formError.pincode;
             setPaymentLoader(false);

@@ -49,7 +49,8 @@ export const validateZipCode = async (
               your location soon. Please try a different delivery address to
               proceed.`,
           "info",
-          "top-center"
+          "top-center",
+          1000
         );
     }
   } catch (error) {
