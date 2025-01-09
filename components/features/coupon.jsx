@@ -78,6 +78,18 @@ function Coupon(props) {
   const previousCartList = useRef(cartList);
   const bestCouponCode = useBestCoupon();
 
+  const onCouponRemove = (e) => {
+    e?.stopPropagation();
+    cartList.forEach((item) => {
+      if (item.cartItemSource === "COUPON") {
+        removeFromCart(item);
+      }
+    });
+
+    removeCoupon();
+    logger.info("Removed coupon");
+  };
+
   const applyCouponCode = useCallback(
     async (couponCode, autoApplied = false) => {
       setLoading(true);
@@ -141,11 +153,18 @@ function Coupon(props) {
 
       const mappedTopCoupons = topCoupons?.map((coupon) => coupon.code);
       if (storedCouponCode && mappedTopCoupons?.includes(storedCouponCode)) {
-        if (
-          (!appliedCoupon || appliedCoupon?.autoApplied) &&
-          appliedCoupon?.code !== storedCouponCode
-        ) {
+        const mappedStoredCoupon = topCoupons?.find(
+          (c) => c.code === storedCouponCode
+        );
+        const shouldApplyStoredCoupon =
+          (!appliedCoupon || appliedCoupon.autoApplied) &&
+          appliedCoupon?.code !== storedCouponCode &&
+          mappedStoredCoupon?.isAffiliated;
+
+        if (shouldApplyStoredCoupon) {
           applyCouponCode(storedCouponCode, true);
+        } else if (!mappedStoredCoupon?.isAffiliated) {
+          clearStoredCoupon();
         }
       } else if (bestCouponCode) {
         if (
@@ -160,19 +179,7 @@ function Coupon(props) {
         }
       }
     }
-  }, [bestCouponCode, cartList]);
-
-  const onCouponRemove = (e) => {
-    e.stopPropagation();
-    cartList.forEach((item) => {
-      if (item.cartItemSource === "COUPON") {
-        removeFromCart(item);
-      }
-    });
-
-    removeCoupon();
-    logger.info("Removed coupon");
-  };
+  }, [bestCouponCode, cartList, topCoupons, storedCouponCode]);
 
   const openCouponModal = () => {
     logger.verbose("Opened coupon modal");

@@ -1,15 +1,16 @@
 import {
+  getCouponDiscount,
   useCartItems,
   useCartTotal,
   useFeaturedCoupons,
   useInventory,
   useRuleEngine,
 } from "@wow-star/utils";
-import { Logger } from "aws-amplify";
+import { API, Logger } from "aws-amplify";
 import { useRouter } from "next/router";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
-
+import { applyCoupon as applyCouponMutation } from "~/graphql/api";
 import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 import CartTotal from "~/components/common/partials/cart-totals";
 import { ProgressBar } from "~/components/common/progress-bar";
@@ -18,11 +19,14 @@ import { Bag, Cart, Cross, Ellipse, LoyaltyTag } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
 import LimitedTimeProduct from "~/components/partials/cart/limited-time-product";
 import LimitedTimeProductDeal from "~/components/partials/cart/limited-time-product-deal";
+import { STORE_ID, STORE_PREFIX } from "~/config";
 import { cartActions } from "~/store/cart";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
 import { getTotalPrice, toDecimal } from "~/utils";
 import { useNavBarState } from "~/utils/contexts/navbar";
+import { errorHandler } from "~/utils/errorHandler";
+import { v4 as uuidv4 } from "uuid";
 
 const logger = new Logger("Cart");
 
@@ -34,11 +38,15 @@ function CartMenu(props) {
     setCartVisibility,
     viewCart,
     validateCart,
+    removeCoupon,
+    removeFromCart,
   } = props;
 
   const router = useRouter();
   const { query, asPath } = router;
   const { cart: forceOpenCart } = query;
+  const sessionKey = `${STORE_PREFIX}_coupon_session_id`;
+  const sessionId = sessionStorage?.getItem(sessionKey);
 
   const cartItems = useCartItems({
     showLTOProducts: false,
@@ -175,6 +183,63 @@ function CartMenu(props) {
 
     return "";
   };
+
+  const handleCouponRemove = () => {
+    cartList.forEach((item) => {
+      if (item?.cartItemSource === "COUPON") {
+        removeFromCart(item);
+      }
+    });
+    removeCoupon();
+  };
+
+  const validatePreviousCart = useCallback(async () => {
+    const code = appliedCoupon?.code;
+    if (!code) return;
+
+    try {
+      const couponData = await API.graphql({
+        query: applyCouponMutation,
+        authMode: "API_KEY",
+        variables: {
+          storeId: STORE_ID,
+          code: code,
+          deviceType: "WEB",
+          variantFilter: { status: { ne: "DISABLED" } },
+          imageLimit: 1,
+        },
+      })
+        .then((data) => data?.data?.applyCoupon)
+        .catch(errorHandler);
+
+      if (!couponData) {
+        handleCouponRemove();
+        return;
+      }
+
+      const { allowed } = getCouponDiscount(couponData, cartList);
+
+      if (!allowed) {
+        handleCouponRemove();
+      }
+    } catch (error) {
+      console.error("Failed to validate coupon:", error);
+      handleCouponRemove();
+    }
+  }, [appliedCoupon, cartList]);
+
+  useEffect(() => {
+    if (!sessionId) {
+      try {
+        validatePreviousCart();
+      } catch (e) {
+        console.error(e);
+      } finally {
+        const id = uuidv4();
+        sessionStorage?.setItem(sessionKey, id);
+      }
+    }
+  }, [sessionId, sessionKey]);
 
   return (
     <div className=" side-bar  d-flex align-items-center p-unset mr-0 mr-lg-2">
@@ -383,4 +448,5 @@ export default connect(mapStateToProps, {
   setCartVisibility: modalActions.setCartVisibility,
   viewCart: eventActions.viewCart,
   validateCart: cartActions.validateCart,
+  removeCoupon: cartActions.removeCoupon,
 })(CartMenu);
