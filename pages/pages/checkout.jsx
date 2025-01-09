@@ -7,10 +7,10 @@ import {
   useNavbar,
   useOrders,
 } from "@wow-star/utils";
-import { Logger } from "aws-amplify";
+import { API, Logger } from "aws-amplify";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Collapse } from "react-bootstrap";
 import { connect } from "react-redux";
 
@@ -28,7 +28,7 @@ import {
   UpAngle,
 } from "~/components/icons";
 import NextImage from "~/components/image";
-import { RAZORPAY_KEY, RAZORPAY_SCRIPT } from "~/config";
+import { RAZORPAY_KEY, RAZORPAY_SCRIPT, STORE_ID } from "~/config";
 import {
   COD_ENABLED,
   MAX_COD_AMOUNT,
@@ -49,6 +49,8 @@ import { analyticsMetaDataMapper, checkAffiseValidity } from "~/utils/helper";
 import loadScript from "~/utils/loadScript";
 import { alertToaster } from "~/utils/popupHelper";
 import { productDiscountPercentage } from "~/utils/products";
+import { checkInventory, getCouponRule } from "~/graphql/api";
+import { errorHandler } from "~/utils/errorHandler";
 
 const logger = new Logger("Checkout");
 
@@ -60,6 +62,7 @@ function Checkout(props) {
     user,
     shoppingCartId,
     emptyCart,
+    validateCartOnError,
     appliedCoupon,
     setCartVisibility,
     store,
@@ -199,6 +202,44 @@ function Checkout(props) {
     }
   }, [isConfirmed]);
 
+  const getInventoryDetails = async (cartItems) => {
+    try {
+      const inventoryPayload = cartItems?.map((product) => ({
+        recordKey: product.recordKey,
+        productId: product.id,
+        variantId: product.variantId,
+        source: product.cartItemSource || null,
+      }));
+
+      const {
+        data: { checkInventory: items },
+      } = await API.graphql({
+        query: checkInventory,
+        variables: { storeId: STORE_ID, items: inventoryPayload },
+        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+      });
+
+      return items;
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
+  const fetchCoupon = useCallback(async (code) => {
+    try {
+      const {
+        data: { getCouponRule: coupon },
+      } = await API.graphql({
+        query: getCouponRule,
+        variables: { code, storeId: STORE_ID },
+        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+      });
+      return coupon;
+    } catch (error) {
+      errorHandler(error);
+    }
+  }, []);
+
   const placeOrder = async (e) => {
     try {
       e.preventDefault();
@@ -240,12 +281,27 @@ function Checkout(props) {
 
       setPaymentLoader(true);
       const [
-        { success, code, formError, order, payment, transaction },
+        { success, code, formError, order, payment, transaction, error },
         rzpEnabled,
       ] = await Promise.all([
         placeOrderV1(variables),
         loadScript(RAZORPAY_SCRIPT),
       ]);
+
+      if (code === "ERROR") {
+        const inventoryDetails = await getInventoryDetails(cartList);
+
+        if (appliedCoupon?.code) {
+          await fetchCoupon(appliedCoupon?.code).then((coupon) => {
+            validateCartOnError({ inventoryDetails, coupon });
+          });
+        } else {
+          validateCartOnError({ inventoryDetails, appliedCoupon });
+        }
+        await router.push(`/?cart=1`);
+        setPaymentLoader(false);
+        return Promise.resolve();
+      }
 
       if (!success) {
         if (code === "INVALID_ADDRESS") {
@@ -922,6 +978,7 @@ function mapStateToProps(state) {
 }
 const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
+  validateCartOnError: cartActions.validateCartOnError,
   openLogin: modalActions.openPasswordlessModal,
   setCartVisibility: modalActions.setCartVisibility,
   placeOrder: eventActions.placeOrder,

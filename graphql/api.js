@@ -2248,13 +2248,15 @@ export const searchShippingTiers = /* GraphQL */ `
 `;
 
 export const checkInventory = /* GraphQL */ `
-  mutation CheckInventory($input: [CheckInventoryInput!]!) {
-    checkInventory(input: $input) {
+  mutation CheckInventory($storeId: ID!, $items: [CheckInventoryInput!]!) {
+    checkInventory(storeId: $storeId, items: $items) {
       recordKey
       productId
       variantId
-      price
       inventory
+      collections
+      price
+      __typename
     }
   }
 `;

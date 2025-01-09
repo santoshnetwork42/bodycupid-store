@@ -17,6 +17,7 @@ export function* cartSaga() {
       actionTypes.APPLY_COUPONS,
       actionTypes.REMOVE_COUPON,
       actionTypes.UPDATE_CART,
+      actionTypes.VALIDATE_CART_ON_ERROR,
       actionTypes.EMPTY_CART,
       userActionTypes.SET_USER,
       actionTypes.APPLY_REWARD_POINT,

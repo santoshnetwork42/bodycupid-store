@@ -2,7 +2,13 @@ import { persistReducer } from "redux-persist";
 import { getFirstVariant } from "~/utils/products";
 import { STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
-import { getCouponDiscount } from "~/utils/coupons";
+import { getCouponDiscount } from "@wow-star/utils";
+import { isDiffArray } from "~/utils/helper";
+import {
+  errorComsOnPlaceOrder,
+  errorTypeOnPlaceOrder,
+} from "~/utils/errorComs";
+import { alertToaster } from "~/utils/popupHelper";
 
 export const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -13,6 +19,7 @@ export const actionTypes = {
   EMPTY_CART: "EMPTY_CART",
   CREATE_CART: "CREATE_CART",
   VALIDATE_CART: "VALIDATE_CART",
+  VALIDATE_CART_ON_ERROR: "VALIDATE_CART_ON_ERROR",
   UPDATE_CART_ID: "UPDATE_CART_ID",
   UPDATE_CART_ID_LOADING: "UPDATE_CART_ID_LOADING",
   STORE_COUPON: "STORE_COUPON",
@@ -141,17 +148,83 @@ function cartReducer(state = initialState, action) {
 
     case actionTypes.VALIDATE_CART:
       const { payload } = action;
-      const data = state.data.map((item) => {
-        if (typeof payload[item.recordKey] === "number") {
-          return {
-            ...item,
-            price: payload[item.recordKey],
-          };
-        }
-        return item;
+      const data = state?.data.map((item) => {
+        return {
+          ...item,
+          ...(payload[item.recordKey] || {}),
+        };
       });
 
-      return { ...state, data };
+      const { allowed: _isCouponAllowed } = getCouponDiscount(
+        state.coupon,
+        data
+      );
+
+      return {
+        ...state,
+        data,
+        coupon: _isCouponAllowed ? state.coupon : null,
+      };
+
+    case actionTypes.VALIDATE_CART_ON_ERROR:
+      const { inventoryDetails, coupon } = action?.payload || {};
+      const { data: cartData = [], coupon: appliedCoupon } = state;
+
+      let error = "";
+
+      if (!!appliedCoupon?.code && !coupon?.code) {
+        error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.COUPON_ARCHIVED];
+      }
+
+      const updatedCart = cartData?.map((i) => {
+        const updatedProduct = inventoryDetails?.find(
+          (p) => p.recordKey === i.recordKey
+        );
+
+        if (i.price !== updatedProduct?.price) {
+          error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.PRICE_CHANGE];
+        }
+
+        const isDiffer = isDiffArray(
+          i?.collections || [],
+          updatedProduct?.collections || []
+        );
+
+        if (isDiffer) {
+          error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.COUPON_CHANGE];
+        }
+
+        return {
+          ...i,
+          price: updatedProduct?.price,
+          inventory: updatedProduct?.inventory,
+          collections: updatedProduct?.collections || [],
+        };
+      });
+
+      const { allowed: isCouponAllowed } = getCouponDiscount(
+        coupon,
+        updatedCart
+      );
+
+      const updatedData = isCouponAllowed
+        ? updatedCart
+        : updatedCart.filter((item) => item?.cartItemSource !== "COUPON");
+
+      if (error) {
+        alertToaster(
+          error,
+          "info",
+          "top-center", // textClassName
+          1000
+        );
+      }
+
+      return {
+        ...state,
+        data: updatedData,
+        coupon: isCouponAllowed ? coupon : null,
+      };
 
     case actionTypes.UPDATE_CART_ID:
       return {
@@ -196,6 +269,10 @@ export const cartActions = {
   }),
   validateCart: (payload) => ({
     type: actionTypes.VALIDATE_CART,
+    payload,
+  }),
+  validateCartOnError: (payload) => ({
+    type: actionTypes.VALIDATE_CART_ON_ERROR,
     payload,
   }),
   removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
