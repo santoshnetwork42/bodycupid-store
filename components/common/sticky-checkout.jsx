@@ -84,6 +84,7 @@ function StickyFooter(props) {
     slug === "gpay2" ||
     slug === "gpay3" ||
     slug === "bundle-offer" ||
+    slug === "deal-perfume" ||
     slug === "affiliate-4" ||
     slug === "affiliate-6" ||
     slug === "deal-offer";
@@ -96,6 +97,7 @@ function StickyFooter(props) {
       cart?.collections?.includes("buy-6-at-899") ||
       cart?.collections?.includes("special-deal") ||
       cart?.collections?.includes("bundle-offer") ||
+      cart?.collections?.includes("deal-perfume") ||
       cart?.collections?.includes("affiliate-6") ||
       cart?.collections?.includes("affiliate-4") ||
       cart?.collections?.includes("deal-offer") ||
@@ -130,6 +132,8 @@ function StickyFooter(props) {
       return "Add more items to unlock 'Buy 4 @ ₹599 Offer'";
     } else if (slug === "affiliate-6") {
       return "Add more items to unlock 'Buy 6 @ ₹999 Offer'";
+    } else if (slug === "deal-perfume") {
+      return "Add more items to unlock 'Buy 5 @ ₹1099 Offer'";
     }
 
     return "";

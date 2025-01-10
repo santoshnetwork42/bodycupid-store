@@ -179,6 +179,8 @@ function CartMenu(props) {
       return "Add more items to unlock 'Buy 4 @ ₹599 Offer'";
     } else if (slug === "affiliate-6") {
       return "Add more items to unlock 'Buy 6 @ ₹999 Offer'";
+    } else if (slug === "deal-perfume") {
+      return "Add more items to unlock 'Buy 5 @ ₹1099 Offer'";
     }
 
     return "";
