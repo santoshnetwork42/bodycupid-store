@@ -64,6 +64,7 @@ function CartMenu(props) {
     usableRewards,
     grandTotal,
     showLoyalty,
+    totalPrice,
   } = useCartTotal({
     paymentType: "PREPAID",
     isRewardApplied: isRewardApplied,
@@ -112,19 +113,28 @@ function CartMenu(props) {
   }, [asPath]);
 
   //passed true for getting cart item number only
-  const { filteredFeaturedCoupons: featuredCoupons = [] } =
+  const { featuredCouponsSorted: featuredCoupons = [] } =
     useFeaturedCoupons(true);
 
   const cartPageWowCashTooltip = useRuleEngine("CREDIT_PREPAID_ORDER");
 
-  const bxayCoupon = useMemo(() => {
-    return featuredCoupons.find(
+  const { percentageCoupon, bxayCoupon } = useMemo(() => {
+    const bxayCoupon = featuredCoupons.find(
       ({ coupon }) =>
         coupon &&
         coupon.couponType === "BUY_X_AT_Y" &&
-        coupon.autoApply &&
+        (coupon.autoApply || coupon.isAffiliated) &&
         coupon.applicableCollections.includes(router?.query?.slug)
     );
+
+    const percentageCoupon = featuredCoupons.find(
+      ({ coupon }) =>
+        coupon &&
+        coupon.couponType === "PERCENTAGE" &&
+        (coupon.autoApply || coupon.isAffiliated) &&
+        coupon.applicableCollections.includes(router?.query?.slug)
+    );
+    return { percentageCoupon, bxayCoupon };
   }, [featuredCoupons]);
 
   const showProgressBar = useMemo(() => {
@@ -175,6 +185,18 @@ function CartMenu(props) {
       return "Add more items to unlock 'Buy 8 @ ₹999 Offer'";
     } else if (slug === "gpay2") {
       return "Add more items to unlock 'Buy 4 @ ₹599 Offer'";
+    } else if (slug === "gpay75") {
+      const isCongratsMessage =
+        appliedCoupon?.code === percentageCoupon?.coupon?.code;
+      const isCouponApplicable = percentageCoupon?.allowed;
+      return isCongratsMessage
+        ? "Congrats, Flat 75% Offer Applied!"
+        : isCouponApplicable
+        ? "Congrats,Your cart is eligible for Flat 75% Offer"
+        : `Add products worth ₹${Math.max(
+            0,
+            percentageCoupon?.coupon?.minOrderValue - totalPrice
+          )} more to the cart to unlock Flat 75% offer`;
     } else if (slug === "affiliate-4") {
       return "Add more items to unlock 'Buy 4 @ ₹599 Offer'";
     } else if (slug === "affiliate-6") {

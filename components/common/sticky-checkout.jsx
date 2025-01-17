@@ -22,7 +22,7 @@ function StickyFooter(props) {
     isRewardApplied: isRewardApplied,
   });
   //passed true for getting cart item number only
-  const { filteredFeaturedCoupons: featuredCoupons = [] } =
+  const { featuredCouponsSorted: featuredCoupons = [] } =
     useFeaturedCoupons(true);
 
   const isBundleOffer = useMemo(() => {
@@ -33,14 +33,23 @@ function StickyFooter(props) {
     // );
   }, [cartList, slug]);
 
-  const bxayCoupon = useMemo(() => {
-    return featuredCoupons.find(
+  const { percentageCoupon, bxayCoupon } = useMemo(() => {
+    const bxayCoupon = featuredCoupons.find(
       ({ coupon }) =>
         coupon &&
         coupon.couponType === "BUY_X_AT_Y" &&
-        coupon.autoApply &&
+        (coupon.autoApply || coupon.isAffiliated) &&
         coupon.applicableCollections.includes(router?.query?.slug)
     );
+
+    const percentageCoupon = featuredCoupons.find(
+      ({ coupon }) =>
+        coupon &&
+        coupon.couponType === "PERCENTAGE" &&
+        (coupon.autoApply || coupon.isAffiliated) &&
+        coupon.applicableCollections.includes(router?.query?.slug)
+    );
+    return { percentageCoupon, bxayCoupon };
   }, [featuredCoupons]);
 
   if (!cartList?.length || !showStickyCheckout) return <></>;
@@ -83,6 +92,7 @@ function StickyFooter(props) {
     slug === "gpay" ||
     slug === "gpay2" ||
     slug === "gpay3" ||
+    slug === "gpay75" ||
     slug === "bundle-offer" ||
     slug === "deal-perfume" ||
     slug === "affiliate-4" ||
@@ -103,7 +113,8 @@ function StickyFooter(props) {
       cart?.collections?.includes("deal-offer") ||
       cart?.collections?.includes("gpay") ||
       cart?.collections?.includes("gpay2") ||
-      cart?.collections?.includes("gpay3")
+      cart?.collections?.includes("gpay3") ||
+      cart?.collections?.includes("gpay75")
   );
   const showDiscount = totalCartItems > 0 && hasDiscountSlug && hasSpecialOffer;
 
@@ -128,6 +139,18 @@ function StickyFooter(props) {
       return "Add more items to unlock 'Buy 4 @ ₹599 Offer'";
     } else if (slug === "gpay3") {
       return "Add more items to unlock 'Buy 6 @ ₹999 Offer'";
+    } else if (slug === "gpay75") {
+      const isCongratsMessage =
+        appliedCoupon?.code === percentageCoupon?.coupon?.code;
+      const isCouponApplicable = percentageCoupon?.allowed;
+      return isCongratsMessage
+        ? "Congrats, Flat 75% Offer Applied!"
+        : isCouponApplicable
+        ? "Congrats,Your cart is eligible for Flat 75% Offer"
+        : `Add products worth ₹${Math.max(
+            0,
+            percentageCoupon?.coupon?.minOrderValue - totalPrice
+          )} more to the cart to unlock Flat 75% offer`;
     } else if (slug === "affiliate-4") {
       return "Add more items to unlock 'Buy 4 @ ₹599 Offer'";
     } else if (slug === "affiliate-6") {

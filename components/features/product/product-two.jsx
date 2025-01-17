@@ -152,6 +152,10 @@ function ProductTwo(props) {
         const showCartModal =
           totalCartItems > 0 && totalCartItems % 5 !== 0 ? false : true;
         showCartModal && setCartVisibility(true);
+      } else if (tagSlug === "gpay75") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 3 !== 0 ? false : true;
+        showCartModal && setCartVisibility(true);
       } else {
         showEveryTime && setCartVisibility(true);
       }
