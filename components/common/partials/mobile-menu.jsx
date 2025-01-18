@@ -10,10 +10,14 @@ import Card from "~/components/features/accordion/card";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
 import Image from "~/components/image";
+import { useStore } from "react-redux";
+import { rootActions } from "~/store";
+import { STORE_PREFIX } from "~/config";
 
 function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
   const router = useRouter();
   const menu = useMenu();
+  const store = useStore();
 
   useEffect(() => {
     window.addEventListener("resize", hideMobileMenuHandler);
@@ -52,6 +56,12 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
   }
 
   const handleLogout = useCallback(async () => {
+    if (store) {
+      store.__persistor.purge();
+      store.dispatch(rootActions.destroySession());
+    }
+    localStorage.removeItem(`${STORE_PREFIX}-user`);
+    localStorage.removeItem(`${STORE_PREFIX}-cartId`);
     logout({
       "Customer ID": user?.id,
       URL: window.location.href,

@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
-import { connect } from "react-redux";
+import { connect, useStore } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import Addresses from "~/components/common/addresses";
@@ -22,6 +22,7 @@ import { modalActions } from "~/store/modal";
 import { rootActions } from "~/store";
 import { eventActions } from "~/store/events";
 import Wallet from "~/components/partials/account/wallet";
+import { STORE_PREFIX } from "~/config";
 
 const MOBILE_TABS = [
   {
@@ -58,6 +59,7 @@ function AccountsTabs({
   destroySession,
 }) {
   const router = useRouter();
+  const localStore = useStore();
 
   const { name } = store || {};
   const { pathname } = router;
@@ -93,6 +95,12 @@ function AccountsTabs({
   }, []);
 
   const handleLogout = useCallback(async () => {
+    if (localStore) {
+      localStore.__persistor.purge();
+      localStore.dispatch(rootActions.destroySession());
+    }
+    localStorage.removeItem(`${STORE_PREFIX}-user`);
+    localStorage.removeItem(`${STORE_PREFIX}-cartId`);
     logout({
       "Customer ID": user?.id,
       URL: window.location.href,

@@ -123,7 +123,7 @@ function Addresses({
   };
 
   useEffect(() => {
-    setIsValidAddress(true);
+    if (setIsValidAddress) setIsValidAddress(true);
     if (onAddressChange && selected) {
       const adr = addresses?.find((a) => a.id === selected.id);
       if (adr) {
