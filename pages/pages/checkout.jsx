@@ -27,30 +27,34 @@ import {
   UpAngle,
 } from "~/components/icons";
 import NextImage from "~/components/image";
-import { RAZORPAY_KEY, RAZORPAY_SCRIPT, STORE_ID } from "~/config";
+import {
+  RAZORPAY_KEY,
+  RAZORPAY_SCRIPT,
+  STORE_ID,
+  STORE_PREFIX,
+} from "~/config";
 import {
   COD_ENABLED,
   MAX_COD_AMOUNT,
   MIN_COD_AMOUNT,
-  MAX_PREPAID_DISCOUNT,
   PPCOD_AMOUNT,
   PPCOD_ENABLED,
   PREPAID_ENABLED,
 } from "~/constant";
+import { checkInventory, getCouponRule } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
 import { eventActions } from "~/store/events";
 import { modalActions } from "~/store/modal";
 import { toDecimal } from "~/utils";
 import { useGuestCheckout, useNavBarState } from "~/utils/contexts/navbar";
+import { errorHandler } from "~/utils/errorHandler";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { analyticsMetaDataMapper, checkAffiseValidity } from "~/utils/helper";
+import { useInventory } from "~/utils/hooks/useInventory";
 import loadScript from "~/utils/loadScript";
 import { alertToaster } from "~/utils/popupHelper";
 import { productDiscountPercentage } from "~/utils/products";
-import { checkInventory, getCouponRule } from "~/graphql/api";
-import { errorHandler } from "~/utils/errorHandler";
-import { useInventory } from "~/utils/hooks/useInventory";
 
 const logger = new Logger("Checkout");
 
@@ -107,6 +111,28 @@ function Checkout(props) {
   const [isValidAddress, setIsValidAddress] = useState(false);
   const [isCollapse, setIsCollapse] = useState(false);
   const [paymentLoader, setPaymentLoader] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [localUser, setLocalUser] = useState(null);
+
+  useEffect(() => {
+    const checkUserAuth = async () => {
+      // Check localStorage
+      const storedUser = JSON.parse(
+        localStorage.getItem(`${STORE_PREFIX}-user`)
+      );
+      if (storedUser) {
+        const data = JSON.parse(storedUser?.data);
+        const custom = JSON.parse(storedUser?.custom);
+
+        if (data?.id || (custom && Object.keys(custom).length > 0)) {
+          setLocalUser(localStorage.getItem(`${STORE_PREFIX}-user`));
+        }
+      }
+      setIsLoading(false);
+    };
+
+    checkUserAuth();
+  }, []);
 
   const [
     { isConfirmed, order: finalOrder, loading },
@@ -389,6 +415,12 @@ function Checkout(props) {
   const ppcodAmountToTake = ppcodCouponEnabled
     ? appliedCoupon?.ppcodCouponAmount
     : ppcodAmount;
+
+  // Don't render modal while checking auth
+  if (isLoading) return null;
+
+  const isUserAuthenticated = user || localUser || customUser;
+
   return (
     <main className="main checkout">
       <Head>
@@ -397,7 +429,10 @@ function Checkout(props) {
       <h1 className="d-none">{name} - Checkout</h1>
       {paymentLoader && <PaymentLoader loading={paymentLoader} />}
 
-      {!user && !guestCheckout && !customUser && (
+      {/* {!user && !guestCheckout && !customUser && (
+        <Passwordless forceOpen redirect={false} customSignupProp={true} />
+      )} */}
+      {!isUserAuthenticated && !guestCheckout && (
         <Passwordless forceOpen redirect={false} customSignupProp={true} />
       )}
       <div className={`checkout-page-content page-content pb-10`}>
