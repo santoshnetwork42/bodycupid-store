@@ -3,7 +3,6 @@ import {
   useCartItems,
   useCartTotal,
   useFeaturedCoupons,
-  useInventory,
   useRuleEngine,
 } from "@wow-star/utils";
 import { API, Logger } from "aws-amplify";
@@ -27,6 +26,7 @@ import { getTotalPrice, toDecimal } from "~/utils";
 import { useNavBarState } from "~/utils/contexts/navbar";
 import { errorHandler } from "~/utils/errorHandler";
 import { v4 as uuidv4 } from "uuid";
+import { useInventory } from "~/utils/hooks/useInventory";
 
 const logger = new Logger("Cart");
 

@@ -595,6 +595,14 @@ export const applyCoupon = /* GraphQL */ `
       applicableProducts
       paymentMethod
       applyPrepaidDiscount
+      couponTitle
+      description
+      autoApply
+      deviceType
+      isFeatured
+      isArchive
+      priority
+      createdAt
     }
   }
 `;
@@ -2254,8 +2262,10 @@ export const checkInventory = /* GraphQL */ `
       productId
       variantId
       inventory
-      collections
       price
+      collections
+      maximumOrderQuantity
+      minimumOrderQuantity
       __typename
     }
   }
@@ -2632,6 +2642,12 @@ export const getCouponRule = /* GraphQL */ `
       ppcodCouponAmount
       createdAt
       updatedAt
+      priority
+      applyPrepaidDiscount
+      applyOnAllVariants
+      couponNote
+      couponTitle
+      tAndC
     }
   }
 `;

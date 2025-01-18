@@ -17,6 +17,7 @@ import {
 import { useIsInteractive } from "~/utils/contexts/navbar";
 import { removeHoverEffect } from "~/utils/helper";
 import { cartActions } from "~/store/cart";
+import { useCoupons } from "@wow-star/utils";
 
 const Footer = dynamic(() => import("~/components/common/footer"));
 const Passwordless = dynamic(
@@ -59,9 +60,12 @@ function Layout({
   closeLogin,
   closePasswordless,
   storeCoupon,
+  updateCartCoupon,
+  appliedCoupon,
 }) {
   const router = useRouter();
   const isInteractive = useIsInteractive();
+  const coupons = useCoupons();
 
   const couponCode = router?.query?.couponCode?.split("&")[0];
   if (couponCode) {
@@ -72,6 +76,15 @@ function Layout({
   useEffect(() => {
     removeHoverEffect();
   }, []);
+
+  useEffect(() => {
+    if (!!coupons?.length) {
+      const updatedCoupon = coupons?.find(
+        (c) => c.code === appliedCoupon?.code
+      );
+      updateCartCoupon(updatedCoupon || null);
+    }
+  }, [coupons]);
 
   useLayoutEffect(() => {
     document.querySelector("body") &&
@@ -163,9 +176,15 @@ function Layout({
   );
 }
 
-export default connect(null, {
+function mapStateToProps(state) {
+  return {
+    appliedCoupon: state.cart.coupon,
+  };
+}
+export default connect(mapStateToProps, {
   closeQuickview: modalActions.closeQuickview,
   closeLogin: modalActions.closeLoginModal,
   closePasswordless: modalActions.closePasswordlessModal,
   storeCoupon: cartActions.storeCoupon,
+  updateCartCoupon: cartActions.updateCartCoupon,
 })(Layout);

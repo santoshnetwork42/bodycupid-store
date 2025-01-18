@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import Head from "next/head";
-import { useCartItems, useInventory } from "@wow-star/utils";
+import { useCartItems } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import Coupons from "~/components/features/coupon";
@@ -12,6 +12,7 @@ import CartProduct from "~/components/partials/cart/cart-product";
 import { Logger } from "aws-amplify";
 import CartTotal from "~/components/common/partials/cart-totals";
 import { cartActions } from "~/store/cart";
+import { useInventory } from "~/utils/hooks/useInventory";
 
 const logger = new Logger("Cart");
 

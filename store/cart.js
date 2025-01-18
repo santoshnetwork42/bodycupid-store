@@ -21,6 +21,7 @@ export const actionTypes = {
   VALIDATE_CART: "VALIDATE_CART",
   VALIDATE_CART_ON_ERROR: "VALIDATE_CART_ON_ERROR",
   UPDATE_CART_ID: "UPDATE_CART_ID",
+  UPDATE_COUPON: "UPDATE_COUPON",
   UPDATE_CART_ID_LOADING: "UPDATE_CART_ID_LOADING",
   STORE_COUPON: "STORE_COUPON",
   CLEAR_STORED_COUPON: "CLEAR_STORED_COUPON",
@@ -147,89 +148,209 @@ function cartReducer(state = initialState, action) {
       return { ...state, coupon: null };
 
     case actionTypes.VALIDATE_CART:
-      const { payload } = action;
-      const data = state?.data.map((item) => {
+      try {
+        const { payload } = action;
+
+        const cartData = state.data || [];
+        const coupon = state.coupon;
+
+        let error = "";
+        if (!!coupon && coupon?.isArchive) {
+          error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.COUPON_ARCHIVED];
+        }
+
+        const data = cartData.map((item) => {
+          const {
+            price = 0,
+            collections = [],
+            minimumOrderQuantity = 1,
+            maximumOrderQuantity = 1,
+          } = payload[item.recordKey] || {};
+
+          if (!payload[item.recordKey]) {
+            return item;
+          }
+
+          const isDiffer = isDiffArray(
+            item?.collections || [],
+            collections || []
+          );
+
+          const currentQty = Math.min(
+            Math.max(item?.qty || 1, minimumOrderQuantity || 1),
+            maximumOrderQuantity
+          );
+
+          if (item.price !== price) {
+            error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.PRICE_CHANGE];
+          } else if (isDiffer) {
+            const isCouponApplicable = (
+              coupon?.applicableCollections || []
+            ).some((c) => collections?.includes(c));
+            if (
+              !isCouponApplicable &&
+              !!coupon?.applicableCollections &&
+              !!collections?.length
+            )
+              error =
+                errorComsOnPlaceOrder[errorTypeOnPlaceOrder.COUPON_CHANGE];
+          } else if (item?.qty !== currentQty) {
+            error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.MOQ_CHANGE];
+          }
+
+          return {
+            ...item,
+            ...payload[item.recordKey],
+            qty: currentQty,
+            ...(item?.variantId && {
+              variants: {
+                items: item?.variants?.items?.map((i) => {
+                  if (i.id === item.variantId) {
+                    return {
+                      ...i,
+                      price,
+                      minimumOrderQuantity,
+                      maximumOrderQuantity,
+                    };
+                  }
+                  return i;
+                }),
+              },
+            }),
+          };
+        });
+
+        const { allowed: _isCouponAllowed } = getCouponDiscount(coupon, data);
+
+        const updatedData = _isCouponAllowed
+          ? data
+          : data?.filter((item) => item?.cartItemSource !== "COUPON");
+
+        if (error) {
+          alertToaster(
+            error,
+            "info",
+            "top-center", // textClassName
+            1000
+          );
+        }
+
         return {
-          ...item,
-          ...(payload[item.recordKey] || {}),
+          ...state,
+          data: updatedData,
+          coupon: _isCouponAllowed ? coupon : null,
         };
-      });
-
-      const { allowed: _isCouponAllowed } = getCouponDiscount(
-        state.coupon,
-        data
-      );
-
-      return {
-        ...state,
-        data,
-        coupon: _isCouponAllowed ? state.coupon : null,
-      };
+      } catch (e) {
+        console.error(e);
+        return { ...state, data: [], coupon: null };
+      }
 
     case actionTypes.VALIDATE_CART_ON_ERROR:
-      const { inventoryDetails, coupon } = action?.payload || {};
-      const { data: cartData = [], coupon: appliedCoupon } = state;
+      try {
+        const { inventoryDetails, coupon } = action?.payload || {};
+        const { data: cartData = [], coupon: appliedCoupon } = state;
 
-      let error = "";
+        let error = "";
 
-      if (!!appliedCoupon?.code && !coupon?.code) {
-        error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.COUPON_ARCHIVED];
-      }
-
-      const updatedCart = cartData?.map((i) => {
-        const updatedProduct = inventoryDetails?.find(
-          (p) => p.recordKey === i.recordKey
-        );
-
-        if (i.price !== updatedProduct?.price) {
-          error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.PRICE_CHANGE];
+        if (!!appliedCoupon?.code && (!coupon?.code || coupon?.isArchive)) {
+          error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.COUPON_ARCHIVED];
         }
 
-        const isDiffer = isDiffArray(
-          i?.collections || [],
-          updatedProduct?.collections || []
-        );
+        const updatedCart = cartData?.map((i) => {
+          const updatedProduct = inventoryDetails?.find(
+            (p) => p.recordKey === i.recordKey
+          );
 
-        if (isDiffer) {
-          error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.COUPON_CHANGE];
+          if (!updatedProduct) {
+            return i;
+          }
+
+          const isDiffer = isDiffArray(
+            i?.collections || [],
+            updatedProduct?.collections || []
+          );
+
+          const currentQty = Math.min(
+            Math.max(i?.qty || 1, updatedProduct?.minimumOrderQuantity || 1),
+            updatedProduct?.maximumOrderQuantity
+          );
+
+          if (currentQty !== i?.qty) {
+            error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.MOQ_CHANGE];
+          } else if (i.price !== updatedProduct?.price) {
+            error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.PRICE_CHANGE];
+          } else if (isDiffer) {
+            error = errorComsOnPlaceOrder[errorTypeOnPlaceOrder.COUPON_CHANGE];
+          }
+
+          return {
+            ...i,
+            ...(i?.variantId && {
+              variants: {
+                items: i?.variants?.items?.map((v) => {
+                  if (v.id === i.variantId) {
+                    return {
+                      ...v,
+                      price: updatedProduct?.price,
+                      minimumOrderQuantity:
+                        updatedProduct?.minimumOrderQuantity,
+                      maximumOrderQuantity:
+                        updatedProduct?.maximumOrderQuantity,
+                    };
+                  }
+                  return i;
+                }),
+              },
+            }),
+            price: updatedProduct?.price,
+            inventory: updatedProduct?.inventory,
+            collections: updatedProduct?.collections || [],
+            qty: currentQty,
+            maximumOrderQuantity: updatedProduct?.maximumOrderQuantity,
+            minimumOrderQuantity: updatedProduct?.minimumOrderQuantity,
+          };
+        });
+
+        const { allowed: isCouponAllowed = false } = !coupon?.isArchive
+          ? getCouponDiscount(coupon, updatedCart)
+          : {};
+
+        const updatedData = isCouponAllowed
+          ? updatedCart
+          : updatedCart.filter((item) => item?.cartItemSource !== "COUPON");
+
+        if (error) {
+          alertToaster(
+            error,
+            "info",
+            "top-center", // textClassName
+            1000
+          );
         }
-
         return {
-          ...i,
-          price: updatedProduct?.price,
-          inventory: updatedProduct?.inventory,
-          collections: updatedProduct?.collections || [],
+          ...state,
+          data: updatedData,
+          coupon: isCouponAllowed ? coupon : null,
         };
-      });
-
-      const { allowed: isCouponAllowed } = getCouponDiscount(
-        coupon,
-        updatedCart
-      );
-
-      const updatedData = isCouponAllowed
-        ? updatedCart
-        : updatedCart.filter((item) => item?.cartItemSource !== "COUPON");
-
-      if (error) {
-        alertToaster(
-          error,
-          "info",
-          "top-center", // textClassName
-          1000
-        );
+      } catch (e) {
+        console.error(e);
+        return {
+          ...state,
+          data: [],
+          coupon: null,
+        };
       }
-
-      return {
-        ...state,
-        data: updatedData,
-        coupon: isCouponAllowed ? coupon : null,
-      };
 
     case actionTypes.UPDATE_CART_ID:
       return {
         ...state,
         cartId: action.payload,
+      };
+
+    case actionTypes.UPDATE_COUPON:
+      return {
+        ...state,
+        coupon: action.payload?.coupon,
       };
 
     case actionTypes.UPDATE_CART_ID_LOADING:
@@ -281,6 +402,10 @@ export const cartActions = {
   updateCartId: (cartId) => ({
     type: actionTypes.UPDATE_CART_ID,
     payload: { cartId },
+  }),
+  updateCartCoupon: (coupon) => ({
+    type: actionTypes.UPDATE_COUPON,
+    payload: { coupon },
   }),
   applyRewardPoint: (isRewardApplied) => ({
     type: actionTypes.APPLY_REWARD_POINT,

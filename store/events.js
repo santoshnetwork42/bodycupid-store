@@ -506,7 +506,8 @@ export function* eventsSaga() {
         order?.paymentType,
         order,
         isFirstTimeUser,
-        checkoutSource
+        checkoutSource,
+        totalAmount
       );
 
       const itemPurchasedEvents = moEngageItemPurchasedMapper(

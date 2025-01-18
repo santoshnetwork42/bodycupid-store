@@ -264,7 +264,8 @@ export const moEngagedOrderMapper = (
   paymentMethod,
   order,
   isFirstTimeUser,
-  checkoutSource = "BODYCUPID"
+  checkoutSource = "BODYCUPID",
+  totalAmount
 ) => {
   const { discount: couponTotal } = getCouponDiscount(coupon, products) || {};
   let currentURL = window.location.href.split("/").slice(0, 3).join("/");
@@ -281,7 +282,6 @@ export const moEngagedOrderMapper = (
   const mappings = products.reduce(
     (
       {
-        "Total Price": Total_Price,
         "Vendor Name": Vendor_Name,
         "Product Title": Product_Title,
         SKU: SKU,
@@ -308,7 +308,7 @@ export const moEngagedOrderMapper = (
       const url = getPublicImageURL(thumbImage?.imageKey);
       totalDiscount = totalDiscount + mrpValue - valueNew;
       return {
-        "Total Price": Total_Price + valueNew,
+        "Total Price": totalAmount,
         "Product Title": [...Product_Title, product.title],
         SKU: [...SKU, product.sku],
         "Total Discount": totalDiscount || 0,
@@ -337,7 +337,7 @@ export const moEngagedOrderMapper = (
       };
     },
     {
-      "Total Price": 0,
+      "Total Price": totalAmount,
       "Product Title": [],
       "Total Discount": 0,
       SKU: [],

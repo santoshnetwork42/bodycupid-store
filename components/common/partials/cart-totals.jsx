@@ -73,9 +73,11 @@ function CartTotal({
     setCartVisibility(false);
 
     if (!isInventoryCheckSuccess) {
-      recordOutOfStock(outOfStockItems, inventoryMapping);
-      alertToaster("Please remove out of stock product from cart", "error");
-      logger.error("Out of stock product found in cart");
+      if (!!outOfStockItems?.length) {
+        recordOutOfStock(outOfStockItems, inventoryMapping);
+        alertToaster("Please remove out of stock product from cart", "error");
+        logger.error("Out of stock product found in cart");
+      }
       return false;
     }
 

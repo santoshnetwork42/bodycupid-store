@@ -3,7 +3,6 @@ import {
   useCartTotal,
   useConfiguration,
   useFreeProducts,
-  useInventory,
   useNavbar,
   useOrders,
 } from "@wow-star/utils";
@@ -51,6 +50,7 @@ import { alertToaster } from "~/utils/popupHelper";
 import { productDiscountPercentage } from "~/utils/products";
 import { checkInventory, getCouponRule } from "~/graphql/api";
 import { errorHandler } from "~/utils/errorHandler";
+import { useInventory } from "~/utils/hooks/useInventory";
 
 const logger = new Logger("Checkout");
 
@@ -288,21 +288,6 @@ function Checkout(props) {
         loadScript(RAZORPAY_SCRIPT),
       ]);
 
-      if (code === "ERROR") {
-        const inventoryDetails = await getInventoryDetails(cartList);
-
-        if (appliedCoupon?.code) {
-          await fetchCoupon(appliedCoupon?.code).then((coupon) => {
-            validateCartOnError({ inventoryDetails, coupon });
-          });
-        } else {
-          validateCartOnError({ inventoryDetails, appliedCoupon });
-        }
-        await router.push(`/?cart=1`);
-        setPaymentLoader(false);
-        return Promise.resolve();
-      }
-
       if (!success) {
         if (code === "INVALID_ADDRESS") {
           setFormError(formError);
@@ -325,6 +310,19 @@ function Checkout(props) {
             setPaymentLoader(false);
             return Promise.resolve();
           }
+        } else if (code === "ERROR") {
+          setPaymentLoader(false);
+          const inventoryDetails = await getInventoryDetails(cartList);
+
+          if (appliedCoupon?.code) {
+            await fetchCoupon(appliedCoupon?.code).then((coupon) => {
+              validateCartOnError({ inventoryDetails, coupon });
+            });
+          } else {
+            validateCartOnError({ inventoryDetails, coupon: appliedCoupon });
+          }
+          router.push("/?cart=1");
+          return Promise.resolve();
         }
         alertToaster("Something went wrong. Try Again!");
         setPaymentLoader(false);
