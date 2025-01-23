@@ -73,11 +73,11 @@ function Footer({ footer, store }) {
                       Contact Us
                     </ALink>
                   </li>
-                  {/* <li> 
+                  <li>
                     <ALink prefetch={false} href="/blog">
                       Blogs
                     </ALink>
-                  </li> */}
+                  </li>
                   <li>
                     <ALink
                       prefetch={false}

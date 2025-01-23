@@ -20,7 +20,13 @@ const MainMenu = dynamic(
   { ssr: false }
 );
 
-function Header({ navbar, auth, openPasswordLess, setCartVisibility }) {
+function Header({
+  navbar,
+  auth,
+  openPasswordLess,
+  setCartVisibility,
+  hideHeader,
+}) {
   const router = useRouter();
   const { cart } = router.query;
 
@@ -47,6 +53,26 @@ function Header({ navbar, auth, openPasswordLess, setCartVisibility }) {
     }
   }, [cart]);
 
+  if (hideHeader) {
+    return (
+      <header className="bg-white">
+        <div className="d-flex justify-content-center align-items-center">
+          <ALink href="/" className="logo">
+            <Image
+              src="/images/logo.png"
+              alt="logo"
+              width={100}
+              height={100}
+              quality={100}
+              priority
+              loader="local"
+              objectFit="contain"
+            />
+          </ALink>
+        </div>
+      </header>
+    );
+  }
   return (
     <header className="header header-border">
       <div className="fix-top sticky-content">

@@ -59,6 +59,7 @@ const App = ({ Component, pageProps }) => {
     showTimer: !!Component.showTimer,
     couponBanner: !!Component.couponBanner,
     hideCart: !!Component.hideCart,
+    hideHeader: blogPage,
   };
 
   const footerProps = {
@@ -290,7 +291,11 @@ const App = ({ Component, pageProps }) => {
             <FomoProvider>
               <NavbarProvider>
                 <GoKwikProvider>
-                  <Layout navbar={navbarProps} footer={footerProps}>
+                  <Layout
+                    navbar={navbarProps}
+                    footer={footerProps}
+                    hideHeader={blogPage}
+                  >
                     <Scripts />
                     <Component {...pageProps} />
                   </Layout>

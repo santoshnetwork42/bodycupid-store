@@ -54,7 +54,7 @@ const BlogPost = ({ blog, error }) => {
           </a>
         </Link>
 
-        <article>
+        <article className="article">
           <div className="aspect-w-16 aspect-h-9 mb-8">
             <img
               src={blog.image || "/default-image.jpg"}
@@ -63,8 +63,8 @@ const BlogPost = ({ blog, error }) => {
             />
           </div>
 
-          <header className="mb-8">
-            <div className="flex flex-col-reverse flex-wrap gap-4 mb-4 tags">
+          <header className="mb-8 header">
+            <div className="flex flex-col-reverse flex-wrap gap-4 mb-4 tags ">
               {blog.tags?.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {blog.tags.map((tag, index) => (
@@ -76,7 +76,7 @@ const BlogPost = ({ blog, error }) => {
               )}
             </div>
 
-            <div className="text-4xl font-bold text-gray-900 mb-4">
+            <div className="blogTitle">
               {blog.metaDescription || "No title"}
             </div>
             <div className="category">

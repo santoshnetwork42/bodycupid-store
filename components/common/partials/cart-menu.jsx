@@ -116,7 +116,7 @@ function CartMenu(props) {
   const { featuredCouponsSorted: featuredCoupons = [] } =
     useFeaturedCoupons(true);
 
-  const cartPageWowCashTooltip = useRuleEngine("CREDIT_PREPAID_ORDER");
+  const cartPageWowCashTooltip = useRuleEngine("DEBIT_PREPAID_ORDER");
 
   const { percentageCoupon, bxayCoupon } = useMemo(() => {
     const bxayCoupon = featuredCoupons.find(
@@ -365,11 +365,11 @@ function CartMenu(props) {
                       <div className="d-flex-col grow-1 gap-5">
                         <div className="font-size-14 line-height-14 d-flex gap-5 align-items-center">
                           Use Cupid Coins
-                          {!!cartPageWowCashTooltip?.description && (
+                          {!!cartPageWowCashTooltip?.cashbackPercentage && (
                             <div className="balance-tooltip">
                               <Ellipse className="" size={14} color="none" />
                               <div className="font-size-10 font-weight-5 tip vis">
-                                {cartPageWowCashTooltip?.description}
+                                {`Redeem ${cartPageWowCashTooltip?.cashbackPercentage}% of your bill (Max ₹${cartPageWowCashTooltip?.maxCashbackAllowed}) with your Cupid coins`}
                               </div>
                             </div>
                           )}

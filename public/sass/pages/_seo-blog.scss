@@ -32,6 +32,22 @@
     background-color: transparent !important; // bg-white
   }
 
+  @for $i from 0 through 100 {
+    .p-#{$i} {
+      padding: #{$i}px;
+    }
+
+    .px-#{$i} {
+      padding-left: #{$i}px;
+      padding-right: #{$i}px;
+    }
+
+    .py-#{$i} {
+      padding-top: #{$i}px;
+      padding-bottom: #{$i}px;
+    }
+  }
+
   .grid {
     display: grid;
     gap: 32px; // gap-8
@@ -39,10 +55,6 @@
     @media (min-width: 768px) {
       // md:grid-cols-2
       grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 768px) {
-      // md:grid-cols-2
       padding: 0 2rem;
     }
 

@@ -27,8 +27,8 @@ async function getPosts() {
 function BlogListing({ articles }) {
   return (
     <div className="seo-blog">
-      <div className="max-w-7xl mx-auto pt-4">
-        <h1 className="">Our Blog</h1>
+      <div className="max-w-7xl mx-auto">
+        <h1 className="py-20">Our Blog</h1>
         <div className="grid">
           {articles.length > 0 ? (
             articles.map((blog) => (
