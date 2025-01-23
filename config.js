@@ -37,3 +37,4 @@ export const SWOP_STORE_BANNER_URL =
   process.env.NEXT_PUBLIC_SWOP_STORE_BANNER_URL;
 export const STORE_ENV = process.env.NEXT_PUBLIC_STORE_ENV;
 export const KWIKPASS_SCRIPT = process.env.NEXT_PUBLIC_KWIKPASS_SCRIPT;
+export const SEOBOT_API_KEY = process.env.NEXT_PUBLIC_SEOBOT_API_KEY;
