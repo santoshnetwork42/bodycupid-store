@@ -147,7 +147,7 @@ function Layout({
           <Announcement showTopRunner={navbar.showTopRunner} />
         )}
 
-        {!hideHeader && <Header navbar={navbar} />}
+        <Header navbar={navbar} hideHeader={hideHeader} />
 
         {children}
 
