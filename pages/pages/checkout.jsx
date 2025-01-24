@@ -201,7 +201,7 @@ function Checkout(props) {
         "BODYCUPID"
       );
 
-      if (isRewardApplied)
+      if (isRewardApplied && typeof setUserWithRewardPoints === "function")
         setUserWithRewardPoints({
           ...userWithRewardPoints,
           totalRewards: Math.max(

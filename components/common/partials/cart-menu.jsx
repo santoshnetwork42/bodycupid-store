@@ -365,11 +365,11 @@ function CartMenu(props) {
                       <div className="d-flex-col grow-1 gap-5">
                         <div className="font-size-14 line-height-14 d-flex gap-5 align-items-center">
                           Use Cupid Coins
-                          {!!cartPageWowCashTooltip?.cashbackPercentage && (
+                          {!!cartPageWowCashTooltip?.description && (
                             <div className="balance-tooltip">
                               <Ellipse className="" size={14} color="none" />
                               <div className="font-size-10 font-weight-5 tip vis">
-                                {`Redeem ${cartPageWowCashTooltip?.cashbackPercentage}% of your bill (Max ₹${cartPageWowCashTooltip?.maxCashbackAllowed}) with your Cupid coins`}
+                                {cartPageWowCashTooltip?.description}
                               </div>
                             </div>
                           )}

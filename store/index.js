@@ -31,22 +31,13 @@ const clearStates = ["cart", "wishlist", "user"];
 
 const rootReducers = (state, action) => {
   // Clear all data in redux store to initial.
-  if (action.type === actionTypes.DESTROY_SESSION) {
-    const filteredStore = Object.keys(state).reduce((obj, key) => {
-      if (!clearStates.includes(key)) {
-        obj[key] = state[key];
-      }
-      return obj;
-    }, {});
-    return appReducer(filteredStore, action);
-  }
+
   return appReducer(state, action);
 };
 
 export const rootActions = {
   destroySession: () => ({ type: actionTypes.DESTROY_SESSION }),
 };
-
 
 export const makeStore = (context) => {
   const store = createStore(rootReducers, applyMiddleware(sagaMiddleware));

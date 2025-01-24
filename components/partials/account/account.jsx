@@ -23,6 +23,10 @@ import { rootActions } from "~/store";
 import { eventActions } from "~/store/events";
 import Wallet from "~/components/partials/account/wallet";
 import { STORE_PREFIX } from "~/config";
+import { userActions } from "~/store/user";
+import { cartActions } from "~/store/cart";
+import { wishlistActions } from "~/store/wishlist";
+import { useNavbar } from "@wow-star/utils";
 
 const MOBILE_TABS = [
   {
@@ -60,6 +64,7 @@ function AccountsTabs({
 }) {
   const router = useRouter();
   const localStore = useStore();
+  const { setUserWithRewardPoints } = useNavbar();
 
   const { name } = store || {};
   const { pathname } = router;
@@ -97,7 +102,12 @@ function AccountsTabs({
   const handleLogout = useCallback(async () => {
     if (localStore) {
       localStore.__persistor.purge();
-      localStore.dispatch(rootActions.destroySession());
+      localStore.dispatch(userActions.refreshUserState());
+      localStore.dispatch(cartActions.emptyCart());
+      localStore.dispatch(wishlistActions.refreshWishlist());
+      if (typeof setUserWithRewardPoints === "function") {
+        setUserWithRewardPoints(null);
+      }
     }
     localStorage.removeItem(`${STORE_PREFIX}-user`);
     localStorage.removeItem(`${STORE_PREFIX}-cartId`);

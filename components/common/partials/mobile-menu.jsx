@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
 import { connect } from "react-redux";
-import { useMenu } from "@wow-star/utils";
+import { useMenu, useNavbar } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import { Cross } from "~/components/icons";
@@ -13,12 +13,15 @@ import Image from "~/components/image";
 import { useStore } from "react-redux";
 import { rootActions } from "~/store";
 import { STORE_PREFIX } from "~/config";
+import { userActions } from "~/store/user";
+import { cartActions } from "~/store/cart";
+import { wishlistActions } from "~/store/wishlist";
 
 function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
   const router = useRouter();
   const menu = useMenu();
   const store = useStore();
-
+  const { setUserWithRewardPoints } = useNavbar();
   useEffect(() => {
     window.addEventListener("resize", hideMobileMenuHandler);
     document.querySelector("body").addEventListener("click", onBodyClick);
@@ -58,8 +61,14 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
   const handleLogout = useCallback(async () => {
     if (store) {
       store.__persistor.purge();
-      store.dispatch(rootActions.destroySession());
+      store.dispatch(userActions.refreshUserState());
+      store.dispatch(cartActions.emptyCart());
+      store.dispatch(wishlistActions.refreshWishlist());
+      if (typeof setUserWithRewardPoints === "function") {
+        setUserWithRewardPoints(null);
+      }
     }
+    // store.dispatch(rootActions.destroySession());
     localStorage.removeItem(`${STORE_PREFIX}-user`);
     localStorage.removeItem(`${STORE_PREFIX}-cartId`);
     logout({

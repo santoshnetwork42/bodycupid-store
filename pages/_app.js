@@ -34,6 +34,8 @@ import { errorHandler } from "~/utils/errorHandler";
 
 import "~/public/sass/style.scss";
 import Cookies from "js-cookie";
+import { cartActions } from "~/store/cart";
+import { wishlistActions } from "~/store/wishlist";
 
 Amplify.configure({
   ...awsconfig,
@@ -72,7 +74,10 @@ const App = ({ Component, pageProps }) => {
   const destroySession = async () => {
     try {
       store.__persistor.purge();
-      store.dispatch(rootActions.destroySession());
+      store.dispatch(userActions.refreshUserState());
+      store.dispatch(cartActions.emptyCart());
+      store.dispatch(wishlistActions.refreshWishlist());
+      // store.dispatch(rootActions.destroySession());
       localStorage.removeItem(`${STORE_PREFIX}-user`);
     } catch (error) {
       logger.error(error);

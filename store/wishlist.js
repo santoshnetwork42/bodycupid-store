@@ -61,6 +61,9 @@ export const wishlistActions = {
     type: actionTypes.TOGGLE_WISHLIST,
     payload: { product },
   }),
+  refreshWishlist: () => ({
+    type: actionTypes.REFRESH_WISHLIST,
+  }),
   removeFromWishlist: (product) => ({
     type: actionTypes.REMOVE_FROM_WISHLIST,
     payload: { product },

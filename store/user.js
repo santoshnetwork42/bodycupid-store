@@ -4,6 +4,7 @@ import { STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
 
 export const actionTypes = {
+  REFRESH_USER_STATE: "REFRESH_USER_STATE",
   SET_USER: "SET_USER",
   REMOVE_USER: "REMOVE_USER",
   UPDATE_USER: "UPDATE_USER",
@@ -23,6 +24,8 @@ const initialState = {
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.REFRESH_USER_STATE:
+      return { ...initialState };
     case actionTypes.SET_USER:
     case actionTypes.UPDATE_USER:
       return { ...state, data: action.payload.user };
@@ -52,6 +55,7 @@ function userReducer(state = initialState, action) {
 }
 
 export const userActions = {
+  refreshUserState: () => ({ type: actionTypes.REFRESH_USER_STATE }),
   setUser: (user) => ({ type: actionTypes.SET_USER, payload: { user } }),
   updateUserFields: (updatedFields) => ({
     type: actionTypes.UPDATE_USER_FIELDS,
