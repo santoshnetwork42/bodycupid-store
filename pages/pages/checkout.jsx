@@ -102,7 +102,7 @@ function Checkout(props) {
   });
 
   const router = useRouter();
-  const [systemMetadata, setSystemMetadata] = useState("");
+  const [systemMetadata, setSystemMetadata] = useState({});
   const [payMethod, setFirst] = useState(prepaidEnabled ? "PREPAID" : "COD");
   const { isReady, userWithRewardPoints, setUserWithRewardPoints } =
     useNavbar();
