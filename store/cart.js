@@ -298,7 +298,7 @@ function cartReducer(state = initialState, action) {
                         updatedProduct?.maximumOrderQuantity,
                     };
                   }
-                  return i;
+                  return v;
                 }),
               },
             }),
