@@ -1,5 +1,6 @@
 import {
   GOOGLE_VERIFICATION_TAG,
+  SEOBOT_API_KEY,
   STORE_ID,
   WORDPRESS_AUTH,
   WORDPRESS_URL,
@@ -66,7 +67,7 @@ export const getStaticProps = async () => {
     { searchProducts: searchFeaturedProducts },
     { searchCollectionTypes: featuredCollectionItem },
     { searchProductCategories: productSubCategoriesItem },
-    blogRes,
+    blogData,
   ] = await Promise.all([
     getSearchProducts({ collections: { eq: "best-seller" } }, 8),
     fetchData(getStoreBanners, { id: STORE_ID, deviceType: "WEB" }),
@@ -74,17 +75,16 @@ export const getStaticProps = async () => {
     getSearchProducts({ collections: { eq: "featured" } }, 8),
     getCollectionBySlug("featured"),
     getProductSubCategory(8),
-    fetch(WORDPRESS_URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: WORDPRESS_AUTH,
-      },
-      method: "POST",
-      body: JSON.stringify({ query: getFeaturedBlogs }),
-    }),
+    // fetch(WORDPRESS_URL, {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: WORDPRESS_AUTH,
+    //   },
+    //   method: "POST",
+    //   body: JSON.stringify({ query: getFeaturedBlogs }),
+    // }),
+    getPosts(),
   ]);
-
-  const blogData = await blogRes.json();
 
   const { items: bestSellerItems } = searchBestSellerProducts;
   const [bestSellerCollection] = bestSellerCollectionItem?.items;
@@ -115,8 +115,29 @@ export const getStaticProps = async () => {
         bestSellerCollection?.defaultSorting
       ),
       featuredCollection,
-      featuredblogs: blogData?.data?.posts?.edges || [],
+      featuredblogs: blogData || [],
     },
     revalidate: 1800,
   };
+};
+
+export const getPosts = async () => {
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  try {
+    const url = `https://cdn.seobotai.com/${SEOBOT_API_KEY}/system/base.json`;
+    const resp = await fetch(url, requestOptions);
+
+    if (!resp.ok) {
+      throw new Error(`HTTP error! status: ${resp.status}`);
+    }
+
+    return await resp.json();
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return [];
+  }
 };

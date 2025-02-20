@@ -12,7 +12,6 @@ function ExploreBlogSection({ blogs, blogClicked }) {
   if (!blogs) return null;
   else if (blogs.length === 0) return null;
 
-  
   return (
     <div className="container pt-6 pb-6">
       <div className="d-flex justify-content-between mb-5">
@@ -26,19 +25,19 @@ function ExploreBlogSection({ blogs, blogClicked }) {
       <div className="mt-4 position-relative">
         {isMobile ? (
           <EmblaCarousel options={{ loop: true }}>
-            {blogs.map((blog) => (
+            {blogs.slice(0, 3).map((blog) => (
               <ALink
-                key={`explore-blog-${blog?.node?.slug}`}
-                href={`/blog/${blog?.node?.slug}`}
+                key={`explore-blog-${blog?.s}`}
+                href={`/blog/${blog?.id}`}
                 style={{
                   flex: "0 0 100%",
                   padding: "0 0.5rem",
                 }}
                 onClick={() => {
                   blogClicked({
-                    item_name: blog?.node?.title,
-                    item_id: blog?.node?.id,
-                    item_slug: blog?.node?.slug,
+                    item_name: blog?.h,
+                    item_id: blog?.id,
+                    item_slug: blog?.s,
                     item_parent_category: "Explore Blogs",
                   });
                 }}
@@ -49,10 +48,11 @@ function ExploreBlogSection({ blogs, blogClicked }) {
                     height: "280px",
                     position: "relative",
                   }}
+                  className="product-card"
                 >
                   <Image
-                    src={blog?.node?.featuredImage?.node?.mediaItemUrl}
-                    alt={blog?.node?.title}
+                    src={blog?.i}
+                    alt={blog?.h}
                     layout="fill"
                     quality={50}
                     objectFit="cover"
@@ -61,31 +61,29 @@ function ExploreBlogSection({ blogs, blogClicked }) {
                   />
                 </div>
 
-                <h5 className="mt-4 mb-2 font-weight-bolder">
-                  {blog?.node?.title}
-                </h5>
-
-                <div
+                <h5 className="mt-4 mb-2 font-weight-bolder">{blog?.h}</h5>
+                <div>{blog?.d}</div>
+                {/* <div
                   dangerouslySetInnerHTML={{
-                    __html: blog?.node?.excerpt,
+                    __html: blog?.d,
                   }}
                   className="lh-111"
-                />
+                /> */}
               </ALink>
             ))}
           </EmblaCarousel>
         ) : (
           <div className="rowss">
-            {blogs.map((blog) => (
-              <React.Fragment key={"post-nine" + blog?.node?.slug}>
+            {blogs.slice(0, 3).map((blog) => (
+              <React.Fragment key={"post-nine" + blog?.s}>
                 <ALink
-                  href={`/blog/${blog?.node?.slug}`}
+                  href={`/blog/${blog?.s}`}
                   className="col-lg-4"
                   onClick={() => {
                     blogClicked({
-                      item_name: blog?.node?.title,
-                      item_id: blog?.node?.id,
-                      item_slug: blog?.node?.slug,
+                      item_name: blog?.h,
+                      item_id: blog?.id,
+                      item_slug: blog?.s,
                       item_parent_category: "Explore Blogs",
                     });
                   }}
@@ -96,11 +94,12 @@ function ExploreBlogSection({ blogs, blogClicked }) {
                       height: "280px",
                       position: "relative",
                     }}
+                    className="product-card"
                     priority={false}
                   >
                     <Image
-                      src={blog?.node?.featuredImage?.node?.mediaItemUrl}
-                      alt={blog?.node?.title}
+                      src={blog?.i}
+                      alt={blog?.h}
                       layout="fill"
                       quality={75}
                       objectFit="cover"
@@ -121,15 +120,15 @@ function ExploreBlogSection({ blogs, blogClicked }) {
                         display: "-webkit-box",
                       }}
                     >
-                      {blog.node.title}
+                      {blog.h}
                     </h5>
-
-                    <div
+                    <div className="mb-3">{blog?.d}</div>
+                    {/* <div
                       dangerouslySetInnerHTML={{
-                        __html: blog?.node?.excerpt,
+                        __html: blog?.,
                       }}
                       className="lh-111"
-                    />
+                    /> */}
                   </div>
                 </ALink>
               </React.Fragment>

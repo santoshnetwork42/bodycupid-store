@@ -121,6 +121,7 @@ const nextConfig = withBundleAnalyzer({
       //   hostname: process.env.NEXT_PUBLIC_WORDPRESS_AVATAR_URL_2,
       // },
     ],
+    domains: ["mars-images.imgix.net"],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
 
