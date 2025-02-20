@@ -77,7 +77,7 @@ function ExploreBlogSection({ blogs, blogClicked }) {
             {blogs.slice(0, 3).map((blog) => (
               <React.Fragment key={"post-nine" + blog?.s}>
                 <ALink
-                  href={`/blog/${blog?.s}`}
+                  href={`/blog/${blog?.id}`}
                   className="col-lg-4"
                   onClick={() => {
                     blogClicked({
