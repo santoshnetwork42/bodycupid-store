@@ -13,6 +13,11 @@ export const DEFAULT_SORTING = {
   PRICE_LOW_TO_HIGH: "price-low",
 };
 
+export const EXCLUDE_ADDITIONAL_INFO_LABEL_LIST = [
+  "feed_title",
+  "feed_description",
+];
+
 export const COD_CHARGES = "COD";
 export const PPCOD_AMOUNT = "PPCOD_AMOUNT";
 export const PPCOD_ENABLED = "PPCOD_ENABLED";

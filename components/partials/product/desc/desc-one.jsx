@@ -26,6 +26,7 @@ import { uploadImages } from "~/utils/imageupload";
 import { alertToaster } from "../../../../utils/popupHelper";
 import RatingStar from "../rating-star";
 import Review from "../review";
+import { EXCLUDE_ADDITIONAL_INFO_LABEL_LIST } from "~/constant";
 
 const reviewDefault = {
   rating: 5,
@@ -360,19 +361,26 @@ function DescOne(props) {
               </div>
               {!!additionalInfo && (
                 <>
-                  {additionalInfo.map((info) => {
-                    return (
-                      <div
-                        className="additional-info-container"
-                        key={info.label}
-                      >
-                        <h6 className="additional-info-label m-0">
-                          {info.label}
-                        </h6>
-                        <p className="additional-info-value">{info.value}</p>
-                      </div>
-                    );
-                  })}
+                  {additionalInfo
+                    .filter(
+                      (info) =>
+                        !EXCLUDE_ADDITIONAL_INFO_LABEL_LIST?.includes(
+                          info?.label || ""
+                        )
+                    )
+                    .map((info) => {
+                      return (
+                        <div
+                          className="additional-info-container"
+                          key={info.label}
+                        >
+                          <h6 className="additional-info-label m-0">
+                            {info.label}
+                          </h6>
+                          <p className="additional-info-value">{info.value}</p>
+                        </div>
+                      );
+                    })}
                 </>
               )}
             </div>
