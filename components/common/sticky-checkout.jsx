@@ -97,7 +97,8 @@ function StickyFooter(props) {
     slug === "deal-perfume" ||
     slug === "affiliate-4" ||
     slug === "affiliate-6" ||
-    slug === "deal-offer";
+    slug === "deal-offer" ||
+    slug === "bundle";
   const hasSpecialOffer = cartList?.some(
     (cart) =>
       slug === "" ||
@@ -125,6 +126,8 @@ function StickyFooter(props) {
       return "Add more items to unlock 'Buy 5 @ ₹999 Offer'";
     } else if (slug === "buy-4-699") {
       return "Add more items to unlock 'Buy 4 @ ₹699 Offer'";
+    } else if (slug === "bundle") {
+      return "Add more items to unlock 'Buy 10 @ ₹1499 Offer'";
     } else if (slug === "buy-6-at-899") {
       return "Add more items to unlock 'Buy 6 @ ₹899 Offer'";
     } else if (slug === "bundle-offer-makeup") {

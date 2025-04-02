@@ -156,6 +156,10 @@ function ProductTwo(props) {
         const showCartModal =
           totalCartItems > 0 && totalCartItems % 3 !== 0 ? false : true;
         showCartModal && setCartVisibility(true);
+      } else if (tagSlug === "bundle") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 10 !== 0 ? false : true;
+        showCartModal && setCartVisibility(true);
       } else {
         showEveryTime && setCartVisibility(true);
       }
