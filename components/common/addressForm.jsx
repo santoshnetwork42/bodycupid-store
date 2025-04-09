@@ -102,6 +102,22 @@ const AddressForm = (props) => {
     }
   }, [defaultAddress]);
 
+  const sanitizeText = (text = "") => {
+    try {
+      const textSanitized = text
+        .normalize("NFKD")
+        .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, "") // Remove emojis
+        .replace(/[\u0300-\u036f]/g, "") // Remove diacritical marks
+        .replace(/\s{2,}/g, " ") // Replace multiple spaces with a single space
+        .trimStart();
+      return textSanitized;
+    } catch (e) {
+      console.log(e);
+      return "";
+    }
+    // Normalize and remove all fancy unicode characters
+  };
+
   const addAddress = useCallback(
     async (e) => {
       e?.preventDefault();
@@ -200,9 +216,14 @@ const AddressForm = (props) => {
                     name="firstName"
                     required
                     value={address?.firstName}
-                    onChange={(e) =>
-                      setAddress({ firstName: e.target.value.trim() })
-                    }
+                    onChange={(e) => {
+                      const text = sanitizeText(e.target.value);
+                      setAddress({ firstName: text });
+                    }}
+                    onBlur={(e) => {
+                      const text = sanitizeText(e.target.value.trim());
+                      setAddress({ firstName: text });
+                    }}
                   />
                 </div>{" "}
                 <div className="col-xs-6">
@@ -213,9 +234,14 @@ const AddressForm = (props) => {
                     name="lastName"
                     required
                     value={address?.lastName}
-                    onChange={(e) =>
-                      setAddress({ lastName: e.target.value.trim() })
-                    }
+                    onChange={(e) => {
+                      const text = sanitizeText(e.target.value);
+                      setAddress({ lastName: text });
+                    }}
+                    onBlur={(e) => {
+                      const text = sanitizeText(e.target.value.trim());
+                      setAddress({ lastName: text });
+                    }}
                   />
                 </div>
                 <div className="col-xs-6 mb-3">
@@ -247,9 +273,14 @@ const AddressForm = (props) => {
                     className="form-control"
                     name="email-address"
                     value={address?.email}
-                    onChange={(e) =>
-                      setAddress({ email: e.target.value.trim() })
-                    }
+                    onChange={(e) => {
+                      const text = sanitizeText(e.target.value);
+                      setAddress({ email: text });
+                    }}
+                    onBlur={(e) => {
+                      const text = sanitizeText(e.target.value.trim());
+                      setAddress({ email: text });
+                    }}
                   />
                 </div>
               </div>
@@ -262,8 +293,14 @@ const AddressForm = (props) => {
                 required
                 placeholder="House number and street name"
                 value={address.address}
-                onChange={(e) => setAddress({ address: e.target.value })}
-                onBlur={(e) => setAddress({ address: e.target.value.trim() })}
+                onChange={(e) => {
+                  const text = sanitizeText(e.target.value);
+                  setAddress({ address: text });
+                }}
+                onBlur={(e) => {
+                  const text = sanitizeText(e.target.value.trim());
+                  setAddress({ address: text });
+                }}
               />
               <div className="row">
                 <div className="col-xs-6">
@@ -274,10 +311,14 @@ const AddressForm = (props) => {
                     name="landmark"
                     placeholder="Landmark (optional)"
                     value={address.landmark}
-                    onChange={(e) => setAddress({ landmark: e.target.value })}
-                    onBlur={(e) =>
-                      setAddress({ landmark: e.target.value.trim() })
-                    }
+                    onChange={(e) => {
+                      const text = sanitizeText(e.target.value);
+                      setAddress({ landmark: text });
+                    }}
+                    onBlur={(e) => {
+                      const text = sanitizeText(e.target.value.trim());
+                      setAddress({ landmark: text });
+                    }}
                   />
                 </div>
                 <div className="col-xs-6">
@@ -288,8 +329,14 @@ const AddressForm = (props) => {
                     name="address2"
                     placeholder="Area (optional)"
                     value={address.area}
-                    onChange={(e) => setAddress({ area: e.target.value })}
-                    onBlur={(e) => setAddress({ area: e.target.value.trim() })}
+                    onChange={(e) => {
+                      const text = sanitizeText(e.target.value);
+                      setAddress({ area: text });
+                    }}
+                    onBlur={(e) => {
+                      const text = sanitizeText(e.target.value.trim());
+                      setAddress({ area: text });
+                    }}
                   />
                 </div>
               </div>
@@ -318,8 +365,14 @@ const AddressForm = (props) => {
                     placeholder="Your city"
                     required
                     value={address.city}
-                    onChange={(e) => setAddress({ city: e.target.value })}
-                    onBlur={(e) => setAddress({ city: e.target.value.trim() })}
+                    onChange={(e) => {
+                      const text = sanitizeText(e.target.value);
+                      setAddress({ city: text });
+                    }}
+                    onBlur={(e) => {
+                      const text = sanitizeText(e.target.value.trim());
+                      setAddress({ city: text });
+                    }}
                   />
                 </div>
                 <div className="col-xs-6">
@@ -383,9 +436,14 @@ const AddressForm = (props) => {
                   name="firstName"
                   required
                   value={address?.firstName}
-                  onChange={(e) =>
-                    setAddress({ firstName: e.target.value.trim() })
-                  }
+                  onChange={(e) => {
+                    const text = sanitizeText(e.target.value);
+                    setAddress({ firstName: text });
+                  }}
+                  onBlur={(e) => {
+                    const text = sanitizeText(e.target.value.trim());
+                    setAddress({ firstName: text });
+                  }}
                 />
               </div>{" "}
               <div className="col-xs-6">
@@ -396,9 +454,14 @@ const AddressForm = (props) => {
                   name="lastName"
                   required
                   value={address?.lastName}
-                  onChange={(e) =>
-                    setAddress({ lastName: e.target.value.trim() })
-                  }
+                  onChange={(e) => {
+                    const text = sanitizeText(e.target.value);
+                    setAddress({ lastName: text });
+                  }}
+                  onBlur={(e) => {
+                    const text = sanitizeText(e.target.value.trim());
+                    setAddress({ lastName: text });
+                  }}
                 />
               </div>
               <div className="col-xs-6 mb-3">
@@ -430,7 +493,14 @@ const AddressForm = (props) => {
                   className="form-control"
                   name="email-address"
                   value={address?.email}
-                  onChange={(e) => setAddress({ email: e.target.value.trim() })}
+                  onChange={(e) => {
+                    const text = sanitizeText(e.target.value);
+                    setAddress({ email: text });
+                  }}
+                  onBlur={(e) => {
+                    const text = sanitizeText(e.target.value.trim());
+                    setAddress({ email: text });
+                  }}
                 />
               </div>
             </div>
@@ -443,8 +513,14 @@ const AddressForm = (props) => {
               required
               placeholder="House number and street name"
               value={address.address}
-              onChange={(e) => setAddress({ address: e.target.value })}
-              onBlur={(e) => setAddress({ address: e.target.value.trim() })}
+              onChange={(e) => {
+                const text = sanitizeText(e.target.value);
+                setAddress({ address: text });
+              }}
+              onBlur={(e) => {
+                const text = sanitizeText(e.target.value.trim());
+                setAddress({ address: text });
+              }}
             />
             <div className="row">
               <div className="col-xs-6">
@@ -455,10 +531,14 @@ const AddressForm = (props) => {
                   name="landmark"
                   placeholder="Landmark (optional)"
                   value={address.landmark}
-                  onChange={(e) => setAddress({ landmark: e.target.value })}
-                  onBlur={(e) =>
-                    setAddress({ landmark: e.target.value.trim() })
-                  }
+                  onChange={(e) => {
+                    const text = sanitizeText(e.target.value);
+                    setAddress({ landmark: text });
+                  }}
+                  onBlur={(e) => {
+                    const text = sanitizeText(e.target.value.trim());
+                    setAddress({ landmark: text });
+                  }}
                 />
               </div>
               <div className="col-xs-6">
@@ -469,8 +549,14 @@ const AddressForm = (props) => {
                   name="address2"
                   placeholder="Area (optional)"
                   value={address.area}
-                  onChange={(e) => setAddress({ area: e.target.value })}
-                  onBlur={(e) => setAddress({ area: e.target.value.trim() })}
+                  onChange={(e) => {
+                    const text = sanitizeText(e.target.value);
+                    setAddress({ area: text });
+                  }}
+                  onBlur={(e) => {
+                    const text = sanitizeText(e.target.value.trim());
+                    setAddress({ area: text });
+                  }}
                 />
               </div>
             </div>
@@ -499,8 +585,14 @@ const AddressForm = (props) => {
                   placeholder="Your city"
                   required
                   value={address.city}
-                  onChange={(e) => setAddress({ city: e.target.value })}
-                  onBlur={(e) => setAddress({ city: e.target.value.trim() })}
+                  onChange={(e) => {
+                    const text = sanitizeText(e.target.value);
+                    setAddress({ city: text });
+                  }}
+                  onBlur={(e) => {
+                    const text = sanitizeText(e.target.value.trim());
+                    setAddress({ city: text });
+                  }}
                 />
               </div>
               <div className="col-xs-6">
