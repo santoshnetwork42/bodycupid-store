@@ -9,7 +9,7 @@ export const getCouponMessage = ({
   getYPercentage,
   getYQuantity,
   paymentMethod,
-  getYStoreProduct,
+  getYStoreProducts,
   minOrderValue,
   maxDiscount,
 }) => {
@@ -29,8 +29,19 @@ export const getCouponMessage = ({
       discountMsg = `${discountMsg} upto ₹${maxDiscount}`;
     }
   } else if (couponType === "PRODUCT") {
-    discountMsg = `FREE ${getYStoreProduct?.title} ${
-      !!getYStoreProduct?.price ? `WORTH ₹${getYStoreProduct?.price}` : ""
+    const titles = getYStoreProducts?.map((item) => item?.title) || [];
+    const result = titles.length
+      ? titles.length > 1
+        ? `${titles.slice(0, -1).join(", ")} and ${titles.at(-1)}`
+        : titles[0]
+      : "";
+
+    const totalFreeProductsPrice = getYStoreProducts
+      ?.filter(Boolean)
+      ?.reduce((acc, item) => acc + (getProductPrice(item)?.price || 0), 0);
+
+    discountMsg = `FREE ${result}${
+      totalFreeProductsPrice ? ` WORTH ₹${totalFreeProductsPrice}` : ""
     }`;
   } else if (couponType === "BUY_X_AT_Y") {
     discountMsg = `Buy ${buyXQuantity} @ ₹${getYAmount}`;
@@ -71,7 +82,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
     getYAmount,
     getYPercentage,
     getYQuantity,
-    getYStoreProduct,
+    getYStoreProducts,
   } = coupon;
 
   const finalGetYQty = couponType === "BUY_X_GET_Y" ? getYQuantity : 0;
@@ -185,22 +196,34 @@ export const getCouponDiscount = (coupon, cartItems) => {
     };
   }
 
-  if (couponType === "PRODUCT") {
-    const { price } = getProductPrice(getYStoreProduct);
+  if (
+    couponType === "PRODUCT" &&
+    Array.isArray(getYStoreProducts) &&
+    !!getYStoreProducts?.length
+  ) {
+    const totalFreeProductsPrice = getYStoreProducts?.reduce(
+      (acc, getYStoreProduct) => {
+        const { price = 0 } = getProductPrice(getYStoreProduct);
+        acc += price;
+        return acc;
+      },
+      0
+    );
+
     return {
-      ...coupon,
-      allowed: !!getYStoreProduct?.title,
-      discount: price,
+      coupon,
+      allowed: true,
+      discount: totalFreeProductsPrice,
       message: getCouponMessage(coupon).discountMsg,
     };
   }
 
   if (couponType === "FREEBIE") {
-    const { price } = getProductPrice(getYStoreProduct);
+    // const { price } = getProductPrice(getYStoreProduct);
     return {
       ...coupon,
-      allowed: !!getYStoreProduct?.title,
-      discount: price,
+      allowed: false,
+      discount: 0,
       message: getCouponMessage(coupon).discountMsg,
     };
   }

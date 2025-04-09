@@ -12,6 +12,22 @@ function ProductBestPrice(props) {
   const isProductCoupon = coupon?.couponType === "PRODUCT";
   const freeProduct = useFreebie();
 
+  const titles = coupon?.getYStoreProducts?.map((item) => item?.title) || [];
+  const productTitlesCombine = titles.length
+    ? titles.length > 1
+      ? `${titles.slice(0, -1).join(", ")} and ${titles.at(-1)}`
+      : titles[0]
+    : "";
+
+  const totalFreeProductsPrice = coupon?.getYStoreProducts?.reduce(
+    (acc, getYStoreProduct) => {
+      const { price = 0 } = getProductPrice(getYStoreProduct);
+      acc += price;
+      return acc;
+    },
+    0
+  );
+
   return (
     <div>
       {freeProduct && (
@@ -43,9 +59,8 @@ function ProductBestPrice(props) {
             <p className="ml-1 text-black mb-1">
               Free Product:&nbsp;
               <span className="font-weight-semi-bold">
-                {coupon?.getYStoreProduct?.title} worth ₹
-                {coupon?.getYStoreProduct?.price} on orders above ₹
-                {freeProduct?.minOrderValue}
+                {productTitlesCombine} worth ₹{totalFreeProductsPrice} on orders
+                above ₹{coupon?.minOrderValue}
               </span>
             </p>
           ) : (

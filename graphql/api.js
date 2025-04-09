@@ -482,8 +482,8 @@ export const getFeaturedCoupon = /* GraphQL */ `
         getYAmount
         getYPercentage
         getYQuantity
-        getYProduct
-        getYStoreProduct {
+        getYProducts
+        getYStoreProducts {
           id
           title
           price
@@ -521,23 +521,15 @@ export const applyCoupon = /* GraphQL */ `
       getYAmount
       getYPercentage
       getYQuantity
-      getYProduct
+      getYProducts
       applyOnAllVariants
       ppcodCouponAmount
-      getYStoreProduct {
+      getYStoreProducts {
         id
         title
         collections
         vendor
-        subCategory {
-          name
-          slug
-        }
         isFeatured
-        category {
-          name
-          slug
-        }
         slug
         price
         sku
@@ -2346,8 +2338,8 @@ export const getCoupon = /* GraphQL */ `
       getYAmount
       getYPercentage
       getYQuantity
-      getYProduct
-      getYStoreProduct {
+      getYProducts
+      getYStoreProducts {
         id
         title
         price
@@ -2568,7 +2560,7 @@ export const getCouponRule = /* GraphQL */ `
       deviceType
       expirationDate
       couponCodeCount
-      getYStoreProduct {
+      getYStoreProducts {
         id
         title
         brand
@@ -2625,7 +2617,7 @@ export const getCouponRule = /* GraphQL */ `
       getYAmount
       getYPercentage
       getYQuantity
-      getYProduct
+      getYProducts
       minOrderValue
       maxDiscount
       maxAllowedUsage
