@@ -8,13 +8,14 @@ import Tag from "~/components/common/tag";
 import ALink from "~/components/features/custom-link";
 import Checkmark, { LoyaltyTag } from "~/components/icons";
 import NextImage from "~/components/image";
-import { STORE_ID, SWOP_STORE_BANNER_URL } from "~/config";
+import { STORE_ID } from "~/config";
 import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
 import { userActions } from "~/store/user";
 import { formateDate, getOrderTotal, toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import fetchData from "~/utils/fetchData";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import useWindowDimensions from "~/utils/getWindowDimension";
 import { alertToaster } from "~/utils/popupHelper";
 
@@ -29,7 +30,12 @@ function Order({
   updateUser,
 }) {
   const [order, setOrder] = useState(orderItem);
-  const { name } = store || {};
+  const { name, banners } = store || {};
+  const {
+    webKey: webBanner = "",
+    mobileKey: mobileBanner = "",
+    link = "",
+  } = banners?.find((i) => !!i.isThankYouPageBanner) || {};
   const [timer, setTimer] = useState(null);
   const allStatus = ["CANCELLED", "DISPATCHED", "COURIER_RETURN", "DELIVERED"];
   const { isSmallSize: isMobile } = useWindowDimensions();
@@ -169,26 +175,24 @@ function Order({
         <div className="container pt-7">
           <div className="d-flex justify-content-center align-items-center mb-4">
             <div id="promocode-element-container">
-              <ALink className="order-image" href={SWOP_STORE_BANNER_URL}>
-                {isMobile && (
+              <ALink className="order-image" href={link || "#"}>
+                {isMobile && !!mobileBanner && (
                   <NextImage
-                    src={"/images/thankyou/swopStoreMobileBanner.jpg"}
-                    alt={"collections-bundle-offer"}
+                    src={getPublicImageURL(mobileBanner)}
+                    alt={"Thank You Page Banner"}
                     loader="local"
                     width={400}
                     height={200}
-                    objectFit="contain"
                     priority
                   />
                 )}
-                {!isMobile && (
+                {!isMobile && !!webBanner && (
                   <NextImage
-                    src={"/images/thankyou/swopStoreDesktopBanner.jpg"}
-                    alt={"collections-bundle-offer"}
+                    src={getPublicImageURL(webBanner)}
+                    alt={"Thank You Page Banner"}
                     loader="local"
                     width={1400}
                     height={400}
-                    objectFit="contain"
                     priority
                   />
                 )}

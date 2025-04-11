@@ -1880,6 +1880,7 @@ export const getStore = /* GraphQL */ `
         name
         isArchive
         priority
+        isThankYouPageBanner
       }
       announcements {
         label
@@ -1916,6 +1917,7 @@ export const getStoreBanners = /* GraphQL */ `
         name
         isArchive
         priority
+        isThankYouPageBanner
       }
       announcements {
         label
