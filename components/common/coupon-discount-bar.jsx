@@ -39,7 +39,7 @@ const couponDiscountBar = ({
     ({ coupon }) =>
       coupon && coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
   );
-  
+
   const hasCartItems = cartList?.length > 0;
 
   if (hasCartItems) {
@@ -48,6 +48,9 @@ const couponDiscountBar = ({
         (appliedCoupon &&
           appliedCoupon?.getYAmount &&
           `Congrats, 'Buy ${appliedCoupon?.buyXQuantity} @ ₹${appliedCoupon?.getYAmount} Offer' Availed!`) ||
+        (appliedCoupon &&
+          !!appliedCoupon?.getYQuantity &&
+          `Congrats, 'Buy ${appliedCoupon?.buyXQuantity} Get ${appliedCoupon?.getYQuantity} Free Offer' Availed!`) ||
         "";
 
       return (
