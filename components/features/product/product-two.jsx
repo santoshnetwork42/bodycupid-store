@@ -161,9 +161,7 @@ function ProductTwo(props) {
           totalCartItems > 0 && totalCartItems % 10 !== 0 ? false : true;
         showCartModal && setCartVisibility(true);
       } else {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 4 !== 0 ? false : true;
-        if (showCartModal) setCartVisibility(true);
+        showEveryTime && setCartVisibility(true);
       }
     }
   };

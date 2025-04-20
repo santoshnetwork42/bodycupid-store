@@ -205,10 +205,6 @@ function CartMenu(props) {
       return "Add more items to unlock 'Buy 5 @ ₹1299 Offer'";
     } else if (slug === "bundle") {
       return "Add more items to unlock 'Buy 10 @ ₹1499 Offer'";
-    } else {
-      return totalItems < 4
-        ? "Add more items to unlock 'Buy 2 get 2 Free Offer'"
-        : "Congrats,Your cart is eligible Buy 2 get 2 Free Offer";
     }
 
     return "";

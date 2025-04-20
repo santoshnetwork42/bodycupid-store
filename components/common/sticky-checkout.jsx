@@ -118,8 +118,7 @@ function StickyFooter(props) {
       cart?.collections?.includes("gpay75")
   );
 
-  const showDiscount = true;
-  //  totalCartItems > 0 && hasDiscountSlug && hasSpecialOffer;
+  const showDiscount = totalCartItems > 0 && hasDiscountSlug && hasSpecialOffer;
 
   const getCollectionWiseNudgeMsg = () => {
     if (slug === "special-deal") {
@@ -162,10 +161,6 @@ function StickyFooter(props) {
       return "Add more items to unlock 'Buy 6 @ ₹999 Offer'";
     } else if (slug === "deal-perfume") {
       return "Add more items to unlock 'Buy 5 @ ₹1299 Offer'";
-    } else {
-      return totalCartItems < 4
-        ? "Add more items to unlock 'Buy 2 get 2 Free Offer'"
-        : "Congrats,Your cart is eligible Buy 2 get 2 Free Offer";
     }
 
     return "";
