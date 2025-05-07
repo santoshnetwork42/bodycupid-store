@@ -13,18 +13,25 @@ export const getCouponMessage = ({
   minOrderValue,
   maxDiscount,
 }) => {
+  const freeGiftsLength = (getYStoreProducts || [])?.length;
   let discountMsg =
     "Lowest value item in the cart will be discounted off on the item total";
 
   if (couponType === "FIXED") {
-    discountMsg = `₹${getYAmount} off from total`;
+    discountMsg = `₹${getYAmount} off from total ${
+      !!freeGiftsLength ? `+ Get ${freeGiftsLength} Free Gifts!` : ""
+    }`;
   } else if (couponType === "PERCENTAGE") {
-    discountMsg = `${getYPercentage}% off from total`;
+    discountMsg = `${getYPercentage}% off from total ${
+      !!freeGiftsLength ? `+ Get ${freeGiftsLength} Free Gifts!` : ""
+    }`;
     if (maxDiscount) {
       discountMsg = `${discountMsg} upto ₹${maxDiscount}`;
     }
   } else if (couponType === "BUY_X_GET_Y" && getYQuantity > 1) {
-    discountMsg = `${getYQuantity} items with the lowest value will be given away for free!`;
+    discountMsg = `${getYQuantity} items with the lowest value will be given away for free! ${
+      !!freeGiftsLength ? `+ Get ${freeGiftsLength} Free Gifts!` : ""
+    }`;
     if (maxDiscount) {
       discountMsg = `${discountMsg} upto ₹${maxDiscount}`;
     }
@@ -44,7 +51,9 @@ export const getCouponMessage = ({
       totalFreeProductsPrice ? ` WORTH ₹${totalFreeProductsPrice}` : ""
     }`;
   } else if (couponType === "BUY_X_AT_Y") {
-    discountMsg = `Buy ${buyXQuantity} @ ₹${getYAmount}`;
+    discountMsg = `Buy ${buyXQuantity} @ ₹${getYAmount} ${
+      !!freeGiftsLength ? `+ Get ${freeGiftsLength} Free Gifts!` : ""
+    }`;
   }
 
   if (minOrderValue) {
@@ -169,12 +178,20 @@ export const getCouponDiscount = (coupon, cartItems) => {
     }
   }
 
+  const totalValueOfFreebies = (getYStoreProducts || [])?.reduce(
+    (acc, getYStoreProduct) => {
+      const { price = 0 } = getProductPrice(getYStoreProduct);
+      acc += price;
+      return acc;
+    },
+    0
+  );
   const { discountMsg } = getCouponMessage(coupon);
 
   if (couponType === "FIXED") {
-    const discount = maxDiscount
-      ? Math.min(maxDiscount, getYAmount)
-      : getYAmount;
+    const discount =
+      (maxDiscount ? Math.min(maxDiscount, getYAmount) : getYAmount) +
+      totalValueOfFreebies;
     return {
       ...coupon,
       allowed: true,
@@ -184,9 +201,10 @@ export const getCouponDiscount = (coupon, cartItems) => {
   }
 
   if (couponType === "PERCENTAGE") {
-    const discount = maxDiscount
-      ? Math.min(maxDiscount, (getYPercentage * totalAmount) / 100)
-      : (getYPercentage * totalAmount) / 100;
+    const discount =
+      (maxDiscount
+        ? Math.min(maxDiscount, (getYPercentage * totalAmount) / 100)
+        : (getYPercentage * totalAmount) / 100) + totalValueOfFreebies;
 
     return {
       ...coupon,
@@ -201,19 +219,10 @@ export const getCouponDiscount = (coupon, cartItems) => {
     Array.isArray(getYStoreProducts) &&
     !!getYStoreProducts?.length
   ) {
-    const totalFreeProductsPrice = getYStoreProducts?.reduce(
-      (acc, getYStoreProduct) => {
-        const { price = 0 } = getProductPrice(getYStoreProduct);
-        acc += price;
-        return acc;
-      },
-      0
-    );
-
     return {
       coupon,
       allowed: true,
-      discount: totalFreeProductsPrice,
+      discount: totalValueOfFreebies,
       message: getCouponMessage(coupon).discountMsg,
     };
   }
@@ -244,7 +253,8 @@ export const getCouponDiscount = (coupon, cartItems) => {
 
     const discountedItems = cartAmounts.slice(-discountedQty);
     const amt = discountedItems.reduce((a, b) => a + b, 0);
-    const discount = maxDiscount ? Math.min(maxDiscount, amt) : amt;
+    const discount =
+      (maxDiscount ? Math.min(maxDiscount, amt) : amt) + totalValueOfFreebies;
     return {
       ...coupon,
       allowed: true,
@@ -258,7 +268,9 @@ export const getCouponDiscount = (coupon, cartItems) => {
     const discountedItems = cartAmounts.slice(0, discountedQty);
     const amt = discountedItems.reduce((a, b) => a + b, 0);
     const discountedAmount = (discountedQty / buyXQuantity) * getYAmount;
-    const discount = discountedAmount < amt ? amt - discountedAmount : 0;
+    const discount =
+      (discountedAmount < amt ? amt - discountedAmount : 0) +
+      totalValueOfFreebies;
     return {
       ...coupon,
       allowed: true,
