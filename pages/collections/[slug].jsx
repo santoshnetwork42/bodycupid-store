@@ -339,10 +339,6 @@ export const getStaticProps = async (context) => {
     };
   }
 
-  if (!collection) {
-    console.warn(`Collection not found for slug: ${slug}`);
-    return { notFound: true };
-  }
   return await handleRedirect(`/collections/${slug}`);
 };
 
