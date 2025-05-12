@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { VERCEL_CHECKOUT_AB_FLAG } from "~/config";
+import { STORE_ID, VERCEL_CHECKOUT_AB_FLAG } from "~/config";
+import fetchData from "./utils/fetchData";
+import { getRedirects } from "./graphql/api";
 
 export const config = {
   matcher: [
@@ -18,7 +20,7 @@ export const config = {
 
 const THRESHOLD = 0.5; // initial threshold for the new variant (100%)
 
-export function middleware(req) {
+export async function middleware(req) {
   if (
     req.nextUrl.pathname.startsWith("/_next") ||
     req.nextUrl.pathname.startsWith("/static") ||
@@ -28,6 +30,24 @@ export function middleware(req) {
     req.nextUrl.pathname === "/favicon.ico"
   ) {
     return NextResponse.next();
+  } else if (
+    req.nextUrl.pathname.startsWith("/products") ||
+    req.nextUrl.pathname.startsWith("/collections") ||
+    req.nextUrl.pathname.startsWith("/pages") ||
+    req.nextUrl.pathname.startsWith("/policies")
+  ) {
+    const path = req.nextUrl.pathname;
+
+    const { redirect: redirectTo } =
+      (await fetchData(getRedirects, {
+        slug: path,
+        storeId: STORE_ID,
+      }).then((resp) => resp.getRedirects)) || {};
+
+    if (!!redirectTo)
+      return NextResponse.redirect(new URL(redirectTo, req.url), {
+        status: 301,
+      });
   }
 
   // get the variant from the cookie
