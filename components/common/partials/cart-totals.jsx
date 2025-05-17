@@ -69,7 +69,7 @@ function CartTotal({
   } = inventory || {};
 
   const validateAndGoToCheckout = useCallback(async () => {
-    const checkoutABVariant = Cookies.get(VERCEL_CHECKOUT_AB_FLAG);
+    // const checkoutABVariant = Cookies.get(VERCEL_CHECKOUT_AB_FLAG);
     setCartVisibility(false);
 
     if (!isInventoryCheckSuccess) {
@@ -93,7 +93,10 @@ function CartTotal({
     //   cartId: cartId || "NOT FOUND",
     // });
 
-    if (isGKCXEnabled && checkoutABVariant === "gokwik-ab-bc") {
+    if (
+      isGKCXEnabled
+      // && checkoutABVariant === "gokwik-ab-bc"
+    ) {
       try {
         gokwikSdk.initCheckout({
           environment: "sandbox",
