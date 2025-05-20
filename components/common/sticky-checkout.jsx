@@ -102,6 +102,7 @@ function StickyFooter(props) {
     slug === "buy-5" ||
     slug === "buy-6" ||
     slug === "buy-4-999" ||
+    slug === "buy-4-for-699" ||
     slug === "buy-8-1099";
 
   const hasSpecialOffer = cartList?.some(
@@ -124,6 +125,7 @@ function StickyFooter(props) {
       cart?.collections?.includes("buy-5") ||
       cart?.collections?.includes("buy-6") ||
       cart?.collections?.includes("buy-4-999") ||
+      cart?.collections?.includes("buy-4-for-699") ||
       cart?.collections?.includes("buy-8-1099")
   );
 
@@ -176,6 +178,8 @@ function StickyFooter(props) {
       return "Add more items to unlock 'Buy 6 @ ₹799 Offer'";
     } else if (slug === "buy-4-999") {
       return "Add more items to unlock 'Buy 4 @ ₹999 Offer'";
+    } else if (slug === "buy-4-for-699") {
+      return "Add more items to unlock 'Buy 4 @ ₹699 Offer'";
     } else if (slug === "buy-8-1099") {
       return "Add more items to unlock 'Buy 8 @ ₹1099 Offer'";
     }

@@ -173,6 +173,8 @@ function CartMenu(props) {
       return "Add more items to unlock 'Buy 5 @ ₹999 Offer'";
     } else if (slug === "buy-4-699") {
       return "Add more items to unlock 'Buy 4 @ ₹699 Offer'";
+    } else if (slug === "buy-4-for-699") {
+      return "Add more items to unlock 'Buy 4 @ ₹699 Offer'";
     } else if (slug === "buy-6-at-899") {
       return "Add more items to unlock 'Buy 6 @ ₹899 Offer'";
     } else if (slug === "bundle-offer-makeup") {
