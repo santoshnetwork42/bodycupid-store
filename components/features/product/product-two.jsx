@@ -168,6 +168,14 @@ function ProductTwo(props) {
         const showCartModal =
           totalCartItems > 0 && totalCartItems % 6 !== 0 ? false : true;
         showCartModal && setCartVisibility(true);
+      } else if (tagSlug === "buy-4-999") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 4 !== 0 ? false : true;
+        showCartModal && setCartVisibility(true);
+      } else if (tagSlug === "buy-8-1099") {
+        const showCartModal =
+          totalCartItems > 0 && totalCartItems % 8 !== 0 ? false : true;
+        showCartModal && setCartVisibility(true);
       } else {
         showEveryTime && setCartVisibility(true);
       }

@@ -209,6 +209,10 @@ function CartMenu(props) {
       return "Add more items to unlock 'Buy 5 @ 699 Offer'";
     } else if (slug === "buy-6") {
       return "Add more items to unlock 'Buy 6 @ 799 Offer'";
+    } else if (slug === "buy-4-999") {
+      return "Add more items to unlock 'Buy 4 @ ₹999 Offer'";
+    } else if (slug === "buy-8-1099") {
+      return "Add more items to unlock 'Buy 8 @ ₹1099 Offer'";
     }
 
     return "";
