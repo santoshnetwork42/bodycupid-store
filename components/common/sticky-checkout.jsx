@@ -85,6 +85,8 @@ function StickyFooter(props) {
   const totalCartItems = getCartCount(cartList);
   const hasDiscountSlug =
     slug === "bundle-offer-buy5" ||
+    slug === "buy-5-799" ||
+    slug === "buy-8-1199" ||
     slug === "buy-4-699" ||
     slug === "buy-6-at-899" ||
     slug === "special-deal" ||
@@ -111,6 +113,8 @@ function StickyFooter(props) {
       slug === "" ||
       cart?.collections?.includes("bundle-offer-buy5") ||
       cart?.collections?.includes("buy-4-699") ||
+      cart?.collections?.includes("buy-5-799") ||
+      cart?.collections?.includes("buy-8-1199") ||
       cart?.collections?.includes("buy-6-at-899") ||
       cart?.collections?.includes("special-deal") ||
       cart?.collections?.includes("bundle-offer") ||
@@ -136,6 +140,10 @@ function StickyFooter(props) {
       return "Add more items to unlock 'Buy 1 get 3 Offer'";
     } else if (slug === "bundle-offer-buy5") {
       return "Add more items to unlock 'Buy 5 @ ₹999 Offer'";
+    } else if (slug === "buy-5-799") {
+      return "Add more items to unlock 'Buy 5 @ ₹799 Offer'";
+    } else if (slug === "buy-8-1199") {
+      return "Add more items to unlock 'Buy 8 @ ₹1199 Offer'";
     } else if (slug === "buy-4-699") {
       return "Add more items to unlock 'Buy 4 @ ₹699 Offer'";
     } else if (slug === "bundle") {

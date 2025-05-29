@@ -106,83 +106,52 @@ function ProductTwo(props) {
       const totalCartItems =
         getCartCount(cartList) + productsNew?.minimumOrderQuantity || 1;
 
-      if (tagSlug === "bundle-offer-buy5") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 5 !== 0 ? false : true;
+      console.log(tagSlug, totalCartItems, "totalCartItems");
 
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "buy-4-699") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 4 !== 0 ? false : true;
+      const getCartModalCondition = (modulo) =>
+        totalCartItems > 0 && totalCartItems % modulo !== 0 ? false : true;
 
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "buy-4-for-699") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 4 !== 0 ? false : true;
+      switch (true) {
+        case tagSlug === "buy-4-699":
+        case tagSlug === "buy-4-for-699":
+        case tagSlug === "gpay2":
+        case tagSlug === "affiliate-4":
+        case tagSlug === "buy-4-999":
+          if (getCartModalCondition(4)) setCartVisibility(true);
+          break;
 
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "buy-6-at-899") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 6 !== 0 ? false : true;
+        case tagSlug === "bundle-offer-buy5":
+        case tagSlug === "buy-5-799":
+        case tagSlug === "deal-perfume":
+        case tagSlug === "buy-5":
+          if (getCartModalCondition(5)) setCartVisibility(true);
+          break;
 
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "gpay3") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 6 !== 0 ? false : true;
+        case tagSlug === "buy-8-1199":
+        case tagSlug === "gpay":
+        case tagSlug === "buy-8-1099":
+          if (getCartModalCondition(8)) setCartVisibility(true);
+          break;
 
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "gpay") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 8 !== 0 ? false : true;
+        case tagSlug === "buy-6-at-899":
+        case tagSlug === "gpay3":
+        case tagSlug === "affiliate-6":
+        case tagSlug === "buy-6":
+          if (getCartModalCondition(6)) setCartVisibility(true);
+          break;
 
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "gpay2") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 4 !== 0 ? false : true;
+        case tagSlug === "deal-offer":
+        case tagSlug === "gpay75":
+          if (getCartModalCondition(3)) setCartVisibility(true);
+          break;
 
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "deal-offer") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 3 !== 0 ? false : true;
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "affiliate-4") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 4 !== 0 ? false : true;
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "affiliate-6") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 6 !== 0 ? false : true;
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "deal-perfume") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 5 !== 0 ? false : true;
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "gpay75") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 3 !== 0 ? false : true;
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "bundle") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 10 !== 0 ? false : true;
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "buy-5") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 5 !== 0 ? false : true;
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "buy-6") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 6 !== 0 ? false : true;
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "buy-4-999") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 4 !== 0 ? false : true;
-        showCartModal && setCartVisibility(true);
-      } else if (tagSlug === "buy-8-1099") {
-        const showCartModal =
-          totalCartItems > 0 && totalCartItems % 8 !== 0 ? false : true;
-        showCartModal && setCartVisibility(true);
-      } else {
-        showEveryTime && setCartVisibility(true);
+        case tagSlug === "bundle":
+          if (getCartModalCondition(10)) setCartVisibility(true);
+          break;
+
+        default:
+          setCartVisibility(true);
+          break;
       }
     }
   };
