@@ -106,8 +106,6 @@ function ProductTwo(props) {
       const totalCartItems =
         getCartCount(cartList) + productsNew?.minimumOrderQuantity || 1;
 
-      console.log(tagSlug, totalCartItems, "totalCartItems");
-
       const getCartModalCondition = (modulo) =>
         totalCartItems > 0 && totalCartItems % modulo !== 0 ? false : true;
 
@@ -124,6 +122,7 @@ function ProductTwo(props) {
         case tagSlug === "buy-5-799":
         case tagSlug === "deal-perfume":
         case tagSlug === "buy-5":
+        case tagSlug === "bundle-deal":
           if (getCartModalCondition(5)) setCartVisibility(true);
           break;
 
