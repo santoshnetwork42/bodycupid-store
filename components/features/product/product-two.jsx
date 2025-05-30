@@ -127,6 +127,7 @@ function ProductTwo(props) {
           break;
 
         case tagSlug === "buy-8-1199":
+        case tagSlug === "special-bundle-offer":
         case tagSlug === "gpay":
         case tagSlug === "buy-8-1099":
           if (getCartModalCondition(8)) setCartVisibility(true);
