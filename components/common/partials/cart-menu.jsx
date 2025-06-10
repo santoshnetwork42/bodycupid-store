@@ -67,7 +67,8 @@ function CartMenu(props) {
     totalPrice,
   } = useCartTotal({
     paymentType: "PREPAID",
-    isRewardApplied: isRewardApplied,
+    isRewardApplied:
+      (!appliedCoupon || appliedCoupon?.isRewardApplicable) && isRewardApplied,
   });
 
   const { inventoryMapping } = inventory;
@@ -82,6 +83,10 @@ function CartMenu(props) {
       clearTimeout(timeoutId);
     };
   }, [isCartOpen]);
+
+  useEffect(() => {
+    if (!!appliedCoupon) handleRewardApply(appliedCoupon?.isRewardApplicable);
+  }, [appliedCoupon?.isRewardApplicable]);
 
   const validLtoProduct =
     !!cartItems?.length &&
@@ -370,42 +375,65 @@ function CartMenu(props) {
                     </div>
                   </div>
                 </div>
-                {!!showLoyalty && !!usableRewards && (
-                  <div className="d-flex-col wowCashCart justify-content-center">
-                    <div className="d-flex pl-4 pr-4  pt-3 pb-3  gap-9">
-                      <input
-                        type="checkbox"
-                        className="wowCashCheckbox"
-                        name="wowCash"
-                        checked={isRewardApplied}
-                        onChange={(e) => handleRewardApply(e.target.checked)}
-                      />
-                      <div className="d-flex-col grow-1 gap-5">
-                        <div className="font-size-14 line-height-14 d-flex gap-5 align-items-center">
-                          Use Cupid Coins
-                          {!!cartPageWowCashTooltip?.description && (
-                            <div className="balance-tooltip">
-                              <Ellipse className="" size={14} color="none" />
-                              <div className="font-size-10 font-weight-5 tip vis">
-                                {cartPageWowCashTooltip?.description}
+                {!!usableRewards && (
+                  <>
+                    <div
+                      className="d-flex-col wowCashCart justify-content-center"
+                      style={{
+                        pointerEvents: !showLoyalty ? "none" : "inherit",
+                        opacity: !showLoyalty ? 0.6 : 1,
+                      }}
+                    >
+                      <div className="d-flex pl-4 pr-4  pt-3 pb-3  gap-9">
+                        <input
+                          type="checkbox"
+                          className="wowCashCheckbox"
+                          name="wowCash"
+                          checked={
+                            (!appliedCoupon ||
+                              appliedCoupon?.isRewardApplicable) &&
+                            isRewardApplied
+                          }
+                          onChange={(e) => handleRewardApply(e.target.checked)}
+                        />
+                        <div className="d-flex-col grow-1 gap-5">
+                          <div className="font-size-14 line-height-14 d-flex gap-5 align-items-center">
+                            Use Cupid Coins
+                            {!!cartPageWowCashTooltip?.description && (
+                              <div className="balance-tooltip">
+                                <Ellipse className="" size={14} color="none" />
+                                <div className="font-size-10 font-weight-5 tip vis">
+                                  {cartPageWowCashTooltip?.description}
+                                </div>
                               </div>
-                            </div>
-                          )}
+                            )}
+                          </div>
+                          <div className="font-size-10 font-weight-3 ">
+                            Available balance:
+                            <span className="font-size-11 font-weight-7">
+                              ₹{totalRewardPointsOfUser.toFixed(2)}
+                            </span>{" "}
+                          </div>
                         </div>
-                        <div className="font-size-10 font-weight-3 ">
-                          Available balance:
-                          <span className="font-size-11 font-weight-7">
-                            ₹{totalRewardPointsOfUser.toFixed(2)}
-                          </span>{" "}
-                        </div>
+                        {!!usableRewards && (
+                          <div className="font-weight-6 font-size-14">
+                            ₹{usableRewards.toFixed(2)}
+                          </div>
+                        )}
                       </div>
-                      {!!usableRewards && (
-                        <div className="font-weight-6 font-size-14">
-                          ₹{usableRewards.toFixed(2)}
-                        </div>
-                      )}
                     </div>
-                  </div>
+                    {!showLoyalty && (
+                      <p
+                        className="pl-4 pr-4  font-weight-3"
+                        style={{
+                          color: "#EF4444",
+                          fontSize: 13,
+                        }}
+                      >
+                        {`* Cupid Coins cannot be clubbed with this offer`}
+                      </p>
+                    )}
+                  </>
                 )}
 
                 <div className="pb-0 d-flex align-items-center summary2 loyalty-text">

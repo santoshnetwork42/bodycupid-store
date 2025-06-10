@@ -473,9 +473,11 @@ export const getFeaturedCoupon = /* GraphQL */ `
         code
         couponType
         buyXQuantity
+        discountItemThreshold
         isAffiliated
         isFeatured
         isPDPFeatured
+        isRewardApplicable
         expirationDate
         showAsNudge
         ppcodCouponAmount
@@ -514,7 +516,9 @@ export const applyCoupon = /* GraphQL */ `
       code
       couponType
       buyXQuantity
+      discountItemThreshold
       isAffiliated
+      isRewardApplicable
       isPDPFeatured
       showAsNudge
       ppcodCouponAmount
@@ -2333,8 +2337,10 @@ export const getCoupon = /* GraphQL */ `
       code
       couponType
       buyXQuantity
+      discountItemThreshold
       isAffiliated
       isPDPFeatured
+      isRewardApplicable
       showAsNudge
       ppcodCouponAmount
       getYAmount
@@ -2616,6 +2622,7 @@ export const getCouponRule = /* GraphQL */ `
         recommendPrice
       }
       buyXQuantity
+      discountItemThreshold
       getYAmount
       getYPercentage
       getYQuantity
@@ -2630,6 +2637,7 @@ export const getCouponRule = /* GraphQL */ `
       isFeatured
       isPDPFeatured
       isBulkCoupon
+      isRewardApplicable
       autoApply
       isAffiliated
       showAsNudge

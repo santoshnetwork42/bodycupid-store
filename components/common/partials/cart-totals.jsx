@@ -55,7 +55,8 @@ function CartTotal({
     appliedCODCharges,
   } = useCartTotal({
     paymentType: prepaidEnabled ? "PREPAID" : "COD",
-    isRewardApplied,
+    isRewardApplied:
+      (!appliedCoupon || appliedCoupon?.isRewardApplicable) && isRewardApplied,
   });
 
   const guestCheckout = useGuestCheckout();

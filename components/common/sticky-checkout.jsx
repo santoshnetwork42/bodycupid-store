@@ -17,7 +17,7 @@ function StickyFooter(props) {
   const router = useRouter();
   const { slug } = router?.query || {};
 
-  const { totalPrice, totalItems } = useCartTotal({
+  const { totalPrice, totalItems, grandTotal } = useCartTotal({
     paymentType: "PREPAID",
     isRewardApplied: isRewardApplied,
   });
@@ -212,7 +212,7 @@ function StickyFooter(props) {
         <div className="lh-default text-primary">
           <span>{totalItems > 1 ? `${totalItems} Items` : `1 Item`}</span>
           <p className="summary-total-price text-left ls-s">
-            ₹ {toDecimal(totalPrice)}
+            ₹ {toDecimal(grandTotal)}
           </p>
         </div>
 
