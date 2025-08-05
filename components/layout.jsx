@@ -70,7 +70,10 @@ function Layout({
   const couponCode = router?.query?.couponCode?.split("&")[0];
   if (couponCode) {
     const expiryTime = new Date().getTime() + 24 * 60 * 60 * 1000;
-    storeCoupon({ couponCode, couponExpiry: expiryTime });
+    storeCoupon({
+      couponCode: (couponCode || "").toLocaleUpperCase(),
+      couponExpiry: expiryTime,
+    });
   }
 
   useEffect(() => {
