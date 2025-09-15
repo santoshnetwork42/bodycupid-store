@@ -26,10 +26,8 @@ function PostThree(props) {
             <Image
               src={post?.featuredImage?.node?.mediaItemUrl}
               alt="post image"
-              effect="opacity"
-              layout="fill"
-              objectFit="cover"
-              style={{ backgroundColor: "#DEE6E8" }}
+              fill
+              style={{ backgroundColor: "#DEE6E8", objectFit: "cover" }}
               onError={(e) => {
                 e.target.src = "/images/logo.png";
               }}

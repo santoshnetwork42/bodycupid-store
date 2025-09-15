@@ -1,5 +1,5 @@
 import { useUpdateUserCoupon } from "@wow-star/utils";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import Script from "next/script";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";

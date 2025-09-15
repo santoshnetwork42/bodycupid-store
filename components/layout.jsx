@@ -1,6 +1,7 @@
+"use client";
+
 import dynamic from "next/dynamic";
-import Head from "next/head";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { useEffect, useLayoutEffect } from "react";
 import "react-input-range/lib/css/index.css";
 import { connect } from "react-redux";
@@ -63,7 +64,7 @@ function Layout({
   updateCartCoupon,
   appliedCoupon,
 }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const isInteractive = useIsInteractive();
   const coupons = useCoupons();
 
@@ -126,22 +127,6 @@ function Layout({
   }, [router.pathname]);
   return (
     <>
-      <Head>
-        <link rel="icon" href="/images/icons/favicon.png" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
-
-        <link
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap"
-          rel="stylesheet"
-        />
-        {/* <link
-          rel="stylesheet"
-          type="text/css"
-          href="/vendor/owl-carousel/owl.carousel.min.css"
-        /> */}
-      </Head>
       <div className="page-wrapper">
         {!hideHeader && isInteractive && (
           <Timer displayTimer={navbar.showTimer} />

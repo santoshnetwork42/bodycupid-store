@@ -22,7 +22,7 @@ export default function ALink({
   };
 
   return content ? (
-    <Link {...props} prefetch={!!prefetch}>
+    <Link {...props} prefetch={!!prefetch} legacyBehavior>
       <a
         className={className}
         style={style}
@@ -35,7 +35,7 @@ export default function ALink({
       </a>
     </Link>
   ) : (
-    <Link {...props} prefetch={!!prefetch}>
+    <Link {...props} prefetch={!!prefetch} legacyBehavior>
       <a
         className={className}
         style={style}

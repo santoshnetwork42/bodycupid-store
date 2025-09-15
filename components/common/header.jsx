@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 
@@ -27,7 +27,7 @@ function Header({
   setCartVisibility,
   hideHeader,
 }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const { cart } = router.query;
 
   useEffect(() => {

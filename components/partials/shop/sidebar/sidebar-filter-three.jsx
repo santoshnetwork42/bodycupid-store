@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 
 import ALink from "~/components/features/custom-link";
 

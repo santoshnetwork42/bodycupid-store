@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 
 import OwlCarousel from "../features/owl-carousel";
 import { announcementSlider } from "~/utils/data/carousel";
@@ -9,7 +9,7 @@ import ALink from "../features/custom-link";
 const Announcement = ({ store, showTopRunner }) => {
   const { announcements } = store || {};
 
-  const router = useRouter();
+  const router = useAppRouter();
   const { isReady } = router;
 
   const filteredAnnouncements =

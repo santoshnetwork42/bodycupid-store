@@ -1,0 +1,199 @@
+"use client";
+
+import React, { useCallback, useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
+import { Auth, Logger } from "aws-amplify";
+
+import ALink from "~/components/features/custom-link";
+import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
+import { modalActions } from "~/store/modal";
+import { errorHandler } from "~/utils/errorHandler";
+import { useAppRouter } from "~/utils/navigation";
+
+const logger = new Logger("Login");
+
+function Login({ auth, redirect = true, closeLogin, showOTPLogin = false, openPasswordless }) {
+  const router = useAppRouter();
+  const [state, setState] = useState({ name: "", phone: "", email: "", password: "", confirmationCode: null });
+  const [confirmSignUp, setConfirmSignUp] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSignup = useCallback(async (e) => {
+    e.preventDefault();
+    try {
+      await Auth.signUp({
+        username: addPhonePrefix(state.phone),
+        password: state.password,
+        phone_number: addPhonePrefix(state.phone),
+        email: state.email,
+        attributes: {
+          name: state.name?.split(" ")[0] || "",
+          given_name: state.name?.split(" ")[1] || "",
+          middle_name: "",
+          email: state.email,
+          phone_number: addPhonePrefix(state.phone),
+        },
+        autoSignIn: { enabled: true },
+      });
+      setConfirmSignUp("SIGNUP");
+    } catch (error) {
+      logger.error("Error signing up:", error);
+      errorHandler(error);
+    }
+    return false;
+  }, [state]);
+
+  const handleConfirmSignUp = useCallback(async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await Auth.confirmSignUp(addPhonePrefix(state.phone), state.confirmationCode);
+      if (confirmSignUp === "SIGNUP") {
+        closeLogin();
+        if (redirect) router.push("/");
+      } else {
+        setConfirmSignUp(null);
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      logger.error("Error confirming sign up:", error);
+      errorHandler(error);
+    }
+    return false;
+  }, [state, confirmSignUp, redirect]);
+
+  const handleSignIn = useCallback(async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await Auth.signIn({ username: addPhonePrefix(state.phone), password: state.password });
+      closeLogin();
+      if (redirect) router.push("/");
+      setLoading(false);
+    } catch (error) {
+      logger.error("Error signing in:", error);
+      if (error.code === "UserNotConfirmedException") {
+        await Auth.resendSignUp(addPhonePrefix(state.phone));
+        setConfirmSignUp("SIGNIN");
+      } else {
+        errorHandler(error);
+      }
+      setLoading(false);
+    }
+    return false;
+  }, [state, redirect]);
+
+  useEffect(() => {
+    if (auth) router.push("/");
+  }, [auth]);
+
+  return (
+    <main className="main">
+      <div className="page-content mt-6 pb-2 bg-white mb-2">
+        <div className="container">
+          <div className="login-popup">
+            <div className="form-box">
+              <div className="tab tab-nav-simple tab-nav-boxed form-tab">
+                <Tabs selectedTabClassName="active" selectedTabPanelClassName="active">
+                  <TabList className="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5 flex-no-wrap">
+                    <Tab className="nav-item"><span className="nav-link border-no lh-1 ls-normal">Sign in</span></Tab>
+                    <li className="delimiter">or</li>
+                    <Tab className="nav-item"><span className="nav-link border-no lh-1 ls-normal">Register</span></Tab>
+                  </TabList>
+
+                  <div className="tab-content">
+                    <TabPanel className="tab-pane">
+                      {!confirmSignUp && (
+                        <form onSubmit={handleSignIn}>
+                          <div className="form-group mb-3">
+                            <div className="input-tel">
+                              <div className="prefix">+91</div>
+                              <input type="tel" className="form-control" id="singin-phone-2" name="singin-phone" placeholder="Phone number *" required maxLength={10} value={removePhonePrefix(state.phone)} onChange={(e) => setState({ ...state, phone: e.target.value })} />
+                            </div>
+                          </div>
+                          <div className="form-group">
+                            <input type="password" className="form-control" id="singin-password-2" placeholder="Password *" name="singin-password" required value={state.password} onChange={(e) => setState({ ...state, password: e.target.value })} />
+                          </div>
+                          <div className="form-footer">
+                            <ALink href="/pages/forgot-password" className="lost-link">Lost your password?</ALink>
+                          </div>
+                          <button className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center" type="submit" disabled={loading}>
+                            Login
+                            {loading && <div className="spin-loader ml-2" />}
+                          </button>
+                          {showOTPLogin && (
+                            <div className="text-center">
+                              <ALink href="#" className="lost-link" onClick={() => { closeLogin(); openPasswordless(false); }}>
+                                Login with OTP
+                              </ALink>
+                            </div>
+                          )}
+                        </form>
+                      )}
+                    </TabPanel>
+
+                    <TabPanel className="tab-pane">
+                      {!confirmSignUp && (
+                        <form onSubmit={handleSignup}>
+                          <div className="form-group">
+                            <label htmlFor="register-name-2">Your name:</label>
+                            <input type="text" className="form-control" id="register-name-2" name="register-name" placeholder="Your name *" required value={state.name} onChange={(e) => setState({ ...state, name: e.target.value })} />
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="register-phone-2">Your phone number:</label>
+                            <div className="input-tel">
+                              <div className="prefix">+91</div>
+                              <input type="tel" className="form-control" id="register-phone-2" name="register-phone" placeholder="Your phone number *" required maxLength={10} value={removePhonePrefix(state.phone)} onChange={(e) => setState({ ...state, phone: e.target.value })} />
+                            </div>
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="register-email-2">Your email address:</label>
+                            <input type="email" className="form-control" id="register-email-2" name="register-email" placeholder="Your email address*" required value={state.email} onChange={(e) => setState({ ...state, email: e.target.value })} />
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="register-password-2">Password:</label>
+                            <input type="password" className="form-control" id="register-password-2" name="register-password" placeholder="Password *" required value={state.password} onChange={(e) => setState({ ...state, password: e.target.value })} />
+                          </div>
+                          <div className="form-footer">
+                            <div className="form-checkbox">
+                              <input type="checkbox" className="custom-checkbox" id="register-agree-2" name="register-agree" required />
+                              <label className="form-control-label" htmlFor="register-agree-2">I agree to the privacy policy</label>
+                            </div>
+                          </div>
+                          <button className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center" type="submit" disabled={loading}>
+                            Register
+                            {loading && <div className="spin-loader ml-2" />}
+                          </button>
+                        </form>
+                      )}
+                    </TabPanel>
+
+                    {confirmSignUp && (
+                      <form onSubmit={handleConfirmSignUp}>
+                        <div className="form-group">
+                          <label htmlFor="confirm-code-2">Confirmation Code:</label>
+                          <input type="text" className="form-control" id="confirm-code-2" name="confirm-code" placeholder="Confirmation Code *" required value={state.confirmationCode} onChange={(e) => setState({ ...state, confirmationCode: e.target.value })} />
+                        </div>
+                        <button className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center" type="submit" disabled={loading}>
+                          Confirm
+                          {loading && <div className="spin-loader ml-2" />}
+                        </button>
+                      </form>
+                    )}
+                  </div>
+                </Tabs>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default connect(
+  (state) => ({ auth: !!state.user.data }),
+  { closeLogin: modalActions.closeLoginModal, openPasswordless: modalActions.openPasswordlessModal }
+)(Login);

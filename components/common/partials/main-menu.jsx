@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { useMenu } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { eventActions } from "~/store/events";
 
 function MainMenu({ topNavbarClicked }) {
-  const { pathname } = useRouter();
+  const { pathname } = useAppRouter();
 
   const menu = useMenu();
 

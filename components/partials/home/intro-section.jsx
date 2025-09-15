@@ -3,7 +3,10 @@ import Image from "~/components/image";
 
 import { connect } from "react-redux";
 import ALink from "~/components/features/custom-link";
-import OwlCarousel from "~/components/features/owl-carousel";
+import dynamic from "next/dynamic";
+const OwlCarousel = dynamic(() => import("~/components/features/owl-carousel"), {
+  ssr: false,
+});
 import { eventActions } from "~/store/events";
 import { introSlider } from "~/utils/data/carousel";
 import { getSource } from "~/utils/helper";

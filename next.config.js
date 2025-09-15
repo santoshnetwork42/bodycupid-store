@@ -101,26 +101,19 @@ const nextConfig = withBundleAnalyzer({
   },
 
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: process.env.NEXT_PUBLIC_MEDIA_URL,
-        // port: '',
-        pathname: "/public/**",
-      },
-      // {
-      //   protocol: "http",
-      //   hostname: process.env.NEXT_PUBLIC_WORDPRESS_MEDIA_URL,
-      // },
-      // {
-      //   protocol: "https",
-      //   hostname: process.env.NEXT_PUBLIC_WORDPRESS_AVATAR_URL_1,
-      // },
-      // {
-      //   protocol: "http",
-      //   hostname: process.env.NEXT_PUBLIC_WORDPRESS_AVATAR_URL_2,
-      // },
-    ],
+    unoptimized: true,
+    remotePatterns: (() => {
+      const patterns = [];
+      if (process.env.NEXT_PUBLIC_MEDIA_URL) {
+        patterns.push({
+          protocol: "https",
+          hostname: process.env.NEXT_PUBLIC_MEDIA_URL,
+          pathname: "/public/**",
+        });
+      }
+      // Optionally extend with other hosts via envs above
+      return patterns;
+    })(),
     domains: ["mars-images.imgix.net"],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
@@ -134,5 +127,9 @@ const nextConfig = withBundleAnalyzer({
 module.exports = withSentryConfig(
   nextConfig,
   { silent: true },
-  { hideSourcemaps: false }
+  {
+    hideSourceMaps: true,
+    disableServerWebpackPlugin: !process.env.SENTRY_AUTH_TOKEN,
+    disableClientWebpackPlugin: !process.env.SENTRY_AUTH_TOKEN,
+  }
 );

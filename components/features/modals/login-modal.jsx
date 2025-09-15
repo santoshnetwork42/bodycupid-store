@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { modalActions } from "~/store/modal";
-import AuthView from "~/pages/pages/login";
+import AuthView from "~/components/pages/login-view";
 import Modal from "~/components/common/modal";
 
 function LoginModal({ isOpen, redirect = true, closeLoginModal }) {

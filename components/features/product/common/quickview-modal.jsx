@@ -4,7 +4,10 @@ import { connect } from "react-redux";
 import NextImage from "~/components/image";
 
 import Modal from "~/components/common/modal";
-import OwlCarousel from "~/components/features/owl-carousel";
+import dynamic from "next/dynamic";
+const OwlCarousel = dynamic(() => import("~/components/features/owl-carousel"), {
+  ssr: false,
+});
 import DetailOne from "~/components/partials/product/detail/detail-one";
 import { getQuickViewProduct } from "~/graphql/api";
 import { modalActions } from "~/store/modal";

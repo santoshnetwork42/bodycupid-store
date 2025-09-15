@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { API, graphqlOperation } from "aws-amplify";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { connect } from "react-redux";

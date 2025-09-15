@@ -1,6 +1,6 @@
 import { useCartTotal, useConfiguration } from "@wow-star/utils";
 import { Logger } from "aws-amplify";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { useCallback, useRef } from "react";
 import { connect } from "react-redux";
 

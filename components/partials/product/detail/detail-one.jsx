@@ -1,5 +1,5 @@
 import { useCartItems, useProductCoupons } from "@wow-star/utils";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { useEffect, useMemo, useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
 import { connect } from "react-redux";

@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { memo } from "react";
 
 import BlogMobileMenu from "~/components/common/blog-mobile-menu";

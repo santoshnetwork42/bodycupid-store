@@ -2,7 +2,10 @@ import Image from "~/components/image";
 import { useEffect, useMemo, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
-import OwlCarousel from "~/components/features/owl-carousel";
+import dynamic from "next/dynamic";
+const OwlCarousel = dynamic(() => import("~/components/features/owl-carousel"), {
+  ssr: false,
+});
 import { Share } from "~/components/icons";
 
 import ThumbOne from "~/components/partials/product/thumb/thumb-one";

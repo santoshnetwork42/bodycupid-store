@@ -6,7 +6,7 @@ import {
   useRuleEngine,
 } from "@wow-star/utils";
 import { API, Logger } from "aws-amplify";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { useCallback, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { applyCoupon as applyCouponMutation } from "~/graphql/api";
@@ -42,7 +42,7 @@ function CartMenu(props) {
     removeFromCart,
   } = props;
 
-  const router = useRouter();
+  const router = useAppRouter();
   const { query, asPath } = router;
   const { cart: forceOpenCart } = query;
   const sessionKey = `${STORE_PREFIX}_coupon_session_id`;

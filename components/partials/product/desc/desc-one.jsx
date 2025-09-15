@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";

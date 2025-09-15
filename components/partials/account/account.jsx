@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from "react";
-import Head from "next/head";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { connect, useStore } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -62,7 +61,7 @@ function AccountsTabs({
   logout,
   destroySession,
 }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const localStore = useStore();
   const { setUserWithRewardPoints } = useNavbar();
 
@@ -128,9 +127,6 @@ function AccountsTabs({
 
   return (
     <main className="main account bg-white">
-      <Head>
-        <title>{name} | Account</title>
-      </Head>
 
       <h1 className="d-none">{name} - Account</h1>
 

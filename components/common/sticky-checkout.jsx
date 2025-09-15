@@ -1,5 +1,5 @@
 import { useCartTotal, useFeaturedCoupons } from "@wow-star/utils";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { useMemo } from "react";
 import { connect } from "react-redux";
 
@@ -14,7 +14,7 @@ function StickyFooter(props) {
   const { cartList, showStickyCheckout, setCartVisibility, appliedCoupon } =
     props;
   const { isRewardApplied } = useNavBarState();
-  const router = useRouter();
+  const router = useAppRouter();
   const { slug } = router?.query || {};
 
   const { totalPrice, totalItems, grandTotal } = useCartTotal({

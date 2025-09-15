@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { useCallback, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { connect } from "react-redux";

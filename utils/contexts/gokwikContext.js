@@ -6,7 +6,7 @@ import {
 } from "@wow-star/utils";
 import { API, Auth } from "aws-amplify";
 import { Logger } from "aws-amplify";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { createContext, useCallback, useEffect } from "react";
 import { connect } from "react-redux";
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { Auth } from "aws-amplify";
 import { connect } from "react-redux";
 import { useMenu, useNavbar } from "@wow-star/utils";
@@ -18,7 +18,7 @@ import { cartActions } from "~/store/cart";
 import { wishlistActions } from "~/store/wishlist";
 
 function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const menu = useMenu();
   const store = useStore();
   const { setUserWithRewardPoints } = useNavbar();

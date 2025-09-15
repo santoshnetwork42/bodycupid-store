@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { MagnifyingGlass, Search } from "~/components/icons";
@@ -7,7 +7,7 @@ import AutoTyper from "~/components/features/auto-typing";
 import { useIsInteractive } from "~/utils/contexts/navbar";
 
 function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const [search, setSearch] = useState(defaultSearch);
   const [timer, setTimer] = useState(null);
   const dispatch = useDispatch();

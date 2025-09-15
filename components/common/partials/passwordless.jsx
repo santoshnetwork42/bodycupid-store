@@ -1,6 +1,6 @@
 import { API, Auth, Logger } from "aws-amplify";
 import delay from "delay";
-import { useRouter } from "next/router";
+import { useAppRouter } from "~/utils/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { connect, useStore } from "react-redux";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";

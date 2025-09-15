@@ -1,6 +1,9 @@
 import React from "react";
 
-import OwlCarousel from "~/components/features/owl-carousel";
+import dynamic from "next/dynamic";
+const OwlCarousel = dynamic(() => import("~/components/features/owl-carousel"), {
+  ssr: false,
+});
 import { mainSlider4 } from "~/utils/data/carousel";
 import RatingStar from "~/components/partials/product/rating-star";
 import Image from "~/components/image";

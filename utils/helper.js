@@ -262,7 +262,7 @@ export const orderStatusBadge = {
 
 export const getCKLocalData = (prefix) => {
   const keysAndValues = {};
-  for (const i = 0; i < localStorage.length; i++) {
+  for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     if (key.startsWith(prefix)) {
       const value = localStorage.getItem(key);

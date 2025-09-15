@@ -1,5 +1,8 @@
 import ALink from "~/components/features/custom-link";
-import OwlCarousel from "~/components/features/owl-carousel";
+import dynamic from "next/dynamic";
+const OwlCarousel = dynamic(() => import("~/components/features/owl-carousel"), {
+  ssr: false,
+});
 
 import ProductTwo from "~/components/features/product/product-two";
 
